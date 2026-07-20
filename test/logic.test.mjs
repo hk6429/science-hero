@@ -579,3 +579,22 @@ test('SciBaseUI.celebrationHtml 慶典卡含標題/內文/繼續鈕', () => {
   const html = makeSandbox().SciBaseUI.celebrationHtml({ id: 'stage-2', type: 'stage', title: '基地升階・進階實驗樓', text: '精通突破 10 張！' });
   assert.ok(html.includes('進階實驗樓') && html.includes('sb-epic-close'));
 });
+
+test('SciRtBattleUI.mount 渲染連線對戰入口，不需啟動瀏覽器', () => {
+  const sandbox = { console, Date, Math, JSON, TypeError, Map, Set, setInterval: () => 1, clearInterval() {}, setTimeout: () => 1, clearTimeout() {} };
+  sandbox.localStorage = { getItem: () => null, setItem() {}, removeItem() {} };
+  sandbox.window = sandbox;
+  const context = vm.createContext(sandbox);
+  const files = ['js/store.js', 'js/flashcard.js', 'js/quiz.js', 'js/weak.js', 'js/battle.js', 'js/shapi.js', 'js/rtbattle.js', 'js/rtbattle-ui.js'];
+  const source = files.map((file) => readFileSync(path.join(ROOT, file), 'utf8')).join('\n;\n');
+  vm.runInContext(`${source}\nglobalThis.__rtui = SciRtBattleUI;`, context);
+  const node = { innerHTML: '', isConnected: true, querySelector: () => ({ addEventListener() {}, value: '' }) };
+  context.__rtui.mount(node, { pool: terms, scope: { subject: 'biology', unit: null, grade: null }, masteredCardCount: 0 });
+  assert.match(node.innerHTML, /id="rt-create"/);
+  assert.match(node.innerHTML, /id="rt-join"/);
+  assert.match(node.innerHTML, /id="rt-challenge-create"/);
+  assert.match(node.innerHTML, /id="rt-challenge-accept"/);
+  assert.match(node.innerHTML, /id="rt-live-student"/);
+  assert.match(node.innerHTML, /id="rt-live-host"/);
+  assert.match(node.innerHTML, /id="rt-season-board"/);
+});

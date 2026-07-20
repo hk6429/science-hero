@@ -1,0 +1,8 @@
+name = "science-hero"
+pages_build_output_dir = "."
+compatibility_date = "2026-07-01"
+
+[[d1_databases]]
+binding = "SCIENCE_HERO_DB"
+database_name = "science-hero-db"
+database_id = "403a5481-7335-46b7-b382-fb62ddf64408"

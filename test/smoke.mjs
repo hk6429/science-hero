@@ -24,10 +24,11 @@ const browser = await chromium.launch({ channel: 'chrome' }).catch(() => chromiu
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 const fails = [];
 page.on('pageerror', (e) => fails.push('pageerror: ' + e.message));
-// 科學基地美術資產尚未生成（emoji-first 階段），assets/base/ 底下的圖一律 404 後由 onerror 換 emoji，屬預期。
-// 用 response 依 URL 精準放行「只有」assets/base/ 的 404，其餘 404（真缺檔）照樣算失敗。
+// 預期 404 白名單：(1) assets/base/ 美術尚未生成，onerror 換 emoji；(2) 靜態 server 無 Functions，
+// /api/ 一律 404 正是觸發「離線降級卡」的機制。其餘 404（真缺檔）照樣算失敗。
 page.on('response', (r) => {
-  if (r.status() === 404 && !r.url().includes('/assets/base/')) fails.push('unexpected 404: ' + r.url());
+  const u = r.url();
+  if (r.status() === 404 && !u.includes('/assets/base/') && !u.includes('/api/')) fails.push('unexpected 404: ' + u);
 });
 page.on('console', (msg) => {
   // resource load 失敗（含 assets/base 佔位圖 404）改由上面的 response handler 依 URL 判斷，這裡不重複計。
@@ -107,6 +108,18 @@ try {
   const pvpTurnAfter = await page.locator('.bat-turn').textContent();
   if (!pvpTurnAfter?.includes('玩家')) fails.push('PvP 答題後未正確換手');
   console.log('✅ PvP 雙人對戰可開打、答題後血量變化且正確換手');
+
+  // 3c. 連線對戰：入口存在；靜態 server 無 Functions，應顯示離線降級卡而非白畫面。
+  await page.click('.mode-switch button[data-mode="rtbattle"]');
+  await page.waitForSelector('#rt-create');
+  await page.click('#rt-create');
+  // 開房走 fetch → 靜態 server 404 → offline，降級卡非同步渲染，等文字出現再判定（避免讀太早）。
+  const offlineShown = await page
+    .waitForFunction(() => document.body.textContent.includes('連不上對戰伺服器'), { timeout: 5000 })
+    .then(() => true)
+    .catch(() => false);
+  if (!offlineShown) fails.push('連線對戰離線時未顯示降級卡');
+  console.log('✅ 連線對戰入口存在、離線降級正常');
 
   // 4. 弱點清單（此時應該已經有作答紀錄）
   await page.click('.mode-switch button[data-mode="weak"]');

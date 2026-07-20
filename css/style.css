@@ -831,6 +831,17 @@ body.base-open { overflow: hidden; }
   .sb-wall-grid { grid-template-columns: 1fr; overflow-y: auto; height: 100%; }
 }
 
+/* ── 連線對戰 ── */
+.rt-code { font-size: 3rem; letter-spacing: .3em; text-align: center; font-weight: 700; margin: .5em 0; }
+.rt-vs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .7em; margin-bottom: .6em; }
+.rt-wait { text-align: center; }
+.rt-adventure { border: 2px solid #e0b64e; background: #fff9df; text-align: center; }
+.rt-result-table { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7em; }
+.rt-input-label { display: flex; justify-content: center; align-items: center; gap: .5em; margin: .8em 0; }
+.rt-input-label input { width: 7em; padding: .55em; font-size: 1.2rem; letter-spacing: .2em; text-align: center; }
+.bat-hp > div { height: 8px; border-radius: 999px; background: #e8ece9; overflow: hidden; }
+.bat-hp i { display: block; height: 100%; background: #2e9e5b; transition: width .2s ease; }
+
 .sb-panel { position: absolute; inset: 8%; z-index: 8; background: rgba(255, 255, 255, .96); border: 1px solid #2e9e5b; border-radius: 12px; padding: .8em; overflow-y: auto; }
 .sb-style-balance { margin-bottom: .6em; color: #174d2d; font-weight: 700; text-align: center; }
 .sb-style-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55em; }

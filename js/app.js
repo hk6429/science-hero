@@ -61,7 +61,7 @@ const SciApp = (() => {
   let activeSubject = 'biology';
   const subjectTerms = new Map();
   let terms = [];
-  let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'weak'
+  let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'battle' | 'rtbattle' | 'weak'
   let unitFilter = null; // 目前選定的單元（null = 全部）
   let gradeFilter = null; // 目前選定的年級（null = 全部）
 
@@ -212,6 +212,7 @@ const SciApp = (() => {
       ['flashcard', '閃卡複習'],
       ['quiz', '自我測驗'],
       ['battle', '答題對戰'],
+      ['rtbattle', '連線對戰'],
       ['weak', '弱點清單'],
     ].forEach(([key, label]) => {
       const btn = document.createElement('button');
@@ -308,7 +309,7 @@ const SciApp = (() => {
     panel.querySelector('.grade-filter')?.remove();
     panel.insertBefore(renderModeSwitch(panel), body);
 
-    if (mode === 'flashcard' || mode === 'quiz' || mode === 'battle') {
+    if (mode === 'flashcard' || mode === 'quiz' || mode === 'battle' || mode === 'rtbattle') {
       const gradeWrap = renderGradeFilter(panel);
       if (gradeWrap) panel.insertBefore(gradeWrap, body);
       panel.insertBefore(renderUnitMap(panel), body);
@@ -317,6 +318,7 @@ const SciApp = (() => {
     if (mode === 'flashcard') renderFlashcard(body);
     else if (mode === 'quiz') renderQuiz(body);
     else if (mode === 'battle') renderBattle(body);
+    else if (mode === 'rtbattle') renderRtBattle(body);
     else renderWeak(body);
   }
 
@@ -329,6 +331,23 @@ const SciApp = (() => {
       subjectLabel,
       recordAnswer,
       masteredCardCount: masteredCardCount(),
+    });
+  }
+
+  // ================= 連線對戰 =================
+  function poolForScope(scope) {
+    let pool = subjectTerms.get(scope.subject) || [];
+    if (scope.unit) pool = pool.filter((term) => term.unit === scope.unit);
+    if (scope.grade) pool = pool.filter((term) => String(term.grade) === scope.grade);
+    return pool;
+  }
+
+  function renderRtBattle(body) {
+    const subjectLabel = SUBJECTS.find((subject) => subject.key === activeSubject)?.label || '';
+    SciRtBattleUI.mount(body, {
+      state, subjectKey: activeSubject, subjectLabel,
+      scope: { subject: activeSubject, unit: unitFilter, grade: gradeFilter },
+      pool: currentPool(), poolForScope, recordAnswer, masteredCardCount: masteredCardCount(),
     });
   }
 
