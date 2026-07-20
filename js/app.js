@@ -328,6 +328,7 @@ const SciApp = (() => {
       state,
       subjectLabel,
       recordAnswer,
+      masteredCardCount: masteredCardCount(),
     });
   }
 

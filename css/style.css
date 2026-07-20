@@ -733,3 +733,59 @@ main {
 .panel[data-key="biology"]  .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-biology); }
 .panel[data-key="chemphys"] .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-chemphys); }
 .panel[data-key="earth"]    .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-earth); }
+
+/* ── 段位條 ── */
+.bat-rank {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+}
+
+.bat-rank-ico { font-size: 1.6rem; }
+.bat-rank-body { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.bat-rank-name { font-size: 0.85rem; font-weight: 700; }
+
+.bat-rank-bar {
+  display: block;
+  height: 6px;
+  background: #eef4f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bat-rank-bar > span { display: block; height: 100%; background: var(--warn); }
+.bat-rank-next { font-size: 0.68rem; color: var(--muted); }
+
+.bat-rankdelta { text-align: center; font-size: 0.82rem; font-weight: 700; margin: 6px 0 14px; }
+.bat-rankdelta.up { color: var(--green-dark); }
+.bat-rankdelta.down { color: var(--danger); }
+
+/* ── 科學夥伴卡 ── */
+.bat-companion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+}
+
+.bat-companion-face { font-size: 2rem; }
+.bat-companion-body { display: flex; flex-direction: column; gap: 2px; }
+.bat-companion-name { font-size: 0.85rem; font-weight: 700; }
+.bat-companion-desc, .bat-companion-next { font-size: 0.7rem; color: var(--muted); }
+
+.bat-assist { text-align: center; font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+.bat-pvp-btn { width: 100%; margin-bottom: 14px; }
+
+.bat-turn { text-align: center; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+
+.bat-hp.active .bat-hp-fill { filter: brightness(1.15); }
