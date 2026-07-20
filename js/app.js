@@ -475,6 +475,8 @@ const SciApp = (() => {
         const chosenId = btn.dataset.id;
         const correct = chosenId === q.answerId;
         if (correct) quizCorrect += 1;
+        const subjectAtAnswer = activeSubject;
+        const modeAtAnswer = mode;
 
         const cardEl = body.querySelector('.card');
         cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
@@ -506,8 +508,14 @@ const SciApp = (() => {
         renderHeroStats();
 
         const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
+        // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
+        // 這裡若不擋下來，會把別科題目誤植進（可能已不存在的）舊分頁，或把使用者尚未看到的
+        // 題目悄悄跳過——這正是多位審查者回報「答完題畫面亂跳到別科」的根因。
+        const stillSameContext = () => activeSubject === subjectAtAnswer && mode === modeAtAnswer;
+
         if (milestoneUnit) {
           setTimeout(() => {
+            if (!stillSameContext()) return;
             preserveScroll(() => renderMilestone(body, milestoneUnit, () => {
               quizIdx += 1;
               renderQuiz(body);
@@ -517,6 +525,7 @@ const SciApp = (() => {
         }
 
         setTimeout(() => {
+          if (!stillSameContext()) return;
           preserveScroll(() => {
             quizIdx += 1;
             renderQuiz(body);
