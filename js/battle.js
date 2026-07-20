@@ -34,6 +34,13 @@ const SciBattle = (() => {
     return dmg;
   }
 
+  function applyWrongAnswer(state) {
+    if (state.shieldLeft > 0) state.shieldLeft -= 1;
+    else state.combo = 0;
+    state.pHp = Math.max(0, state.pHp - 8);
+    return state;
+  }
+
   // ── 段位排行：只認 PvE 勝負，跟「精通詞卡稱號」是兩套獨立指標 ──
   const RANKS = [
     { name: '銅牌探索者', ico: '🥉', at: 0 },
@@ -214,10 +221,17 @@ const SciBattle = (() => {
         return;
       }
       const beaten = new Set(beatenList(state));
+      const marketReady = typeof SciMarketStore !== 'undefined';
+      const inventory = marketReady ? SciMarketStore.getInv() : {};
+      const carry = marketReady ? SciMarketStore.getCarry() : null;
+      const carryItems = marketReady ? Object.entries(SciMarketStore.ITEM_CATALOG).filter(([id, item]) => item.kind === 'tool' && inventory[id] > 0) : [];
       el.innerHTML = `
         <p class="bat-hint">在「${subjectLabel}」目前選定的範圍內出題，挑一位對手開打！</p>
         ${rankStrip()}
         ${companionCard()}
+        ${carryItems.length ? `<div class="bat-carry"><strong>🎒 戰前攜帶（PvE）</strong>
+          ${carryItems.map(([id, item]) => `<button type="button" data-carry="${id}" class="${carry === id ? 'active' : ''}">${item.emoji} ${item.name} ×${inventory[id]}</button>`).join('')}
+          <button type="button" data-carry="">不帶</button></div>` : ''}
         <button class="btn btn-secondary bat-pvp-btn" id="bat-pvp">👥 雙人對戰（同裝置輪流答題）</button>
         <div class="bat-oppgrid">
           ${OPPONENTS.map((o) => {
@@ -238,6 +252,11 @@ const SciBattle = (() => {
           start(OPPONENTS.find((o) => o.id === btn.dataset.id));
         });
       });
+      el.querySelectorAll('[data-carry]').forEach((btn) => btn.addEventListener('click', () => {
+        if (typeof SciMarketStore === 'undefined') return;
+        SciMarketStore.setCarry(btn.dataset.carry || null);
+        renderPicker();
+      }));
       el.querySelector('#bat-pvp').addEventListener('click', startPvp);
     }
 
@@ -245,6 +264,15 @@ const SciBattle = (() => {
     function start(o) {
       opp = o;
       battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, log: opp.taunt };
+      if (typeof SciMarketStore !== 'undefined') {
+        const carried = SciMarketStore.takeCarry();
+        if (carried) {
+          battleState.pHp += carried.effect.hp || 0;
+          battleState.excludeLeft = carried.effect.excludeOnce ? 1 : 0;
+          battleState.shieldLeft = carried.effect.shieldOnce ? 1 : 0;
+          battleState.log = `${carried.toolId === 'energy' ? '⚡ 能量飲生效！' : carried.toolId === 'magnifier' ? '🔍 放大鏡已備妥！' : '🥽 護目鏡已戴上！'} ${opp.taunt}`;
+        }
+      }
       locked = false;
       nextRound();
     }
@@ -260,7 +288,7 @@ const SciBattle = (() => {
 
     function hpBar(hp, side) {
       return `<div class="bat-hp ${hp <= 30 ? 'low' : ''} ${side}">
-        <div class="bat-hp-fill" style="width:${hp}%"></div><span>${hp}</span></div>`;
+        <div class="bat-hp-fill" style="width:${Math.min(100, hp)}%"></div><span>${hp}</span></div>`;
     }
 
     function render(midTurn) {
@@ -284,10 +312,18 @@ const SciBattle = (() => {
           <div class="quiz-options">
             ${q.options.map((o) => `<button class="quiz-option" data-id="${o.id}" ${midTurn ? 'disabled' : ''}>${o.label}</button>`).join('')}
           </div>
+          ${!midTurn && battleState.excludeLeft > 0 ? '<button type="button" class="btn btn-secondary bat-magnify">🔍 排除一個錯誤選項</button>' : ''}
         </div>`;
       if (!midTurn) {
         el.querySelectorAll('.quiz-option').forEach((btn) => {
           btn.addEventListener('click', () => onAnswer(btn.dataset.id));
+        });
+        const magnify = el.querySelector('.bat-magnify');
+        if (magnify) magnify.addEventListener('click', () => {
+          const wrong = [...el.querySelectorAll('.quiz-option')].filter((btn) => btn.dataset.id !== q.answerId && !btn.disabled);
+          if (wrong.length) wrong[Math.floor(Math.random() * wrong.length)].disabled = true;
+          battleState.excludeLeft = 0;
+          magnify.remove();
         });
       }
     }
@@ -329,9 +365,10 @@ const SciBattle = (() => {
           }
         }
       } else {
-        battleState.combo = 0;
-        battleState.pHp = Math.max(0, battleState.pHp - 8);
+        const protectedCombo = battleState.shieldLeft > 0;
+        applyWrongAnswer(battleState);
         battleState.log = `答錯！${opp.name} 趁隙反擊，你 -8（正確答案：${target.term}）`;
+        if (protectedCombo) battleState.log += '　🥽 護目鏡保住了連擊！';
       }
       render(true);
 
@@ -468,7 +505,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, isUnlocked, calcDamage, mount,
+    OPPONENTS, TIER_UNLOCK, isUnlocked, calcDamage, applyWrongAnswer, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject,

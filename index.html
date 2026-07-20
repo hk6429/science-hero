@@ -32,6 +32,7 @@
 <main>
   <div id="panels"></div>
   <div class="io-row">
+    <button id="btn-market" class="io-btn">🛒 科學市集（每週五開市）</button>
     <button id="btn-base" class="io-btn io-btn--base">🏕️ 我的科學基地</button>
     <button id="fusion-lab-btn" class="io-btn">🧬 精靈融合坊</button>
     <button id="share-card-btn" class="io-btn">🏆 產生戰績卡片</button>
@@ -66,6 +67,61 @@
       <p class="base-hint">拖曳裝飾自由擺放；點裝飾換樣式；點主樓或展館掛門牌、選銘言。晶能來自答對／連擊／精通／對戰勝，每日上限 100。</p>
     </div>
   </div>
+
+  <!-- 科學市集 -->
+  <div id="mkt-overlay" class="mkt-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="mkt-title">
+    <div class="mkt-panel">
+      <div class="mkt-head">
+        <h2 id="mkt-title">🛒 科學市集</h2>
+        <button id="mkt-close" type="button" aria-label="關閉科學市集">✕</button>
+      </div>
+      <div id="mkt-topbar" class="mkt-topbar"></div>
+      <details id="mkt-rules" class="mkt-rules">
+        <summary>📜 市集規則（家長也請看這裡）</summary>
+        <div id="mkt-rules-body"></div>
+      </details>
+      <section aria-labelledby="mkt-stall-title">
+        <h3 id="mkt-stall-title">🏪 官方直購攤位</h3>
+        <div id="mkt-stall" class="mkt-grid"></div>
+      </section>
+      <section id="mkt-wallet-actions" class="mkt-tools" aria-labelledby="mkt-wallet-title">
+        <h3 id="mkt-wallet-title">💎 市集錢包</h3>
+        <label>金額
+          <select id="mkt-wallet-amount"><option>10</option><option>30</option><option>50</option><option>100</option></select>
+        </label>
+        <button id="mkt-deposit" type="button">入金</button>
+        <button id="mkt-withdraw" type="button">出金</button>
+      </section>
+      <section id="mkt-sell" class="mkt-tools" aria-labelledby="mkt-sell-title">
+        <h3 id="mkt-sell-title">📤 我要上架</h3>
+        <label>物品 <select id="mkt-sell-item"></select></label>
+        <label>價格 <select id="mkt-sell-price" class="mkt-price"></select></label>
+        <label><input id="mkt-sell-pub" type="checkbox" /> 公開到全站（預設僅同班）</label>
+        <button id="mkt-sell-submit" type="button">確認上架</button>
+      </section>
+      <section id="mkt-buy-panel" class="mkt-tools" hidden aria-labelledby="mkt-buy-title">
+        <h3 id="mkt-buy-title">💌 選一張感謝小卡</h3>
+        <select id="mkt-card-choice"><option value="0">不送小卡</option></select>
+        <button id="mkt-buy-confirm" type="button">確認購買</button>
+        <button id="mkt-buy-cancel" type="button">取消</button>
+      </section>
+      <section id="mkt-claims" class="mkt-tools" aria-labelledby="mkt-claims-title">
+        <h3 id="mkt-claims-title">🧾 我的掛單</h3>
+        <div id="mkt-claims-list"></div>
+      </section>
+      <div id="mkt-tabs" class="mkt-tabs" role="tablist">
+        <button type="button" data-mkt-tab="class">我的班級</button>
+        <button type="button" data-mkt-tab="pub">全站公開</button>
+        <button id="mkt-tab-stars" type="button" data-mkt-tab="stars">🏆 集市達人</button>
+        <button id="mkt-tab-ever" type="button" data-mkt-tab="ever">📦 曾經持有</button>
+      </div>
+      <section id="mkt-class-pane" class="mkt-pane"></section>
+      <section id="mkt-pub-pane" class="mkt-pane" hidden></section>
+      <section id="mkt-stars-pane" class="mkt-pane" hidden></section>
+      <section id="mkt-ever-pane" class="mkt-pane" hidden></section>
+      <p id="mkt-status" class="mkt-status" aria-live="polite"></p>
+    </div>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -84,6 +140,8 @@
 <script src="js/rtbattle-ui.js"></script>
 <script src="js/base-store.js"></script>
 <script src="js/base-ui.js"></script>
+<script src="js/market-store.js"></script>
+<script src="js/market-ui.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

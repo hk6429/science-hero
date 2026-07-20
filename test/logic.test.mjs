@@ -982,3 +982,56 @@ test('SciRtBattleUI.mount 渲染連線對戰入口，不需啟動瀏覽器', () 
   assert.match(node.innerHTML, /id="rt-live-host"/);
   assert.match(node.innerHTML, /id="rt-season-board"/);
 });
+
+test('科學市集瀏覽 UI 靜態接線：overlay、透明規則、六卡與 SHAPI 單一出口', () => {
+  const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const ui = readFileSync(path.join(ROOT, 'js/market-ui.js'), 'utf8');
+  assert.match(html, /id="btn-market"/);
+  assert.match(html, /id="mkt-overlay"[^>]*role="dialog"[^>]*aria-modal="true"/);
+  assert.match(html, /id="mkt-rules"/);
+  assert.match(ui, /不可兌換現實金錢或禮物/);
+  assert.match(ui, /精靈與稚靈是夥伴，不是商品/);
+  assert.match(ui, /SHAPI\.call\('\/api\/mkt'/);
+  assert.doesNotMatch(ui, /\bfetch\s*\(/);
+  assert.ok(html.indexOf('js/market-store.js') < html.indexOf('js/market-ui.js'));
+  assert.ok(html.indexOf('js/market-ui.js') < html.indexOf('js/app.js'));
+});
+
+test('SciBattle.applyWrongAnswer：護目鏡保留一次連擊，扣血照常', () => {
+  const lib = makeSandbox();
+  const state = { pHp: 100, oHp: 100, combo: 3, shieldLeft: 1, log: '' };
+  lib.SciBattle.applyWrongAnswer(state);
+  assert.deepEqual({ combo: state.combo, shieldLeft: state.shieldLeft, pHp: state.pHp }, { combo: 3, shieldLeft: 0, pHp: 92 });
+  lib.SciBattle.applyWrongAnswer(state);
+  assert.equal(state.combo, 0);
+});
+
+test('科學市集交易 UI 靜態接線：上架全下拉、小卡、錢包、claims 與 PvE 攜帶', () => {
+  const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const ui = readFileSync(path.join(ROOT, 'js/market-ui.js'), 'utf8');
+  const battle = readFileSync(path.join(ROOT, 'js/battle.js'), 'utf8');
+  assert.match(html, /id="mkt-sell"/);
+  assert.match(html, /id="mkt-sell-item"[^>]*select|<select id="mkt-sell-item"/);
+  assert.doesNotMatch(html, /id="mkt-sell-price"[^>]*type="(?:text|number)"/);
+  assert.match(html, /id="mkt-card-choice"/);
+  assert.match(html, /id="mkt-wallet-actions"/);
+  assert.match(html, /id="mkt-claims"/);
+  assert.match(ui, /payLocal[\s\S]*callMkt\(\{ op: 'deposit'/);
+  assert.match(ui, /refundLocal/);
+  assert.match(battle, /bat-carry/);
+  assert.match(battle, /takeCarry/);
+});
+
+test('科學市集社交收藏：達人榜只取前五、曾經持有分頁保留售予／購自', () => {
+  const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const ui = readFileSync(path.join(ROOT, 'js/market-ui.js'), 'utf8');
+  assert.match(html, /id="mkt-tab-stars"/);
+  assert.match(html, /id="mkt-tab-ever"/);
+  assert.match(html, /id="mkt-stars-pane"/);
+  assert.match(html, /id="mkt-ever-pane"/);
+  assert.match(ui, /op: 'stars'/);
+  assert.match(ui, /\.slice\(0, 5\)/);
+  assert.match(ui, /getEver\(\)/);
+  assert.match(ui, /售予/);
+  assert.match(ui, /購自/);
+});

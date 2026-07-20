@@ -2,8 +2,8 @@
 const SciEconomy = (() => {
   const KEY = 'sci_econ';
   const DAILY_CAP = 100;
-  // 融合失敗回補是退款，不是學習收入，不佔每日獲取額度。
-  const UNCAPPED = new Set(['achievement', 'fusion-refund']);
+  // 退款與市集錢包出金不是新產出的晶能，不佔每日獲取額度。
+  const UNCAPPED = new Set(['achievement', 'fusion-refund', 'mkt-withdraw', 'mkt-refund']);
   const EARN_TABLE = { answer: 1, combo: 1, battleWin: 5, master: 3 };
 
   function defaultEcon() {
