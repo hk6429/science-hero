@@ -865,3 +865,75 @@ body.base-open { overflow: hidden; }
   .sb-style-list { grid-template-columns: 1fr; }
   .sb-word-bank { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ── 精靈融合坊 ── */
+.fusion-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(12, 28, 19, .72);
+}
+.fusion-overlay[hidden] { display: none; }
+.fusion-panel {
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  border: 2px solid var(--green);
+  border-radius: 18px;
+  background: #f5fbf7;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .32);
+}
+.fusion-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #fff;
+  background: var(--green-dark);
+}
+.fusion-head h2 { flex: 1; margin: 0; font-size: 1.25rem; }
+.fusion-head button { border: 0; background: transparent; color: #fff; font-size: 1.2rem; cursor: pointer; }
+.fusion-crystals { border-radius: 999px; background: rgba(255,255,255,.16); padding: .35em .7em; }
+#fusion-body { padding: 16px; }
+.fusion-summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-bottom: 14px; color: #31513c; }
+.fusion-spirit-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.fusion-spirit { display: flex; flex-direction: column; align-items: center; gap: 4px; border: 1px solid #c9e4d2; border-radius: 12px; background: #fff; padding: 12px 8px; text-align: center; }
+.fusion-spirit > span { font-size: 2rem; }
+.fusion-spirit small { color: var(--muted); line-height: 1.45; }
+.fusion-pair-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.fusion-pair-card { display: flex; min-height: 220px; flex-direction: column; align-items: center; gap: 8px; border: 1px solid #c9e4d2; border-radius: 14px; background: #fff; padding: 14px; text-align: center; }
+.fusion-pair-card.is-owned { border-color: #e0b64e; background: #fffbed; }
+.fusion-pair-card.is-known { border-color: var(--green); }
+.fusion-pair-card small { color: var(--muted); }
+.fusion-pair-card p { margin: 0; color: #456653; font-size: .82rem; line-height: 1.5; }
+.fusion-cub-face, .fusion-result-emoji { font-size: 3.2rem; }
+.is-silhouette { filter: grayscale(1) brightness(.4) opacity(.6); }
+.fusion-owned-tag { margin-top: auto; border-radius: 999px; background: #e9f7ee; color: var(--green-dark); padding: .25em .65em; font-size: .78rem; font-weight: 700; }
+.fusion-reasons { width: 100%; margin: 0; padding-left: 1.2em; color: #a04c28; text-align: left; font-size: .75rem; }
+.fusion-notice { margin-bottom: 14px; border: 1px solid #b8dcc5; border-radius: 12px; background: #fff; padding: 12px; text-align: center; }
+.fusion-notice.is-success { border-color: #e0b64e; background: #fffbed; }
+.fusion-notice.is-gentle { border-color: #8ab7d8; background: #f0f8ff; }
+.fusion-collection { margin-top: 18px; }
+.fusion-collection-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #d9e9de; padding: 10px 0; }
+.fusion-collection-name { min-width: 8em; }
+.fusion-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+.fusion-actions .btn, .fusion-pair-card .btn { padding: .55em .75em; font-size: .78rem; }
+.fusion-empty { color: var(--muted); }
+.fusion-back { margin-bottom: 10px; border: 0; background: transparent; color: var(--green-dark); cursor: pointer; font-weight: 700; }
+.fusion-kicker { color: var(--green-dark); font-weight: 700; text-align: center; }
+.fusion-quiz-feedback { text-align: center; }
+.fusion-nickname { text-align: center; }
+.fusion-nick-selects { display: flex; justify-content: center; gap: 8px; }
+.fusion-nick-selects select { min-width: 90px; border: 1px solid #b8dcc5; border-radius: 8px; background: #fff; padding: .6em; font-size: 1rem; }
+
+@media (max-width: 700px) {
+  .fusion-spirit-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fusion-pair-grid { grid-template-columns: 1fr; }
+  .fusion-collection-row { align-items: flex-start; flex-direction: column; }
+}

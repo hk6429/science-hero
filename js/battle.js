@@ -101,6 +101,53 @@ const SciBattle = (() => {
     return { ...cur, level: i + 1, mastered: n, next };
   }
 
+  // 四科精靈：進化門檻與助戰數值沿用既有科學夥伴，只更換各科形象。
+  const SUBJECT_LINES = {
+    nature: [
+      ['🌰', '萌芽種子'], ['🌱', '新芽綠靈'], ['🌿', '藤蔓精靈'], ['🌳', '巨木守衛'], ['🍀', '萬物之靈'],
+    ],
+    biology: [
+      ['🥚', '細胞原卵'], ['🐛', '幼蟲之靈'], ['🦋', '蝶翼精靈'], ['🦉', '智慧之鴞'], ['🧬', '生命之靈'],
+    ],
+    chemphys: [
+      ['⚗️', '燒瓶精靈'], ['🧪', '試管之靈'], ['🔥', '焰晶精靈'], ['⚡', '電光之靈'], ['⚛️', '元素宗靈'],
+    ],
+    earth: [
+      ['🪨', '礦石精靈'], ['🌋', '火山之靈'], ['🌊', '海潮精靈'], ['🌍', '地脈守護'], ['🪐', '星辰之靈'],
+    ],
+  };
+  Object.keys(SUBJECT_LINES).forEach((key) => {
+    SUBJECT_LINES[key] = SUBJECT_LINES[key].map(([emoji, name], i) => ({
+      ...COMPANION_TIERS[i], emoji, name,
+    }));
+  });
+
+  const PREFIX_SUBJECT = { e: 'nature', b: 'biology', pc: 'chemphys', d: 'earth' };
+
+  function subjectOfId(id) {
+    const match = String(id).match(/^([a-z]+)/);
+    return (match && PREFIX_SUBJECT[match[1]]) || null;
+  }
+
+  function masteredBySubject(state, maxBox) {
+    const result = { nature: 0, biology: 0, chemphys: 0, earth: 0 };
+    const cards = (state && state.cards) || {};
+    Object.keys(cards).forEach((id) => {
+      const subject = subjectOfId(id);
+      if (subject && cards[id].box >= maxBox) result[subject] += 1;
+    });
+    return result;
+  }
+
+  function companionForSubject(subjectKey, masteredCount) {
+    const line = SUBJECT_LINES[subjectKey] || COMPANION_TIERS;
+    const n = masteredCount || 0;
+    let i = 0;
+    while (i + 1 < line.length && n >= line[i + 1].at) i++;
+    const cur = line[i];
+    return { ...cur, level: i + 1, mastered: n, next: line[i + 1] || null };
+  }
+
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -123,6 +170,10 @@ const SciBattle = (() => {
     let battleState = null;
     let locked = false;
 
+    const currentCompanion = () => ctx.subjectKey
+      ? companionForSubject(ctx.subjectKey, ctx.masteredCountForSubject)
+      : companionFor(masteredCardCount);
+
     function totalReviews() {
       return state.stats.totalReviews || 0;
     }
@@ -140,7 +191,7 @@ const SciBattle = (() => {
     }
 
     function companionCard() {
-      const c = companionFor(masteredCardCount);
+      const c = currentCompanion();
       return `<div class="bat-companion">
         <span class="bat-companion-face">${c.emoji}</span>
         <span class="bat-companion-body">
@@ -152,7 +203,7 @@ const SciBattle = (() => {
     }
 
     function assistTag() {
-      const c = companionFor(masteredCardCount);
+      const c = currentCompanion();
       if (!c.atk) return '';
       return `<div class="bat-assist">${c.emoji} ${c.name} 助戰（追擊 ${c.atk}${c.leech ? '・機率回血' : ''}）</div>`;
     }
@@ -256,13 +307,25 @@ const SciBattle = (() => {
         battleState.oHp = Math.max(0, battleState.oHp - dmg);
         battleState.combo++;
         battleState.log = `命中！對 ${opp.name} 造成 ${dmg} 點傷害${battleState.combo >= 2 ? `（連擊 ×${battleState.combo}）` : ''}`;
-        const c = companionFor(masteredCardCount);
+        const c = currentCompanion();
         if (c.atk > 0 && battleState.oHp > 0) {
           battleState.oHp = Math.max(0, battleState.oHp - c.atk);
           battleState.log += `　${c.emoji} ${c.name} 追擊 -${c.atk}`;
           if (c.leech && Math.random() < c.leechChance) {
             battleState.pHp = Math.min(MAX_HP, battleState.pHp + c.leech);
             battleState.log += `・回血 +${c.leech}`;
+          }
+        }
+        // 稚靈隨行：只在 PvE 答對後疊加第二段小額追擊，不改 calcDamage。
+        const cubMods = ctx.cubMods || { atk: 0, leech: 0, leechChance: 0 };
+        if (cubMods.atk > 0 && battleState.oHp > 0) {
+          const cubAtk = Math.min(cubMods.atk, 5);
+          battleState.oHp = Math.max(0, battleState.oHp - cubAtk);
+          const activeCub = SciFusionStore.listCubs(SciFusionStore.load()).find((cub) => cub.isActive);
+          battleState.log += `　${activeCub ? `${activeCub.emoji} ${activeCub.displayName}` : '稚靈'} 追擊 -${cubAtk}`;
+          if (cubMods.leech && Math.random() < cubMods.leechChance) {
+            battleState.pHp = Math.min(MAX_HP, battleState.pHp + cubMods.leech);
+            battleState.log += `・回血 +${cubMods.leech}`;
           }
         }
       } else {
@@ -408,5 +471,6 @@ const SciBattle = (() => {
     OPPONENTS, TIER_UNLOCK, isUnlocked, calcDamage, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
+    SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject,
   };
 })();

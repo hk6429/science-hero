@@ -33,12 +33,25 @@
   <div id="panels"></div>
   <div class="io-row">
     <button id="btn-base" class="io-btn io-btn--base">🏕️ 我的科學基地</button>
+    <button id="fusion-lab-btn" class="io-btn">🧬 精靈融合坊</button>
     <button id="share-card-btn" class="io-btn">🏆 產生戰績卡片</button>
     <button id="export-btn" class="io-btn">匯出進度</button>
     <button id="import-btn" class="io-btn">匯入進度</button>
     <input type="file" id="import-file" accept="application/json" hidden />
   </div>
   <p class="io-hint">換手機、換電腦想接著練？先「匯出進度」存一個檔案，再到新裝置上「匯入進度」讀回來即可。</p>
+
+  <!-- 精靈融合坊 -->
+  <div id="fusion-overlay" class="fusion-overlay" hidden>
+    <div class="fusion-panel" role="dialog" aria-modal="true" aria-label="精靈融合坊">
+      <div class="fusion-head">
+        <h2>🧬 精靈融合坊</h2>
+        <span class="fusion-crystals">晶能 <b id="fusion-crystal-balance">0</b></span>
+        <button id="fusion-close" type="button" aria-label="關閉融合坊">✕</button>
+      </div>
+      <div id="fusion-body"></div>
+    </div>
+  </div>
 
   <!-- 科學基地 -->
   <div id="base-overlay" class="base-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="base-title">
@@ -62,9 +75,10 @@
 <script src="js/store.js"></script>
 <script src="js/flashcard.js"></script>
 <script src="js/quiz.js"></script>
-<script src="js/economy.js"></script>
 <script src="js/weak.js"></script>
+<script src="js/economy.js"></script>
 <script src="js/battle.js"></script>
+<script src="js/fusion-store.js"></script>
 <script src="js/shapi.js"></script>
 <script src="js/rtbattle.js"></script>
 <script src="js/rtbattle-ui.js"></script>

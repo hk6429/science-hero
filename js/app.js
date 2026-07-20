@@ -331,6 +331,9 @@ const SciApp = (() => {
       subjectLabel,
       recordAnswer,
       masteredCardCount: masteredCardCount(),
+      subjectKey: activeSubject,
+      masteredCountForSubject: masteredCountForSubject(activeSubject),
+      cubMods: SciFusionStore.cubBattleMods(SciFusionStore.load()),
     });
   }
 
@@ -716,6 +719,11 @@ const SciApp = (() => {
     return Object.values((state && state.cards) || {}).filter((c) => c.box >= maxBox).length;
   }
 
+  function masteredCountForSubject(subjectKey) {
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    return SciBattle.masteredBySubject(state, maxBox)[subjectKey] || 0;
+  }
+
   function countMasteredUnits() {
     let count = 0;
     subjectTerms.forEach((list) => {
@@ -822,13 +830,296 @@ const SciApp = (() => {
     });
   }
 
+  function drawCubCard(data) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, '#e4f8eb');
+    gradient.addColorStop(1, '#ffffff');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#2e9e5b';
+    ctx.lineWidth = 18;
+    ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#1c2b22';
+    ctx.font = 'bold 58px sans-serif';
+    ctx.fillText('🧬 科學英雄稚靈名片', canvas.width / 2, 130);
+    ctx.font = '230px sans-serif';
+    ctx.fillText(data.emoji, canvas.width / 2, 410);
+    ctx.font = 'bold 76px sans-serif';
+    ctx.fillText(data.displayName, canvas.width / 2, 530);
+    if (data.displayName !== data.name) {
+      ctx.fillStyle = '#5c6b62';
+      ctx.font = '34px sans-serif';
+      ctx.fillText(`稚靈：${data.name}`, canvas.width / 2, 585);
+    }
+
+    ctx.fillStyle = '#2e9e5b';
+    ctx.font = 'bold 38px sans-serif';
+    ctx.fillText(`${data.parents[0].label} × ${data.parents[1].label}`, canvas.width / 2, 670);
+    ctx.fillStyle = '#33473a';
+    ctx.font = '32px sans-serif';
+    const chars = Array.from(data.bornLine);
+    const lines = [];
+    for (let i = 0; i < chars.length; i += 18) lines.push(chars.slice(i, i + 18).join(''));
+    lines.forEach((line, index) => ctx.fillText(line, canvas.width / 2, 760 + index * 50));
+
+    ctx.fillStyle = '#1c2b22';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText(`主人段位：${data.rankLabel || '見習生'}`, canvas.width / 2, 1060);
+    ctx.fillText(`稚靈圖鑑：${data.cubCount} / 6`, canvas.width / 2, 1120);
+    ctx.fillStyle = '#718077';
+    ctx.font = '26px sans-serif';
+    ctx.fillText('science-hero-hk6429.vercel.app', canvas.width / 2, 1250);
+    return canvas;
+  }
+
+  function shareCubCard(cubId) {
+    const fstate = SciFusionStore.load();
+    const data = SciFusionStore.buildCubCardData(fstate, cubId, { rankLabel: rankLabel(masteredCardCount()) });
+    if (!data) return;
+    const canvas = drawCubCard(data);
+    canvas.toBlob(async (blob) => {
+      if (!blob) return;
+      const file = new File([blob], `科學英雄稚靈-${data.displayName}.png`, { type: 'image/png' });
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: '我的稚靈名片' });
+          return;
+        } catch { /* 取消或失敗時落回下載 */ }
+      }
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = file.name;
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  // ================= 精靈融合坊 =================
+  let fusionNotice = null;
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    })[char]);
+  }
+
+  function fusionReasonText(reason) {
+    if (reason === 'same-subject') return '請選兩個不同科目。';
+    if (reason === 'already-hatched') return '這組配對的稚靈已經孵化。';
+    if (reason.startsWith('master:')) {
+      const subject = reason.slice('master:'.length);
+      return `${SciFusionStore.SUBJECT_LABELS[subject] || subject}尚未精通滿 100 張。`;
+    }
+    if (reason.startsWith('accuracy:')) {
+      const subject = reason.slice('accuracy:'.length);
+      return `${SciFusionStore.SUBJECT_LABELS[subject] || subject}近期正確率未達 80%（至少 15 題）。`;
+    }
+    return '還有融合條件未達成。';
+  }
+
+  function fusionNoticeHtml() {
+    if (!fusionNotice) return '';
+    if (fusionNotice.type === 'success') {
+      const cub = fusionNotice.cub;
+      return `<div class="fusion-notice is-success celebrate-in">
+        <div class="fusion-result-emoji">${escapeHtml(cub.emoji)}</div>
+        <strong>${escapeHtml(cub.name)} 誕生了！</strong><p>${escapeHtml(cub.bornLine)}</p>
+        <div class="fusion-actions"><button class="btn btn-secondary" data-nick="${escapeHtml(cub.id)}">幫牠取名</button>
+        <button class="btn btn-primary" data-card="${escapeHtml(cub.id)}">產生名片</button></div></div>`;
+    }
+    if (fusionNotice.type === 'fail') {
+      return `<div class="fusion-notice is-gentle"><strong>這次光暈散開了</strong><p>${escapeHtml(fusionNotice.line)}</p>
+        <p>已返還 ${fusionNotice.refund} 晶能，精靈與學習進度都完好無缺。</p></div>`;
+    }
+    return `<div class="fusion-notice">${escapeHtml(fusionNotice.text || '')}</div>`;
+  }
+
+  function renderFusionLab() {
+    const body = el('#fusion-body');
+    if (!body) return;
+    const fstate = SciFusionStore.load();
+    const balance = SciFusionStore.crystalBalance();
+    const today = SciStore.todayStr();
+    const todayCount = fstate.lastFuseDate === today ? fstate.fuseCount : 0;
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const mastered = SciBattle.masteredBySubject(state, maxBox);
+    const collection = SciFusionStore.listCubs(fstate);
+    const owned = new Map(collection.map((cub) => [cub.id, cub]));
+    const balanceEl = el('#fusion-crystal-balance');
+    if (balanceEl) balanceEl.textContent = balance;
+
+    const spiritStrip = SUBJECTS.map((subject) => {
+      const count = mastered[subject.key] || 0;
+      const spirit = SciBattle.companionForSubject(subject.key, count);
+      return `<div class="fusion-spirit"><span>${escapeHtml(spirit.emoji)}</span><b>${escapeHtml(subject.label)}</b>
+        <small>${escapeHtml(spirit.name)} Lv.${spirit.level}<br>${count >= SciFusionStore.MASTER_GATE ? '已滿階 ✓' : `精通 ${count} / 100`}</small></div>`;
+    }).join('');
+
+    const pairCards = SciFusionStore.CUBS.map((cub) => {
+      const [a, b] = cub.pair;
+      const parentLabel = `${SciFusionStore.SUBJECT_LABELS[a]} × ${SciFusionStore.SUBJECT_LABELS[b]}`;
+      const ownedCub = owned.get(cub.id);
+      if (ownedCub) {
+        return `<article class="fusion-pair-card is-owned"><div class="fusion-cub-face">${escapeHtml(ownedCub.emoji)}</div>
+          <strong>${escapeHtml(ownedCub.displayName)}</strong><small>${escapeHtml(parentLabel)}</small>
+          <span class="fusion-owned-tag">${ownedCub.isActive ? '隨行中 ✓' : '已孵化'}</span></article>`;
+      }
+      const preview = SciFusionStore.getFusionPreview(fstate, a, b);
+      if (!preview.known) {
+        return `<article class="fusion-pair-card"><div class="fusion-cub-face is-silhouette">❓</div><strong>？？？</strong>
+          <small>${escapeHtml(parentLabel)}</small><button class="btn btn-secondary" data-reveal="${a}|${b}">解謎揭曉</button></article>`;
+      }
+      const gate = SciFusionStore.canFuse({ maxBox }, state, a, b);
+      const reasons = gate.reasons.map(fusionReasonText);
+      if (balance < SciFusionStore.FUSE_COST) reasons.push(`晶能不足（需 ${SciFusionStore.FUSE_COST}）。`);
+      if (todayCount >= SciFusionStore.MAX_FUSE_PER_DAY) reasons.push('今日融合次數已用完。');
+      const canStart = gate.ok && balance >= SciFusionStore.FUSE_COST && todayCount < SciFusionStore.MAX_FUSE_PER_DAY;
+      return `<article class="fusion-pair-card is-known"><div class="fusion-cub-face">${escapeHtml(preview.cub.emoji)}</div>
+        <strong>${escapeHtml(preview.cub.name)}</strong><small>${escapeHtml(parentLabel)}</small><p>${escapeHtml(preview.cub.bornLine)}</p>
+        ${reasons.length ? `<ul class="fusion-reasons">${reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join('')}</ul>` : ''}
+        <button class="btn btn-primary" data-fuse="${a}|${b}" ${canStart ? '' : 'disabled'}>融合（${SciFusionStore.FUSE_COST} 晶能）</button></article>`;
+    }).join('');
+
+    body.innerHTML = `${fusionNoticeHtml()}<div class="fusion-summary"><span>今日融合 <b>${todayCount} / ${SciFusionStore.MAX_FUSE_PER_DAY}</b></span>
+      <span>稚靈圖鑑 <b>${collection.length} / 6</b></span></div>
+      <h3>四科精靈</h3><div class="fusion-spirit-strip">${spiritStrip}</div>
+      <h3>稚靈配對牆</h3><div class="fusion-pair-grid">${pairCards}</div>
+      <section class="fusion-collection"><h3>稚靈收藏</h3>${collection.length ? collection.map((cub) => `<div class="fusion-collection-row">
+        <span class="fusion-collection-name">${escapeHtml(cub.emoji)} <b>${escapeHtml(cub.displayName)}</b>${cub.isActive ? ' · 隨行中' : ''}</span>
+        <span class="fusion-actions"><button class="btn btn-secondary" data-active="${escapeHtml(cub.id)}">${cub.isActive ? '取消隨行' : '隨行出戰'}</button>
+        <button class="btn btn-secondary" data-nick="${escapeHtml(cub.id)}">改暱稱</button><button class="btn btn-secondary" data-card="${escapeHtml(cub.id)}">看名片</button></span></div>`).join('')
+        : '<p class="fusion-empty">答對隱藏題揭曉配方，學習量達標後就能迎接第一隻稚靈。</p>'}</section>`;
+
+    body.querySelectorAll('[data-reveal]').forEach((button) => button.addEventListener('click', () => {
+      const [a, b] = button.dataset.reveal.split('|');
+      renderRevealQuestion(a, b);
+    }));
+    body.querySelectorAll('[data-fuse]').forEach((button) => button.addEventListener('click', () => {
+      const [a, b] = button.dataset.fuse.split('|');
+      if (!confirm(`確定花費 ${SciFusionStore.FUSE_COST} 晶能進行融合？`)) return;
+      const next = SciFusionStore.load();
+      const result = SciFusionStore.fuse(next, state, a, b, { today, meta: { maxBox } });
+      if (result.ok) {
+        fusionNotice = result.result === 'success' ? { type: 'success', cub: result.cub }
+          : { type: 'fail', line: result.line, refund: result.refund };
+        SciFusionStore.save(next);
+      } else {
+        const text = result.reason === 'crystals' ? '晶能不足。'
+          : result.reason === 'daily-limit' ? '今日融合次數已用完。' : '融合條件還沒有全部達成。';
+        fusionNotice = { type: 'info', text };
+      }
+      renderFusionLab();
+    }));
+    body.querySelectorAll('[data-active]').forEach((button) => button.addEventListener('click', () => {
+      const next = SciFusionStore.load();
+      if (next.activeCub === button.dataset.active) SciFusionStore.clearActiveCub(next);
+      else SciFusionStore.setActiveCub(next, button.dataset.active);
+      SciFusionStore.save(next);
+      fusionNotice = { type: 'info', text: next.activeCub ? '稚靈已跟上你的對戰隊伍。' : '已取消稚靈隨行。' };
+      renderFusionLab();
+    }));
+    body.querySelectorAll('[data-nick]').forEach((button) => button.addEventListener('click', () => renderNicknamePanel(button.dataset.nick)));
+    body.querySelectorAll('[data-card]').forEach((button) => button.addEventListener('click', () => shareCubCard(button.dataset.card)));
+  }
+
+  function renderRevealQuestion(a, b) {
+    const body = el('#fusion-body');
+    const reveal = SciFusionStore.buildRevealQuestion(a, b, Object.fromEntries(subjectTerms));
+    const q = reveal.question;
+    const startedAt = Date.now();
+    body.dataset.answered = '0';
+    body.innerHTML = `<button class="fusion-back" type="button">← 回配對牆</button><div class="fusion-quiz card">
+      <p class="fusion-kicker">配方揭曉·${escapeHtml(SciFusionStore.SUBJECT_LABELS[reveal.subject])}</p>
+      <div class="quiz-prompt">${q.mode === 'term2def' ? `「${escapeHtml(q.prompt)}」是在說什麼？` : `這個定義說的是哪個詞：<br>「${escapeHtml(q.prompt)}」`}</div>
+      <div class="quiz-options">${q.options.map((option) => `<button class="quiz-option" data-id="${escapeHtml(option.id)}">${escapeHtml(option.label)}</button>`).join('')}</div>
+      <div class="fusion-quiz-feedback" aria-live="polite"></div></div>`;
+    body.querySelector('.fusion-back').addEventListener('click', renderFusionLab);
+    body.querySelectorAll('.quiz-option').forEach((button) => button.addEventListener('click', () => {
+      if (body.dataset.answered === '1') return;
+      body.dataset.answered = '1';
+      const correct = button.dataset.id === q.answerId;
+      const target = (subjectTerms.get(reveal.subject) || []).find((term) => term.id === q.answerId);
+      recordAnswer(target, correct, Date.now() - startedAt);
+      body.querySelectorAll('.quiz-option').forEach((option) => { option.disabled = true; });
+      const feedback = body.querySelector('.fusion-quiz-feedback');
+      if (correct) {
+        const next = SciFusionStore.load();
+        SciFusionStore.revealPair(next, a, b);
+        SciFusionStore.save(next);
+        fusionNotice = { type: 'info', text: '雙科線索合上了，稚靈真身已揭曉！' };
+        setTimeout(renderFusionLab, 450);
+      } else {
+        feedback.innerHTML = '<p>這次差一點，沒有任何資源損失。</p><button class="btn btn-secondary" type="button">再試一題</button>';
+        feedback.querySelector('button').addEventListener('click', () => renderRevealQuestion(a, b));
+      }
+    }));
+  }
+
+  function renderNicknamePanel(cubId) {
+    const body = el('#fusion-body');
+    const cub = SciFusionStore.listCubs(SciFusionStore.load()).find((item) => item.id === cubId);
+    if (!cub) return renderFusionLab();
+    body.innerHTML = `<button class="fusion-back" type="button">← 回融合坊</button><div class="fusion-nickname card">
+      <div class="fusion-result-emoji">${escapeHtml(cub.emoji)}</div><h3>幫 ${escapeHtml(cub.name)} 選個暱稱</h3>
+      <p>只從預設詞庫組合，不開放自由輸入。</p><div class="fusion-nick-selects">
+      <select id="fusion-nick-prefix">${SciFusionStore.NICK_PREFIXES.map((word, index) => `<option value="${index}">${escapeHtml(word)}</option>`).join('')}</select>
+      <select id="fusion-nick-suffix">${SciFusionStore.NICK_SUFFIXES.map((word, index) => `<option value="${index}">${escapeHtml(word)}</option>`).join('')}</select></div>
+      <p>預覽：<strong id="fusion-nick-preview"></strong></p><div class="fusion-actions">
+      <button class="btn btn-secondary" id="fusion-nick-clear">恢復本名</button><button class="btn btn-primary" id="fusion-nick-save">儲存暱稱</button></div></div>`;
+    const updatePreview = () => {
+      el('#fusion-nick-preview').textContent = SciFusionStore.composeNickname(Number(el('#fusion-nick-prefix').value), Number(el('#fusion-nick-suffix').value));
+    };
+    body.querySelector('.fusion-back').addEventListener('click', renderFusionLab);
+    el('#fusion-nick-prefix').addEventListener('change', updatePreview);
+    el('#fusion-nick-suffix').addEventListener('change', updatePreview);
+    el('#fusion-nick-save').addEventListener('click', () => {
+      const next = SciFusionStore.load();
+      SciFusionStore.setNickname(next, cubId, el('#fusion-nick-preview').textContent);
+      SciFusionStore.save(next);
+      fusionNotice = { type: 'info', text: '暱稱已儲存。' };
+      renderFusionLab();
+    });
+    el('#fusion-nick-clear').addEventListener('click', () => {
+      const next = SciFusionStore.load();
+      SciFusionStore.setNickname(next, cubId, '');
+      SciFusionStore.save(next);
+      fusionNotice = { type: 'info', text: '已恢復稚靈本名。' };
+      renderFusionLab();
+    });
+    updatePreview();
+  }
+
+  function openFusionLab() {
+    const overlay = el('#fusion-overlay');
+    if (!overlay) return;
+    fusionNotice = null;
+    overlay.hidden = false;
+    renderFusionLab();
+  }
+
+  function closeFusionLab() {
+    const overlay = el('#fusion-overlay');
+    if (overlay) overlay.hidden = true;
+  }
+
   // ================= 進度匯出／匯入 =================
   function wireIoButtons() {
     const exportBtn = el('#export-btn');
     const importBtn = el('#import-btn');
     const importFile = el('#import-file');
     const shareBtn = el('#share-card-btn');
+    const fusionBtn = el('#fusion-lab-btn');
+    const fusionClose = el('#fusion-close');
     if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
+    if (fusionBtn) fusionBtn.addEventListener('click', openFusionLab);
+    if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);
     if (!exportBtn || !importBtn || !importFile) return;
 
     exportBtn.addEventListener('click', () => {

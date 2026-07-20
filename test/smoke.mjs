@@ -126,6 +126,18 @@ try {
   await page.waitForSelector('.card');
   console.log('✅ 弱點清單頁可開啟');
 
+  // 4b. 融合坊：開啟→看到晶能餘額與六格配對牆→關閉
+  await page.click('#fusion-lab-btn');
+  await page.waitForSelector('#fusion-overlay:not([hidden])');
+  const crystalTxt = await page.locator('#fusion-crystal-balance').textContent();
+  if (crystalTxt == null) fails.push('融合坊未顯示晶能餘額');
+  const pairCards = await page.locator('.fusion-pair-card').count();
+  if (pairCards !== 6) fails.push(`融合坊配對牆應有 6 格，實得 ${pairCards}`);
+  await page.click('#fusion-close');
+  // 關閉後 overlay 帶 hidden 屬性＝不可見，需用 state:'hidden' 等待（預設 state 等「可見」會逾時）。
+  await page.waitForSelector('#fusion-overlay', { state: 'hidden' });
+  console.log('✅ 融合坊可開啟、六格配對牆渲染、可關閉');
+
   // 5. 重新整理後進度還在（localStorage 應保留 totalReviews > 0）
   const before = await page.evaluate(() => JSON.parse(localStorage.getItem('science-hero:v1')).stats.totalReviews);
   await page.reload();
