@@ -7,7 +7,7 @@
     "def": "說明「細胞是生物體最基本的構造與功能單位,所有生物都由一個或多個細胞組成」的科學理論。",
     "example": "依照細胞學說,無論多小的生物,身體都是由細胞組成的。",
     "category": "基礎理論",
-    "distractor_pool": "basic_theory"
+    "distractor_pool": "cell_intro_concepts"
   },
   {
     "id": "b0002",
@@ -17,7 +17,7 @@
     "def": "包圍在細胞最外層、控制物質進出細胞的構造,具有選擇性,能讓需要的物質通過。",
     "example": "細胞膜就像細胞的守衛,決定哪些物質可以進出細胞。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_outer"
+    "distractor_pool": "cell_structure_organelle"
   },
   {
     "id": "b0003",
@@ -27,7 +27,7 @@
     "def": "位於細胞膜外側、由纖維素構成的堅硬構造,只存在於植物細胞,能支撐並保護細胞。",
     "example": "植物細胞外面多了一層細胞壁,所以形狀比較固定,不容易變形。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_outer"
+    "distractor_pool": "cell_structure_organelle"
   },
   {
     "id": "b0004",
@@ -107,7 +107,7 @@
     "def": "細胞內含有遺傳物質、控制細胞生長與活動的重要構造,通常位於細胞中央。",
     "example": "細胞核就像細胞的指揮中心,掌管細胞內大部分的活動。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_nucleus"
+    "distractor_pool": "cell_structure_organelle"
   },
   {
     "id": "b0012",
@@ -117,7 +117,7 @@
     "def": "存在於細胞核內、由DNA與蛋白質組成的絲狀物質,細胞分裂時會濃縮成染色體。",
     "example": "平常細胞核裡的遺傳物質呈現細絲狀的染色質,不容易在顯微鏡下看清楚。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_nucleus"
+    "distractor_pool": "cell_structure_organelle"
   },
   {
     "id": "b0013",
@@ -127,7 +127,7 @@
     "def": "位於細胞核內的小圓形構造,與核糖體的形成有關。",
     "example": "在細胞核中可以觀察到一個或多個深色的核仁。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_nucleus"
+    "distractor_pool": "cell_structure_organelle"
   },
   {
     "id": "b0014",
@@ -137,7 +137,7 @@
     "def": "動物體的基本構造單位,沒有細胞壁與葉綠體,形狀通常較不固定。",
     "example": "觀察動物細胞時,會發現它沒有像植物那樣明顯的細胞壁。",
     "category": "細胞類型",
-    "distractor_pool": "cell_type_structure"
+    "distractor_pool": "cell_intro_concepts"
   },
   {
     "id": "b0015",
@@ -147,7 +147,7 @@
     "def": "植物體的基本構造單位,具有細胞壁、葉綠體及明顯的大液胞,是與動物細胞的主要差異。",
     "example": "植物細胞因為有細胞壁,所以形狀比動物細胞更固定。",
     "category": "細胞類型",
-    "distractor_pool": "cell_type_structure"
+    "distractor_pool": "cell_intro_concepts"
   },
   {
     "id": "b0016",
@@ -157,7 +157,7 @@
     "def": "整個身體只由一個細胞構成、能獨立完成生命所有功能的生物,例如變形蟲、草履蟲。",
     "example": "草履蟲是一種單細胞生物,一個細胞就能完成攝食、呼吸等所有生命現象。",
     "category": "細胞類型",
-    "distractor_pool": "organism_by_cellcount"
+    "distractor_pool": "cell_intro_concepts"
   },
   {
     "id": "b0017",
@@ -167,7 +167,7 @@
     "def": "身體由許多細胞組成、細胞之間會分工合作的生物,例如人類、樹木。",
     "example": "人類是多細胞生物,體內有神經細胞、肌肉細胞等許多種不同的細胞分工合作。",
     "category": "細胞類型",
-    "distractor_pool": "organism_by_cellcount"
+    "distractor_pool": "cell_intro_concepts"
   },
   {
     "id": "b0018",
@@ -768,7 +768,7 @@
     "def": "身體透過流汗、皮膚血管收縮擴張、肌肉顫抖等方式，使體內溫度維持在相對穩定範圍的恆定性機制。",
     "example": "天氣炎熱時，身體會靠體溫調節機制大量流汗來散熱降溫。",
     "category": "恆定性",
-    "distractor_pool": "homeostasis"
+    "distractor_pool": "endocrine"
   },
   {
     "id": "b0078",
@@ -778,7 +778,7 @@
     "def": "身體藉由胰島素與升糖素等激素的協同作用，使血液中的葡萄糖濃度維持在穩定範圍的恆定性機制。",
     "example": "飯後血糖升高，身體會啟動血糖調節機制把濃度慢慢降回正常值。",
     "category": "恆定性",
-    "distractor_pool": "homeostasis"
+    "distractor_pool": "endocrine"
   },
   {
     "id": "b0079",
@@ -1910,7 +1910,8 @@
     "def": "分布於細胞質中，由蛋白質纖維交織而成的網絡構造，可支撐並維持細胞的形狀，並協助胞器在細胞內移動。",
     "example": "顯微鏡下雖然看不清楚，但細胞骨架其實遍布整個細胞質，撐起細胞的形狀並讓胞器維持在固定位置。",
     "category": "構造名詞",
-    "distractor_pool": "cell_structure_organelle"
+    "distractor_pool": "cell_structure_organelle",
+    "advanced": true
   },
   {
     "id": "b0192",
@@ -1920,7 +1921,8 @@
     "def": "細胞質在細胞內部循環移動的現象，有助於將養分、氧氣等物質輸送到細胞各處。",
     "example": "在水綿的細胞中，可以觀察到葉綠體隨著細胞質流動而緩緩繞著細胞邊緣移動。",
     "category": "生理作用",
-    "distractor_pool": "cell_physiology"
+    "distractor_pool": "cell_physiology",
+    "advanced": true
   },
   {
     "id": "b0193",
@@ -1990,7 +1992,8 @@
     "def": "細胞表面積與體積之間的比值，此比值會隨細胞體積增大而變小，是限制細胞不能無限長大的重要因素。",
     "example": "細胞體積越大，表面積體積比就越小，物質進出細胞的效率也會跟著下降。",
     "category": "構造性質",
-    "distractor_pool": "cell_physiology"
+    "distractor_pool": "cell_physiology",
+    "advanced": true
   },
   {
     "id": "b0200",
@@ -2130,7 +2133,7 @@
     "def": "當體內某項生理數值偏離正常範圍時，身體會啟動相反方向的反應使其回到穩定狀態的調節機制，是維持恆定性的主要方式。",
     "example": "體溫過高時皮膚血管擴張並排汗散熱，這種讓數值回到正常的過程就是負回饋調節。",
     "category": "恆定性",
-    "distractor_pool": "homeostasis"
+    "distractor_pool": "endocrine"
   },
   {
     "id": "b0214",
