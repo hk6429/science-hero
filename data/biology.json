@@ -1891,5 +1891,615 @@
     "example": "工廠廢水未經處理直接排放，會造成汙染並影響下游整個水域生態系。",
     "category": "保育與環境議題",
     "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0190",
+    "term": "中心體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "動物細胞中與紡錘絲形成有關的構造，於細胞分裂時協助染色體的移動與分配。",
+    "example": "動物細胞在準備分裂前，中心體會先複製並移動到細胞的兩極，協助紡錘絲的形成。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "b0191",
+    "term": "細胞骨架",
+    "unit": "cell",
+    "grade": "7",
+    "def": "分布於細胞質中，由蛋白質纖維交織而成的網絡構造，可支撐並維持細胞的形狀，並協助胞器在細胞內移動。",
+    "example": "顯微鏡下雖然看不清楚，但細胞骨架其實遍布整個細胞質，撐起細胞的形狀並讓胞器維持在固定位置。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "b0192",
+    "term": "細胞質流動",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞質在細胞內部循環移動的現象，有助於將養分、氧氣等物質輸送到細胞各處。",
+    "example": "在水綿的細胞中，可以觀察到葉綠體隨著細胞質流動而緩緩繞著細胞邊緣移動。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "b0193",
+    "term": "載物台",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上用來放置玻片標本的水平平台，中央有通光孔讓光線得以穿透標本。",
+    "example": "小華把裝好蓋玻片的玻片標本輕輕放上載物台，並用彈簧夾固定好位置。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0194",
+    "term": "光源",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡下方提供照明的裝置，例如反光鏡或內建電燈，使光線能穿透標本讓影像清楚可見。",
+    "example": "教室光線不足時，同學需要先打開顯微鏡的光源，才能看清楚玻片上的標本。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0195",
+    "term": "粗調節輪",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上用來大幅度升降鏡筒、快速找到影像位置的旋鈕，通常搭配低倍鏡使用。",
+    "example": "觀察玻片時，老師提醒同學要先用粗調節輪快速找到影像的大致位置，再做細部調整。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0196",
+    "term": "細調節輪",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上用來微幅調整鏡筒高度、使影像更加清晰的旋鈕，常在換成高倍鏡後使用。",
+    "example": "換成高倍鏡之後，只能轉動細調節輪做微小幅度調整，以免鏡頭壓碎玻片。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0197",
+    "term": "視野",
+    "unit": "cell",
+    "grade": "7",
+    "def": "透過顯微鏡目鏡所能觀察到的圓形範圍，放大倍率愈高時，視野會愈小。",
+    "example": "把物鏡從低倍換成高倍以後，視野變小了，能看到的範圍也隨之縮小。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0198",
+    "term": "選擇性通透",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞膜只允許特定種類與大小的物質自由進出細胞，藉此控制細胞內外物質交換的特性。",
+    "example": "細胞膜的選擇性通透讓葡萄糖能夠順利進入細胞，卻阻擋了體積過大的物質隨意穿越。",
+    "category": "構造性質",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "b0199",
+    "term": "表面積體積比",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞表面積與體積之間的比值，此比值會隨細胞體積增大而變小，是限制細胞不能無限長大的重要因素。",
+    "example": "細胞體積越大，表面積體積比就越小，物質進出細胞的效率也會跟著下降。",
+    "category": "構造性質",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "b0200",
+    "term": "能量轉換",
+    "unit": "cell",
+    "grade": "7",
+    "def": "生物體內將某一形式的能量轉變為另一種形式的過程，是細胞維持生命活動的重要功能。",
+    "example": "光合作用是植物細胞內重要的能量轉換過程，把光能轉變成儲存在葡萄糖中的化學能。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "b0201",
+    "term": "解剖顯微鏡",
+    "unit": "cell",
+    "grade": "7",
+    "def": "放大倍率較低但能呈現立體影像的顯微鏡，適合觀察不透光、體積較大的標本。",
+    "example": "老師用解剖顯微鏡讓同學觀察整隻螞蟻的外形構造，因為牠不透光而且立體。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "b0202",
+    "term": "口腔",
+    "unit": "body",
+    "grade": "8",
+    "def": "消化系統的起始部位，內有牙齒與舌頭，可進行機械性消化（咀嚼）並與唾液混合，啟動化學性消化。",
+    "example": "食物進入口腔後，牙齒先將其磨碎，舌頭再協助攪拌並與唾液混合。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "b0203",
+    "term": "咽",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於口腔與食道、氣管交界處的通道，是食物與空氣共同經過的部位，吞嚥時會厭軟骨會蓋住氣管入口以避免嗆到。",
+    "example": "吞嚥時食物團會通過咽，此時呼吸道暫時被會厭軟骨封閉，避免食物誤入氣管。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "b0204",
+    "term": "心房",
+    "unit": "body",
+    "grade": "8",
+    "def": "心臟上方負責接收血液的兩個腔室（左心房、右心房），收縮時將血液送入下方的心室。",
+    "example": "全身靜脈血先流回右心房，再由右心房收縮送入右心室。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "b0205",
+    "term": "心室",
+    "unit": "body",
+    "grade": "8",
+    "def": "心臟下方負責將血液送出的兩個腔室（左心室、右心室），肌肉壁較厚，收縮力大，可將血液推送至肺部或全身。",
+    "example": "左心室的肌肉壁特別厚，收縮時能產生強大壓力，把血液打到全身各處。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "b0206",
+    "term": "血壓",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液在血管壁上所產生的壓力，通常以收縮壓與舒張壓表示，是反映心臟與血管功能的重要指標。",
+    "example": "醫護人員用血壓計測量病人的血壓，判斷心血管系統是否正常運作。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "b0207",
+    "term": "鼻腔",
+    "unit": "body",
+    "grade": "8",
+    "def": "呼吸系統最前端的通道，內壁有黏膜與鼻毛，可過濾、濕潤並加溫吸入的空氣，再送往咽、氣管。",
+    "example": "冷空氣進入鼻腔後，經過黏膜的加溫與濕潤，變得較溫暖濕潤才繼續往下進入氣管。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "b0208",
+    "term": "氣體交換",
+    "unit": "body",
+    "grade": "8",
+    "def": "肺泡與微血管之間，氧氣與二氧化碳依濃度差以擴散方式進行交換的過程，是呼吸系統運作的核心目的。",
+    "example": "肺泡壁極薄且布滿微血管，正是為了讓氣體交換能有效率地進行。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "b0209",
+    "term": "腎小管",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接腎絲球的細長管道，負責將過濾液中有用的水分、葡萄糖與礦物質再吸收回血液，並分泌部分廢物，最終形成尿液。",
+    "example": "過濾後的液體流經腎小管時，大部分葡萄糖與水分會被重新吸收回血液中。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "b0210",
+    "term": "腦幹",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於大腦與脊髓之間的構造，負責控制呼吸、心跳等維持生命的基本生理活動，是連接腦與脊髓的重要通道。",
+    "example": "腦幹一旦受到嚴重損傷，可能會導致呼吸與心跳等維生功能無法正常運作。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "b0211",
+    "term": "副甲狀腺",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於甲狀腺後方的內分泌腺體，可分泌副甲狀腺素，調節血液中鈣離子的濃度。",
+    "example": "當血鈣濃度過低時，副甲狀腺會分泌更多激素，促使骨骼釋出鈣質以維持恆定。",
+    "category": "內分泌系統",
+    "distractor_pool": "endocrine"
+  },
+  {
+    "id": "b0212",
+    "term": "肌腱",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接骨骼肌與骨骼的堅韌結締組織，能將肌肉收縮產生的力量傳遞到骨骼，帶動關節運動。",
+    "example": "阿基里斯腱是人體最粗的肌腱，連接小腿肌肉與腳跟骨，讓我們能夠踮腳與跳躍。",
+    "category": "骨骼肌肉系統",
+    "distractor_pool": "skeletal"
+  },
+  {
+    "id": "b0213",
+    "term": "負回饋調節",
+    "unit": "body",
+    "grade": "8",
+    "def": "當體內某項生理數值偏離正常範圍時，身體會啟動相反方向的反應使其回到穩定狀態的調節機制，是維持恆定性的主要方式。",
+    "example": "體溫過高時皮膚血管擴張並排汗散熱，這種讓數值回到正常的過程就是負回饋調節。",
+    "category": "恆定性",
+    "distractor_pool": "homeostasis"
+  },
+  {
+    "id": "b0214",
+    "term": "孢子生殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "無性生殖的一種方式，生物體產生大量微小、具保護構造的孢子，孢子成熟後脫離母體，在適合環境下萌發成新個體，常見於黴菌等生物。",
+    "example": "黑黴菌成熟後會釋放出大量孢子，這種靠孢子生殖繁衍後代的方式讓黴菌能迅速散布到麵包表面各處。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "b0215",
+    "term": "卵巢",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "女性的主要生殖器官，負責產生卵細胞並分泌雌性激素，每個月通常會有一顆卵成熟並排出。",
+    "example": "女性的卵巢左右各一個，位於子宮兩側，負責產生卵並定期排卵。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "b0216",
+    "term": "睪丸",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "男性的主要生殖器官，位於陰囊內，負責產生精子並分泌雄性激素。",
+    "example": "男性的睪丸持續不斷地製造精子，是精子生成的主要場所。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "b0217",
+    "term": "輸卵管",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "連接卵巢與子宮的管狀構造，是精子與卵通常相遇並完成受精的地方，受精卵會經此運送到子宮。",
+    "example": "卵從卵巢排出後會進入輸卵管，若在輸卵管中與精子相遇，就可能完成受精。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "b0218",
+    "term": "子宮",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "女性體內的中空肌肉器官，內壁有子宮內膜，是胚胎著床、發育與孕育胎兒的場所。",
+    "example": "受精卵沿著輸卵管移動到子宮後，會附著在子宮內膜上，開始進行胚胎發育。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "b0219",
+    "term": "體細胞",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "指生物體內除生殖細胞以外的一般細胞，其染色體數目為成對的完整套數，透過有絲分裂增生。",
+    "example": "人體的皮膚細胞、肌肉細胞都屬於體細胞，染色體數目與生殖細胞不同。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  },
+  {
+    "id": "b0220",
+    "term": "聯會",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "在減數分裂過程中，成對的同源染色體緊密配對靠在一起的現象，是減數分裂前期的重要特徵，有助於後續染色體的分離。",
+    "example": "減數分裂初期，來自父母雙方的同源染色體會發生聯會，兩兩配對排列在一起。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  },
+  {
+    "id": "b0221",
+    "term": "有絲分裂",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "體細胞增生的方式，一個細胞分裂為兩個染色體數目與原細胞相同的子細胞，用於生物體的生長與修復，與減數分裂不同。",
+    "example": "皮膚傷口能夠癒合，就是因為周圍的細胞不斷進行有絲分裂來增加細胞數量。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  },
+  {
+    "id": "b0222",
+    "term": "獨立分配律",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "孟德爾提出的遺傳法則之一，指位於不同對染色體上的不同對偶基因，在生殖細胞形成時會各自獨立分配，互不影響。",
+    "example": "孟德爾透過豌豆的種子形狀與顏色兩種性狀同時觀察，歸納出獨立分配律。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "b0223",
+    "term": "基因重組",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "在有性生殖過程中，來自父母雙方的基因經由減數分裂與受精作用重新組合，使子代產生與親代不完全相同的基因型組合。",
+    "example": "兄弟姊妹雖然來自同一對父母，外貌卻各有不同，這正是基因重組造成的結果。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "b0224",
+    "term": "遺傳疾病",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "由基因或染色體異常所引起、可經由父母傳給子代的疾病，其發生與遺傳物質的變化有關，並非後天感染造成。",
+    "example": "血友病是一種典型的遺傳疾病，患者因基因異常而導致血液凝固功能不足。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "b0225",
+    "term": "同卵雙胞胎",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "由同一個受精卵在早期發育階段分裂成兩個獨立胚胎所形成的雙胞胎，兩人基因型完全相同。",
+    "example": "同卵雙胞胎因為來自同一顆受精卵分裂而成，所以外貌與基因型幾乎一模一樣。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "b0226",
+    "term": "綱",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "分類階層中界於門與目之間的層級，將同門生物依骨骼、生理等較大範圍的共同特徵再分群，例如哺乳綱、鳥綱。",
+    "example": "老師說貓和老虎雖然種類不同，但都屬於同一個「綱」，因為牠們都是用乳汁哺育幼獸的哺乳動物。",
+    "category": "分類階層",
+    "distractor_pool": "taxonomy"
+  },
+  {
+    "id": "b0227",
+    "term": "目",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "分類階層中界於綱與科之間的層級，將同綱生物依更細部的共同特徵再劃分為較小的類群。",
+    "example": "貓和狗雖然同屬哺乳綱，卻因牙齒構造與捕食方式不同，被分在不同的「目」。",
+    "category": "分類階層",
+    "distractor_pool": "taxonomy"
+  },
+  {
+    "id": "b0228",
+    "term": "科",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "分類階層中界於目與屬之間的層級，是比屬更大的分類單位，同科生物具有較多共同的形態或構造特徵。",
+    "example": "玫瑰和草莓雖然外觀差異很大，卻同屬於薔薇「科」的植物。",
+    "category": "分類階層",
+    "distractor_pool": "taxonomy"
+  },
+  {
+    "id": "b0229",
+    "term": "地理隔離",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "因高山、海洋或河流等地理屏障，使同一物種的族群被分隔於不同區域、無法自由交配往來，是新物種形成的重要條件之一。",
+    "example": "兩座島嶼之間因海水阻隔造成地理隔離，島上的鳥類經過長期演化後羽色出現明顯差異。",
+    "category": "演化概念",
+    "distractor_pool": "evolution"
+  },
+  {
+    "id": "b0230",
+    "term": "生殖隔離",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "兩個族群之間因構造、行為或生理差異，即使相遇也無法成功交配、或交配後代無法繼續繁殖的現象，是判斷是否已形成不同物種的關鍵依據。",
+    "example": "馬和驢交配雖能生下騾，但騾沒有生殖能力，顯示馬與驢之間已出現生殖隔離。",
+    "category": "演化概念",
+    "distractor_pool": "evolution"
+  },
+  {
+    "id": "b0231",
+    "term": "人擇",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "人類依自身需求，有目的地挑選具特定性狀的動植物個體進行繁殖，使該性狀在後代中逐漸普遍化的過程。",
+    "example": "農夫長期挑選果實較大的植株留種繁殖，正是人擇造成農作物性狀改變的例子。",
+    "category": "演化概念",
+    "distractor_pool": "evolution"
+  },
+  {
+    "id": "b0232",
+    "term": "演化樹",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "以樹狀分支圖呈現不同生物之間演化上的親緣關係，並標示出共同祖先分支點的圖形工具。",
+    "example": "生物課本上的演化樹顯示，鳥類與爬蟲類在很久以前是由同一支祖先分支演化而來。",
+    "category": "演化概念",
+    "distractor_pool": "evolution"
+  },
+  {
+    "id": "b0233",
+    "term": "共同祖先",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "兩種或多種生物在演化歷史上曾經共同擁有、後來分支演化出不同物種的祖先生物。",
+    "example": "科學家從骨骼結構推論，人類與黑猩猩擁有共同祖先，只是後來分支演化出不同的物種。",
+    "category": "演化概念",
+    "distractor_pool": "evolution"
+  },
+  {
+    "id": "b0234",
+    "term": "真核生物",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "細胞內具有由核膜包圍的細胞核與粒線體等胞器的生物，包括動物、植物、真菌與原生生物，與沒有核膜構造的原核生物相對。",
+    "example": "除了細菌之外，動物、植物與真菌等真核生物的細胞都擁有由核膜包裹的細胞核。",
+    "category": "生物界說",
+    "distractor_pool": "diversity"
+  },
+  {
+    "id": "b0235",
+    "term": "扁形動物",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "身體背腹扁平、沒有真體腔與肛門的無脊椎動物，例如自由生活的渦蟲與寄生性的絛蟲、吸蟲。",
+    "example": "渦蟲是常見的自由生活扁形動物，身體扁平且具有很強的再生能力。",
+    "category": "無脊椎動物類群",
+    "distractor_pool": "invertebrate"
+  },
+  {
+    "id": "b0236",
+    "term": "刺絲胞動物",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "身體呈輻射對稱、觸手上具有刺絲胞可用來攻擊或防禦的無脊椎動物，例如水母、珊瑚與海葵。",
+    "example": "水母是典型的刺絲胞動物，觸手上的刺絲胞能釋放毒液捕捉獵物。",
+    "category": "無脊椎動物類群",
+    "distractor_pool": "invertebrate"
+  },
+  {
+    "id": "b0237",
+    "term": "線形動物",
+    "unit": "evo_classify",
+    "grade": "9",
+    "def": "身體細長呈圓柱狀、兩端尖細、體表具角質層的無脊椎動物，多數種類體型微小，例如蛔蟲與其他線蟲。",
+    "example": "蛔蟲是一種寄生在人體腸道內、常見的線形動物。",
+    "category": "無脊椎動物類群",
+    "distractor_pool": "invertebrate"
+  },
+  {
+    "id": "b0238",
+    "term": "初級消費者",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "生態系中直接以生產者（植物或藻類）為食的動物，位於食物鏈的第二個階層，例如草食性動物。",
+    "example": "草原上啃食青草維生的兔子，就是這片生態系裡典型的初級消費者。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "b0239",
+    "term": "次級消費者",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "以初級消費者（草食性動物）為食的肉食性或雜食性動物，位於食物鏈的第三個階層。",
+    "example": "以田鼠為主食的蛇，在這條食物鏈中扮演次級消費者的角色。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "b0240",
+    "term": "頂級消費者",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "食物鏈中位居最高階層、少有天敵捕食的消費者，數量通常最少，容易受汙染物累積影響。",
+    "example": "老鷹處於食物鏈最頂端，很少被其他動物捕食，因此被視為這片森林的頂級消費者。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "b0241",
+    "term": "生物量",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "特定時間內，某一生態系或某一營養階層中，所有生物體所含有機物質的總重量，常用來估算能量儲存的多寡。",
+    "example": "科學家測量池塘中浮游藻類的生物量，藉此推估這片水域能供養多少魚類。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "b0242",
+    "term": "生態系服務",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "生態系透過其自然運作，為人類提供的各種有形與無形益處，包括淨化空氣與水、授粉、調節氣候、提供食物與遊憩空間等。",
+    "example": "森林能涵養水源、淨化空氣、調節氣候，這些都屬於森林提供的生態系服務。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0243",
+    "term": "生態演替",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "一個地區的生物群集隨時間逐漸改變，由簡單、不穩定的狀態，朝向複雜、穩定的狀態發展的過程。",
+    "example": "火山噴發後的裸露地表，經過數十年的生態演替，逐漸從草地演變為森林。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "b0244",
+    "term": "原生演替",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "在原本沒有生物存在、也沒有土壤的裸露地面（如新形成的火山岩或沙丘）上，從零開始展開的生態演替過程，需要極長時間才能形成穩定群集。",
+    "example": "新噴發冷卻後的熔岩地，苔蘚與地衣率先進駐，展開一場漫長的原生演替。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "b0245",
+    "term": "次生演替",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "在原本已有生物與土壤、但因火災、砍伐或風災等因素遭破壞後的地區，重新展開的生態演替過程，速度通常比原生演替快。",
+    "example": "森林大火燒毀林地後，土壤中殘留的種子與根系讓次生演替得以較快速地展開。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "b0246",
+    "term": "瀕危物種",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "族群數量已大幅減少，若不加以保護，在可預見的未來極可能滅絕的物種。",
+    "example": "石虎因棲地不斷縮小、族群數量銳減，已被列為臺灣的瀕危物種之一。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0247",
+    "term": "保護區",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "政府或組織依法劃設、限制人為開發與破壞行為的特定區域，目的是保存自然生態環境與珍貴物種。",
+    "example": "政府在候鳥重要棲地劃設保護區，禁止在區內進行任何開發或狩獵行為。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0248",
+    "term": "外來入侵種",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "被引入新環境後，因缺乏天敵而大量繁殖擴散，並透過競爭、掠食或傳播疾病等方式，實際威脅到本土物種生存的外來種。",
+    "example": "小花蔓澤蘭在臺灣缺乏天敵制衡，快速攀爬覆蓋原生植物，是典型的外來入侵種。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0249",
+    "term": "生物防治",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "利用天敵、寄生生物或病原微生物等自然生物力量，來控制害蟲或有害物種數量的防治方法，可減少化學農藥的使用。",
+    "example": "農民引進瓢蟲來捕食蚜蟲，就是一種以天敵抑制害蟲數量的生物防治方式。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "b0250",
+    "term": "永續利用",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "在滿足目前人類需求的同時，兼顧生態系的再生能力與長期穩定，使自然資源能持續供應未來世代使用的資源運用方式。",
+    "example": "漁民採取限額捕撈，讓魚群有足夠時間繁殖，正是落實漁業資源永續利用的做法。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
   }
 ]

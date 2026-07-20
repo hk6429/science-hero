@@ -1808,5 +1808,695 @@
     "example": "烏龜和蜥蜴身上有鱗片、用肺呼吸，都屬於爬蟲類。",
     "category": "動物分類",
     "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0182",
+    "term": "假設",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "根據已知的知識和觀察，對還沒驗證的問題先提出一個合理的猜測性說明，作為接下來實驗要驗證的方向。",
+    "example": "老師請同學提出假設：如果澆水量增加，植物會不會長得比較高？",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0183",
+    "term": "探究問題",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "把心中好奇或想弄清楚的事情，改寫成一個可以用觀察或實驗去回答的具體問題。",
+    "example": "小明把「為什麼影子會變長」改寫成一個明確的探究問題：一天當中影子的長度會怎麼變化？",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0184",
+    "term": "客觀紀錄",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "只寫下實際觀察或測量到的結果，不加入自己的猜測、心情或想像，讓別人看了紀錄也能得到相同的資訊。",
+    "example": "做完實驗後，老師提醒大家要做客觀紀錄，把溫度計顯示的數字寫下來就好，不要寫「我覺得變熱了」。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0185",
+    "term": "實驗步驟",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "進行實驗時，依照先後順序排列的操作流程，讓實驗可以被清楚地重複執行。",
+    "example": "這次實驗步驟共有五步，第一步是準備器材，最後一步才是紀錄結果。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0186",
+    "term": "實驗組與對照組",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "實驗組是接受某種處理或改變的一組，對照組則維持原本條件不變，用來作為比較的基準，兩組其他條件都相同。",
+    "example": "這次實驗把植物分成實驗組與對照組，實驗組每天澆兩次水，對照組維持原本一天一次。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0187",
+    "term": "量角器",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "用來測量或畫出角度大小的半圓形或圓形工具，邊緣刻有0度到180度（或360度）的刻度。",
+    "example": "小華用量角器量出三角形其中一個角是60度。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0188",
+    "term": "皮尺",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "材質柔軟可以彎曲纏繞的長度測量工具，適合用來測量圓柱體周長或不平直的距離。",
+    "example": "老師請同學用皮尺量出樹幹一圈的周長。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0189",
+    "term": "誤差",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "測量結果和真實數值之間存在的差距，可能來自工具精密度不足、讀取角度不同或操作方式不一致等原因。",
+    "example": "三位同學量同一枝筆的長度，結果各差了0.1公分，這就是測量產生的誤差。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0190",
+    "term": "估計值",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "在無法或不需要精確測量時，依照經驗和觀察先大略推算出的接近數值，之後可再用工具驗證。",
+    "example": "在還沒用量筒實際測量前，小美先說出水量的估計值大約是200毫升。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0191",
+    "term": "單位換算",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "把同一種科學量用不同單位表示時，依照固定的比例關係轉換數值大小，例如公尺和公分之間的關係。",
+    "example": "老師教大家做單位換算，把150公分換算成1.5公尺。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0192",
+    "term": "圓餅圖",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "用一個圓形被切成好幾塊扇形來表示各部分占全體比例的圖表，適合呈現百分比或占比資料。",
+    "example": "這張圓餅圖顯示班上同學最喜歡的水果種類，其中蘋果占了三分之一。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0193",
+    "term": "資料比較",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "把不同組別、不同時間或不同條件下蒐集到的資料放在一起對照，找出彼此的異同或變化趨勢。",
+    "example": "透過資料比較，同學發現澆水量較多的植物平均長得比較高。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0194",
+    "term": "呼吸作用",
+    "unit": "life",
+    "grade": "4",
+    "def": "生物體內把養分和氧氣轉換成能量、並釋放二氧化碳的過程，植物和動物都會進行呼吸作用來獲得生命活動所需的能量。",
+    "example": "科學家發現，植物在夜晚沒有陽光時，仍會持續進行呼吸作用消耗氧氣。",
+    "category": "生命現象",
+    "distractor_pool": "life_vs_nonlife"
+  },
+  {
+    "id": "e0195",
+    "term": "氣孔",
+    "unit": "life",
+    "grade": "4",
+    "def": "多數分布在葉片表皮上的微小開口，是植物與外界交換氣體、排出水分的通道。",
+    "example": "顯微鏡下可以清楚看到葉片背面布滿一顆顆的氣孔。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0196",
+    "term": "地下莖",
+    "unit": "life",
+    "grade": "4",
+    "def": "生長在土壤中、外形像根卻具有節與芽、能儲存養分並發芽長出新植株的莖。",
+    "example": "馬鈴薯和薑都是常見的地下莖，可以切塊後種植發芽。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0197",
+    "term": "扦插",
+    "unit": "life",
+    "grade": "4",
+    "def": "剪取植物的莖或枝條插入土壤或水中，使其長出新根與新芽而成為獨立植株的繁殖方法。",
+    "example": "老師示範用扦插的方式，把黃金葛的莖段插進水杯裡培養新根。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0198",
+    "term": "保護色",
+    "unit": "life",
+    "grade": "5",
+    "def": "動物的體色與周圍環境顏色相近，藉此不容易被天敵發現或方便伏擊獵物的特徵。",
+    "example": "竹節蟲的保護色讓牠停在樹枝上時幾乎看不出來。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0199",
+    "term": "擬態",
+    "unit": "life",
+    "grade": "6",
+    "def": "動物在外形或行為上模仿其他生物或環境物體，藉此躲避天敵或欺騙獵物的現象。",
+    "example": "枯葉蝶闔上翅膀後外形酷似枯葉，是典型的擬態例子。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0200",
+    "term": "冬眠",
+    "unit": "life",
+    "grade": "5",
+    "def": "部分動物在寒冷季節食物缺乏時，降低體溫與代謝速率、長時間靜止不動以度過冬天的行為。",
+    "example": "青蛙會躲進泥土深處冬眠，直到春天回暖才醒來活動。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0201",
+    "term": "遷徙",
+    "unit": "life",
+    "grade": "5",
+    "def": "動物隨季節變化，定期在不同地區之間長距離移動以尋找食物或適合繁殖環境的行為。",
+    "example": "每年秋天，候鳥會展開長途遷徙飛往溫暖的南方過冬。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0202",
+    "term": "變溫動物",
+    "unit": "life",
+    "grade": "6",
+    "def": "體溫會隨著周圍環境溫度改變而升降、無法自行維持恆定體溫的動物。",
+    "example": "蜥蜴是變溫動物，天氣冷時常會趴在石頭上曬太陽取暖。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0203",
+    "term": "恆溫動物",
+    "unit": "life",
+    "grade": "6",
+    "def": "體內能自行調節產生熱量，使體溫維持在穩定範圍、不受外界氣溫明顯影響的動物。",
+    "example": "鳥類和哺乳類都是恆溫動物，即使冬天也能維持體溫。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0204",
+    "term": "外骨骼",
+    "unit": "life",
+    "grade": "5",
+    "def": "包覆在昆蟲等節肢動物身體外側、提供支撐與保護，但需要脫殼才能長大的堅硬外殼構造。",
+    "example": "獨角仙的外骨骼十分堅硬，能保護牠柔軟的內部器官。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0205",
+    "term": "觸角",
+    "unit": "life",
+    "grade": "3",
+    "def": "昆蟲頭部一對細長的感覺器官，用來偵測氣味、觸碰物體及感知周圍環境的變化。",
+    "example": "螞蟻常用觸角互相碰觸，藉此傳遞找到食物的訊息。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0206",
+    "term": "密度",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質在單位體積中所含的質量多寡，用來比較不同物質「同樣大小但可能重量不同」的性質。",
+    "example": "老師讓我們秤量同體積的鐵塊和保麗龍，發現鐵塊的密度比保麗龍大很多。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0207",
+    "term": "透明度",
+    "unit": "matter",
+    "grade": "3",
+    "def": "光線能穿透物質的程度，可分為透明、半透明、不透明三種。",
+    "example": "老師比較玻璃、毛玻璃和木板的透明度，讓我們觀察光線穿透的差異。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0208",
+    "term": "磁性",
+    "unit": "matter",
+    "grade": "4",
+    "def": "物質能被磁鐵吸引的性質，鐵、鎳等金屬通常具有這種性質。",
+    "example": "我們用磁鐵測試迴紋針和塑膠尺，發現只有迴紋針具有磁性。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0209",
+    "term": "導熱性",
+    "unit": "matter",
+    "grade": "5",
+    "def": "物質傳導熱能快慢的性質，金屬通常比木頭、塑膠具有更好的導熱性。",
+    "example": "把湯匙放進熱水裡很快就變燙，是因為金屬的導熱性很強。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0210",
+    "term": "溶解度",
+    "unit": "matter",
+    "grade": "6",
+    "def": "在固定溫度下，一定量的水最多能溶解某種物質的量，超過這個量就無法再溶解。",
+    "example": "老師讓我們測試糖在冷水和熱水中的溶解度有什麼不同。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0211",
+    "term": "濃度",
+    "unit": "matter",
+    "grade": "5",
+    "def": "溶液中溶質所佔的比例多寡，比例越高表示溶液越濃。",
+    "example": "加入越多糖，糖水的濃度就越高，喝起來也越甜。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0212",
+    "term": "稀釋",
+    "unit": "matter",
+    "grade": "5",
+    "def": "在溶液中加入更多溶劑，使溶質的濃度降低的過程。",
+    "example": "媽媽把濃縮果汁加水稀釋後，味道就沒有那麼濃郁了。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0213",
+    "term": "傾析",
+    "unit": "matter",
+    "grade": "5",
+    "def": "把液體輕輕倒出，讓已經沉澱在底部的固體留在容器裡，藉此分離固液混合物的方法。",
+    "example": "我們用傾析的方法，把泥水上層清澈的水倒進另一個杯子，泥沙就留在原本容器底部。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0214",
+    "term": "靜置",
+    "unit": "matter",
+    "grade": "4",
+    "def": "讓混合物不受攪動地放置一段時間，使裡面較重的顆粒慢慢沉到底部。",
+    "example": "把泥水靜置一個晚上後，泥沙都沉到杯底，上面的水變得比較清澈。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0215",
+    "term": "酸鹼中和",
+    "unit": "matter",
+    "grade": "6",
+    "def": "酸性物質和鹼性物質互相作用，使溶液的酸鹼性質趨向中性的變化。",
+    "example": "被蚊蟲叮咬後塗抹小蘇打水，就是利用酸鹼中和的原理來減輕癢痛。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0216",
+    "term": "物理變化",
+    "unit": "matter",
+    "grade": "5",
+    "def": "物質只改變形狀、大小或狀態，但沒有變成新物質的變化。",
+    "example": "把紙撕成碎片只是物理變化，紙的成分並沒有改變。",
+    "category": "物質變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0217",
+    "term": "化學變化",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質經過變化後產生了與原本性質不同的新物質，通常無法輕易恢復原狀。",
+    "example": "鐵釘生鏽是一種化學變化，因為鐵已經變成了另一種物質，也就是氧化鐵。",
+    "category": "物質變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0218",
+    "term": "斜面",
+    "unit": "energy",
+    "grade": "4",
+    "def": "一種表面傾斜的簡單機械，可以用較小的力把重物沿斜面推到高處，但施力距離會變長。",
+    "example": "搬運工人常利用木板架成斜面，把沉重的貨物慢慢推上貨車。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0219",
+    "term": "齒輪",
+    "unit": "energy",
+    "grade": "5",
+    "def": "邊緣有齒狀凸起的圓形機械零件，兩個齒輪互相咬合轉動時可以傳遞力量並改變轉動的方向或速度。",
+    "example": "腳踏車的踏板轉動時，會帶動齒輪把力量傳到後輪，讓車子前進。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0220",
+    "term": "慣性",
+    "unit": "energy",
+    "grade": "6",
+    "def": "物體保持原本運動狀態（靜止或等速前進）的特性，除非受到外力作用，否則不會自己改變運動狀態。",
+    "example": "公車緊急煞車時，乘客的身體因為慣性會不自主地往前傾。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0221",
+    "term": "指北針",
+    "unit": "energy",
+    "grade": "4",
+    "def": "內部裝有可自由轉動小磁針的儀器，磁針會受地球磁場影響而指向南北，常用來辨別方向。",
+    "example": "登山時如果迷路，可以拿出指北針看看北方在哪個方向。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0222",
+    "term": "串聯",
+    "unit": "energy",
+    "grade": "5",
+    "def": "把電池、燈泡等電器元件一個接一個依序連接成一條電路的接法，電路中只有一條電流通過的路徑。",
+    "example": "把兩顆燈泡用串聯的方式接起來，只要拔掉其中一顆，另一顆也會跟著熄滅。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0223",
+    "term": "並聯",
+    "unit": "energy",
+    "grade": "5",
+    "def": "把電池、燈泡等電器元件分成好幾條各自獨立的路徑，再一起接到電路上的接法，每條路徑都有電流通過。",
+    "example": "家裡的電燈大多採用並聯的方式接線，即使關掉一盞燈，其他燈仍然可以繼續發亮。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0224",
+    "term": "光的直進",
+    "unit": "energy",
+    "grade": "3",
+    "def": "光在同一種透明物質中沿著直線前進的性質，遇到不透明的物體就會被擋住而產生影子。",
+    "example": "手電筒照射時光的直進讓光束呈現一直線，只要用手擋住就能在牆上看到影子。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0225",
+    "term": "影子",
+    "unit": "energy",
+    "grade": "3",
+    "def": "光的直進遇到不透明物體擋住而無法通過時，在物體後方形成的暗黑區域。",
+    "example": "太陽下山前，操場上同學的影子被拉得又細又長。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0226",
+    "term": "透明",
+    "unit": "energy",
+    "grade": "3",
+    "def": "物質能讓光大部分穿透過去，使人可以清楚看到物體另一邊景象的性質。",
+    "example": "玻璃窗是透明的材質，所以我們可以透過它看到窗外的風景。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0227",
+    "term": "不透明",
+    "unit": "energy",
+    "grade": "3",
+    "def": "物質幾乎不能讓光穿透，光線被擋住或吸收，使人無法看穿物體看到另一邊的性質。",
+    "example": "木板是不透明的材質，光線完全無法穿過去，後面會形成陰影。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0228",
+    "term": "共鳴",
+    "unit": "energy",
+    "grade": "6",
+    "def": "一個物體因為接收到與自身振動頻率相符的聲波而跟著振動發聲的現象。",
+    "example": "敲擊音叉靠近另一個相同頻率的音叉時，會發生共鳴讓後者也跟著發出聲音。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0229",
+    "term": "河流地形",
+    "unit": "earth",
+    "grade": "5",
+    "def": "河水流動過程中因侵蝕、搬運與堆積作用,在上游、中游、下游形成不同樣貌的地形,例如峽谷、河灘與三角洲。",
+    "example": "老師帶學生觀察溪流上游到出海口,發現河流地形從陡峭峽谷逐漸變成平坦的沙洲與三角洲。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0230",
+    "term": "地層",
+    "unit": "earth",
+    "grade": "5",
+    "def": "由泥沙、礫石等沉積物一層一層堆疊而成的岩層,愈下面的地層通常年代愈久遠。",
+    "example": "山壁上清楚露出一層一層顏色不同的地層,老師說由下往上可以推測堆積的先後順序。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0231",
+    "term": "濕度",
+    "unit": "earth",
+    "grade": "4",
+    "def": "表示空氣中水氣含量多寡的程度,濕度愈高代表空氣中水氣愈多,常用濕度計測量。",
+    "example": "梅雨季節教室裡的濕度計顯示濕度超過八成,窗戶玻璃都起了霧氣。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0232",
+    "term": "氣壓",
+    "unit": "earth",
+    "grade": "5",
+    "def": "空氣對物體表面所產生的壓力,氣壓的高低變化與天氣狀況有密切關係,例如低氣壓常帶來降雨。",
+    "example": "氣象主播提醒,颱風接近時中心氣壓會明顯下降,風雨也隨之增強。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0233",
+    "term": "彗星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "太陽系中由冰、塵埃與岩石組成的小天體,繞著太陽運行,接近太陽時會因蒸發而拖出長長的尾巴。",
+    "example": "那顆彗星每隔數十年才會靠近地球一次,拖著長尾劃過夜空,吸引許多人抬頭觀賞。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0234",
+    "term": "人造衛星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "由人類發射到太空、環繞地球或其他天體運行的裝置,可用來通訊、觀測天氣或導航。",
+    "example": "氣象局利用人造衛星拍攝的雲圖,分析颱風的位置與移動方向。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0235",
+    "term": "日食",
+    "unit": "earth",
+    "grade": "6",
+    "def": "當月球運行到太陽與地球之間,擋住太陽射向地球的光,使地面上看到太陽被部分或全部遮蔽的天文現象。",
+    "example": "那天中午發生日食,天色突然變暗,大家戴著專用眼鏡抬頭觀察太陽被月球遮住的過程。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0236",
+    "term": "月食",
+    "unit": "earth",
+    "grade": "6",
+    "def": "當地球運行到太陽與月球之間,地球的影子遮住月球,使月球表面變暗或呈現暗紅色的天文現象。",
+    "example": "昨晚發生月食,原本明亮的滿月漸漸被地球的影子遮住,最後變成暗紅色。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0237",
+    "term": "潮汐",
+    "unit": "earth",
+    "grade": "6",
+    "def": "海水受到月球與太陽引力影響,水位規律地上升與下降的現象,通常一天出現兩次滿潮與乾潮。",
+    "example": "漁民依照潮汐的漲退時間出海捕魚,趁著滿潮時把船順利開出港口。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0238",
+    "term": "防災避難",
+    "unit": "earth",
+    "grade": "4",
+    "def": "面對地震、颱風等天然災害發生前後,依照正確步驟保護自身安全並前往安全地點的行動。",
+    "example": "學校每學期都會舉辦防災避難演練,教導學生地震發生時如何躲到桌下並依序疏散。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0239",
+    "term": "山崩",
+    "unit": "earth",
+    "grade": "4",
+    "def": "山坡上大量土石因重力作用瞬間滑落或崩塌的現象,常在豪雨或地震後發生。",
+    "example": "連日豪雨導致山區坡地含水量過高,半夜發生山崩,大量土石掩埋了山下的道路。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0240",
+    "term": "再生能源",
+    "unit": "environment",
+    "grade": "4",
+    "def": "可以在短時間內從自然界不斷得到補充、用不完的能源，例如太陽能、風能、水力等。",
+    "example": "老師介紹太陽能和風力發電都屬於再生能源，因為陽光和風不會用完。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0241",
+    "term": "非再生能源",
+    "unit": "environment",
+    "grade": "4",
+    "def": "蘊藏量有限、用完就無法在短時間內再生的能源，例如煤、石油、天然氣等化石燃料。",
+    "example": "課本說明石油屬於非再生能源，開採速度遠比它形成的速度快，用完就沒有了。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0242",
+    "term": "能源標章",
+    "unit": "environment",
+    "grade": "5",
+    "def": "政府核發給省電家電產品的標示，貼有標章的產品代表符合節能效率標準，能幫助消費者選購省電產品。",
+    "example": "媽媽買冰箱時特別挑選貼有能源標章的機型，因為比較省電又省錢。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0243",
+    "term": "溫室氣體",
+    "unit": "environment",
+    "grade": "5",
+    "def": "大氣中會吸收熱能、使地球表面溫度上升的氣體，例如二氧化碳、甲烷等，排放過多會加劇全球暖化。",
+    "example": "汽機車排放廢氣會產生溫室氣體，是造成地球越來越熱的原因之一。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0244",
+    "term": "酸雨",
+    "unit": "environment",
+    "grade": "5",
+    "def": "空氣中的硫氧化物和氮氧化物與雨水結合，形成酸鹼值偏低的雨水，會腐蝕建築物並傷害植物與水中生物。",
+    "example": "工廠排放廢氣如果沒有妥善處理，可能會形成酸雨，讓森林裡的樹葉逐漸枯黃。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0245",
+    "term": "垃圾掩埋",
+    "unit": "environment",
+    "grade": "3",
+    "def": "將無法回收利用的垃圾集中掩埋在土地中的處理方式，占用大量土地，還可能污染土壤與地下水。",
+    "example": "這座垃圾掩埋場快要滿了，鄉公所正在尋找新的地點處理垃圾。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0246",
+    "term": "綠色運輸",
+    "unit": "environment",
+    "grade": "5",
+    "def": "指搭乘大眾運輸工具、騎自行車或步行等減少空氣汙染與能源消耗的交通方式。",
+    "example": "學校鼓勵師生騎腳踏車上學，一起推動綠色運輸來減少廢氣排放。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0247",
+    "term": "垃圾分類",
+    "unit": "environment",
+    "grade": "3",
+    "def": "依照垃圾的種類（例如一般垃圾、資源回收物、廚餘）分開丟棄，方便後續回收再利用並減少焚化掩埋量。",
+    "example": "每天放學前，班上同學都會做好垃圾分類，把寶特瓶和紙類分開回收。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0248",
+    "term": "堆肥",
+    "unit": "environment",
+    "grade": "4",
+    "def": "把落葉、菜渣、廚餘等有機廢棄物經過發酵分解，轉變成可以滋養植物的天然肥料的過程。",
+    "example": "阿公把廚房裡的菜葉和果皮拿去堆肥，過幾個星期就變成種菜用的肥料。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0249",
+    "term": "生態平衡",
+    "unit": "environment",
+    "grade": "5",
+    "def": "生態系中生物的種類與數量維持穩定關係，能量與物質循環正常運作的狀態。",
+    "example": "如果森林裡的獵食者突然消失，草食動物大量增加，就會破壞原本的生態平衡。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0250",
+    "term": "共生",
+    "unit": "environment",
+    "grade": "6",
+    "def": "兩種不同生物長期生活在一起、彼此互相依賴或其中一方受益的關係，例如小丑魚與海葵。",
+    "example": "生物課教到小丑魚和海葵之間的共生現象，海葵保護小丑魚，小丑魚則幫忙清除寄生蟲。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
   }
 ]

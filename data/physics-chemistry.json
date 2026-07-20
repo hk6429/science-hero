@@ -1800,5 +1800,705 @@
     "example": "手搖發電機轉動線圈後點亮燈泡，把機械能轉成電能。",
     "category": "電磁學",
     "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0181",
+    "term": "游標尺",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "一種利用副尺與主尺刻度對齊原理，可精確測量到十分之一或二十分之一公釐的長度測量工具，常用於測量物體的內、外徑與深度。",
+    "example": "小明用游標尺測量金屬圓柱體的直徑，讀出比一般直尺更精細的數值到小數點下第二位。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0182",
+    "term": "精確度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指測量結果中數值間彼此接近的程度，反映儀器或方法重複測量時所得數據的一致性，與測量值是否接近真實值無關。",
+    "example": "老師強調，同一把量尺重複測量五次長度都很接近，代表這組數據的精確度很高，但不一定準確。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0183",
+    "term": "準確度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指測量結果與真實值（或公認標準值）接近的程度，用來評估測量是否正確，與數據彼此間是否一致（精確度）是不同的概念。",
+    "example": "用已知標準砝碼校正電子秤後，測得的質量非常接近真實值，顯示這台秤的準確度很高。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0184",
+    "term": "有效數字",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "測量所得數值中，能確實反映儀器測量能力的所有數字，包含直接讀出的位數與最後一位估計位，用來表示測量的精細程度。",
+    "example": "用最小刻度為毫米的直尺量出物體長度為12.35公分時，這個數值共有四位有效數字。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0185",
+    "term": "比重",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "又稱相對密度，指某物質的密度與同溫度下水的密度相比所得的比值，是一個沒有單位的數值。",
+    "example": "老師講解某礦石樣本的比重是2.7，代表它的密度是同溫度水的2.7倍。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0186",
+    "term": "單質",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由同一種元素所組成的純物質，可以是單一原子或多個相同原子組成的分子，例如氧氣、鐵、碳等。",
+    "example": "老師舉例說明，氧氣、鋁箔與石墨都是單質，因為它們各自只含有一種元素。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0187",
+    "term": "汽化熱",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指單位質量的液體在沸點溫度下，完全轉變為同溫度氣體時所需吸收的熱量，此過程中溫度維持不變。",
+    "example": "水在100°C沸騰時持續吸熱卻不再升溫，這些熱量正是用來克服水的汽化熱。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0188",
+    "term": "熔化熱",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指單位質量的固體在熔點溫度下，完全轉變為同溫度液體時所需吸收的熱量，此過程中溫度維持不變。",
+    "example": "冰塊在0°C融化的過程中溫度不會上升，加入的熱量全部用來克服冰的熔化熱。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0189",
+    "term": "不飽和溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指在一定溫度下，溶劑中所溶解的溶質量尚未達到溶解度上限，仍可繼續溶解更多溶質的溶液。",
+    "example": "燒杯中的食鹽水還能繼續加鹽並攪拌溶解，代表這是一杯不飽和溶液。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0190",
+    "term": "過飽和溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指在特定條件下，溶劑中所含溶質的量超過該溫度正常溶解度上限的不穩定溶液，稍受擾動或加入晶種便容易析出多餘的溶質。",
+    "example": "老師示範將糖水緩慢冷卻並小心不去晃動，製造出一杯過飽和溶液，一丟入小晶粒糖就立刻大量析出。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0191",
+    "term": "萃取",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用某物質在特定溶劑中溶解度較高的性質，將其從混合物中選擇性溶出並分離出來的方法。",
+    "example": "同學利用酒精萃取茶葉中的成分，把想要的物質從固體茶葉中溶出到液體裡。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0192",
+    "term": "離心分離",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用高速旋轉產生的離心力，使懸浮液中密度較大的固體顆粒快速沉降到容器底部，藉此分離固體與液體的方法，適合處理難以自然沉澱或過濾的細小顆粒。",
+    "example": "實驗室用離心分離機把血液中密度較大的血球快速甩到試管底部，與上層血漿分開。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0193",
+    "term": "露點",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指空氣中的水蒸氣在冷卻過程中開始凝結成小水滴時的溫度，是判斷水氣是否會結成露珠或霧的重要指標。",
+    "example": "清晨氣溫降到露點以下，草葉上便凝結出一顆顆晶瑩的露珠。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0194",
+    "term": "週期",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素週期表中橫向排列的一列，同一週期的元素其原子的電子殼層數相同。",
+    "example": "鈉和氯同屬於元素週期表的第三週期，兩者的原子都有三層電子殼層。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0195",
+    "term": "金屬元素",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "具有金屬光澤、良好導電導熱性、容易失去電子形成陽離子的一類元素，多分布在元素週期表的左側與中間。",
+    "example": "鐵、銅、鋁都是金屬元素，在教室裡常被用來做導線。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0196",
+    "term": "非金屬元素",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "通常缺乏金屬光澤、導電導熱性較差、容易獲得電子形成陰離子的一類元素，多分布在元素週期表的右側。",
+    "example": "氧、氮、硫都是非金屬元素，其中氧氣是生物呼吸不可或缺的氣體。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0197",
+    "term": "化合反應",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "兩種或兩種以上的物質反應後結合成一種新物質的化學反應類型。",
+    "example": "氫氣與氧氣點燃後生成水，就是一個典型的化合反應。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0198",
+    "term": "分解反應",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "一種物質經化學反應後分解成兩種或兩種以上較簡單物質的反應類型。",
+    "example": "加熱碳酸氫鈉會發生分解反應，產生二氧化碳、水和碳酸鈉。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0199",
+    "term": "置換反應",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "一種元素取代化合物中另一種元素的位置，生成新元素與新化合物的化學反應類型。",
+    "example": "鋅加入稀鹽酸中會發生置換反應，鋅取代氫離子，生成氯化鋅並放出氫氣。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0200",
+    "term": "氧化物",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素與氧結合所生成的化合物。",
+    "example": "鐵在潮溼空氣中生成的紅棕色物質是一種氧化物，主要成分是氧化鐵。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0201",
+    "term": "生鏽",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "金屬長期暴露在空氣與水氣中，緩慢與氧結合形成氧化物的現象，是一種常見的氧化反應。",
+    "example": "腳踏車鐵架如果淋雨後沒有擦乾，放久了就容易生鏽。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0202",
+    "term": "鹽",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "酸與鹼發生中和反應時，除了水以外所生成的化合物，通常由酸根離子與金屬陽離子（或銨根離子）組成。",
+    "example": "鹽酸和氫氧化鈉中和後，會生成氯化鈉這種鹽和水。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0203",
+    "term": "中性",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶液的酸鹼度恰好等於pH值7，既不呈酸性也不呈鹼性的狀態。",
+    "example": "純水在室溫下是中性，用酸鹼指示劑檢測不會使石蕊試紙變色。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0204",
+    "term": "牛頓第一運動定律",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體如果不受外力作用，或所受合力為零，將保持原本的運動狀態，靜者恆靜、動者恆做等速度直線運動，此定律又稱為慣性定律。",
+    "example": "桌面上的杯子沒有受到水平方向的外力，依牛頓第一運動定律會持續保持靜止。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0205",
+    "term": "瞬時速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體在某一極短時間內的速度，代表該時刻的運動快慢與方向，與描述整段路程平均快慢的平均速率不同。",
+    "example": "汽車儀表板上顯示的時速，代表的是這一瞬間的瞬時速度而非整趟旅程的平均值。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0206",
+    "term": "靜摩擦力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體相對於接觸面尚未產生相對滑動時，接觸面所提供、用來阻止物體開始移動的摩擦力，其大小會隨施力增加而自動調整。",
+    "example": "用手輕輕推書桌卻推不動時，是因為靜摩擦力剛好抵消了手施加的推力。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0207",
+    "term": "最大靜摩擦力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體即將開始滑動前，接觸面所能提供的靜摩擦力上限值，通常略大於動摩擦力。",
+    "example": "施力超過最大靜摩擦力的瞬間，箱子才會由靜止開始滑動。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0208",
+    "term": "動摩擦力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體與接觸面之間已經產生相對滑動時所受到、方向與運動方向相反的摩擦力，其大小與正向力成正比，通常小於最大靜摩擦力。",
+    "example": "木箱在地板上被拖行時所受到的阻力，就是動摩擦力。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0209",
+    "term": "力矩平衡",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "作用在同一物體上的所有力矩，順時針方向與逆時針方向的力矩總和相等，使物體維持轉動狀態不變。",
+    "example": "蹺蹺板兩端的人施加的力矩若達到力矩平衡，蹺蹺板就能靜止水平不動。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0210",
+    "term": "省力槓桿",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "抗力臂大於施力臂的槓桿，施力點所需施加的力小於抗力，但施力點移動的距離較長，例如開瓶器與剪鐵絲的剪刀。",
+    "example": "用開罐器開瓶蓋時所利用的是省力槓桿的原理。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0211",
+    "term": "費力槓桿",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "施力臂小於抗力臂的槓桿，施力點所需施加的力大於抗力，但施力點移動距離較短、動作較快，例如釣魚竿與筷子。",
+    "example": "用筷子夾菜時，手所使用的其實是費力槓桿。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0212",
+    "term": "等臂槓桿",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "施力臂與抗力臂長度相等的槓桿，施力大小與抗力大小相等，常用來精確比較兩物重量，例如天平。",
+    "example": "天平兩端的秤盤與支點距離相等，屬於等臂槓桿。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0213",
+    "term": "浮沉條件",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體在液體中最終呈現上浮、懸浮或下沉的狀態，取決於物體所受重力與浮力的相對大小，或物體密度與液體密度的比較。",
+    "example": "木塊放入水中會上浮，判斷依據就是它的浮沉條件符合密度小於水。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0214",
+    "term": "真空",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "空間中幾乎不存在任何氣體分子、壓力趨近於零的狀態，在真空環境下不存在大氣壓力。",
+    "example": "外太空接近真空，因此太空人必須穿著加壓太空衣才能生存。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0215",
+    "term": "托里切利實驗",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "利用一端封閉、裝滿水銀的玻璃管倒插入水銀槽中，藉由觀察管內水銀柱下降後的高度，來測量大氣壓力大小的經典實驗。",
+    "example": "托里切利實驗測得海平面大氣壓力約可支撐76公分高的水銀柱。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0216",
+    "term": "離心效應",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體在做圓周運動時，因慣性而傾向沿切線方向飛出，使人感覺彷彿有一股向外的力將物體推離圓心的現象。",
+    "example": "汽車過彎時乘客身體向外傾倒，就是離心效應造成的感覺。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0217",
+    "term": "彈性位能",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體因彈性形變（如彈簧壓縮或拉伸）而儲存的位能，形變量愈大彈性位能愈大。",
+    "example": "拉弓時弓臂彎曲會儲存彈性位能，放箭瞬間彈性位能轉換成箭矢的動能。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0218",
+    "term": "能量轉換",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "能量從一種形式轉變成另一種形式的過程，轉換前後總能量維持不變。",
+    "example": "溜滑梯時，小明從高處往下滑，重力位能經過能量轉換變成滑行時的動能。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0219",
+    "term": "熱脹冷縮",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物質溫度升高時體積膨脹、溫度降低時體積收縮的現象，是分子熱運動程度改變所造成。",
+    "example": "夏天鐵軌之間會留有縫隙，就是為了預留熱脹冷縮所需要的空間，避免鐵軌受熱彎曲。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0220",
+    "term": "熱容",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "使一物體溫度上升攝氏一度所需吸收的熱量，大小與物體的質量及材料的比熱有關，是針對特定物體整體而非單位質量的量。",
+    "example": "同樣是水，一大桶水的熱容比一小杯水的熱容大，因為要讓整桶水升溫需要吸收更多熱量。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0221",
+    "term": "絕對零度",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "理論上物質分子熱運動趨於最小、溫度可能達到的最低極限，約為攝氏負273.15度，是溫度的下限。",
+    "example": "科學家在研究超導現象時，會將材料冷卻到接近絕對零度的極低溫環境進行實驗。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0222",
+    "term": "共振",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "當外力振動的頻率與物體的自然頻率相同時，物體振幅會大幅增加的現象。",
+    "example": "士兵齊步通過橋梁時若步伐頻率與橋梁自然頻率相同，可能引發共振使橋梁劇烈搖晃。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0223",
+    "term": "駐波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "兩列振幅、頻率、波速相同但傳播方向相反的波相疊加，形成波形位置固定不再前進、有節點與腹點的合成波。",
+    "example": "撥動兩端固定的吉他弦時，弦上會形成駐波，使弦產生穩定的振動花紋。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0224",
+    "term": "凸透鏡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "中央厚、邊緣薄的透鏡，能使平行光線經折射後聚集在焦點，具有會聚光線的功能。",
+    "example": "老花眼鏡常使用凸透鏡，幫助眼睛把光線多聚焦一些以看清近物。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0225",
+    "term": "凹透鏡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "中央薄、邊緣厚的透鏡，能使平行光線經折射後向外發散，具有發散光線的功能。",
+    "example": "近視眼鏡使用凹透鏡，讓進入眼睛的光線先發散，把成像位置往後移到視網膜上。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0226",
+    "term": "實像",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光線實際會聚而成、可以用屏幕承接到的像，成像時光線真的通過該點。",
+    "example": "電影放映機投射在銀幕上的畫面就是實像，可以直接用布幕承接看到。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0227",
+    "term": "虛像",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光線的反向延長線相交而成、無法用屏幕承接、只能用眼睛或儀器觀察到的像。",
+    "example": "站在平面鏡前看到鏡子裡的自己是虛像，就算拿一張紙放在鏡子後面也接不到那個影像。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0228",
+    "term": "全反射",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光線由光密介質進入光疏介質，當入射角大於某臨界角時，光線不再折射出去，而是完全反射回原介質的現象。",
+    "example": "光纖能夠傳輸訊號，就是利用光在玻璃纖維內部不斷發生全反射，讓光幾乎不外洩地前進。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0229",
+    "term": "焦距",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "透鏡或面鏡的光心（或鏡心）到焦點之間的距離，用來描述透鏡或面鏡聚光或發散能力的強弱。",
+    "example": "凸透鏡的焦距愈短，代表它把平行光線聚焦的能力愈強。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0230",
+    "term": "都卜勒效應",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "當波源與觀察者之間有相對運動時，觀察者接收到的波頻率會改變的現象，靠近時頻率變高、遠離時頻率變低。",
+    "example": "救護車鳴笛駛近再遠離時，我們聽到的音調忽高忽低變化，就是都卜勒效應造成的。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0231",
+    "term": "驗電器",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "利用靜電感應原理製成的儀器，透過金屬箔片張開的角度判斷物體是否帶電及帶電量的多寡。",
+    "example": "老師將摩擦過的塑膠棒靠近驗電器的金屬球，觀察金屬箔片張開的角度變化。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0232",
+    "term": "感應起電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "帶電體靠近不帶電的導體時，因靜電感應使導體兩端出現異性電荷分布，此時若將導體接地或分開，可使導體帶上電荷的過程。",
+    "example": "老師用帶負電的塑膠棒靠近兩個相接觸的金屬球，再將兩球分開，示範感應起電讓金屬球帶電的過程。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0233",
+    "term": "導體",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "內部含有大量可自由移動電荷（如自由電子），能讓電流順利通過的物質，例如金屬、石墨與人體。",
+    "example": "銅線是常見的導體，能讓電流順利通過而點亮燈泡。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0234",
+    "term": "絕緣體",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "內部電荷不易自由移動，幾乎不能讓電流通過的物質，例如塑膠、橡膠與乾燥的木頭。",
+    "example": "電線外層包覆一層塑膠絕緣體，防止使用者觸摸時發生觸電。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0235",
+    "term": "開關",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "裝設在電路中，用來控制電路通路或斷路狀態的裝置，按下或切換即可讓電路接通或切斷。",
+    "example": "按下電燈的開關，電路由斷路變成通路，燈泡因此發亮。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0236",
+    "term": "電阻串聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "將多個電阻依序頭尾相接於同一條路徑上，電流只有一條路可走，此時總電阻等於各電阻之和，比其中任一電阻都大。",
+    "example": "把兩個燈泡以電阻串聯的方式接入電路，其中一個燈絲斷掉，另一個燈泡也會跟著熄滅。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0237",
+    "term": "電阻並聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "將多個電阻分別接在兩個共同的節點之間，電流可分成多條路徑通過，此時總電阻比其中任一電阻都小。",
+    "example": "家中同一插座上的多樣電器多以電阻並聯的方式連接，即使拔掉一個插頭，其他電器仍能正常運作。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0238",
+    "term": "直流電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流方向固定不隨時間改變的電流形式，例如乾電池與行動電源所提供的電。",
+    "example": "手電筒使用的乾電池提供的是直流電，電流只往同一個方向流動。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0239",
+    "term": "交流電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流方向會隨時間週期性改變的電流形式，臺灣家用電力即為頻率60赫茲的交流電。",
+    "example": "家裡插座提供的交流電，電流方向每秒鐘會週期性地來回改變多次。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0240",
+    "term": "瓦特",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電功率的國際單位，符號為W，表示電器每秒消耗或轉換的電能大小，1瓦特等於1焦耳每秒。",
+    "example": "一顆標示60瓦特的燈泡，表示它每秒消耗的電能是60焦耳。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0241",
+    "term": "電費",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "依用電量（度數）與電力公司費率計算出，使用者需支付給電力公司的用電費用。",
+    "example": "這個月冷氣使用時間變長，家裡的電費比上個月多了不少。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0242",
+    "term": "家用電器安全用電原則",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "使用家用電器時應遵守的基本安全守則，包含不濕手觸摸插頭、不同時插用過多電器造成過載、電線破損要更換等，以避免觸電或走火。",
+    "example": "老師提醒同學，家用電器安全用電原則之一就是絕不能用濕手去插拔插頭。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0243",
+    "term": "電磁鐵",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "將導線繞成線圈並纏繞在鐵芯上，通電時因電流磁效應產生磁性、斷電後磁性隨即消失的裝置，磁力強弱可靠電流大小或線圈匝數調整。",
+    "example": "電鈴利用電磁鐵通電產生磁力吸引鐵片敲擊鈴身，斷電後磁力消失使鐵片彈回，反覆動作而發出鈴聲。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0244",
+    "term": "變壓器",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "利用電磁感應原理，藉由改變線圈匝數比例來提高或降低交流電壓的裝置。",
+    "example": "手機充電器內部裝有變壓器，能把家用110伏特的交流電壓降低成手機可用的電壓。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0245",
+    "term": "體積百分濃度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "溶液中溶質體積占溶液總體積的百分比，用來表示液態溶質溶於液態溶劑時的濃度，常用於酒精、消毒水等溶液的濃度標示。",
+    "example": "一瓶標示75%酒精的消毒液，即表示其體積百分濃度為75%，代表100毫升溶液中含有75毫升純酒精。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0246",
+    "term": "同位素",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "質子數相同（原子序相同）但中子數不同、因而質量數不同的同一元素原子，化學性質幾乎相同但物理性質可能不同。",
+    "example": "碳的同位素中，碳-12與碳-14的質子數相同但中子數不同，後者常用於考古定年。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0247",
+    "term": "價電子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子最外層電子殼層中的電子，其數目決定原子在化學反應中形成化學鍵或得失電子的能力，是影響元素化學性質的重要因素。",
+    "example": "鈉原子的價電子只有一個，使它容易失去這個電子而形成帶正電的陽離子。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0248",
+    "term": "惰性氣體",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素週期表中最外層電子殼層已填滿、化學性質非常穩定、極不易與其他元素發生反應的一族氣體元素，如氦、氖、氬等。",
+    "example": "因為惰性氣體幾乎不與其他物質反應，氦氣常被填充於氣球中以避免燃燒危險。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0249",
+    "term": "非電解質",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水中不會解離出離子、因此水溶液不能導電的物質，例如糖、酒精等。",
+    "example": "將砂糖溶於水中測試導電性，發現燈泡不亮，可判斷砂糖是非電解質。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0250",
+    "term": "力的三要素",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "完整描述一個力所必須具備的三個條件，分別是力的大小、方向與作用點，三者缺一不可，否則無法確定力對物體的實際作用效果。",
+    "example": "在畫力圖時必須標出力的三要素，才能正確表示這個力如何影響物體的運動。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
   }
 ]

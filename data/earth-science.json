@@ -1798,5 +1798,705 @@
     "example": "把舊電腦整修後再使用，而非直接丟棄，是循環經濟的例子。",
     "category": "永續行動",
     "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0181",
+    "term": "莫氏硬度計",
+    "unit": "geology",
+    "grade": "9",
+    "def": "一套由礦物學家莫氏（Mohs）制定，以十種礦物硬度由小到大排序作為比對標準的相對硬度分級工具，用來判斷礦物抵抗刻痕的能力。",
+    "example": "老師示範用莫氏硬度計比對，測得這塊礦物大約介於硬度五到六之間。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0182",
+    "term": "火山",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地下岩漿沿地殼裂隙或通道噴發至地表，堆積噴發物所形成的地形，噴發物可能為熔岩流、火山灰或火山碎屑物。",
+    "example": "這座火山山頂仍可見到過去多次噴發後堆積而成的火山口。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0183",
+    "term": "火山岩",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩漿噴出地表後，因快速冷卻凝固而形成的火成岩，通常礦物顆粒細小，肉眼不易分辨。",
+    "example": "玄武岩是常見的火山岩，因冷卻速度快而具有細緻的結晶顆粒。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0184",
+    "term": "深成岩",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩漿在地底深處緩慢冷卻凝固所形成的火成岩，因冷卻時間長，礦物有充分時間結晶，顆粒通常較粗大。",
+    "example": "花岡岩屬於深成岩，粗大的礦物顆粒是它在地底緩慢冷卻的證據。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0185",
+    "term": "地震帶",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地震活動頻繁、密集分布的地帶，通常與板塊邊界位置一致，是地震發生機率相對較高的區域。",
+    "example": "臺灣位於地震帶上，因此地殼變動頻繁，地震發生次數也較多。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0186",
+    "term": "環太平洋火山帶",
+    "unit": "geology",
+    "grade": "9",
+    "def": "沿著太平洋周緣分布、由多處聚合型板塊邊界串聯而成的火山與地震密集地帶，範圍涵蓋日本、臺灣、印尼、美洲西岸等地。",
+    "example": "臺灣正好位於環太平洋火山帶的範圍內，因此地震和火山活動都相對活躍。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0187",
+    "term": "化石",
+    "unit": "geology",
+    "grade": "9",
+    "def": "保存在地層中的古代生物遺體、印痕或活動痕跡，可作為判斷地層形成年代與過去環境的重要證據。",
+    "example": "這塊岩石中保存的貝類化石，說明此地層在過去曾是淺海環境。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0188",
+    "term": "地滑",
+    "unit": "geology",
+    "grade": "9",
+    "def": "坡地上土層或岩層沿著滑動面緩慢或快速向下滑動位移的現象，滑動面通常較為明顯，範圍與速度依情況而異。",
+    "example": "這處丘陵地因地下水滲入軟弱岩層，長期發生緩慢的地滑現象。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0189",
+    "term": "河階",
+    "unit": "geology",
+    "grade": "9",
+    "def": "因河流下切侵蝕作用增強，使原本的河床或氾濫平原相對抬升，在河谷兩側形成階梯狀的地形。",
+    "example": "沿著這條河谷向上游走，可以看到多層河階清楚呈現出河流下切的歷史。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0190",
+    "term": "三角洲",
+    "unit": "geology",
+    "grade": "9",
+    "def": "河流攜帶的泥沙在出海口或注入湖泊處，因流速減緩而堆積形成的扇形或三角形沉積地形。",
+    "example": "這條大河在出海口處堆積出廣大的三角洲，土壤肥沃，適合農業發展。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0191",
+    "term": "大陸漂移學說",
+    "unit": "geology",
+    "grade": "9",
+    "def": "主張地球上的大陸原本連結成一整塊，後來逐漸分裂並漂移到現今位置的學說，是板塊構造學說發展的重要基礎。",
+    "example": "魏格納根據海岸線的吻合與化石分布，提出了大陸漂移學說。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0192",
+    "term": "斷層",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地殼岩層受力後沿著破裂面產生明顯錯動位移的構造，斷層錯動釋放的能量是造成地震的主要原因之一。",
+    "example": "車籠埔斷層在九二一地震中發生明顯錯動，造成地表出現顯著的斷層崖。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0193",
+    "term": "中氣層",
+    "unit": "weather",
+    "grade": "9",
+    "def": "位於平流層之上、增溫層之下的大氣層，氣溫隨高度增加而遞減，是大氣層中氣溫最低的一層，流星進入大氣後多在此層因摩擦生熱而燃燒殆盡。",
+    "example": "流星進入大氣層後，多半在中氣層就因與空氣摩擦生熱而燃燒殆盡。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0194",
+    "term": "增溫層",
+    "unit": "weather",
+    "grade": "9",
+    "def": "位於中氣層之上、大氣的最外層，因吸收太陽的高能輻射，氣溫隨高度增加而顯著上升，電離層即位於此層，能反射無線電波。",
+    "example": "增溫層中的電離層能反射無線電波，是早期跨洋無線電通訊得以進行的重要媒介。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0195",
+    "term": "雲量",
+    "unit": "weather",
+    "grade": "9",
+    "def": "天空被雲遮蔽的程度，氣象觀測上將天空分為十等分來估計雲層覆蓋的比例，是判斷天氣晴陰的重要依據之一。",
+    "example": "氣象觀測員記錄當天雲量為八分，代表天空約有八成面積被雲層遮蔽。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0196",
+    "term": "雨量筒",
+    "unit": "weather",
+    "grade": "9",
+    "def": "用來測量一段時間內降水量的觀測儀器，藉由承接雨水並換算成累積深度，單位通常為公釐。",
+    "example": "氣象站利用雨量筒收集降雨，換算出當日累積降水量已達五十公釐。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0197",
+    "term": "風力等級",
+    "unit": "weather",
+    "grade": "9",
+    "def": "依風速大小所劃分的等級，以風對地面物體或海面造成的影響程度來判斷風勢強弱，常用於颱風警報中描述當地風力強度。",
+    "example": "氣象報告指出，颱風外圍環流已達七級風力等級，樹枝已開始明顯搖動。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0198",
+    "term": "颱風警報",
+    "unit": "weather",
+    "grade": "9",
+    "def": "中央氣象署依颱風暴風圈是否侵襲海上或陸上，分別發布海上颱風警報與陸上颱風警報，作為航行、漁業活動與停班停課決策的重要依據。",
+    "example": "颱風逼近台灣時，氣象署已同時發布海上及陸上颱風警報，提醒各界加強防範。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0199",
+    "term": "季風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "因大陸與海洋比熱不同，隨季節產生大範圍、風向會明顯反轉的定期風系，台灣冬季吹東北風、夏季吹西南風即屬此類。",
+    "example": "台灣的氣候深受季風影響，冬夏兩季的盛行風向會出現明顯的反轉。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0200",
+    "term": "東北季風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "冬季時大陸冷高氣壓南下、海洋相對溫暖形成低氣壓，使台灣地區盛行由東北方吹來的風，常為北部及東北部帶來低溫多雨的天氣。",
+    "example": "每年十月過後東北季風增強，基隆、宜蘭一帶便逐漸進入濕冷多雨的季節。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0201",
+    "term": "西南季風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "夏季時大陸增溫形成低氣壓、海洋相對涼爽形成高氣壓，使台灣地區盛行由西南方吹來的風，帶來豐沛水氣，是夏季西南部降雨的重要來源。",
+    "example": "西南季風在夏季為台灣西南部地區帶來充沛的降雨與悶熱潮濕的天氣。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0202",
+    "term": "對流雨",
+    "unit": "weather",
+    "grade": "9",
+    "def": "地面受太陽強烈照射增溫，使近地面空氣受熱上升、水氣冷卻凝結成雲後降下的降水，多發生於夏季午後，常伴隨雷電，又稱雷陣雨。",
+    "example": "夏日午後常見的對流雨來得又急又猛，往往伴隨著轟隆雷聲。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0203",
+    "term": "地形雨",
+    "unit": "weather",
+    "grade": "9",
+    "def": "潮濕氣流遇到山脈阻擋而被迫抬升，水氣因冷卻凝結降下的降水，常使山區迎風坡的降水量遠大於背風坡。",
+    "example": "東北季風帶著水氣爬升翻越中央山脈時，常在迎風坡形成明顯的地形雨。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0204",
+    "term": "鋒面雨",
+    "unit": "weather",
+    "grade": "9",
+    "def": "兩種性質不同的氣團相遇形成鋒面時，暖濕空氣被迫沿鋒面抬升冷卻、水氣凝結所降下的降水，常沿鋒面呈帶狀分布。",
+    "example": "梅雨季節台灣常見的連日陰雨，多屬於滯留鋒面所帶來的鋒面雨。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0205",
+    "term": "天氣圖符號",
+    "unit": "weather",
+    "grade": "9",
+    "def": "天氣圖上用來標示風向、風力、雲量、氣溫、氣壓等觀測資料的一套標準符號系統，可讓人快速判讀某測站當時的天氣狀況。",
+    "example": "學會判讀天氣圖符號後，就能從地面天氣圖上看出各測站的風向與雲量狀況。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0206",
+    "term": "焚風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "潮濕氣流受山脈阻擋被迫抬升、降雨後水氣減少，再順著背風坡下沉，因絕熱增溫而變得乾熱的下坡風，常使背風坡地區出現異常高溫乾燥的天氣。",
+    "example": "台灣東部偶爾出現的異常高溫，可能是氣流翻越中央山脈後形成的焚風所致。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0207",
+    "term": "波長",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪中相鄰兩個波峰（或相鄰兩個波谷）之間的水平距離，是描述海浪大小的基本要素之一。",
+    "example": "觀測站測得這次湧浪的波長長達150公尺，代表這是一道能量集中、傳播力強的長浪。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0208",
+    "term": "風浪",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "由當地強風直接吹拂海面所形成的波浪，波形不規則、波峰尖銳，仍持續受風力作用影響。",
+    "example": "颱風接近外海時，海面上出現雜亂洶湧的風浪，漁船因此提早返港避風。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0209",
+    "term": "湧浪",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪離開原本的強風生成區後，在遠處海面持續傳播、波形變得平緩規則的波浪。",
+    "example": "雖然當地無風無雨，海岸邊仍出現一波波規律的湧浪，那是遠方風暴傳來的能量。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0210",
+    "term": "半日潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "一天內出現兩次滿潮與兩次乾潮，且相鄰兩次滿潮（或乾潮）高度大致相近的潮汐型態，週期約24小時50分。",
+    "example": "臺灣西部沿海屬於半日潮，居民只要記住一天會漲退兩次潮，就能抓準出海與採集的時機。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0211",
+    "term": "混合潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "一天內雖有兩次滿潮與兩次乾潮，但兩次滿潮或兩次乾潮的高度明顯不相等的潮汐型態，兼具全日潮與半日潮的特徵。",
+    "example": "南海部分海域受地形與天文潮共同影響，呈現混合潮，同一天內漲退幅度差異很大。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0212",
+    "term": "親潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "源自北太平洋、沿千島群島與日本東北海岸南下的寒流，水溫低、養分豐富，與黑潮交會形成優良漁場。",
+    "example": "親潮從北方南下與黑潮交會，把深層養分帶到表層，造就了日本東北外海的著名漁場。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0213",
+    "term": "沙洲",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "由沿岸流或波浪長期搬運堆積泥沙，在海岸外側形成的狹長狀堆積地形，常隨潮流變化緩慢移動。",
+    "example": "雲林外海的外傘頂洲是臺灣最大的沙洲，形狀每年都會隨著洋流與季風略有改變。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0214",
+    "term": "潟湖",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "被沙洲或堤狀地形與外海隔開，僅透過缺口與海水交換的淺水海岸水域，水流平緩、生態豐富。",
+    "example": "台南七股的潟湖水域平靜，非常適合養殖牡蠣與候鳥棲息。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0215",
+    "term": "海蝕洞",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪長期沖擊岩岸中較脆弱的岩層，掏空侵蝕而形成的洞穴狀地形。",
+    "example": "野柳海岸的海蝕洞洞口不斷擴大，顯示海浪侵蝕作用仍在持續進行。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0216",
+    "term": "海蝕平台",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪長期侵蝕岩岸崖壁基部，使岩石逐漸崩落磨平，在潮間帶形成的平坦岩石台地。",
+    "example": "退潮時可以走上寬闊的海蝕平台，觀察岩縫間躲藏的螃蟹與海葵。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0217",
+    "term": "珊瑚礁",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "由珊瑚蟲分泌的碳酸鈣骨骼長期堆積形成的海底地形，提供豐富生物多樣性棲地，對水溫與水質變化十分敏感。",
+    "example": "墾丁後壁湖的珊瑚礁孕育了色彩繽紛的熱帶魚群，是熱門的浮潛地點。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0218",
+    "term": "藻礁",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "由殼狀珊瑚藻等鈣化藻類經數千年層層堆積碳酸鈣所形成的礁體，形成速度比珊瑚礁更緩慢，是特殊的海岸生態系。",
+    "example": "桃園觀新藻礁的形成歷經數千年,一旦遭受破壞極難自然恢復。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0219",
+    "term": "過度捕撈",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "捕魚的速度超過魚群自然繁殖與補充的能力，導致漁業資源持續衰減甚至枯竭的現象。",
+    "example": "近海鮪魚數量因過度捕撈而大幅減少,漁民必須跑到更遠的海域才捕得到魚。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0220",
+    "term": "海洋酸化",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海水大量吸收大氣中的二氧化碳後,酸鹼值逐漸下降的現象,會影響珊瑚與貝類等生物形成碳酸鈣外殼的能力。",
+    "example": "科學家發現海洋酸化正讓珊瑚礁的鈣化速度變慢,骨骼變得脆弱易碎。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0221",
+    "term": "赤道座標系統",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "以赤經、赤緯標定天體在天球上位置的座標系統，此座標不隨觀測地點與時間改變，適合用來標示星圖與星表中恆星的位置。",
+    "example": "天文學家查閱星表時，會用赤道座標系統記錄的赤經、赤緯數值，準確找到某顆恆星在天球上的位置。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0222",
+    "term": "望遠鏡",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "利用透鏡或反射鏡聚集天體光線、放大影像的觀測儀器，可幫助觀察者看清肉眼難以分辨的星體細節，是天文觀測的重要工具。",
+    "example": "社團老師帶學生用望遠鏡觀察木星表面的條紋雲帶，讓大家實際感受天文觀測的樂趣。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0223",
+    "term": "上弦月",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月相之一，出現於新月後約一週，此時可見月球被照亮的一半（西側亮），形狀如右半圓，通常在傍晚時分位於天空高處。",
+    "example": "傍晚時抬頭看見天空高處掛著一顆右半邊發亮的月亮，那正是上弦月。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0224",
+    "term": "下弦月",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月相之一，出現於滿月後約一週，此時可見月球被照亮的一半（東側亮），形狀如左半圓，通常在清晨時分才會看到高掛天空。",
+    "example": "清晨天還未全亮時，看到東邊天空掛著左半邊發亮的月亮，那就是下弦月。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0225",
+    "term": "日全食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球運行到太陽與地球之間，且三者恰好排成一直線，月球完全遮蔽太陽本體，使觀測地區短暫陷入黑暗、僅見太陽外圍日冕的天文現象。",
+    "example": "許多天文迷專程前往可見日全食的地區，等待天空瞬間變暗、太陽被月球完全遮住的那一刻。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0226",
+    "term": "日環食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球運行到太陽與地球之間、三者接近一直線，但因月球距地球較遠、視直徑較小，無法完全遮住太陽，使太陽邊緣露出一圈明亮光環的天文現象。",
+    "example": "那次觀測活動中，大家戴上濾光眼鏡，看見太陽被月球遮住中間、只留下一圈金色光環的日環食景象。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0227",
+    "term": "月全食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球運行到太陽與月球之間，且三者排成一直線，月球完全進入地球本影，使月面呈現暗紅色的天文現象。",
+    "example": "當晚滿月逐漸被地球影子吞沒，最後整個月面轉成暗紅色，那正是難得一見的月全食。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0228",
+    "term": "木星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "太陽系中體積與質量最大的行星，屬於類木行星，主要由氫、氦等氣體組成，表面有明顯的條紋雲帶與大紅斑。",
+    "example": "透過望遠鏡觀察木星，可以清楚看見表面的橘褐色條紋雲帶。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0229",
+    "term": "土星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "太陽系中體積僅次於木星的行星，屬於類木行星，因擁有由冰粒與岩石碎屑組成的明顯環系統而廣為人知。",
+    "example": "小朋友第一次用望遠鏡看到土星環繞著一圈明亮的光環時，忍不住驚呼出聲。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0230",
+    "term": "天王星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "太陽系中距太陽第七遠的行星，屬於類木行星，自轉軸幾乎倒臥在公轉軌道平面上，呈現「側躺」自轉的特殊現象。",
+    "example": "課本提到天王星是所有行星中自轉軸傾斜角度最特別的一顆，幾乎是側躺著自轉。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0231",
+    "term": "海王星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "太陽系中距太陽最遠的行星，屬於類木行星，呈深藍色外觀，公轉週期長達約一百六十五年。",
+    "example": "老師說海王星繞太陽公轉一圈需要一百六十五年，比人的一輩子還久。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0232",
+    "term": "絕對星等",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "假設將恆星放在統一的標準距離（十秒差距）觀測所測得的亮度等級，用來比較不同恆星真正的發光能力，不受各恆星與地球實際距離遠近的影響。",
+    "example": "兩顆看起來一樣亮的星星，換算成絕對星等後才發現其中一顆本身亮度遠大於另一顆，只是距離地球比較近。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0233",
+    "term": "都卜勒效應",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "當波源（如光源）與觀測者相對運動時，觀測到的波長會發生改變的現象；天文學家利用星系光譜的紅移即都卜勒效應，推論多數星系正遠離地球而去。",
+    "example": "科學家觀察遙遠星系光譜的紅移，運用都卜勒效應的原理判斷這些星系正逐漸遠離我們。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0234",
+    "term": "生態系統服務",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "自然生態系統為人類提供的各種效益，例如淨化水質、涵養水源、調節氣候、供應糧食與提供休閒場所等。",
+    "example": "森林能涵養水源並降低土石流風險，這項功能屬於生態系統服務中重要的一環。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0235",
+    "term": "地下水超抽",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "抽取地下水的速度超過雨水入滲補注地下水的速度，導致地下水位持續下降，可能引發地層下陷等問題。",
+    "example": "沿海地區長期養殖漁業造成地下水超抽，使地層逐年下陷。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0236",
+    "term": "滯洪設施",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "為降低暴雨時下游淹水風險而設置的暫時蓄水空間，可延緩地表逕流匯入河川的速度，降低洪峰流量。",
+    "example": "都市新建社區依規定須設置滯洪設施，以減緩強降雨造成的淹水災情。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0237",
+    "term": "海平面上升",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "因全球暖化使冰川與極地冰層融化、海水受熱膨脹，導致全球平均海水面逐漸升高的長期現象。",
+    "example": "科學家長期監測潮位站資料，證實近幾十年海平面上升的趨勢確實存在。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0238",
+    "term": "極端天氣事件",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "強度、頻率或發生時間明顯偏離歷史常態紀錄的天氣現象，如破紀錄豪雨、熱浪或寒害；其長期發生頻率增加常與氣候變遷有關，但單一極端天氣事件並不能單獨用來證明或否定氣候變遷。",
+    "example": "短時間內降下等同一整月雨量的暴雨，是常被討論的極端天氣事件之一。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0239",
+    "term": "風災",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "因颱風或強烈季風等伴隨強風所造成的災害，常合併豪雨引發淹水、農損、停電與設施毀損等連鎖影響。",
+    "example": "強烈颱風侵襲當晚，沿海地區因風災導致大量路樹倒伏與電線桿損毀。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0240",
+    "term": "防災疏散演練",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "政府或學校等單位事先規劃，模擬地震、水災等災害發生時人員避難與撤離路線的演練活動，目的在提升民眾臨場應變能力。",
+    "example": "學校每學期依規定辦理防災疏散演練，讓學生熟悉地震發生時的避難動線。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0241",
+    "term": "地熱資源",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "蘊藏於地球內部岩層與地下水中的熱能，可用於發電或供暖，屬於再生能源的一種，在火山活動或板塊交界帶蘊藏量通常較豐富。",
+    "example": "臺灣位於板塊交界帶，具有開發地熱資源作為發電能源的潛力。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0242",
+    "term": "海洋能",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "利用海洋中潮汐、波浪或洋流所蘊含的動能與位能轉換而成的能源，屬於再生能源，較不受日夜天候變化影響。",
+    "example": "部分沿海國家已建置潮汐發電站，實際運用海洋能來供應電力。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0243",
+    "term": "風力發電",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "利用風力帶動風機葉片旋轉，再將機械能轉換為電能的發電方式，是目前應用廣泛的再生能源之一。",
+    "example": "臺灣西部沿海因風力穩定，設置了多座離岸風力發電機組。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0244",
+    "term": "太陽能發電",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "利用太陽能板將太陽輻射能直接轉換為電能的發電方式，發電過程不排放溫室氣體，是重要的再生能源之一。",
+    "example": "許多學校在屋頂加裝太陽能板進行太陽能發電，同時作為能源教育教材。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0245",
+    "term": "碳足跡",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "個人、產品或活動在其生命週期中直接與間接產生的溫室氣體排放總量，通常以二氧化碳當量表示。",
+    "example": "選擇搭乘大眾運輸而非自行開車，可以有效降低個人的碳足跡。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0246",
+    "term": "環境影響評估",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "在開發建設計畫實施前，依法對其可能造成的生態、空氣、水質等環境衝擊進行系統性調查、預測與審查的制度，用以降低開發對環境的負面影響。",
+    "example": "該開發案因鄰近保護區，依法須通過環境影響評估才能動工。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0247",
+    "term": "比重",
+    "unit": "geology",
+    "grade": "9",
+    "def": "礦物質量與同體積純水質量的比值，是用來輔助鑑定礦物種類的物理性質之一，可搭配硬度與條痕綜合判斷。",
+    "example": "地質老師讓同學測量幾種礦物的比重，藉此分辨外觀相似但成分不同的標本。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0248",
+    "term": "順向坡",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩層層面傾斜方向與地表坡面傾斜方向大致相同的邊坡地形，因岩層面成為滑動面，遇豪雨時容易發生大規模滑動。",
+    "example": "這片順向坡在連日豪雨浸潤岩層後，發生了大規模的邊坡崩塌。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0249",
+    "term": "月偏食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球只有部分表面進入地球本影，造成月面僅局部區域變暗的月食現象，與月球完全沒入本影的月全食不同。",
+    "example": "昨晚觀測到的月偏食，只有月面下緣一小塊區域被地球的影子遮暗。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0250",
+    "term": "熱島效應",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "都市地區因大量人工建材蓄熱、綠地減少及冷氣廢熱排放，使市區氣溫明顯高於周圍郊區的現象。",
+    "example": "夏夜走在柏油路密布的市中心，能明顯感受到熱島效應帶來的悶熱與郊區的溫差。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
   }
 ]
