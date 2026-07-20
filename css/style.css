@@ -1,0 +1,365 @@
+:root {
+  --green: #1f9d55;
+  --green-dark: #16793f;
+  --bg: #f4f9f6;
+  --card-bg: #ffffff;
+  --text: #1b2b22;
+  --muted: #6b7d72;
+  --danger: #d9534f;
+  --warn: #e8a33d;
+  --warn-bg: #fdf3e3;
+  --border: #dcecE2;
+
+  /* 四科主題色 */
+  --sci-nature: #2f9e44;
+  --sci-biology: #0d9488;
+  --sci-chemphys: #e8590c;
+  --sci-earth: #4263eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header.site-header {
+  background: var(--green-dark);
+  color: #fff;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+header.site-header h1 { margin: 0 0 4px; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.02em; }
+header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity: 0.85; }
+
+.hero-stats { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+
+.hero-stat {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.15);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.hero-stat strong { font-size: 0.88rem; }
+
+.trust-line {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 8px 0 0;
+  padding: 0 16px;
+}
+
+.io-row { display: flex; gap: 10px; justify-content: center; margin: 18px 0 4px; }
+
+.io-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.io-btn:hover { border-color: var(--green); color: var(--green-dark); }
+
+nav.tabs {
+  display: flex;
+  overflow-x: auto;
+  background: #fff;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav.tabs button {
+  flex: 1 0 auto;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.2s ease;
+}
+
+nav.tabs button.active {
+  color: var(--green-dark);
+  border-bottom-color: var(--green);
+  font-weight: 700;
+}
+
+nav.tabs button[data-key="nature"].active   { color: var(--sci-nature);   border-bottom-color: var(--sci-nature); }
+nav.tabs button[data-key="biology"].active  { color: var(--sci-biology);  border-bottom-color: var(--sci-biology); }
+nav.tabs button[data-key="chemphys"].active { color: var(--sci-chemphys); border-bottom-color: var(--sci-chemphys); }
+nav.tabs button[data-key="earth"].active    { color: var(--sci-earth);    border-bottom-color: var(--sci-earth); }
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.panel { display: none; }
+.panel.active { display: block; animation: panelIn 0.22s ease-out; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panel[data-key="nature"]   .btn-primary, .panel[data-key="nature"]   .mode-switch button.active { background: var(--sci-nature); border-color: var(--sci-nature); }
+.panel[data-key="biology"]  .btn-primary, .panel[data-key="biology"]  .mode-switch button.active { background: var(--sci-biology); border-color: var(--sci-biology); }
+.panel[data-key="chemphys"] .btn-primary, .panel[data-key="chemphys"] .mode-switch button.active { background: var(--sci-chemphys); border-color: var(--sci-chemphys); }
+.panel[data-key="earth"]    .btn-primary, .panel[data-key="earth"]    .mode-switch button.active { background: var(--sci-earth); border-color: var(--sci-earth); }
+
+.panel[data-key="nature"]   .card { border-left-color: var(--sci-nature); }
+.panel[data-key="biology"]  .card { border-left-color: var(--sci-biology); }
+.panel[data-key="chemphys"] .card { border-left-color: var(--sci-chemphys); }
+.panel[data-key="earth"]    .card { border-left-color: var(--sci-earth); }
+
+.panel[data-key="nature"]   .progress-bar > div { background: var(--sci-nature); }
+.panel[data-key="biology"]  .progress-bar > div { background: var(--sci-biology); }
+.panel[data-key="chemphys"] .progress-bar > div { background: var(--sci-chemphys); }
+.panel[data-key="earth"]    .progress-bar > div { background: var(--sci-earth); }
+
+.placeholder-card {
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.mode-switch {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mode-switch button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mode-switch button.active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.04);
+  border-left: 4px solid var(--green);
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  margin-bottom: 14px;
+}
+
+.card.celebrate-in { animation: celebrateIn 0.35s ease-out; }
+
+@keyframes celebrateIn {
+  0% { transform: scale(0.97); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.flash-term {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.flash-meta {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+  opacity: 0.75;
+}
+
+.flash-def {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.7;
+  min-height: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.flash-def.hidden { color: var(--muted); }
+
+.btn-row { display: flex; gap: 10px; margin-top: 18px; }
+
+.btn {
+  flex: 1;
+  padding: 13px 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn:active { transform: translateY(1px); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+.btn:hover { filter: brightness(1.05); }
+
+.btn-primary { background: var(--green); color: #fff; box-shadow: 0 3px 0 var(--green-dark); }
+.btn-primary:active { box-shadow: 0 1px 0 var(--green-dark); transform: translateY(2px); }
+.btn-secondary { background: #eef4f0; color: var(--text); box-shadow: none; }
+.btn-danger { background: #fdeceb; color: var(--danger); box-shadow: none; }
+.btn-ok { background: #e7f6ec; color: var(--green-dark); box-shadow: none; }
+
+.quiz-prompt {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+
+.quiz-option {
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.quiz-option:hover:not(:disabled) { border-color: var(--green); transform: translateX(2px); }
+.quiz-option:disabled { cursor: default; }
+
+.quiz-option.correct {
+  border-width: 2px;
+  border-color: var(--green);
+  background: #e7f6ec;
+  font-weight: 700;
+  animation: correctPop 0.25s ease;
+  box-shadow: 0 0 0 3px rgba(31,157,85,0.12);
+}
+
+.quiz-option.wrong {
+  border-width: 2px;
+  border-color: var(--warn);
+  background: var(--warn-bg);
+  font-weight: 700;
+  animation: wrongShake 0.3s ease;
+  box-shadow: 0 0 0 3px rgba(232,163,61,0.15);
+}
+
+@keyframes correctPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.quiz-feedback {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--warn-bg);
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar > div {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.weak-list { list-style: none; margin: 0; padding: 0; }
+
+.weak-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+
+.weak-list li:last-child { border-bottom: none; }
+
+.weak-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.weak-score {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.btn-weak-practice {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--green);
+  background: #fff;
+  color: var(--green-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-weak-practice:hover { background: var(--green); color: #fff; }
+
+@media (max-width: 420px) {
+  header.site-header h1 { font-size: 1.2rem; }
+  .flash-term { font-size: 1.35rem; }
+}

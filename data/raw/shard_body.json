@@ -1,0 +1,422 @@
+[
+  {
+    "id": "body_001",
+    "term": "唾液澱粉酶",
+    "unit": "body",
+    "grade": "8",
+    "def": "由唾液腺分泌，存在口腔中的消化酶，能把澱粉分解成較小的醣類分子，是消化作用的第一步。",
+    "example": "食物在口腔中經過咀嚼，唾液澱粉酶就開始把澱粉分解成麥芽糖。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_002",
+    "term": "食道",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接咽與胃之間的長管狀構造，藉由肌肉的蠕動把食物向下推送到胃，本身不進行消化作用。",
+    "example": "吞嚥後，食團會沿著食道蠕動，大約幾秒鐘就送達胃部。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_003",
+    "term": "胃液",
+    "unit": "body",
+    "grade": "8",
+    "def": "由胃壁分泌的消化液，含有胃蛋白酶與鹽酸，能分解蛋白質並殺死隨食物進入的細菌。",
+    "example": "胃液中的鹽酸會讓胃內環境呈強酸性，幫助胃蛋白酶發揮作用。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_004",
+    "term": "小腸絨毛",
+    "unit": "body",
+    "grade": "8",
+    "def": "小腸內壁上密布的指狀突起構造，能大幅增加吸收表面積，是養分被吸收進入血液的主要場所。",
+    "example": "小腸絨毛表面布滿微血管，讓消化後的養分能迅速吸收進入血液。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_005",
+    "term": "肝臟",
+    "unit": "body",
+    "grade": "8",
+    "def": "人體最大的內臟器官，能分泌膽汁幫助脂肪的乳化，並負責解毒、儲存肝醣等多種代謝功能。",
+    "example": "肝臟分泌的膽汁會先儲存在膽囊，進食後再釋放到小腸幫助脂肪消化。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_006",
+    "term": "胰臟",
+    "unit": "body",
+    "grade": "8",
+    "def": "兼具消化與內分泌功能的器官，能分泌胰液幫助消化三大營養素，也能分泌胰島素調節血糖。",
+    "example": "胰臟分泌的胰液進入小腸後，能同時分解澱粉、蛋白質與脂肪。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_007",
+    "term": "大腸",
+    "unit": "body",
+    "grade": "8",
+    "def": "消化道末段，主要功能是吸收食物殘渣中的水分與部分礦物質，並形成糞便暫存後排出體外。",
+    "example": "食物殘渣進入大腸後，水分會被大量吸收，糞便因此逐漸變得比較乾硬。",
+    "category": "消化系統",
+    "distractor_pool": "digestive"
+  },
+  {
+    "id": "body_008",
+    "term": "心臟",
+    "unit": "body",
+    "grade": "8",
+    "def": "由心肌構成的中空器官，藉由規律收縮把血液推送到全身，分為左右心房與左右心室四個腔室。",
+    "example": "心臟不斷規律地收縮與舒張，才能把血液持續送往身體各處。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_009",
+    "term": "動脈",
+    "unit": "body",
+    "grade": "8",
+    "def": "把血液從心臟送往身體各部位的血管，管壁較厚且富彈性，能承受心臟收縮時較高的血液壓力。",
+    "example": "把手指輕壓在手腕的動脈上，可以感覺到隨心跳而來的規律搏動。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_010",
+    "term": "靜脈",
+    "unit": "body",
+    "grade": "8",
+    "def": "把血液從身體各部位送回心臟的血管，管壁較薄，內部具有瓣膜以防止血液逆流。",
+    "example": "腿部靜脈裡的瓣膜能防止血液因為重力而倒流回下肢。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_011",
+    "term": "微血管",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接動脈與靜脈之間管徑最細、管壁最薄的血管，血液在此與周圍組織細胞進行物質交換。",
+    "example": "氧氣與養分要靠微血管的薄壁，才能順利擴散到組織細胞當中。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_012",
+    "term": "紅血球",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液中數量最多的血球，含有血紅素，主要功能是運送氧氣到全身各組織。",
+    "example": "紅血球裡的血紅素與氧氣結合後，會隨著血液循環運送到全身細胞。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_013",
+    "term": "白血球",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液中負責身體防禦的血球，能吞噬入侵的病菌或產生抗體，是免疫系統的重要成員。",
+    "example": "傷口受到細菌感染時，白血球會聚集過去吞噬入侵的病菌。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_014",
+    "term": "血小板",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液中體積最小的有形成分，在血管受傷破裂時能聚集並促進凝血，防止血液持續流失。",
+    "example": "皮膚受傷流血後，血小板會很快聚集在傷口處幫助止血。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_015",
+    "term": "血漿",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液中的淡黃色液態成分，主要由水組成，負責運送養分、代謝廢物、激素及血球等物質。",
+    "example": "血液離心後上層淡黃色的液體就是血漿，裡面溶有許多養分與蛋白質。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_016",
+    "term": "肺循環",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液由心臟右心室送往肺部進行氣體交換，再回到左心房的循環路徑，能把血液中的二氧化碳換成氧氣。",
+    "example": "血液進行肺循環時會流經肺泡周圍的微血管，釋出二氧化碳並帶回氧氣。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_017",
+    "term": "體循環",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液由心臟左心室送往全身組織，再經由靜脈回到右心房的循環路徑，負責把氧氣與養分送到全身。",
+    "example": "含氧血經由體循環送到腦部、肌肉等組織，供給細胞所需的氧氣。",
+    "category": "循環系統",
+    "distractor_pool": "circulatory"
+  },
+  {
+    "id": "body_018",
+    "term": "氣管",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接喉與支氣管之間的管狀構造，管壁上有軟骨環支撐並布有纖毛，能過濾及推送空氣。",
+    "example": "空氣吸入後會先經過氣管，再分別流入左右兩側的支氣管。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "body_019",
+    "term": "支氣管",
+    "unit": "body",
+    "grade": "8",
+    "def": "由氣管分支而成，左右各一，再逐漸分支變細後深入肺部，最終連接到肺泡。",
+    "example": "氣管在胸腔內分成左右兩條支氣管，分別進入左肺與右肺。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "body_020",
+    "term": "肺",
+    "unit": "body",
+    "grade": "8",
+    "def": "胸腔內成對的呼吸器官，內部由大量肺泡組成，是空氣進行氣體交換的主要場所。",
+    "example": "橫膈膜收縮下降時，胸腔擴大，空氣就會被吸入肺中。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "body_021",
+    "term": "肺泡",
+    "unit": "body",
+    "grade": "8",
+    "def": "肺部微小囊狀構造，周圍布滿微血管，是氧氣與二氧化碳進行氣體交換發生的場所。",
+    "example": "氧氣在肺泡與微血管之間進行氣體交換，進入血液循環。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "body_022",
+    "term": "橫膈膜",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於胸腔與腹腔之間的肌肉薄膜，收縮與舒張能改變胸腔容積，是呼吸運動的重要動力來源之一。",
+    "example": "吸氣時橫膈膜會收縮並向下移動，讓胸腔的空間變大。",
+    "category": "呼吸系統",
+    "distractor_pool": "respiratory"
+  },
+  {
+    "id": "body_023",
+    "term": "腎臟",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於腹腔背側成對的排泄器官，主要功能是過濾血液中的代謝廢物，並調節體內水分與電解質平衡。",
+    "example": "血液流經腎臟時，代謝產生的尿素會被過濾出來形成尿液。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "body_024",
+    "term": "腎絲球",
+    "unit": "body",
+    "grade": "8",
+    "def": "腎臟中由微血管纏繞成球狀的構造，負責把血液中的水分、養分與代謝廢物初步過濾出來。",
+    "example": "血液流經腎絲球時，較小的分子會被過濾到腎小管中，形成濾液。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "body_025",
+    "term": "輸尿管",
+    "unit": "body",
+    "grade": "8",
+    "def": "連接腎臟與膀胱之間的細長管狀構造，藉由肌肉蠕動把腎臟形成的尿液運送到膀胱暫存。",
+    "example": "尿液在腎臟形成後，會經由輸尿管慢慢流向膀胱。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "body_026",
+    "term": "膀胱",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於下腹部具有彈性的囊狀器官，能暫時儲存由輸尿管送來的尿液，達一定量後再經尿道排出體外。",
+    "example": "尿液持續累積到膀胱脹滿時，就會產生想要排尿的感覺。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "body_027",
+    "term": "尿液形成",
+    "unit": "body",
+    "grade": "8",
+    "def": "血液經腎絲球過濾後，濾液再經腎小管重新吸收有用物質、分泌廢物，最後剩下的液體就成為尿液。",
+    "example": "尿液形成的過程中，大部分的葡萄糖與水分都會被腎小管重新吸收回血液。",
+    "category": "排泄系統",
+    "distractor_pool": "excretory"
+  },
+  {
+    "id": "body_028",
+    "term": "大腦",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於顱腔內體積最大的腦部構造，負責記憶、思考、語言與感覺、隨意運動的統合等高階功能。",
+    "example": "大腦掌管思考與記憶，讓我們能學習新知識並做出判斷。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_029",
+    "term": "小腦",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於大腦後下方的腦部構造，主要負責身體動作的協調與平衡，使動作能精確而流暢。",
+    "example": "走路時能保持身體平衡不跌倒，主要就是靠小腦的協調功能。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_030",
+    "term": "脊髓",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於脊椎骨內的長條狀神經構造，向上與腦相連，負責傳遞神經訊息，也是許多反射作用的中樞。",
+    "example": "膝跳反射的神經訊息不需要經過大腦，只在脊髓就完成反應。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_031",
+    "term": "神經元",
+    "unit": "body",
+    "grade": "8",
+    "def": "神經系統的基本構造與功能單位，具有樹突與軸突，能接收並傳導神經衝動。",
+    "example": "一個神經元可以透過軸突把訊息快速傳給下一個神經元。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_032",
+    "term": "反射作用",
+    "unit": "body",
+    "grade": "8",
+    "def": "身體對刺激所產生的一種快速、不經大腦思考的自動反應，訊息傳導路徑通常經由脊髓完成。",
+    "example": "手不小心碰到燙的東西會立刻縮回，這是一種反射作用。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_033",
+    "term": "視網膜",
+    "unit": "body",
+    "grade": "8",
+    "def": "眼球內部最深層的構造，布滿感光細胞，能把光線轉換成神經訊號傳向大腦，產生視覺。",
+    "example": "光線經過水晶體聚焦後，會投射在視網膜上形成清晰的影像。",
+    "category": "神經系統",
+    "distractor_pool": "nervous"
+  },
+  {
+    "id": "body_034",
+    "term": "激素",
+    "unit": "body",
+    "grade": "8",
+    "def": "由內分泌腺分泌，直接進入血液運送到特定標的器官，用來調節生理作用的化學物質，微量即能發揮作用。",
+    "example": "胰島素是一種激素，能幫助身體降低血液中過高的血糖濃度。",
+    "category": "內分泌系統",
+    "distractor_pool": "endocrine"
+  },
+  {
+    "id": "body_035",
+    "term": "甲狀腺",
+    "unit": "body",
+    "grade": "8",
+    "def": "位於頸部前方的內分泌腺，能分泌甲狀腺素，調節身體的新陳代謝速率與生長發育。",
+    "example": "甲狀腺分泌的甲狀腺素不足時，身體的新陳代謝速率會明顯下降。",
+    "category": "內分泌系統",
+    "distractor_pool": "endocrine"
+  },
+  {
+    "id": "body_036",
+    "term": "胰島素",
+    "unit": "body",
+    "grade": "8",
+    "def": "由胰臟分泌的激素，能促使細胞吸收血液中的葡萄糖，是降低血糖濃度的主要激素。",
+    "example": "飯後血糖上升時，胰臟會分泌胰島素幫助把血糖濃度降回正常範圍。",
+    "category": "內分泌系統",
+    "distractor_pool": "endocrine"
+  },
+  {
+    "id": "body_037",
+    "term": "腎上腺素",
+    "unit": "body",
+    "grade": "8",
+    "def": "由腎上腺分泌的激素，在緊張或危急狀況下大量釋放，能使心跳加快、呼吸急促，提升身體應變能力。",
+    "example": "遇到突發驚嚇時，腎上腺素會迅速分泌，讓心跳與呼吸都變得急促。",
+    "category": "內分泌系統",
+    "distractor_pool": "endocrine"
+  },
+  {
+    "id": "body_038",
+    "term": "骨骼",
+    "unit": "body",
+    "grade": "8",
+    "def": "由許多骨頭組成的支撐系統，具有支持身體、保護內臟、提供肌肉附著點，以及協助造血等功能。",
+    "example": "胸廓的骨骼包圍著心臟與肺，能有效保護這些重要器官。",
+    "category": "骨骼肌肉系統",
+    "distractor_pool": "skeletal"
+  },
+  {
+    "id": "body_039",
+    "term": "關節",
+    "unit": "body",
+    "grade": "8",
+    "def": "兩塊或多塊骨頭相連接的構造，多數關節能讓骨骼產生一定範圍的活動，使身體得以做出各種動作。",
+    "example": "膝關節能彎曲伸直，讓我們可以走路、跑步與蹲下。",
+    "category": "骨骼肌肉系統",
+    "distractor_pool": "skeletal"
+  },
+  {
+    "id": "body_040",
+    "term": "骨骼肌",
+    "unit": "body",
+    "grade": "8",
+    "def": "附著在骨骼上受意識控制的肌肉，藉由收縮與舒張牽動骨骼，產生身體的各種隨意運動。",
+    "example": "舉起啞鈴時，手臂上的骨骼肌會用力收縮以拉動骨頭。",
+    "category": "骨骼肌肉系統",
+    "distractor_pool": "skeletal"
+  },
+  {
+    "id": "body_041",
+    "term": "體溫調節",
+    "unit": "body",
+    "grade": "8",
+    "def": "身體透過流汗、皮膚血管收縮擴張、肌肉顫抖等方式，使體內溫度維持在相對穩定範圍的恆定性機制。",
+    "example": "天氣炎熱時，身體會靠體溫調節機制大量流汗來散熱降溫。",
+    "category": "恆定性",
+    "distractor_pool": "homeostasis"
+  },
+  {
+    "id": "body_042",
+    "term": "血糖調節",
+    "unit": "body",
+    "grade": "8",
+    "def": "身體藉由胰島素與升糖素等激素的協同作用，使血液中的葡萄糖濃度維持在穩定範圍的恆定性機制。",
+    "example": "飯後血糖升高，身體會啟動血糖調節機制把濃度慢慢降回正常值。",
+    "category": "恆定性",
+    "distractor_pool": "homeostasis"
+  }
+]

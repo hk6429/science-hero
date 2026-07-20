@@ -1,0 +1,362 @@
+[
+  {
+    "id": "pc0073",
+    "term": "參考點",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "描述物體位置或運動時，用來比較的基準點。",
+    "example": "參考點：描述公車位置時，可以把站牌選為參考點。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0074",
+    "term": "位置",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體相對於參考點所在的地點，常需配合方向與距離描述。",
+    "example": "位置：小球在原點東方 3 公尺處，這句話同時說明位置的方向與距離。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0075",
+    "term": "路徑長",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體運動軌跡的總長度，是只有大小的純量。",
+    "example": "路徑長：選手沿 400 公尺跑道跑一圈，路徑長是 400 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0076",
+    "term": "位移",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體由起點指向終點的位置變化，具有大小和方向。",
+    "example": "位移：選手沿 400 公尺跑道跑一圈回到起點，位移為零。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0077",
+    "term": "速率",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體單位時間內所走的路徑長。",
+    "example": "速率：腳踏車 10 秒走 50 公尺，其平均速率為每秒 5 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0078",
+    "term": "速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體單位時間內的位移，具有大小和方向。",
+    "example": "速度：汽車以每秒 10 公尺向東行駛，這個速度包含大小和方向。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0079",
+    "term": "平均速率",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體運動的總路徑長除以總時間。",
+    "example": "平均速率：小明 5 分鐘走 300 公尺，平均速率為每分鐘 60 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0080",
+    "term": "等速度運動",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體速度的大小和方向都不隨時間改變的運動。",
+    "example": "等速度運動：火車沿直線以固定大小與方向行駛，可視為等速度運動。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0081",
+    "term": "加速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "單位時間內速度的變化量，可描述速度改變的快慢。",
+    "example": "加速度：汽車速度每秒增加 2 公尺／秒，其加速度為 2 公尺／秒²。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0082",
+    "term": "等加速度運動",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體的加速度在運動過程中保持不變。",
+    "example": "等加速度運動：小車沿斜面下滑時，每秒速度增加相同數值，可視為等加速度運動。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0083",
+    "term": "自由落體",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "忽略空氣阻力時，物體只受重力作用的運動。",
+    "example": "自由落體：把球向上拋出後忽略空氣阻力，球上升和下降期間都屬自由落體。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0084",
+    "term": "重力加速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體自由落下時因重力產生的加速度，近地表方向指向地心。",
+    "example": "重力加速度：近地表自由落下的球，其重力加速度方向始終指向地心。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0085",
+    "term": "力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體間的互相作用，可改變物體的運動狀態或形狀。",
+    "example": "力：推車後車子開始移動，顯示力能改變運動狀態。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0086",
+    "term": "合力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "多個力作用時，能產生相同效果的單一等效力。",
+    "example": "合力：兩人從相反方向各推箱子，可先求合力判斷箱子如何運動。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0087",
+    "term": "力的平衡",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受合力為零的狀態。",
+    "example": "力的平衡：書靜放桌面時重力與桌面作用力互相抵消，處於力的平衡。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0088",
+    "term": "慣性",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體傾向保持原有靜止或等速度直線運動狀態的性質。",
+    "example": "慣性：公車突然煞車時乘客身體傾向維持前進，表現出慣性。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0089",
+    "term": "牛頓第二運動定律",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體加速度與合力成正比、與質量成反比，方向與合力相同。",
+    "example": "牛頓第二運動定律：同一台車所受合力加倍時，加速度也加倍，符合牛頓第二運動定律。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0090",
+    "term": "牛頓第三運動定律",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "兩物體互相作用時，作用力與反作用力大小相等、方向相反且同時發生。",
+    "example": "牛頓第三運動定律：手推牆時，牆也同時推手，這對力符合牛頓第三運動定律。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0091",
+    "term": "重力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "天體對物體的引力，在地表附近方向指向地心。",
+    "example": "重力：鬆手後球落向地面，是地球重力作用的結果。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0092",
+    "term": "重量",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受重力的大小，會隨重力場強弱而改變。",
+    "example": "重量：同一物體到月球後重量變小，但質量不變。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0093",
+    "term": "正向力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "接觸面對物體施以垂直於接觸面的力。",
+    "example": "正向力：書放在桌上時，桌面對書施加向上的正向力。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0094",
+    "term": "張力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "繩索被拉緊時，沿其方向傳遞的拉力。",
+    "example": "張力：用繩子拉雪橇時，繩上的張力沿繩方向作用。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0095",
+    "term": "彈力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體發生彈性形變時，為恢復原狀而產生的力。",
+    "example": "彈力：壓縮彈簧後放手，彈力使彈簧恢復原狀。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0096",
+    "term": "摩擦力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "兩接觸面間阻礙相對運動或運動趨勢的力。",
+    "example": "摩擦力：鞋底與地面間的摩擦力讓人走路時不易滑倒。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0097",
+    "term": "壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "垂直作用於單位面積上的力，可用力除以受力面積求得。",
+    "example": "壓力：同樣的力作用在較小面積上會產生較大的壓力。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0098",
+    "term": "大氣壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "大氣因本身重量而對其中物體和地表施加的壓力。",
+    "example": "大氣壓力：用吸盤貼在牆面時，內外大氣壓力差幫助吸盤固定。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0099",
+    "term": "液體壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "液體因重力產生的壓力，會隨深度增加。",
+    "example": "液體壓力：潛水者越往深處，受到的液體壓力越大。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0100",
+    "term": "帕斯卡原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "密閉液體中某處壓力的變化，會大小不變地傳到各處。",
+    "example": "帕斯卡原理：按壓密閉油壓裝置的小活塞，壓力依帕斯卡原理傳到大活塞。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0101",
+    "term": "浮力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體浸在靜止流體中時，由流體壓力差所形成的向上合力。",
+    "example": "浮力：把木塊壓入水中時，水對木塊產生向上的浮力。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0102",
+    "term": "阿基米德原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受浮力等於它所排開流體的重量。",
+    "example": "阿基米德原理：物體排開 2 牛頓重的水時，依阿基米德原理所受浮力為 2 牛頓。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0103",
+    "term": "力矩",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "力使物體繞轉軸轉動的效應，大小與力及力臂有關。",
+    "example": "力矩：用扳手轉螺帽時，加長握柄可增大力矩。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0104",
+    "term": "力臂",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "從轉軸到力的作用線之垂直距離。",
+    "example": "力臂：門把裝在遠離鉸鏈處，是為了增加力臂。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0105",
+    "term": "槓桿原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "槓桿平衡時，支點兩側順時針與逆時針方向的力矩相等。",
+    "example": "槓桿原理：翹翹板平衡時，支點兩側順、逆時針力矩相等，符合槓桿原理。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0106",
+    "term": "重心",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "在近地表可將物體所受重力視為集中作用的點。",
+    "example": "重心：把直尺支在重心位置附近，直尺可以保持平衡。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0107",
+    "term": "向心力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "使物體做圓周運動、方向指向圓心的合力。",
+    "example": "向心力：繩子拉著小球繞圈時，繩張力提供指向圓心的向心力。",
+    "category": "轉動與引力",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0108",
+    "term": "萬有引力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "任何兩個有質量的物體之間都存在的相互吸引力。",
+    "example": "萬有引力：地球繞太陽運行所需的吸引力來自萬有引力。",
+    "category": "轉動與引力",
+    "distractor_pool": "force_type"
+  }
+]

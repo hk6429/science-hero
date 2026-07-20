@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d0109",
+    "term": "天球",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "為描述天體位置而假想以觀測者為中心的巨大球面。",
+    "example": "把星星位置畫在圓頂星圖上，是利用天球概念記錄天空。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0110",
+    "term": "地平線",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "觀測者看見天空與地面或海面相接的假想界線。",
+    "example": "夕陽落到海面遠方的地平線附近後消失。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0111",
+    "term": "天頂",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "觀測者頭頂正上方在天球上的位置。",
+    "example": "仰頭垂直向上看，視線指向天頂。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0112",
+    "term": "高度角",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "天體與地平線之間的夾角，範圍由 0 度到 90 度。",
+    "example": "月亮位在地平線上方 30 度時，其高度角為 30 度。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0113",
+    "term": "方位角",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "由基準方向沿地平線量到天體方向的角度。",
+    "example": "記錄日出位置時，可用指南針與方位角表示方向。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0114",
+    "term": "周日運動",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "天體因地球自轉而呈現每日由東向西移動的視運動。",
+    "example": "縮時攝影中的星軌繞北極星旋轉，是周日運動的結果。",
+    "category": "天文觀測",
+    "distractor_pool": "astro_observation"
+  },
+  {
+    "id": "d0115",
+    "term": "地球自轉",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球繞自轉軸由西向東旋轉，週期約一天。",
+    "example": "傅科擺與日夜交替都能提供地球自轉的證據。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0116",
+    "term": "地軸",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "連接地球南北極、地球自轉所繞的假想軸。",
+    "example": "地球儀傾斜的轉軸用來表示地軸方向。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0117",
+    "term": "晝夜交替",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球自轉使各地輪流面向與背向太陽而產生的明暗變化。",
+    "example": "臺灣進入白天時，地球另一側可能正因晝夜交替進入夜晚。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0118",
+    "term": "地球公轉",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球沿軌道繞太陽運行，週期約一年。",
+    "example": "一年後地球回到軌道上相近位置，完成一次地球公轉。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0119",
+    "term": "公轉軌道",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "天體繞另一個天體運行時所行經的路徑。",
+    "example": "地球的公轉軌道接近橢圓形，太陽位在其中一個焦點附近。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0120",
+    "term": "四季",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地軸傾斜配合地球公轉，使各地日照角度與晝長週期改變所形成的季節。",
+    "example": "北半球夏季太陽高度較高、白晝較長，可用四季成因解釋。",
+    "category": "地球運動",
+    "distractor_pool": "astro_earth_motion"
+  },
+  {
+    "id": "d0121",
+    "term": "月球",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球的天然衛星，本身不發可見光，主要反射太陽光。",
+    "example": "夜空中看見明亮月球，是因其表面反射太陽光。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0122",
+    "term": "月相",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "從地球看到月球受光部分形狀隨日、地、月相對位置改變的現象。",
+    "example": "連續一個月在固定時間拍照，可記錄月相週期變化。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0123",
+    "term": "新月",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球大致位於地球與太陽之間，亮面多背向地球的月相。",
+    "example": "新月前後月球和太陽方向接近，夜晚通常不易看見。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0124",
+    "term": "滿月",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "地球大致位於太陽與月球之間，月球近地面幾乎全亮的月相。",
+    "example": "滿月通常在日落附近升起，整夜可見時間較長。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0125",
+    "term": "日食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球運行到太陽與地球之間，月影落到地球部分區域的現象。",
+    "example": "觀測日食必須使用合格太陽濾鏡，不能直接看太陽。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0126",
+    "term": "月食",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "月球進入地球影子而逐漸變暗的現象。",
+    "example": "滿月時若日、地、月排列接近一直線，可能發生月食。",
+    "category": "月相與食",
+    "distractor_pool": "astro_moon"
+  },
+  {
+    "id": "d0127",
+    "term": "太陽",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "距離地球最近的恆星，是地球主要能量來源。",
+    "example": "植物光合作用與地表升溫所需能量主要來自太陽。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0128",
+    "term": "太陽系",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "由太陽及受其引力束縛的行星、矮行星、小天體等組成的系統。",
+    "example": "地球是太陽系中繞太陽運行的八大行星之一。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0129",
+    "term": "類地行星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "體積較小、密度較大且以岩石為主的內側行星。",
+    "example": "水星、金星、地球和火星都屬於類地行星。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0130",
+    "term": "類木行星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "體積較大、以氣體或冰物質為主且多有光環與衛星的外側行星。",
+    "example": "木星、土星、天王星和海王星都屬於類木行星。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0131",
+    "term": "小行星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "繞太陽運行、體積比行星小且多為岩石或金屬的天體。",
+    "example": "火星與木星軌道間可觀測到大量小行星。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0132",
+    "term": "彗星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "由冰、塵埃與岩石組成，接近太陽時可能形成彗髮和彗尾的天體。",
+    "example": "彗星接近太陽時，彗尾大致背向太陽延伸。",
+    "category": "太陽系",
+    "distractor_pool": "astro_solar_system"
+  },
+  {
+    "id": "d0133",
+    "term": "恆星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "能自行發光發熱、主要由高溫氣體組成的巨大天體。",
+    "example": "太陽是一顆離地球最近的恆星。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0134",
+    "term": "星座",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "人們把天球特定區域的星星想像並劃分出的圖案或區域。",
+    "example": "夜間可利用星座辨認天空方位，但其中星星彼此未必相近。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0135",
+    "term": "北極星",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "目前接近北天極、在北半球可用來辨認北方的恆星。",
+    "example": "長時間攝影時其他星軌繞著北極星附近旋轉。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0136",
+    "term": "視星等",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "由地球觀測到的天體亮度分級，數值越小通常看起來越亮。",
+    "example": "視星等為 1 的星通常比視星等為 5 的星明亮。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0137",
+    "term": "恆星顏色",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "恆星表面溫度不同所呈現的色彩差異，藍白色通常比紅色高溫。",
+    "example": "比較參宿四與參宿七，可從恆星顏色推測表面溫度差異。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0138",
+    "term": "光年",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "光在真空中一年行進的距離，是長度單位。",
+    "example": "說某星距離地球 10 光年，是用光年表示距離而不是時間。",
+    "category": "恆星觀測",
+    "distractor_pool": "astro_star"
+  },
+  {
+    "id": "d0139",
+    "term": "星系",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "由大量恆星、氣體、塵埃與暗物質等受引力束縛形成的系統。",
+    "example": "望遠鏡影像中的旋渦狀巨大天體系統可能是一個星系。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0140",
+    "term": "銀河系",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "太陽系所在的棒旋星系，包含數千億顆恆星。",
+    "example": "夜空中的銀河只是從銀河系內部看到其部分恆星密集區。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0141",
+    "term": "星雲",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "星際空間中由氣體與塵埃形成的雲狀天體。",
+    "example": "獵戶座方向可拍到發光氣體組成的星雲。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0142",
+    "term": "星團",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "許多恆星因共同起源或引力聚集形成的群體。",
+    "example": "昴宿星團在晴朗夜空中可看見數顆相近的亮星。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0143",
+    "term": "宇宙",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "包含所有空間、時間、物質與能量的整體。",
+    "example": "星系只是宇宙中眾多大型結構之一。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  },
+  {
+    "id": "d0144",
+    "term": "宇宙膨脹",
+    "unit": "astronomy",
+    "grade": "9",
+    "def": "大尺度上星系之間的空間隨時間增加的現象。",
+    "example": "遙遠星系光譜普遍紅移，是宇宙膨脹的重要觀測證據。",
+    "category": "宇宙尺度",
+    "distractor_pool": "astro_universe"
+  }
+]

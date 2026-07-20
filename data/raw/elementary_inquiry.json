@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0001",
+    "term": "觀察",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "運用感官或工具，有目的地察看物體與現象並記錄特徵。",
+    "example": "進行觀察時，要把看到的顏色、形狀和變化如實記下來。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0002",
+    "term": "比較",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "找出兩個以上物體或現象之間相同與不同之處的方法。",
+    "example": "透過比較，可以發現兩片葉子的形狀和葉脈並不相同。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0003",
+    "term": "分類",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "依照共同特徵或訂定的標準，把事物分成不同群組。",
+    "example": "我們依照有沒有翅膀進行分類，把動物分成兩組。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0004",
+    "term": "測量",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "使用適當工具和單位，取得長度、質量、溫度等數值。",
+    "example": "用直尺進行測量，才能知道鉛筆的正確長度。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0005",
+    "term": "推論",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "根據已觀察到的證據，提出合理解釋或可能結果。",
+    "example": "看到地面有水漬，我們推論剛才可能下過雨。",
+    "category": "探究方法",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0006",
+    "term": "預測",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "依據已有資料或規律，事先判斷可能發生的結果。",
+    "example": "根據烏雲變厚的現象，我們預測不久後可能會下雨。",
+    "category": "探究方法",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0007",
+    "term": "變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "在探究中可能影響結果、可以改變或控制的因素。",
+    "example": "研究水溫對溶解快慢的影響時，水溫就是一個變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0008",
+    "term": "操縱變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中研究者刻意改變，用來觀察其影響的因素。",
+    "example": "測試光照對植物生長的影響時，光照時間是操縱變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0009",
+    "term": "控制變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中除了操縱變因以外，必須保持相同的因素。",
+    "example": "比較不同土壤的保水性時，倒入的水量要列為控制變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0010",
+    "term": "應變變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中因操縱變因改變而被觀察或測量的結果。",
+    "example": "研究風力大小時，風車轉動圈數可以作為應變變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0011",
+    "term": "公平測試",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "一次只改變一個主要因素，其餘條件盡量相同的實驗方式。",
+    "example": "比較紙飛機機翼長度時，要採用公平測試才容易判斷差異。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0012",
+    "term": "重複實驗",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "用相同步驟多做幾次，以降低偶然誤差並提高結果可信度。",
+    "example": "測量擺動次數時進行重複實驗，可以讓結果更可靠。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0013",
+    "term": "直尺",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "測量較短物體長度的工具，常用公分和毫米作單位。",
+    "example": "使用直尺時，物體一端要對準零刻度。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0014",
+    "term": "量筒",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "測量液體體積的透明容器，外壁標有容量刻度。",
+    "example": "讀取量筒中的水量時，視線要和液面同高。",
+    "category": "測量工具",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0015",
+    "term": "溫度計",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "測量物體或環境冷熱程度的工具，常用攝氏度表示。",
+    "example": "把溫度計放入水中，可以測出水溫。",
+    "category": "測量工具",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0016",
+    "term": "天平",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "利用兩端平衡原理測量物體質量，使用前需要先歸零的工具。",
+    "example": "使用天平測量橡皮擦的質量前，要先確認指針平衡。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0017",
+    "term": "碼表",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "用來測量經過時間，能記錄秒或更小時間單位的工具。",
+    "example": "賽跑實驗可以用碼表記錄每個人跑完全程的時間。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0018",
+    "term": "放大鏡",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "利用凸透鏡把近處物體影像放大，方便觀察細節的工具。",
+    "example": "用放大鏡觀察葉片，可以看清楚葉面上的細小紋路。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0019",
+    "term": "長度",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示物體從一端到另一端距離的量，常用公分或公尺表示。",
+    "example": "桌面的長度可以用直尺或捲尺測量。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0020",
+    "term": "質量",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "表示物體所含物質多寡的量，常用公克或公斤表示。",
+    "example": "同樣大小的木塊和鐵塊，質量可能不相同。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0021",
+    "term": "體積",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "表示物體或物質所占空間大小的量，可用立方單位或容量單位表示。",
+    "example": "把石頭放進量筒後，水面上升的量可用來求石頭的體積。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0022",
+    "term": "溫度",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示物體冷熱程度的量，臺灣常用攝氏度作單位。",
+    "example": "氣象報告中的溫度能幫助我們選擇合適衣物。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0023",
+    "term": "時間",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示事件持續長短或先後順序的量，常用時、分和秒作為單位。",
+    "example": "記錄冰塊融化所需的時間，可以比較不同環境的影響。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0024",
+    "term": "容量",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "容器最多可以容納液體多少的量，常用毫升或公升表示。",
+    "example": "水壺標示的容量是六百毫升。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0025",
+    "term": "紀錄表",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "用列與欄有系統地整理觀察或測量資料的表格。",
+    "example": "把每天豆苗高度填入紀錄表，就能看出生長變化。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0026",
+    "term": "長條圖",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "以長條長短表示不同類別數量，方便彼此比較的圖表。",
+    "example": "用長條圖呈現各組種子發芽數量，可以快速比較結果。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0027",
+    "term": "折線圖",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "用線段連接各時間點數值，呈現連續變化趨勢的圖表。",
+    "example": "一週氣溫的升降變化適合用折線圖呈現。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0028",
+    "term": "表格",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "依照欄位整齊排列資料，便於查找與比較的方式。",
+    "example": "把不同動物的足數整理成表格後，更容易進行分類。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0029",
+    "term": "證據",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "能支持或反駁說法的觀察、測量結果或可靠資料。",
+    "example": "科學解釋必須提出證據，不能只靠猜測。",
+    "category": "資料表達",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0030",
+    "term": "結論",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "根據探究問題和資料分析後，所做出的合理回答。",
+    "example": "寫結論時要回應原本的問題，並說明資料是否支持預測。",
+    "category": "資料表達",
+    "distractor_pool": "scientific_reasoning"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "_comment": "四科共用詞條 schema 空殼範例。之後擴充國小自然/國中理化/國中地科時，比照這個結構開新的 data/<subject>.json + data/raw/shard_*.json + raw notes，並在 scripts/merge.mjs、scripts/validate.mjs、js/app.js 的 SUBJECTS/UNIT_LABELS 加上對應項目。",
+  "example_entry": {
+    "id": "x0001",
+    "term": "詞條/知識點名稱",
+    "unit": "該科的單元代碼（比照 biology_source_notes.md 的做法，自訂內部代碼，不冒用不存在的官方課綱編碼）",
+    "grade": "7｜8｜9（國小自然可能要換成不同的年級代碼，如 3-6）",
+    "def": "20-60 字的精準定義，國中/國小生能理解，不過度簡化到錯誤",
+    "example": "一句包含 term 完整字面的例句（validate.mjs 的硬性檢查）",
+    "category": "供分類/UI 顯示用的類別名稱",
+    "distractor_pool": "四選一誘答池代碼，同池詞條彼此可互為誘答"
+  }
+}

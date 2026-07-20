@@ -1,0 +1,382 @@
+[
+  {
+    "id": "eco_001",
+    "term": "生態系",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生物與其生存環境（陽光、空氣、水、土壤等）交互作用所形成的一個整體系統。",
+    "example": "一座池塘裡的魚、水草與水質共同組成一個完整的生態系。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_002",
+    "term": "族群",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "在同一時間、同一地區生活的同種生物所組成的群體。",
+    "example": "這片草原上所有的野兔，構成了一個野兔族群。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_003",
+    "term": "群集",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "在同一地區生活的所有不同物種族群，彼此交互作用所形成的整體。",
+    "example": "森林裡所有樹木、鳥類與昆蟲的族群加總起來，就形成森林的群集。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_004",
+    "term": "棲地",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生物生存、覓食、繁殖所依賴的特定自然環境空間。",
+    "example": "紅樹林是招潮蟹重要的棲地，提供牠們遮蔽與食物來源。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_005",
+    "term": "生態棲位",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "一物種在生態系中所扮演的角色，包括牠利用的資源、活動時間與生存方式。",
+    "example": "貓頭鷹與老鷹雖然都是猛禽，但因活動時間不同，占據不同的生態棲位。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_006",
+    "term": "生物因子",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生態系中會影響生物生存的其他生物，例如掠食者、競爭者或共生夥伴。",
+    "example": "掠食者的數量增加，是影響族群大小的重要生物因子。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_007",
+    "term": "非生物因子",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生態系中影響生物生存的環境條件，例如陽光、空氣、水、溫度與土壤。",
+    "example": "溫度與降雨量都是決定一地區植被類型的重要非生物因子。",
+    "category": "生態系組成層級",
+    "distractor_pool": "ecosystem_levels"
+  },
+  {
+    "id": "eco_008",
+    "term": "生產者",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "能利用光合作用自行合成養分的生物，如植物與藻類，是食物鏈的起點。",
+    "example": "稻田裡的稻子是這個生態系中的生產者，能自行進行光合作用製造養分。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_009",
+    "term": "消費者",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "無法自行製造養分，必須攝食其他生物以獲取能量的生物。",
+    "example": "草食性的兔子與肉食性的狐狸，在生態系中都屬於消費者。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_010",
+    "term": "分解者",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "能將動植物遺體與排遺分解為簡單物質、歸還環境的生物，例如細菌與真菌。",
+    "example": "落葉堆裡的黴菌與細菌是重要的分解者，能把枯葉分解成養分回到土壤中。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_011",
+    "term": "食物鏈",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "生態系中生物依攝食關係，由生產者到各級消費者所形成的單一取食順序。",
+    "example": "「水草→小魚→大魚」是池塘中一條簡單的食物鏈。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_012",
+    "term": "食物網",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "生態系中多條食物鏈相互交錯、連結而成的複雜攝食關係網路。",
+    "example": "生態系裡的食物網顯示出各物種之間錯綜複雜的攝食關係。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_013",
+    "term": "能量流動",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "能量隨著生物間的攝食關係，由生產者依序往各級消費者傳遞、並逐級減少的過程。",
+    "example": "生態系中的能量流動是單向的，能量會沿著食物鏈逐級遞減。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_014",
+    "term": "生態金字塔",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "以塔狀圖形表示生態系中，生物量或能量從生產者往高階消費者逐級遞減的關係。",
+    "example": "生態金字塔的底層通常是生產者，數量與能量都遠多於頂層的高階消費者。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_015",
+    "term": "碳循環",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "碳元素透過光合作用、呼吸作用與燃燒等過程，在大氣、生物體與環境間反覆流轉的過程。",
+    "example": "植物行光合作用吸收二氧化碳、生物呼吸釋放二氧化碳，都是碳循環的一環。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_016",
+    "term": "氮循環",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "氮元素透過固氮、分解、硝化等作用，在大氣、土壤與生物體之間反覆轉換流轉的過程。",
+    "example": "豆科植物根瘤菌能將空氣中的氮氣固定成養分，是氮循環中的重要一步。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_017",
+    "term": "物質循環",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "生態系中的化學物質（如碳、氮）能在生物與環境之間反覆循環利用，不會憑空消失。",
+    "example": "與單向流動的能量不同，物質循環讓碳、氮等元素能一再被生物重複利用。",
+    "category": "能量與物質流動",
+    "distractor_pool": "energy_flow"
+  },
+  {
+    "id": "eco_018",
+    "term": "共生",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "兩種不同生物長期生活在一起、彼此產生密切關係的現象，依對雙方利害可再細分不同類型。",
+    "example": "小丑魚與海葵長期生活在一起，是常見的共生例子。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_019",
+    "term": "互利共生",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "兩種生物共同生活，雙方都能從彼此身上獲得利益的共生關係。",
+    "example": "螞蟻幫蚜蟲驅趕天敵、蚜蟲分泌蜜露給螞蟻吃，是典型的互利共生。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_020",
+    "term": "片利共生",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "兩種生物共同生活，其中一方獲得利益，另一方既不受益也不受害的共生關係。",
+    "example": "鮣魚附著在鯊魚身上移動並撿食殘渣，鯊魚不受影響，屬於片利共生。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_021",
+    "term": "寄生",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "一種生物長期依附在另一生物體內或體表，奪取養分並使對方受到傷害的交互關係。",
+    "example": "蛔蟲寄生在人體腸道中，靠奪取宿主的養分維生。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_022",
+    "term": "競爭",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "兩種生物因需求相同的資源，如食物、空間或陽光而互相爭奪的交互作用。",
+    "example": "同一片草原上的斑馬與羚羊，會為了爭奪牧草而產生競爭。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_023",
+    "term": "掠食",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "一種生物直接捕食另一種生物、以獲取能量的交互作用。",
+    "example": "獵豹追捕並吃掉羚羊，是自然界常見的掠食行為。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_024",
+    "term": "種內競爭",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "同一族群中的個體，為了爭奪相同的食物、空間或配偶等資源而產生的競爭關係。",
+    "example": "同一片森林裡的雄鹿，會為了爭奪地盤與交配權而發生種內競爭。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_025",
+    "term": "種間競爭",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "不同物種之間，因需求相似的資源而互相爭奪所產生的競爭關係。",
+    "example": "外來的福壽螺與本土田螺爭奪相同食物與棲地，形成明顯的種間競爭。",
+    "category": "生物間交互作用",
+    "distractor_pool": "interactions"
+  },
+  {
+    "id": "eco_026",
+    "term": "陽光",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生態系中重要的非生物因子之一，是生產者行光合作用、也是多數生物能量的最終來源。",
+    "example": "森林底層的植物因為照不到充足的陽光，生長得比較緩慢。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "eco_027",
+    "term": "水",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "生物體維持生理作用不可或缺的非生物因子，其多寡深深影響生態系的組成與分布。",
+    "example": "沙漠地區因為缺乏水，只有耐旱的生物才能在此生存。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "eco_028",
+    "term": "溫度",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "影響生物代謝速率與分布範圍的非生物因子，不同生物對溫度變化的耐受程度不同。",
+    "example": "高山地區因為溫度較低，只有耐寒的植物才能生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "eco_029",
+    "term": "土壤",
+    "unit": "ecology",
+    "grade": "7",
+    "def": "提供植物生長所需水分、礦物質與立足空間的非生物因子，也是許多生物的棲身之處。",
+    "example": "肥沃的土壤含有豐富的養分，有利於農作物生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "eco_030",
+    "term": "限制因子",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "生態系中最匱乏、足以限制生物族群成長的環境因子。",
+    "example": "在乾燥地區，水往往是限制植物族群成長的限制因子。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "eco_031",
+    "term": "生物多樣性",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "一地區內物種種類、基因與生態系的豐富程度，是評估環境健康的重要指標。",
+    "example": "熱帶雨林的生物多樣性極高，孕育了數百萬種動植物。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_032",
+    "term": "外來種",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "經人為或自然因素被引入原本不屬於的生態系中的物種，可能破壞當地生態平衡。",
+    "example": "小花蔓澤蘭是入侵臺灣山林的外來種植物，會纏繞覆蓋原生植物。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_033",
+    "term": "生態平衡",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "生態系中生物種類與數量能維持相對穩定、物質與能量流動運作順暢的狀態。",
+    "example": "過度捕獵掠食者，可能會打破整個生態系原本的生態平衡。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_034",
+    "term": "優養化",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "水域因氮、磷等營養鹽過量流入，導致藻類大量繁殖、耗盡水中溶氧的環境問題。",
+    "example": "農田排放的肥料流入河川，可能造成下游水域優養化，使魚類大量死亡。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_035",
+    "term": "生物放大作用",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "汙染物質沿食物鏈逐級累積，使高階消費者體內濃度遠高於環境中濃度的現象。",
+    "example": "重金屬透過生物放大作用，在食物鏈頂端的猛禽體內累積到高濃度。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_036",
+    "term": "棲地破壞",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "人類開發活動導致生物原有生存環境縮小或消失，是威脅生物多樣性的主要原因之一。",
+    "example": "都市擴張造成的棲地破壞，使許多野生動物失去原本的家園。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_037",
+    "term": "保育類生物",
+    "unit": "ecology",
+    "grade": "9",
+    "def": "因數量稀少或棲地遭破壞而面臨滅絕風險、受法律列管保護的物種。",
+    "example": "臺灣黑熊是受法律保護的保育類生物，禁止獵捕與買賣。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  },
+  {
+    "id": "eco_038",
+    "term": "汙染",
+    "unit": "ecology",
+    "grade": "8",
+    "def": "有害物質排入環境後，透過空氣、水或土壤擴散，對生態系中的生物造成傷害的過程。",
+    "example": "工廠廢水未經處理直接排放，會造成汙染並影響下游整個水域生態系。",
+    "category": "保育與環境議題",
+    "distractor_pool": "conservation"
+  }
+]

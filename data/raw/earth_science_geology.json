@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d0001",
+    "term": "礦物",
+    "unit": "geology",
+    "grade": "9",
+    "def": "具有一定化學組成與晶體構造的天然固體，是組成岩石的基本物質。",
+    "example": "觀察花岡岩時可辨認石英、長石和雲母等不同礦物。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0002",
+    "term": "晶體",
+    "unit": "geology",
+    "grade": "9",
+    "def": "內部粒子規則排列，常呈現特定幾何外形的固體。",
+    "example": "食鹽水蒸發後留下方形小顆粒，可觀察晶體的規則外形。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0003",
+    "term": "硬度",
+    "unit": "geology",
+    "grade": "9",
+    "def": "礦物抵抗刮擦的能力，可用互相刻劃來比較。",
+    "example": "石英能刮傷玻璃，表示石英的硬度比玻璃高。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0004",
+    "term": "條痕",
+    "unit": "geology",
+    "grade": "9",
+    "def": "礦物在無釉瓷板上磨擦後留下的粉末顏色。",
+    "example": "赤鐵礦外表可能呈黑色，但在瓷板上的條痕常呈紅褐色。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0005",
+    "term": "解理",
+    "unit": "geology",
+    "grade": "9",
+    "def": "礦物受力後容易沿特定平面裂開的性質。",
+    "example": "雲母可剝成薄片，顯示它具有明顯的解理。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0006",
+    "term": "光澤",
+    "unit": "geology",
+    "grade": "9",
+    "def": "礦物表面反射光線所呈現的外觀特徵。",
+    "example": "黃鐵礦表面像金屬般反光，可記錄它的光澤特徵。",
+    "category": "礦物辨識",
+    "distractor_pool": "geo_mineral"
+  },
+  {
+    "id": "d0007",
+    "term": "岩石",
+    "unit": "geology",
+    "grade": "9",
+    "def": "由一種或多種礦物組成的天然固體集合體。",
+    "example": "校園石材中的不同顆粒共同組成一塊岩石。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0008",
+    "term": "岩漿",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地下高溫熔融或部分熔融的岩石物質。",
+    "example": "火山噴發前，地底的岩漿可能沿裂隙上升。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0009",
+    "term": "火成岩",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩漿或熔岩冷卻凝固形成的岩石。",
+    "example": "花岡岩具有較大的晶體，可判斷它是地下緩慢冷卻形成的火成岩。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0010",
+    "term": "沉積岩",
+    "unit": "geology",
+    "grade": "9",
+    "def": "沉積物經壓密、膠結等作用形成的岩石。",
+    "example": "砂岩中可看見砂粒和層理，是常見的沉積岩。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0011",
+    "term": "變質岩",
+    "unit": "geology",
+    "grade": "9",
+    "def": "原有岩石在高溫、高壓下改變組織或礦物組成形成的岩石。",
+    "example": "石灰岩受熱與壓力作用可形成大理岩這種變質岩。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0012",
+    "term": "岩石循環",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩石在熔融、冷卻、風化、沉積與變質等作用間互相轉變的過程。",
+    "example": "把花岡岩風化成砂、再沉積成砂岩，可用岩石循環連結兩者。",
+    "category": "岩石循環",
+    "distractor_pool": "geo_rock"
+  },
+  {
+    "id": "d0013",
+    "term": "地殼",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地球最外層的固體部分，厚度比地球半徑小得多。",
+    "example": "海洋下方的地殼通常比大陸下方薄。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0014",
+    "term": "地函",
+    "unit": "geology",
+    "grade": "9",
+    "def": "位於地殼與地核之間、占地球體積最大部分的圈層。",
+    "example": "地震波資料顯示地殼下方存在厚廣的地函。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0015",
+    "term": "地核",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地球中心以鐵、鎳為主的圈層，可分外核與內核。",
+    "example": "科學家利用地震波無法直接穿越某區的現象推測地核結構。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0016",
+    "term": "岩石圈",
+    "unit": "geology",
+    "grade": "9",
+    "def": "由地殼和最上部地函組成、較堅硬的外層。",
+    "example": "板塊是岩石圈分裂成的巨大塊體。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0017",
+    "term": "軟流圈",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩石圈下方較具塑性、能緩慢流動的地函部分。",
+    "example": "岩石圈板塊可在軟流圈上方緩慢移動。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0018",
+    "term": "板塊",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩石圈分裂成的巨大塊體，會彼此相對移動。",
+    "example": "臺灣位在歐亞板塊與菲律賓海板塊交界附近。",
+    "category": "地球內部",
+    "distractor_pool": "geo_structure"
+  },
+  {
+    "id": "d0019",
+    "term": "板塊運動",
+    "unit": "geology",
+    "grade": "9",
+    "def": "板塊因地球內部能量驅動而持續緩慢移動的現象。",
+    "example": "GPS 長期測量可看出不同測站因板塊運動而逐年位移。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0020",
+    "term": "張裂型板塊邊界",
+    "unit": "geology",
+    "grade": "9",
+    "def": "兩板塊彼此分離，常有岩漿上升形成新地殼的邊界。",
+    "example": "中洋脊兩側板塊分開，是張裂型板塊邊界的例子。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0021",
+    "term": "聚合型板塊邊界",
+    "unit": "geology",
+    "grade": "9",
+    "def": "兩板塊彼此靠近，可能發生隱沒或碰撞造山的邊界。",
+    "example": "臺灣東部附近板塊靠近，可用聚合型板塊邊界解釋頻繁地震。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0022",
+    "term": "錯動型板塊邊界",
+    "unit": "geology",
+    "grade": "9",
+    "def": "兩板塊沿邊界水平方向錯動的邊界。",
+    "example": "兩側地表水平錯開而沒有明顯生成或消耗地殼，可判斷為錯動型板塊邊界。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0023",
+    "term": "隱沒作用",
+    "unit": "geology",
+    "grade": "9",
+    "def": "密度較大的海洋板塊沉入另一板塊下方的過程。",
+    "example": "海溝旁深源地震帶向陸地下方傾斜，可作為隱沒作用的證據。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0024",
+    "term": "造山運動",
+    "unit": "geology",
+    "grade": "9",
+    "def": "板塊擠壓使地層變形、隆起並形成山脈的過程。",
+    "example": "臺灣山脈持續隆升，與板塊碰撞造成的造山運動有關。",
+    "category": "板塊構造",
+    "distractor_pool": "geo_plate"
+  },
+  {
+    "id": "d0025",
+    "term": "地震",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地層突然錯動釋放能量，使地面振動的現象。",
+    "example": "強震來臨時先趴下、掩護、穩住，是面對地震的基本行動。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0026",
+    "term": "震源",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地球內部開始發生斷層錯動並釋放能量的位置。",
+    "example": "地震定位結果顯示破裂從地下 15 公里開始，該處就是震源。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0027",
+    "term": "震央",
+    "unit": "geology",
+    "grade": "9",
+    "def": "震源正上方的地表位置。",
+    "example": "地圖上標出的星號位在震源正上方，代表此次地震的震央。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0028",
+    "term": "地震波",
+    "unit": "geology",
+    "grade": "9",
+    "def": "地震釋放的能量以波動形式向外傳播。",
+    "example": "地震儀先收到速度較快的 P 波，再收到 S 波，兩者都是地震波。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0029",
+    "term": "地震規模",
+    "unit": "geology",
+    "grade": "9",
+    "def": "表示一次地震釋放能量大小的數值，同一地震只有一個主要數值。",
+    "example": "甲、乙兩地雖搖晃不同，新聞報導的地震規模仍相同。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0030",
+    "term": "地震震度",
+    "unit": "geology",
+    "grade": "9",
+    "def": "表示特定地點地面搖晃強弱及影響程度的分級。",
+    "example": "同一次地震在花蓮與臺北測得不同地震震度，是合理的觀測結果。",
+    "category": "地震觀測",
+    "distractor_pool": "geo_quake"
+  },
+  {
+    "id": "d0031",
+    "term": "風化作用",
+    "unit": "geology",
+    "grade": "9",
+    "def": "岩石在原地因物理、化學或生物因素逐漸破碎或改變的作用。",
+    "example": "樹根撐大岩縫使岩石裂開，是風化作用的例子。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0032",
+    "term": "侵蝕作用",
+    "unit": "geology",
+    "grade": "9",
+    "def": "流水、風、冰或海浪移除地表物質的作用。",
+    "example": "河水切割河床並帶走砂石，顯示侵蝕作用正在發生。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0033",
+    "term": "搬運作用",
+    "unit": "geology",
+    "grade": "9",
+    "def": "流水、風、冰或重力將碎屑由一處帶往另一處的作用。",
+    "example": "暴雨後溪水混濁，表示大量泥沙正受搬運作用移動。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0034",
+    "term": "沉積作用",
+    "unit": "geology",
+    "grade": "9",
+    "def": "搬運能力降低時，碎屑在某處堆積的作用。",
+    "example": "河流進入平原後流速變慢，砂礫因沉積作用留在河床。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0035",
+    "term": "外營力",
+    "unit": "geology",
+    "grade": "9",
+    "def": "由太陽能與重力等驅動、改變地表形貌的風化侵蝕等作用。",
+    "example": "雨水侵蝕坡面並把泥沙帶走，屬於外營力造成的地形變化。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  },
+  {
+    "id": "d0036",
+    "term": "內營力",
+    "unit": "geology",
+    "grade": "9",
+    "def": "由地球內部能量驅動，造成地殼變動、火山與地震的作用。",
+    "example": "板塊擠壓使山脈隆起，顯示內營力正在改變地表。",
+    "category": "地表作用",
+    "distractor_pool": "geo_surface"
+  }
+]

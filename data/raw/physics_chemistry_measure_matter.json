@@ -1,0 +1,362 @@
+[
+  {
+    "id": "pc0001",
+    "term": "物理量",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "可用數值和單位表示，並能透過測量得到的性質。",
+    "example": "物理量：小安量得課桌長 120 公分，其中長度就是一個物理量。",
+    "category": "測量",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0002",
+    "term": "國際單位制",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "國際通用的測量單位系統，以公尺、公斤、秒等為基本單位。",
+    "example": "國際單位制：跑道長用公尺、計時用秒，這些都是國際單位制的單位。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0003",
+    "term": "溫度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "表示物體冷熱程度的物理量，常用攝氏溫標表示。",
+    "example": "溫度：體溫計顯示 38.2°C，這個溫度比一般體溫高。",
+    "category": "測量",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0004",
+    "term": "最小刻度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "測量工具上相鄰兩刻度線所代表量值的差。",
+    "example": "最小刻度：直尺每一小格是 1 毫米，因此它的最小刻度為 1 毫米。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0005",
+    "term": "視差",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "視線未與刻度面垂直而造成的讀值誤差。",
+    "example": "視差：讀量筒時眼睛高於液面，所得數值可能因視差而偏小或偏大。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0006",
+    "term": "科學記號",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "將數寫成 a 乘以 10 的 n 次方，且 a 大於等於 1、小於 10 的表示法。",
+    "example": "科學記號：地球到太陽約 150000000 公里，可用科學記號寫成 1.5×10^8 公里。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0007",
+    "term": "質量",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物體所含物質的量，不因所在位置改變。",
+    "example": "質量：同一顆球帶到月球後，天平測得的質量仍不改變。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0008",
+    "term": "體積",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物體在空間中所占的大小。",
+    "example": "體積：長 2 公分、寬 3 公分、高 4 公分的方塊，體積是 24 立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0009",
+    "term": "密度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "單位體積物質的質量，可用質量除以體積求得。",
+    "example": "密度：某金屬塊質量 54 公克、體積 20 立方公分，密度為 2.7 公克／立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0010",
+    "term": "排水法",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "把不溶於水且不吸水的物體完全浸沒，利用排開水的體積測定不規則物體體積的方法。",
+    "example": "排水法：石頭完全沒入量筒後水面由 50 毫升升到 68 毫升，排水法測得體積為 18 立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0011",
+    "term": "熔點",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "固體與液體在一定壓力下共存時的溫度。",
+    "example": "熔點：加熱冰時，冰水共存階段的溫度可用來判斷冰的熔點。",
+    "category": "物質性質",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0012",
+    "term": "沸點",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "液體在一定外界壓力下沸騰時的溫度。",
+    "example": "沸點：水沸騰後持續加熱，溫度在當地氣壓下維持的數值就是沸點。",
+    "category": "物質性質",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0013",
+    "term": "三態",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質常見的固態、液態與氣態三種狀態。",
+    "example": "三態：冰塊、水和水蒸氣分別呈現水的三態。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0014",
+    "term": "熔化",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由固態變成液態的狀態變化，過程需吸熱。",
+    "example": "熔化：冰塊放在室溫下變成水，是熔化現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0015",
+    "term": "凝固",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由液態變成固態的狀態變化，過程會放熱。",
+    "example": "凝固：把水放進冷凍庫變成冰，是凝固現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0016",
+    "term": "氣化",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由液態變成氣態的狀態變化。",
+    "example": "氣化：濕衣服晾乾時，水發生氣化進入空氣。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0017",
+    "term": "凝結",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由氣態變成液態的狀態變化。",
+    "example": "凝結：冰飲杯外出現小水珠，是空氣中的水蒸氣凝結而成。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0018",
+    "term": "昇華",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質不經液態，直接由固態變成氣態的過程。",
+    "example": "昇華：乾冰直接變成二氧化碳氣體，可觀察到昇華現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0019",
+    "term": "純物質",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "具有固定組成與特定性質，不能用物理方法分離成其他物質的物質。",
+    "example": "純物質：蒸餾水具有固定組成，可判斷為純物質。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0020",
+    "term": "混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由兩種以上純物質混合而成，成分比例可以改變。",
+    "example": "混合物：空氣含有氮氣、氧氣等多種成分，因此是混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0021",
+    "term": "元素",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由相同質子數的原子所界定的物質種類。",
+    "example": "元素：銅導線中的銅和氧氣中的氧，都是元素的例子。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0022",
+    "term": "化合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由兩種以上元素以固定比例化合而成的純物質。",
+    "example": "化合物：水由氫、氧兩種元素以固定比例組成，是化合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0023",
+    "term": "均勻混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "各部分組成與性質一致，無法直接分辨成分的混合物。",
+    "example": "均勻混合物：食鹽水各處的鹹度一致，可視為均勻混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0024",
+    "term": "非均勻混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "各部分組成或性質不一致，可看出不同成分或相的混合物。",
+    "example": "非均勻混合物：泥水靜置後可看見沉澱與上層水，是非均勻混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0025",
+    "term": "溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "溶質均勻分散在溶劑中所形成的均勻混合物。",
+    "example": "溶液：食鹽完全溶於水後形成透明均勻的溶液。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0026",
+    "term": "溶質",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在溶液中被溶解、通常含量較少的成分。",
+    "example": "溶質：配製糖水時，加入並被溶解的糖是溶質。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0027",
+    "term": "溶劑",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在溶液中用來溶解其他物質、通常含量較多的成分。",
+    "example": "溶劑：配製糖水時，用來溶解糖的水是溶劑。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0028",
+    "term": "飽和溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在一定溫度下已無法再溶解更多該溶質的溶液。",
+    "example": "飽和溶液：室溫下持續加鹽並攪拌，杯底仍有鹽不再溶解，上層液體是飽和溶液。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0029",
+    "term": "溶解度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "指定溫度下，一定量溶劑所能溶解溶質的最大量。",
+    "example": "溶解度：查表可知 20°C 時 100 公克水最多能溶多少食鹽，這個數值就是該溫度的溶解度。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0030",
+    "term": "重量百分濃度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "溶質質量占溶液總質量的百分比。",
+    "example": "重量百分濃度：10 公克食鹽加 90 公克水配成溶液，其重量百分濃度為 10%。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0031",
+    "term": "過濾",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用濾材截留不溶性固體，將其與液體分離的方法。",
+    "example": "過濾：把泥水倒入漏斗，濾紙留下泥沙，這項操作稱為過濾。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0032",
+    "term": "蒸餾",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用各成分沸點不同，先氣化再冷凝以分離的方法。",
+    "example": "蒸餾：將鹽水加熱並收集冷凝水，可用蒸餾取得較純的水。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0033",
+    "term": "結晶",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "使溶液中的溶質形成規則排列固體晶體的過程。",
+    "example": "結晶：濃食鹽水蒸發部分水分後出現晶體，可用結晶分離食鹽。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0034",
+    "term": "色層分析",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用各成分在固定相與流動相間作用差異進行分離的方法。",
+    "example": "色層分析：黑色水性筆墨在濾紙上展開成不同色帶，是色層分析的結果。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0035",
+    "term": "傾析",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用密度差使混合物先分層，再傾倒上層液體的分離方法。",
+    "example": "傾析：泥沙沉底後緩慢倒出上層清水，是傾析的操作。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0036",
+    "term": "磁性分離",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用成分磁性不同，以磁鐵分離混合物的方法。",
+    "example": "磁性分離：把磁鐵靠近鐵粉與砂的混合物，可用磁性分離取出鐵粉。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  }
+]

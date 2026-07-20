@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d0037",
+    "term": "大氣",
+    "unit": "weather",
+    "grade": "9",
+    "def": "包圍地球的氣體層，主要成分是氮氣和氧氣。",
+    "example": "氣球升空時仍位在包圍地球的大氣之中。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0038",
+    "term": "對流層",
+    "unit": "weather",
+    "grade": "9",
+    "def": "最接近地表的大氣層，氣溫通常隨高度增加而降低，多數天氣現象發生於此。",
+    "example": "客機起飛時穿過有雲雨的對流層。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0039",
+    "term": "平流層",
+    "unit": "weather",
+    "grade": "9",
+    "def": "位於對流層上方、氣流較穩定且氣溫隨高度增加而上升的大氣層。",
+    "example": "高空氣球升到對流層頂以上後進入平流層。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0040",
+    "term": "臭氧層",
+    "unit": "weather",
+    "grade": "9",
+    "def": "平流層中臭氧濃度較高、能吸收大部分太陽紫外線的區域。",
+    "example": "若臭氧層變薄，抵達地表的有害紫外線可能增加。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0041",
+    "term": "溫室氣體",
+    "unit": "weather",
+    "grade": "9",
+    "def": "能吸收並放射紅外線、影響地球能量收支的大氣成分。",
+    "example": "二氧化碳和甲烷濃度上升時，溫室氣體對氣候的影響會增強。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0042",
+    "term": "水氣",
+    "unit": "weather",
+    "grade": "9",
+    "def": "以氣態存在於空氣中的水，是雲、霧與降水的重要來源。",
+    "example": "潮濕空氣降溫後，原本看不見的水氣可能凝結成小水滴。",
+    "category": "大氣結構",
+    "distractor_pool": "weather_atmosphere"
+  },
+  {
+    "id": "d0043",
+    "term": "氣溫",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣冷熱程度的量度，測量時應避免日照等局部熱源干擾。",
+    "example": "百葉箱內的溫度計可較客觀地量測氣溫。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0044",
+    "term": "氣壓",
+    "unit": "weather",
+    "grade": "9",
+    "def": "單位面積上空氣重量所造成的壓力。",
+    "example": "颱風中心附近的氣壓通常比周圍低。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0045",
+    "term": "相對濕度",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣中實際水氣量相對於同溫度飽和水氣量的百分比。",
+    "example": "浴室洗澡後鏡面容易起霧，此時相對濕度通常很高。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0046",
+    "term": "風向",
+    "unit": "weather",
+    "grade": "9",
+    "def": "風的來向，通常以方位表示。",
+    "example": "北風表示風向是由北方吹向南方。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0047",
+    "term": "風速",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣水平移動的快慢。",
+    "example": "風速計轉杯在強風時轉得較快。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0048",
+    "term": "降水量",
+    "unit": "weather",
+    "grade": "9",
+    "def": "一段時間內降到水平地面的雨、雪等換算成水層的深度。",
+    "example": "雨量筒記錄 24 小時累積 80 毫米，這是當日降水量。",
+    "category": "天氣觀測",
+    "distractor_pool": "weather_measurement"
+  },
+  {
+    "id": "d0049",
+    "term": "飽和水氣量",
+    "unit": "weather",
+    "grade": "9",
+    "def": "一定溫度下，單位體積空氣所能容納水氣的最大量。",
+    "example": "暖空氣通常能容納較多水氣，因此其飽和水氣量較大。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0050",
+    "term": "露點",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣在水氣量不變時冷卻至飽和並開始凝結的溫度。",
+    "example": "杯壁溫度降到露點以下時，外側開始出現小水滴。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0051",
+    "term": "凝結",
+    "unit": "weather",
+    "grade": "9",
+    "def": "水氣轉變成液態小水滴的過程。",
+    "example": "清晨葉面上的露珠是水氣凝結形成的。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0052",
+    "term": "雲",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣上升冷卻後，水氣凝結或凝華成微小水滴、冰晶的集合。",
+    "example": "山坡迎風面空氣抬升後常出現雲。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0053",
+    "term": "霧",
+    "unit": "weather",
+    "grade": "9",
+    "def": "接近地面的空氣中懸浮大量微小水滴，使能見度降低的現象。",
+    "example": "冬季清晨道路能見度很低時，可能出現霧。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0054",
+    "term": "降水",
+    "unit": "weather",
+    "grade": "9",
+    "def": "雲中水滴或冰晶增大後落到地面的現象。",
+    "example": "雨、雪和冰雹都屬於降水。",
+    "category": "水氣與雲",
+    "distractor_pool": "weather_moisture"
+  },
+  {
+    "id": "d0055",
+    "term": "等壓線",
+    "unit": "weather",
+    "grade": "9",
+    "def": "天氣圖上連接相同海平面氣壓地點的曲線。",
+    "example": "天氣圖上的等壓線越密集，通常表示水平氣壓差越明顯。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0056",
+    "term": "高氣壓",
+    "unit": "weather",
+    "grade": "9",
+    "def": "中心氣壓比周圍高的氣壓系統，近地面空氣通常向外流。",
+    "example": "冬季大陸高氣壓增強時，臺灣常迎來冷而乾的空氣。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0057",
+    "term": "低氣壓",
+    "unit": "weather",
+    "grade": "9",
+    "def": "中心氣壓比周圍低的氣壓系統，近地面空氣通常向中心流入。",
+    "example": "颱風是一種強烈的低氣壓系統。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0058",
+    "term": "氣壓梯度",
+    "unit": "weather",
+    "grade": "9",
+    "def": "水平方向上氣壓隨距離改變的程度，是驅動風的重要因素。",
+    "example": "相同距離內氣壓差越大，氣壓梯度通常越大。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0059",
+    "term": "風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "空氣主要因水平氣壓差而產生的流動。",
+    "example": "海邊午後陸地較熱，氣壓差可造成由海向陸的風。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0060",
+    "term": "海陸風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "海岸因海陸升溫與降溫速度不同而形成、日夜方向相反的局部風。",
+    "example": "晴朗白天常由海面吹向陸地，屬於海陸風中的海風。",
+    "category": "氣壓與風",
+    "distractor_pool": "weather_pressure"
+  },
+  {
+    "id": "d0061",
+    "term": "氣團",
+    "unit": "weather",
+    "grade": "9",
+    "def": "溫度與濕度等性質較均勻的大範圍空氣。",
+    "example": "冬季影響臺灣的冷乾空氣可視為一個氣團。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0062",
+    "term": "鋒面",
+    "unit": "weather",
+    "grade": "9",
+    "def": "冷暖性質不同氣團相遇形成的交界面。",
+    "example": "天氣圖上三角形或半圓符號標示的位置代表鋒面。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0063",
+    "term": "冷鋒",
+    "unit": "weather",
+    "grade": "9",
+    "def": "冷氣團主動推進並迫使暖氣團抬升的鋒面。",
+    "example": "冷鋒通過時常先降雨，之後氣溫下降、風向改變。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0064",
+    "term": "暖鋒",
+    "unit": "weather",
+    "grade": "9",
+    "def": "暖氣團主動前進並沿冷氣團上方緩慢抬升的鋒面。",
+    "example": "暖鋒接近時可能先出現廣泛層狀雲和持續降雨。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0065",
+    "term": "滯留鋒",
+    "unit": "weather",
+    "grade": "9",
+    "def": "冷暖氣團勢力相近，使鋒面移動緩慢的情況。",
+    "example": "鋒面在同一地區徘徊數日並持續降雨，可判斷為滯留鋒。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0066",
+    "term": "梅雨鋒面",
+    "unit": "weather",
+    "grade": "9",
+    "def": "臺灣晚春初夏常出現、容易帶來持續或劇烈降雨的鋒面系統。",
+    "example": "五月到六月連日降雨時，常需留意梅雨鋒面的影響。",
+    "category": "氣團與鋒面",
+    "distractor_pool": "weather_front"
+  },
+  {
+    "id": "d0067",
+    "term": "地面天氣圖",
+    "unit": "weather",
+    "grade": "9",
+    "def": "以氣壓、鋒面、風等符號呈現某時刻近地面天氣狀況的圖。",
+    "example": "從地面天氣圖可找出高低氣壓中心與鋒面位置。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0068",
+    "term": "天氣預報",
+    "unit": "weather",
+    "grade": "9",
+    "def": "綜合觀測資料、數值模式與預報員判斷，推估未來天氣。",
+    "example": "出門前查閱天氣預報，可決定是否攜帶雨具。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0069",
+    "term": "颱風",
+    "unit": "weather",
+    "grade": "9",
+    "def": "形成於暖洋面的強烈熱帶氣旋，可能帶來強風、豪雨與巨浪。",
+    "example": "中央氣象署發布海上警報時，表示颱風可能威脅附近海域。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0070",
+    "term": "颱風眼",
+    "unit": "weather",
+    "grade": "9",
+    "def": "強烈颱風中心附近風較弱、雲較少的區域，周圍是強烈眼牆。",
+    "example": "衛星雲圖上中央清晰的近圓形區域可能是颱風眼。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0071",
+    "term": "暴潮",
+    "unit": "weather",
+    "grade": "9",
+    "def": "強風與低氣壓使沿岸海面異常升高的現象。",
+    "example": "颱風接近又遇滿潮時，沿海低地需特別防範暴潮。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  },
+  {
+    "id": "d0072",
+    "term": "寒潮",
+    "unit": "weather",
+    "grade": "9",
+    "def": "強烈冷空氣南下，使廣大地區氣溫明顯驟降的天氣現象。",
+    "example": "寒潮來臨時農民會為作物加設防寒措施。",
+    "category": "天氣系統",
+    "distractor_pool": "weather_system"
+  }
+]

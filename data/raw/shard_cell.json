@@ -1,0 +1,362 @@
+[
+  {
+    "id": "cell_001",
+    "term": "細胞學說",
+    "unit": "cell",
+    "grade": "7",
+    "def": "說明「細胞是生物體最基本的構造與功能單位,所有生物都由一個或多個細胞組成」的科學理論。",
+    "example": "依照細胞學說,無論多小的生物,身體都是由細胞組成的。",
+    "category": "基礎理論",
+    "distractor_pool": "basic_theory"
+  },
+  {
+    "id": "cell_002",
+    "term": "細胞膜",
+    "unit": "cell",
+    "grade": "7",
+    "def": "包圍在細胞最外層、控制物質進出細胞的構造,具有選擇性,能讓需要的物質通過。",
+    "example": "細胞膜就像細胞的守衛,決定哪些物質可以進出細胞。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_outer"
+  },
+  {
+    "id": "cell_003",
+    "term": "細胞壁",
+    "unit": "cell",
+    "grade": "7",
+    "def": "位於細胞膜外側、由纖維素構成的堅硬構造,只存在於植物細胞,能支撐並保護細胞。",
+    "example": "植物細胞外面多了一層細胞壁,所以形狀比較固定,不容易變形。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_outer"
+  },
+  {
+    "id": "cell_004",
+    "term": "細胞質",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞膜以內、細胞核以外的膠狀物質,內含各種胞器,是細胞內許多化學反應進行的場所。",
+    "example": "各種胞器都懸浮在細胞質中,彼此分工合作。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_005",
+    "term": "粒線體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內進行呼吸作用、分解養分以產生能量的胞器,常被稱為細胞的發電廠。",
+    "example": "肌肉細胞需要大量能量,所以裡面的粒線體特別多。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_006",
+    "term": "葉綠體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "只存在於植物細胞中,含有葉綠素、能進行光合作用製造養分的胞器。",
+    "example": "葉肉細胞裡的葉綠體會利用光線,把二氧化碳和水轉變成養分。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_007",
+    "term": "液胞",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內用來儲存水分、養分或代謝廢物的囊狀構造,植物細胞的液胞通常較大且明顯。",
+    "example": "成熟的植物細胞中央常有一個很大的液胞,占據大部分空間。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_008",
+    "term": "核糖體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內負責合成蛋白質的微小顆粒狀構造,可以附著在內質網上,也可以游離於細胞質中。",
+    "example": "核糖體依照指令,把胺基酸組合成細胞需要的蛋白質。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_009",
+    "term": "內質網",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞質內像網狀通道般的膜狀構造,負責運輸細胞內合成的物質。",
+    "example": "內質網像工廠裡的輸送帶,把蛋白質等物質運送到細胞各處。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_010",
+    "term": "高基氏體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "負責將細胞內合成的物質加工、包裝,再運送到細胞其他部位或分泌到細胞外的胞器。",
+    "example": "高基氏體會把蛋白質包裝好,再送到需要的地方。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_organelle"
+  },
+  {
+    "id": "cell_011",
+    "term": "細胞核",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內含有遺傳物質、控制細胞生長與活動的重要構造,通常位於細胞中央。",
+    "example": "細胞核就像細胞的指揮中心,掌管細胞內大部分的活動。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_nucleus"
+  },
+  {
+    "id": "cell_012",
+    "term": "染色質",
+    "unit": "cell",
+    "grade": "7",
+    "def": "存在於細胞核內、由DNA與蛋白質組成的絲狀物質,細胞分裂時會濃縮成染色體。",
+    "example": "平常細胞核裡的遺傳物質呈現細絲狀的染色質,不容易在顯微鏡下看清楚。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_nucleus"
+  },
+  {
+    "id": "cell_013",
+    "term": "核仁",
+    "unit": "cell",
+    "grade": "7",
+    "def": "位於細胞核內的小圓形構造,與核糖體的形成有關。",
+    "example": "在細胞核中可以觀察到一個或多個深色的核仁。",
+    "category": "構造名詞",
+    "distractor_pool": "cell_structure_nucleus"
+  },
+  {
+    "id": "cell_014",
+    "term": "動物細胞",
+    "unit": "cell",
+    "grade": "7",
+    "def": "動物體的基本構造單位,沒有細胞壁與葉綠體,形狀通常較不固定。",
+    "example": "觀察動物細胞時,會發現它沒有像植物那樣明顯的細胞壁。",
+    "category": "細胞類型",
+    "distractor_pool": "cell_type"
+  },
+  {
+    "id": "cell_015",
+    "term": "植物細胞",
+    "unit": "cell",
+    "grade": "7",
+    "def": "植物體的基本構造單位,具有細胞壁、葉綠體及明顯的大液胞,是與動物細胞的主要差異。",
+    "example": "植物細胞因為有細胞壁,所以形狀比動物細胞更固定。",
+    "category": "細胞類型",
+    "distractor_pool": "cell_type"
+  },
+  {
+    "id": "cell_016",
+    "term": "單細胞生物",
+    "unit": "cell",
+    "grade": "7",
+    "def": "整個身體只由一個細胞構成、能獨立完成生命所有功能的生物,例如變形蟲、草履蟲。",
+    "example": "草履蟲是一種單細胞生物,一個細胞就能完成攝食、呼吸等所有生命現象。",
+    "category": "細胞類型",
+    "distractor_pool": "cell_type"
+  },
+  {
+    "id": "cell_017",
+    "term": "多細胞生物",
+    "unit": "cell",
+    "grade": "7",
+    "def": "身體由許多細胞組成、細胞之間會分工合作的生物,例如人類、樹木。",
+    "example": "人類是多細胞生物,體內有神經細胞、肌肉細胞等許多種不同的細胞分工合作。",
+    "category": "細胞類型",
+    "distractor_pool": "cell_type"
+  },
+  {
+    "id": "cell_018",
+    "term": "組織",
+    "unit": "cell",
+    "grade": "7",
+    "def": "由許多構造與功能相似的細胞聚集在一起,共同執行特定功能所形成的構造層級。",
+    "example": "肌肉組織是由許多肌肉細胞聚集而成,負責收縮產生動作。",
+    "category": "組織層級",
+    "distractor_pool": "organization_level"
+  },
+  {
+    "id": "cell_019",
+    "term": "器官",
+    "unit": "cell",
+    "grade": "7",
+    "def": "由兩種以上的組織組合而成、能執行特定功能的構造,例如心臟、葉片。",
+    "example": "心臟是一個器官,由肌肉組織、神經組織等多種組織共同組成。",
+    "category": "組織層級",
+    "distractor_pool": "organization_level"
+  },
+  {
+    "id": "cell_020",
+    "term": "器官系統",
+    "unit": "cell",
+    "grade": "7",
+    "def": "由多個彼此合作、共同完成同一大類生理功能的器官所組成的構造層級,例如消化系統。",
+    "example": "消化系統這個器官系統包含了胃、小腸等多個器官。",
+    "category": "組織層級",
+    "distractor_pool": "organization_level"
+  },
+  {
+    "id": "cell_021",
+    "term": "個體",
+    "unit": "cell",
+    "grade": "7",
+    "def": "由多個器官系統共同組成、能獨立生存的完整生物體。",
+    "example": "一株完整的植物或一個人都可以稱為一個個體。",
+    "category": "組織層級",
+    "distractor_pool": "organization_level"
+  },
+  {
+    "id": "cell_022",
+    "term": "顯微鏡",
+    "unit": "cell",
+    "grade": "7",
+    "def": "利用鏡片將微小物體放大,讓肉眼能觀察到細胞等細微構造的儀器。",
+    "example": "我們用顯微鏡才能看清楚洋蔥表皮細胞的形狀。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_023",
+    "term": "目鏡",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上靠近眼睛、用來觀察影像的鏡頭,通常標示有固定的放大倍率。",
+    "example": "使用顯微鏡時,眼睛要靠近目鏡觀察標本。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_024",
+    "term": "物鏡",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上靠近標本、負責將物體影像放大的鏡頭,有低倍與高倍之分。",
+    "example": "轉動旋轉盤可以更換不同倍率的物鏡。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_025",
+    "term": "放大倍率",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡下觀察到的影像相對於實際物體被放大的倍數,等於目鏡倍率乘以物鏡倍率。",
+    "example": "目鏡10倍搭配物鏡40倍,這台顯微鏡的放大倍率就是400倍。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_026",
+    "term": "調焦鈕",
+    "unit": "cell",
+    "grade": "7",
+    "def": "顯微鏡上用來調整鏡筒與標本間距離、使影像清晰對焦的旋鈕。",
+    "example": "觀察標本時要慢慢轉動調焦鈕,直到影像變得清楚為止。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_027",
+    "term": "載玻片",
+    "unit": "cell",
+    "grade": "7",
+    "def": "用來放置標本、透明平整的玻璃薄片,置於顯微鏡的載物台上觀察。",
+    "example": "製作洋蔥表皮玻片標本時,要先把材料放在載玻片上。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_028",
+    "term": "蓋玻片",
+    "unit": "cell",
+    "grade": "7",
+    "def": "覆蓋在標本上方的透明薄玻片,可以保護標本並使其平整,方便觀察。",
+    "example": "滴上水滴後要小心蓋上蓋玻片,避免產生氣泡。",
+    "category": "顯微鏡操作",
+    "distractor_pool": "microscope"
+  },
+  {
+    "id": "cell_029",
+    "term": "體細胞分裂",
+    "unit": "cell",
+    "grade": "7",
+    "def": "一個細胞分裂成兩個染色體數目與原細胞相同的子細胞的過程,是生物生長與修補組織的方式。",
+    "example": "傷口能夠癒合,就是因為皮膚細胞不斷進行體細胞分裂,產生新細胞。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_030",
+    "term": "擴散作用",
+    "unit": "cell",
+    "grade": "7",
+    "def": "物質分子由濃度較高處自然移動到濃度較低處,直到分布均勻的現象,不需要消耗細胞能量。",
+    "example": "滴一滴墨水到水中,墨水分子會因擴散作用逐漸散布到整杯水中。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_031",
+    "term": "滲透作用",
+    "unit": "cell",
+    "grade": "7",
+    "def": "水分子經由半透膜,由濃度較高(水分較多)的一側移向濃度較低(水分較少)的一側的現象。",
+    "example": "把植物細胞放入清水中,水分會因滲透作用進入細胞,使細胞膨脹。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_032",
+    "term": "半透膜",
+    "unit": "cell",
+    "grade": "7",
+    "def": "只允許水分子等較小物質通過、限制較大分子通過的膜構造,細胞膜就具有這種性質。",
+    "example": "細胞膜是一種半透膜,能選擇性地讓特定物質進出細胞。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_033",
+    "term": "呼吸作用",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內利用氧氣分解養分、釋放能量供細胞使用的過程,主要在粒線體中進行。",
+    "example": "細胞行呼吸作用時會消耗氧氣、產生二氧化碳,並釋放出能量。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_034",
+    "term": "光合作用",
+    "unit": "cell",
+    "grade": "7",
+    "def": "植物利用光線,在葉綠體中把二氧化碳和水轉變成養分(葡萄糖)並釋放氧氣的過程。",
+    "example": "陽光充足時,植物的光合作用會比較旺盛,產生更多養分。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_035",
+    "term": "ATP",
+    "unit": "cell",
+    "grade": "7",
+    "def": "細胞內用來儲存與傳遞能量的分子,常被稱為細胞的能量貨幣,由呼吸作用產生。",
+    "example": "呼吸作用釋放出的能量,會先儲存在ATP這種分子中,供細胞隨時使用。",
+    "category": "生理作用",
+    "distractor_pool": "cell_physiology"
+  },
+  {
+    "id": "cell_036",
+    "term": "細胞分化",
+    "unit": "cell",
+    "grade": "7",
+    "def": "由同一個受精卵分裂產生的細胞,逐漸發展出不同構造與功能,形成各種組織的過程。",
+    "example": "神經細胞與肌肉細胞雖然來自同一個受精卵,卻因細胞分化而具有不同功能。",
+    "category": "組織層級",
+    "distractor_pool": "organization_level"
+  }
+]

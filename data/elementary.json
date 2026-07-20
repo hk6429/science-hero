@@ -1,0 +1,1812 @@
+[
+  {
+    "id": "e0001",
+    "term": "觀察",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "運用感官或工具，有目的地察看物體與現象並記錄特徵。",
+    "example": "進行觀察時，要把看到的顏色、形狀和變化如實記下來。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0002",
+    "term": "比較",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "找出兩個以上物體或現象之間相同與不同之處的方法。",
+    "example": "透過比較，可以發現兩片葉子的形狀和葉脈並不相同。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0003",
+    "term": "分類",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "依照共同特徵或訂定的標準，把事物分成不同群組。",
+    "example": "我們依照有沒有翅膀進行分類，把動物分成兩組。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0004",
+    "term": "測量",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "使用適當工具和單位，取得長度、質量、溫度等數值。",
+    "example": "用直尺進行測量，才能知道鉛筆的正確長度。",
+    "category": "探究方法",
+    "distractor_pool": "inquiry_actions"
+  },
+  {
+    "id": "e0005",
+    "term": "推論",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "根據已觀察到的證據，提出合理解釋或可能結果。",
+    "example": "看到地面有水漬，我們推論剛才可能下過雨。",
+    "category": "探究方法",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0006",
+    "term": "預測",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "依據已有資料或規律，事先判斷可能發生的結果。",
+    "example": "根據烏雲變厚的現象，我們預測不久後可能會下雨。",
+    "category": "探究方法",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0007",
+    "term": "變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "在探究中可能影響結果、可以改變或控制的因素。",
+    "example": "研究水溫對溶解快慢的影響時，水溫就是一個變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0008",
+    "term": "操縱變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中研究者刻意改變，用來觀察其影響的因素。",
+    "example": "測試光照對植物生長的影響時，光照時間是操縱變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0009",
+    "term": "控制變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中除了操縱變因以外，必須保持相同的因素。",
+    "example": "比較不同土壤的保水性時，倒入的水量要列為控制變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0010",
+    "term": "應變變因",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "實驗中因操縱變因改變而被觀察或測量的結果。",
+    "example": "研究風力大小時，風車轉動圈數可以作為應變變因。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0011",
+    "term": "公平測試",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "一次只改變一個主要因素，其餘條件盡量相同的實驗方式。",
+    "example": "比較紙飛機機翼長度時，要採用公平測試才容易判斷差異。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0012",
+    "term": "重複實驗",
+    "unit": "inquiry",
+    "grade": "6",
+    "def": "用相同的步驟多做幾次實驗，確認每次結果是否一致，讓答案更可靠。",
+    "example": "老師請同學把種子發芽的實驗重複做三次，確認每次結果都差不多，這就是重複實驗。",
+    "category": "實驗設計",
+    "distractor_pool": "experiment_design"
+  },
+  {
+    "id": "e0013",
+    "term": "直尺",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "測量較短物體長度的工具，常用公分和毫米作單位。",
+    "example": "使用直尺時，物體一端要對準零刻度。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0014",
+    "term": "量筒",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "測量液體體積的透明容器，外壁標有容量刻度。",
+    "example": "讀取量筒中的水量時，視線要和液面同高。",
+    "category": "測量工具",
+    "distractor_pool": "measuring_instruments"
+  },
+  {
+    "id": "e0015",
+    "term": "溫度計",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "測量物體或環境冷熱程度的工具，常用攝氏度表示。",
+    "example": "把溫度計放入水中，可以測出水溫。",
+    "category": "測量工具",
+    "distractor_pool": "measuring_instruments"
+  },
+  {
+    "id": "e0016",
+    "term": "天平",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "利用兩端平衡原理測量物體質量，使用前需要先確認指針是否平衡的工具。",
+    "example": "使用天平測量橡皮擦的質量前，要先確認指針平衡。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0017",
+    "term": "碼表",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "用來測量經過時間，能記錄秒或更小時間單位的工具。",
+    "example": "賽跑實驗可以用碼表記錄每個人跑完全程的時間。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0018",
+    "term": "放大鏡",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "利用凸透鏡把近處物體影像放大，方便觀察細節的工具。",
+    "example": "用放大鏡觀察葉片，可以看清楚葉面上的細小紋路。",
+    "category": "測量工具",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0019",
+    "term": "長度",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示物體從一端到另一端距離的量，常用公分或公尺表示。",
+    "example": "桌面的長度可以用直尺或捲尺測量。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0020",
+    "term": "質量",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "表示物體所含物質多寡的量，常用公克或公斤表示。",
+    "example": "同樣大小的木塊和鐵塊，質量可能不相同。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0021",
+    "term": "體積",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "表示物體或物質所占空間大小的量，可用立方單位或容量單位表示。",
+    "example": "把石頭放進量筒後，水面上升的量可用來求石頭的體積。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0022",
+    "term": "溫度",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示物體冷熱程度的量，臺灣常用攝氏度作單位。",
+    "example": "氣象報告中的溫度能幫助我們選擇合適衣物。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0023",
+    "term": "時間",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "表示事件持續長短或先後順序的量，常用時、分和秒作為單位。",
+    "example": "記錄冰塊融化所需的時間，可以比較不同環境的影響。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0024",
+    "term": "容量",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "容器最多可以容納液體多少的量，常用毫升或公升表示。",
+    "example": "水壺標示的容量是六百毫升。",
+    "category": "科學量",
+    "distractor_pool": "science_quantities"
+  },
+  {
+    "id": "e0025",
+    "term": "紀錄表",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "用來持續記錄觀察或測量過程中資料的表格，通常隨時間或次數逐次填寫。",
+    "example": "小安每天量一次豆苗高度，寫進紀錄表裡，方便之後比較生長情形。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0026",
+    "term": "長條圖",
+    "unit": "inquiry",
+    "grade": "4",
+    "def": "以長條長短表示不同類別數量，方便彼此比較的圖表。",
+    "example": "用長條圖呈現各組種子發芽數量，可以快速比較結果。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0027",
+    "term": "折線圖",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "用線段連接各時間點數值，呈現連續變化趨勢的圖表。",
+    "example": "一週氣溫的升降變化適合用折線圖呈現。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0028",
+    "term": "表格",
+    "unit": "inquiry",
+    "grade": "3",
+    "def": "把資料按照欄與列整齊排列、方便閱讀比較的呈現方式。",
+    "example": "把不同動物的足數整理成表格後，更容易進行分類。",
+    "category": "資料表達",
+    "distractor_pool": "data_formats"
+  },
+  {
+    "id": "e0029",
+    "term": "證據",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "能支持或反駁說法的觀察、測量結果或可靠資料。",
+    "example": "科學解釋必須提出證據，不能只靠猜測。",
+    "category": "資料表達",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0030",
+    "term": "結論",
+    "unit": "inquiry",
+    "grade": "5",
+    "def": "根據探究問題和資料分析後，所做出的合理回答。",
+    "example": "寫結論時要回應原本的問題，並說明資料是否支持預測。",
+    "category": "資料表達",
+    "distractor_pool": "scientific_reasoning"
+  },
+  {
+    "id": "e0031",
+    "term": "生物",
+    "unit": "life",
+    "grade": "3",
+    "def": "具有生長、繁殖、感應和新陳代謝等生命現象的個體。",
+    "example": "蝴蝶是生物，會攝食、生長並繁殖後代。",
+    "category": "生命現象",
+    "distractor_pool": "life_vs_nonlife"
+  },
+  {
+    "id": "e0032",
+    "term": "非生物",
+    "unit": "life",
+    "grade": "3",
+    "def": "不具有完整生命現象的物體，例如石頭、水和空氣。",
+    "example": "石頭屬於非生物，不會自行生長或繁殖。",
+    "category": "生命現象",
+    "distractor_pool": "life_vs_nonlife"
+  },
+  {
+    "id": "e0033",
+    "term": "生長",
+    "unit": "life",
+    "grade": "3",
+    "def": "生物體的體型或構造隨時間逐漸發育的現象。",
+    "example": "小雞逐漸長大成母雞的過程稱為生長。",
+    "category": "生命現象",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0034",
+    "term": "繁殖",
+    "unit": "life",
+    "grade": "3",
+    "def": "生物產生新個體，使同類能延續下去的生命現象。",
+    "example": "青蛙透過產卵進行繁殖。",
+    "category": "生命現象",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0035",
+    "term": "感應",
+    "unit": "life",
+    "grade": "4",
+    "def": "生物察覺光、聲音或碰觸等環境刺激後產生反應的生命現象。",
+    "example": "含羞草被碰觸後閉合葉片，是一種感應。",
+    "category": "生命現象",
+    "distractor_pool": "life_signs"
+  },
+  {
+    "id": "e0036",
+    "term": "棲息地",
+    "unit": "life",
+    "grade": "4",
+    "def": "生物長期生活並取得食物、水、空間和庇護等資源的環境。",
+    "example": "潮間帶是許多螃蟹和貝類的棲息地。",
+    "category": "生態環境",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0037",
+    "term": "根",
+    "unit": "life",
+    "grade": "3",
+    "def": "多位於土壤中，負責固定植物並吸收水和礦物質的器官。",
+    "example": "植物的根能抓住土壤，也能吸收水分。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0038",
+    "term": "莖",
+    "unit": "life",
+    "grade": "3",
+    "def": "支撐葉、花和果實，並運送水分與養分的植物器官。",
+    "example": "鳳仙花的莖能把有色水向上運送。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0039",
+    "term": "葉",
+    "unit": "life",
+    "grade": "3",
+    "def": "多為扁平構造，是植物製造養分和進行氣體交換的重要器官。",
+    "example": "綠色的葉能利用陽光製造養分。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0040",
+    "term": "花",
+    "unit": "life",
+    "grade": "3",
+    "def": "種子植物進行有性生殖的重要器官，常含雄蕊和雌蕊。",
+    "example": "蜜蜂停在花上採蜜時也可能幫忙傳粉。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0041",
+    "term": "果實",
+    "unit": "life",
+    "grade": "3",
+    "def": "花凋謝後，由花的部分構造發育而成，能保護裡面種子的構造。",
+    "example": "番茄的果實裡包著許多種子。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0042",
+    "term": "種子",
+    "unit": "life",
+    "grade": "3",
+    "def": "含有胚和養分，適當條件下能萌發成新植物的構造。",
+    "example": "綠豆種子吸水後會逐漸發芽。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0043",
+    "term": "萌發",
+    "unit": "life",
+    "grade": "3",
+    "def": "種子在水分、空氣和適當溫度下開始生長的過程。",
+    "example": "綠豆的萌發需要水分、空氣和適當溫度。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0044",
+    "term": "光合作用",
+    "unit": "life",
+    "grade": "5",
+    "def": "綠色植物利用光能，把水和二氧化碳製造成養分並釋出氧氣的過程。",
+    "example": "植物進行光合作用時，需要陽光、水和二氧化碳。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0045",
+    "term": "蒸散作用",
+    "unit": "life",
+    "grade": "6",
+    "def": "植物體內水分主要由葉片氣孔散失到空氣中的現象。",
+    "example": "天氣炎熱時，植物的蒸散作用通常會加快。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0046",
+    "term": "傳粉",
+    "unit": "life",
+    "grade": "4",
+    "def": "花粉藉由風、動物或其他方式，從雄蕊移到同種花雌蕊柱頭上的過程。",
+    "example": "蜜蜂訪花能協助許多植物完成傳粉。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0047",
+    "term": "受精",
+    "unit": "life",
+    "grade": "5",
+    "def": "雄性生殖細胞與雌性生殖細胞結合，形成受精卵的過程。",
+    "example": "植物完成傳粉後，雄性與雌性生殖細胞結合，就是受精。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0048",
+    "term": "種子傳播",
+    "unit": "life",
+    "grade": "4",
+    "def": "種子藉由風、水、動物或果實彈力離開母株的過程。",
+    "example": "蒲公英利用風力進行種子傳播。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0049",
+    "term": "完全變態",
+    "unit": "life",
+    "grade": "4",
+    "def": "昆蟲一生經過卵、幼蟲、蛹和成蟲四個階段的生長方式。",
+    "example": "蝴蝶的完全變態包含毛毛蟲和蛹的階段。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0050",
+    "term": "不完全變態",
+    "unit": "life",
+    "grade": "4",
+    "def": "昆蟲一生經過卵、若蟲和成蟲三個階段，不經過蛹期。",
+    "example": "蟋蟀採取不完全變態，若蟲外形像縮小的成蟲。",
+    "category": "動物成長",
+    "distractor_pool": "metamorphosis_types"
+  },
+  {
+    "id": "e0051",
+    "term": "胎生",
+    "unit": "life",
+    "grade": "4",
+    "def": "胚胎主要在母體內發育，出生時通常已是幼體的生殖方式。",
+    "example": "人類是胎生動物，胎兒在母體內發育。",
+    "category": "動物成長",
+    "distractor_pool": "reproduction_types"
+  },
+  {
+    "id": "e0052",
+    "term": "卵生",
+    "unit": "life",
+    "grade": "4",
+    "def": "動物產下卵，胚胎主要在卵內發育後孵化的生殖方式。",
+    "example": "雞屬於卵生動物，雛雞由蛋中孵出。",
+    "category": "動物成長",
+    "distractor_pool": "reproduction_types"
+  },
+  {
+    "id": "e0053",
+    "term": "幼體",
+    "unit": "life",
+    "grade": "3",
+    "def": "動物出生或孵化後，尚未發育成熟的早期階段。",
+    "example": "蝌蚪是青蛙的幼體，生活方式和成蛙不同。",
+    "category": "動物成長",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0054",
+    "term": "成體",
+    "unit": "life",
+    "grade": "3",
+    "def": "動物經過生長發育而成熟，外形完整且通常具有繁殖能力的階段。",
+    "example": "青蛙的成體有四肢，能在陸地和水邊活動。",
+    "category": "動物成長",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0055",
+    "term": "脊椎動物",
+    "unit": "life",
+    "grade": "5",
+    "def": "體內具有脊椎的動物總稱，包括魚類、兩生類、爬蟲類、鳥類和哺乳類。",
+    "example": "臺灣黑熊是具有脊椎的脊椎動物。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_classification"
+  },
+  {
+    "id": "e0056",
+    "term": "無脊椎動物",
+    "unit": "life",
+    "grade": "5",
+    "def": "體內沒有脊椎的動物總稱，例如昆蟲、蜘蛛、蝸牛和水母。",
+    "example": "蝴蝶屬於無脊椎動物，體內沒有脊椎。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_classification"
+  },
+  {
+    "id": "e0057",
+    "term": "魚類",
+    "unit": "life",
+    "grade": "4",
+    "def": "通常生活在水中，以鰓呼吸並用鰭游動的脊椎動物。",
+    "example": "吳郭魚屬於魚類，利用鰓取得水中的氧氣。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0058",
+    "term": "兩生類",
+    "unit": "life",
+    "grade": "4",
+    "def": "幼體多生活在水中，成體可在水陸活動的脊椎動物。",
+    "example": "青蛙屬於兩生類，皮膚需要保持溼潤。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0059",
+    "term": "鳥類",
+    "unit": "life",
+    "grade": "4",
+    "def": "身體有羽毛、前肢多變成翼，通常產有硬殼卵的脊椎動物。",
+    "example": "麻雀屬於鳥類，身體表面覆蓋羽毛。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0060",
+    "term": "哺乳類",
+    "unit": "life",
+    "grade": "4",
+    "def": "多以肺呼吸、身體有毛，母體能分泌乳汁哺育幼兒的脊椎動物。",
+    "example": "石虎屬於哺乳類，幼兒會吸食母乳。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0061",
+    "term": "固體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "在一般條件下具有固定形狀和體積，不會隨容器改變外形的物質狀態。",
+    "example": "積木是固體，移到不同容器後形狀仍大致不變。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0062",
+    "term": "液體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "有固定體積但沒有固定形狀，會隨容器改變形狀的物質狀態。",
+    "example": "水是液體，倒入杯中後會呈現杯子的形狀。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0063",
+    "term": "氣體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "沒有固定形狀和體積，會充滿所在空間的物質狀態。",
+    "example": "空氣是氣體，會充滿打氣後的氣球。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0064",
+    "term": "熔化",
+    "unit": "matter",
+    "grade": "4",
+    "def": "固體吸收足夠熱量後逐漸變成液體的一種物質狀態變化。",
+    "example": "冰塊在室溫下熔化，會變成液態水。",
+    "category": "物質狀態",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0065",
+    "term": "凝固",
+    "unit": "matter",
+    "grade": "4",
+    "def": "液體失去足夠熱量後逐漸變成固體的一種物質狀態變化。",
+    "example": "把水放入冷凍庫，水凝固後會成為冰。",
+    "category": "物質狀態",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0066",
+    "term": "蒸發",
+    "unit": "matter",
+    "grade": "4",
+    "def": "液體由表面慢慢變成氣體的現象。",
+    "example": "溼衣服晾在通風處，水分蒸發後就會變乾。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0067",
+    "term": "沸騰",
+    "unit": "matter",
+    "grade": "5",
+    "def": "液體達到沸點時，內部和表面同時快速汽化的現象。",
+    "example": "水加熱到沸點後會沸騰，產生大量氣泡。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0068",
+    "term": "凝結",
+    "unit": "matter",
+    "grade": "4",
+    "def": "氣態物質遇冷失去熱量，轉變成液態物質的一種狀態變化。",
+    "example": "冰杯外的小水滴是空氣中水蒸氣凝結形成的。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0069",
+    "term": "水蒸氣",
+    "unit": "matter",
+    "grade": "4",
+    "def": "水的氣態形式，無色透明，肉眼通常看不見。",
+    "example": "空氣中的水蒸氣遇冷可能凝結成小水滴。",
+    "category": "水的變化",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0070",
+    "term": "水循環",
+    "unit": "matter",
+    "grade": "5",
+    "def": "水在海洋、陸地與大氣間經由蒸發、凝結和降水不斷移動的過程。",
+    "example": "太陽能驅動水循環，使地球上的水持續移動。",
+    "category": "水的變化",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0071",
+    "term": "降水",
+    "unit": "matter",
+    "grade": "4",
+    "def": "雲中水滴或冰晶變大後落到地面的現象，包括雨、雪和冰雹。",
+    "example": "颱風來臨時常帶來大量降水。",
+    "category": "水的變化",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0072",
+    "term": "溶解",
+    "unit": "matter",
+    "grade": "4",
+    "def": "一種物質均勻分散在另一種物質中，形成溶液的過程。",
+    "example": "食鹽放入水中攪拌後會逐漸溶解。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0073",
+    "term": "溶質",
+    "unit": "matter",
+    "grade": "5",
+    "def": "在溶液中被溶劑溶解並均勻分散的成分。",
+    "example": "製作食鹽水時，食鹽是溶質。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0074",
+    "term": "溶劑",
+    "unit": "matter",
+    "grade": "5",
+    "def": "溶液中用來溶解溶質的成分。",
+    "example": "製作糖水時，水是溶劑。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0075",
+    "term": "溶液",
+    "unit": "matter",
+    "grade": "5",
+    "def": "溶質均勻分散在溶劑中形成的混合物，各處性質大致相同。",
+    "example": "糖完全溶在水中後形成均勻的糖水溶液。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0076",
+    "term": "飽和溶液",
+    "unit": "matter",
+    "grade": "6",
+    "def": "在一定溫度下，已無法再溶解更多該溶質的溶液。",
+    "example": "在固定溫度下持續加入食鹽並攪拌，當食鹽不再溶解、杯底留下未溶顆粒時，這杯鹽水就是飽和溶液。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0077",
+    "term": "攪拌",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用外力使液體流動，通常能增加溶質與溶劑接觸而加快溶解。",
+    "example": "泡糖水時進行攪拌，可以讓糖更快溶解。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0078",
+    "term": "混合物",
+    "unit": "matter",
+    "grade": "4",
+    "def": "由兩種以上物質混合而成，各成分仍保有原來性質的物質。",
+    "example": "沙和鐵粉放在一起形成混合物，可以再分離。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0079",
+    "term": "過濾",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用濾紙或濾網孔隙大小，分離液體中不溶固體的方法。",
+    "example": "用濾紙進行過濾，可以把水中的細沙分離出來。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0080",
+    "term": "篩選",
+    "unit": "matter",
+    "grade": "3",
+    "def": "利用顆粒大小不同，讓混合物通過篩網進行分離的方法。",
+    "example": "工地用篩選的方式把大石塊和細沙分開。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0081",
+    "term": "磁力分離",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用物質是否會被磁鐵吸引，分離混合物的方法。",
+    "example": "可用磁力分離把鐵粉從沙堆中取出。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0082",
+    "term": "蒸發分離",
+    "unit": "matter",
+    "grade": "5",
+    "def": "讓溶劑蒸發，留下原本溶解在其中固體的方法。",
+    "example": "鹽田利用蒸發分離從海水中取得食鹽。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0083",
+    "term": "沉澱",
+    "unit": "matter",
+    "grade": "4",
+    "def": "讓密度較大且不溶的顆粒靜置後沉到容器底部的分離現象。",
+    "example": "混濁泥水靜置一段時間後，泥沙會形成沉澱。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0084",
+    "term": "酸性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質在水溶液中呈現的一種性質，通常可使藍色石蕊試紙變紅。",
+    "example": "檸檬汁具有酸性，味道通常偏酸。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0085",
+    "term": "鹼性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質在水溶液中呈現的一種性質，通常可使紅色石蕊試紙變藍。",
+    "example": "小蘇打水呈弱鹼性。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0086",
+    "term": "中性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "水溶液既不呈現酸性也不呈現鹼性，酸鹼程度居中的性質。",
+    "example": "純水在一般情況下接近中性。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0087",
+    "term": "石蕊試紙",
+    "unit": "matter",
+    "grade": "6",
+    "def": "能用顏色變化初步判斷水溶液酸鹼性的試紙。",
+    "example": "使用石蕊試紙時，要分別觀察紅色和藍色試紙的變化。",
+    "category": "水溶液性質",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0088",
+    "term": "紫色高麗菜汁",
+    "unit": "matter",
+    "grade": "6",
+    "def": "含天然色素，可隨水溶液酸鹼性呈現不同顏色的指示劑。",
+    "example": "紫色高麗菜汁遇到不同酸鹼性的溶液會改變顏色。",
+    "category": "水溶液性質",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0089",
+    "term": "導電性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質讓電流通過的能力，不同水溶液的導電程度可能不同。",
+    "example": "食鹽水具有導電性，可以讓簡單電路中的燈泡發亮。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0090",
+    "term": "昇華",
+    "unit": "matter",
+    "grade": "5",
+    "def": "固體沒有先變成液體，而是直接變成氣體的物質狀態變化。",
+    "example": "乾冰在室溫下會昇華，直接變成二氧化碳氣體。",
+    "category": "物質變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0091",
+    "term": "力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "能使物體運動狀態或形狀改變的推或拉作用。",
+    "example": "用手推車時施加了力，車子才會開始移動。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0092",
+    "term": "推力",
+    "unit": "energy",
+    "grade": "3",
+    "def": "施力者推動物體，使物體朝遠離施力者方向運動或變形的作用力。",
+    "example": "用手關門時，手對門施加推力。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0093",
+    "term": "拉力",
+    "unit": "energy",
+    "grade": "3",
+    "def": "施力者拉動物體，使物體朝接近施力者方向運動或變形的作用力。",
+    "example": "拔河時，雙方都對繩子施加拉力。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0094",
+    "term": "摩擦力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個接觸面相對運動或有運動趨勢時，阻礙其滑動的力。",
+    "example": "鞋底和地面間的摩擦力能避免走路時滑倒。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0095",
+    "term": "重力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "地球對附近物體產生的吸引力，方向大致朝向地球中心。",
+    "example": "球被拋向空中後，會因重力再落回地面。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0096",
+    "term": "彈力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "彈性物體受力變形後，想要恢復原來形狀而產生的作用力。",
+    "example": "拉長橡皮筋後放手，彈力會使橡皮筋縮回去。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0097",
+    "term": "槓桿",
+    "unit": "energy",
+    "grade": "5",
+    "def": "能繞固定支點轉動，藉由支點、施力點、抗力點的位置關係來省力或改變施力方向的工具。",
+    "example": "使用開瓶器時，槓桿原理能幫助我們省力。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0098",
+    "term": "支點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "槓桿受到作用力而轉動時，槓桿所繞著旋轉的固定位置。",
+    "example": "使用剪刀時，中央螺絲的位置就是支點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0099",
+    "term": "施力點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "操作槓桿時，使用者所施加外力作用在槓桿上的位置。",
+    "example": "用釘書機時，手指按壓的位置是施力點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0100",
+    "term": "抗力點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "使用槓桿時，負載或阻力作用在槓桿上的位置。",
+    "example": "用鑷子夾物品時，鑷子尖端是抗力點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0101",
+    "term": "輪軸",
+    "unit": "energy",
+    "grade": "6",
+    "def": "由大小不同且同軸轉動的輪和軸組成，可省力或加快轉動的工具。",
+    "example": "門把運用輪軸原理，轉動較大的把手就能帶動軸心。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0102",
+    "term": "滑輪",
+    "unit": "energy",
+    "grade": "6",
+    "def": "邊緣有凹槽、可繞中心軸轉動，用來改變施力方向或省力的輪子。",
+    "example": "升旗臺使用滑輪，讓人向下拉繩就能把國旗升高。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0103",
+    "term": "磁鐵",
+    "unit": "energy",
+    "grade": "3",
+    "def": "能吸引鐵、鎳等特定金屬，並具有南北兩極的物體。",
+    "example": "磁鐵可以隔著薄紙吸起鐵製迴紋針。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0104",
+    "term": "磁極",
+    "unit": "energy",
+    "grade": "4",
+    "def": "磁鐵上磁力較強的區域，通常位於兩端並分為北極和南極。",
+    "example": "長條磁鐵兩端的磁極最容易吸附鐵粉。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0105",
+    "term": "同極相斥",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個相同磁極互相靠近時，會彼此推開的現象。",
+    "example": "兩個磁鐵的北極接近時會出現同極相斥。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0106",
+    "term": "異極相吸",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個不同磁極互相靠近時，會彼此吸引的現象。",
+    "example": "磁鐵的北極靠近另一個南極時會異極相吸。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0107",
+    "term": "磁力線",
+    "unit": "energy",
+    "grade": "6",
+    "def": "用來表示磁場方向與強弱的假想線，磁鐵外部由北極指向南極。",
+    "example": "撒上鐵粉可以看出近似磁力線的排列圖樣，但不能直接看出方向。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0108",
+    "term": "電磁鐵",
+    "unit": "energy",
+    "grade": "6",
+    "def": "電流通過線圈時產生磁性，斷電後磁性大多消失的裝置。",
+    "example": "起重機可利用電磁鐵吸起大型廢鐵。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0109",
+    "term": "電路",
+    "unit": "energy",
+    "grade": "4",
+    "def": "電流能從電源出發，經導線和用電器再回到電源的完整路徑。",
+    "example": "燈泡要接成完整電路才會發亮。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0110",
+    "term": "電池",
+    "unit": "energy",
+    "grade": "3",
+    "def": "提供電路所需電能的裝置，接上電路就能讓燈泡發亮、馬達轉動。",
+    "example": "手電筒裡的電池能提供燈泡所需的電能。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0111",
+    "term": "導線",
+    "unit": "energy",
+    "grade": "3",
+    "def": "用來連接電路元件、讓電流通過的線材，內芯常由金屬製成。",
+    "example": "用導線連接電池和燈泡，才能形成通路。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0112",
+    "term": "開關",
+    "unit": "energy",
+    "grade": "3",
+    "def": "用來控制電路接通或斷開，進而決定電流是否通過的元件。",
+    "example": "按下開關接通電路後，燈泡就會發亮。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0113",
+    "term": "導體",
+    "unit": "energy",
+    "grade": "4",
+    "def": "容易讓電流通過的物質，例如銅、鋁等多數金屬材料。",
+    "example": "銅是良好的導體，常被用作電線內芯。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0114",
+    "term": "絕緣體",
+    "unit": "energy",
+    "grade": "4",
+    "def": "不容易讓電流通過的物質，例如塑膠和橡膠。",
+    "example": "電線外層使用絕緣體包覆，可以降低觸電風險。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0115",
+    "term": "振動",
+    "unit": "energy",
+    "grade": "4",
+    "def": "物體在平衡位置附近快速來回運動的現象，常會產生聲音。",
+    "example": "撥動橡皮筋造成振動，就能聽見聲音。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0116",
+    "term": "音量",
+    "unit": "energy",
+    "grade": "4",
+    "def": "人耳感受到聲音強弱大小的程度，通常和振動幅度有關。",
+    "example": "用力敲鼓時振動較大，聽到的音量也較大。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0117",
+    "term": "音調",
+    "unit": "energy",
+    "grade": "4",
+    "def": "人耳感受到聲音高低的特性，通常和振動快慢有關。",
+    "example": "短而緊的弦振動較快，產生的音調較高。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0118",
+    "term": "聲音傳播",
+    "unit": "energy",
+    "grade": "4",
+    "def": "聲音可以經由空氣、水或固體向外傳遞。",
+    "example": "聲音傳播需要空氣、水或固體等物質，在真空中無法傳播。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0119",
+    "term": "反射",
+    "unit": "energy",
+    "grade": "5",
+    "def": "光或聲音遇到物體表面後，改變方向返回原介質的現象。",
+    "example": "鏡子能成像，是因為光發生反射。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0120",
+    "term": "折射",
+    "unit": "energy",
+    "grade": "5",
+    "def": "光從一種透明介質進入另一種介質時，傳播方向改變的現象。",
+    "example": "吸管插入水中看似彎折，是光的折射造成的。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0121",
+    "term": "岩石",
+    "unit": "earth",
+    "grade": "4",
+    "def": "由一種或多種礦物組成，是構成地殼的主要物質。",
+    "example": "海邊和山區可以觀察到不同種類的岩石。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0122",
+    "term": "礦物",
+    "unit": "earth",
+    "grade": "4",
+    "def": "天然形成、具有特定成分和性質的固體，是組成岩石的材料。",
+    "example": "石英是一種常見礦物，可在許多岩石中找到。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0123",
+    "term": "土壤",
+    "unit": "earth",
+    "grade": "3",
+    "def": "岩石風化碎屑與腐植質、水和空氣等混合形成的地表物質。",
+    "example": "土壤能提供植物根部固定和生長所需的環境。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0124",
+    "term": "風化",
+    "unit": "earth",
+    "grade": "5",
+    "def": "岩石在原地受溫度、水、生物等作用而逐漸破碎或改變的過程。",
+    "example": "岩縫中的植物根長大，可能促使岩石發生風化。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0125",
+    "term": "侵蝕",
+    "unit": "earth",
+    "grade": "5",
+    "def": "流水、風或海浪等外力，逐漸磨損並帶走地表土石的作用。",
+    "example": "豪雨形成的急流可能加速山坡侵蝕。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0126",
+    "term": "沉積",
+    "unit": "earth",
+    "grade": "5",
+    "def": "被搬運的泥沙因流水或風力減弱而堆積下來的作用。",
+    "example": "河流進入平緩地區後流速降低，泥沙容易沉積。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0127",
+    "term": "天氣",
+    "unit": "earth",
+    "grade": "3",
+    "def": "某地短時間內大氣的溫度、風、雲和降水等狀況。",
+    "example": "今天的天氣晴朗，午後卻可能出現雷陣雨。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0128",
+    "term": "氣溫",
+    "unit": "earth",
+    "grade": "3",
+    "def": "表示空氣冷熱的程度，通常使用溫度計測量並以攝氏度表示。",
+    "example": "中央氣象署公布的氣溫可作為穿著參考。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0129",
+    "term": "風向",
+    "unit": "earth",
+    "grade": "4",
+    "def": "風吹來的方向，通常以東、西、南、北等方位名稱表示。",
+    "example": "氣象報告說今天風向是北風，表示風是從北方吹過來的。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0130",
+    "term": "風力",
+    "unit": "earth",
+    "grade": "4",
+    "def": "風的強弱程度，可由物體受風吹動的情形判斷。",
+    "example": "旗幟飄動得越劇烈，通常表示風力越強。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0131",
+    "term": "降雨量",
+    "unit": "earth",
+    "grade": "4",
+    "def": "一段時間內落到地面的雨水深度，通常以毫米表示。",
+    "example": "雨量筒可以用來測量降雨量。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0132",
+    "term": "雲量",
+    "unit": "earth",
+    "grade": "4",
+    "def": "天空被雲遮蔽面積的多寡，是描述天氣的要素之一。",
+    "example": "觀察雲量可以協助判斷當時是晴天或陰天。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0133",
+    "term": "太陽",
+    "unit": "earth",
+    "grade": "3",
+    "def": "距離地球最近的恆星，提供地球主要的光和熱。",
+    "example": "太陽是地球上大多數能量的最初來源。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0134",
+    "term": "地球",
+    "unit": "earth",
+    "grade": "3",
+    "def": "人類居住的行星，繞太陽公轉並繞自轉軸自轉。",
+    "example": "地球自轉造成晝夜交替。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0135",
+    "term": "月球",
+    "unit": "earth",
+    "grade": "3",
+    "def": "繞著地球公轉的天然衛星，本身不會發光，表面能反射太陽光。",
+    "example": "我們看到明亮的月球，是因為它反射太陽光。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0136",
+    "term": "恆星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "能自行發出光和熱，由極高溫物質組成的巨大球狀天體。",
+    "example": "太陽是一顆恆星，只是距離地球比其他恆星近。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0137",
+    "term": "行星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "繞恆星運行、本身通常不發光的近球形天體。",
+    "example": "地球是一顆繞太陽公轉的行星。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0138",
+    "term": "太陽系",
+    "unit": "earth",
+    "grade": "5",
+    "def": "以太陽為中心，包含行星、衛星、小行星等天體的系統。",
+    "example": "地球和其他七顆行星都屬於太陽系。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0139",
+    "term": "自轉",
+    "unit": "earth",
+    "grade": "5",
+    "def": "天體以自身的轉軸為中心持續旋轉的一種規律運動。",
+    "example": "地球自轉一周約需一天，造成晝夜交替。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0140",
+    "term": "公轉",
+    "unit": "earth",
+    "grade": "5",
+    "def": "一個天體沿著特定軌道，繞另一個天體持續運行的規律運動。",
+    "example": "地球繞太陽公轉一周約需一年。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0141",
+    "term": "晝夜交替",
+    "unit": "earth",
+    "grade": "5",
+    "def": "地球自轉使不同地區輪流面向或背向太陽的現象。",
+    "example": "地球持續自轉，因此各地會出現晝夜交替。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0142",
+    "term": "月相",
+    "unit": "earth",
+    "grade": "5",
+    "def": "從地球看見月球受光部分形狀隨日期規律改變的現象。",
+    "example": "月相會依新月、上弦月、滿月和下弦月的順序變化。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0143",
+    "term": "月相週期",
+    "unit": "earth",
+    "grade": "6",
+    "def": "月相由某一形狀變化後再回到相同形狀所需的時間，大約是一個月（約二十九點五天）。",
+    "example": "完整的月相週期約為二十九點五天。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0144",
+    "term": "星座盤",
+    "unit": "earth",
+    "grade": "5",
+    "def": "依日期和時間調整後，用來辨認當時可見星座的工具。",
+    "example": "使用星座盤前，要先把觀察日期和時間對準。",
+    "category": "天體運動",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0145",
+    "term": "地震",
+    "unit": "earth",
+    "grade": "5",
+    "def": "地下岩層突然破裂或錯動，釋放能量使地面震動的現象。",
+    "example": "發生地震時應保護頭頸並遵守趴下、掩護、穩住原則。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0146",
+    "term": "海嘯",
+    "unit": "earth",
+    "grade": "6",
+    "def": "海底地震、火山活動或山崩等造成海水劇烈波動，形成的長波浪。",
+    "example": "若強震後收到海嘯警報，應立即往高處或內陸避難。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0147",
+    "term": "颱風",
+    "unit": "earth",
+    "grade": "4",
+    "def": "形成於熱帶海洋上的強烈低氣壓系統，常帶來強風和豪雨。",
+    "example": "颱風接近臺灣時，要留意中央氣象署發布的警報。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0148",
+    "term": "土石流",
+    "unit": "earth",
+    "grade": "5",
+    "def": "山坡上的土砂和石塊因大量水分混合後快速向下移動的現象。",
+    "example": "豪雨期間應遠離土石流潛勢溪流。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0149",
+    "term": "洪水",
+    "unit": "earth",
+    "grade": "4",
+    "def": "河川或排水系統無法容納大量水，使水淹到平常乾燥地區的災害。",
+    "example": "短時間強降雨可能造成洪水。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0150",
+    "term": "乾旱",
+    "unit": "earth",
+    "grade": "4",
+    "def": "一個地區長時間降雨明顯不足，造成土壤缺水和水資源短缺的現象。",
+    "example": "遇到乾旱時，更要節約用水。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0151",
+    "term": "生態系",
+    "unit": "environment",
+    "grade": "5",
+    "def": "生物和周遭非生物環境互相作用所形成的整體。",
+    "example": "池塘生態系包含魚、水草、陽光、水和泥土。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0152",
+    "term": "生產者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "能利用陽光自行製造養分的生物，例如綠色植物。",
+    "example": "水草是池塘生態系中的生產者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0153",
+    "term": "消費者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "無法自行製造養分，必須攝食其他生物獲得能量的生物。",
+    "example": "兔子吃植物，因此兔子是消費者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0154",
+    "term": "分解者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "分解生物遺體和排遺，使物質回到環境中的生物。",
+    "example": "真菌和部分細菌是重要的分解者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0155",
+    "term": "食物鏈",
+    "unit": "environment",
+    "grade": "5",
+    "def": "用吃與被吃的關係，表示生態系中能量傳遞順序。",
+    "example": "草、蚱蜢和青蛙可以組成一條食物鏈。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0156",
+    "term": "食物網",
+    "unit": "environment",
+    "grade": "6",
+    "def": "生態系中多條食物鏈彼此交錯形成的攝食關係網絡。",
+    "example": "森林裡的多條食物鏈互相連結形成食物網。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0157",
+    "term": "光照",
+    "unit": "environment",
+    "grade": "3",
+    "def": "環境中光線的強弱與照射時間，會影響生物的生長和活動。",
+    "example": "光照的強弱與時間會影響植物生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0158",
+    "term": "空氣",
+    "unit": "environment",
+    "grade": "3",
+    "def": "包圍地球的混合氣體，含有生物呼吸所需的氧氣。",
+    "example": "人和動物需要空氣中的氧氣維持生命。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0159",
+    "term": "水分",
+    "unit": "environment",
+    "grade": "3",
+    "def": "環境中可供生物利用的水，會影響生物生存與分布。",
+    "example": "水分不足時，許多植物會萎凋。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0160",
+    "term": "土壤條件",
+    "unit": "environment",
+    "grade": "4",
+    "def": "土壤的顆粒、有機質與含水量等特性，會影響生物生長。",
+    "example": "蚯蚓偏好溼潤、疏鬆的土壤條件。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0161",
+    "term": "環境溫度",
+    "unit": "environment",
+    "grade": "5",
+    "def": "環境冷熱條件，會影響生物生長、活動與分布。",
+    "example": "高山的環境溫度較低，會限制某些植物生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0162",
+    "term": "空氣溼度",
+    "unit": "environment",
+    "grade": "5",
+    "def": "空氣中水氣含量的多寡，會影響生物的水分散失與活動。",
+    "example": "空氣溼度太低時，蚯蚓的皮膚容易乾燥而影響呼吸。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0163",
+    "term": "地熱能",
+    "unit": "environment",
+    "grade": "5",
+    "def": "來自地球內部熱量，可用於發電或供熱的能源。",
+    "example": "地熱能可利用地下熱水或蒸氣來發電。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0164",
+    "term": "核能",
+    "unit": "environment",
+    "grade": "6",
+    "def": "由原子核反應釋放，可轉換為電能的能量。",
+    "example": "核能發電會產生放射性廢棄物，必須安全管理。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0165",
+    "term": "太陽能",
+    "unit": "environment",
+    "grade": "4",
+    "def": "利用太陽輻射的光和熱轉換成可用能量的能源。",
+    "example": "屋頂太陽能板能把光能轉換成電能。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0166",
+    "term": "風能",
+    "unit": "environment",
+    "grade": "4",
+    "def": "利用空氣流動帶動設備，轉換成機械能或電能的能源。",
+    "example": "沿海地區可設置風力發電機利用風能。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0167",
+    "term": "水力",
+    "unit": "environment",
+    "grade": "5",
+    "def": "利用流水或落水的能量，可轉換成機械能或電能。",
+    "example": "水庫可以利用水力推動渦輪機發電。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0168",
+    "term": "化石燃料",
+    "unit": "environment",
+    "grade": "5",
+    "def": "古代生物遺骸經長時間變化形成的煤、石油和天然氣。",
+    "example": "燃燒化石燃料會排放二氧化碳。",
+    "category": "能源資源",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0169",
+    "term": "空氣汙染",
+    "unit": "environment",
+    "grade": "4",
+    "def": "有害氣體或微粒進入空氣，危害健康與環境的現象。",
+    "example": "減少汽機車廢氣有助於降低空氣汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0170",
+    "term": "水汙染",
+    "unit": "environment",
+    "grade": "4",
+    "def": "有害物質進入河川、湖泊或海洋，使水質惡化的現象。",
+    "example": "未處理的廢水可能造成水汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0171",
+    "term": "土壤汙染",
+    "unit": "environment",
+    "grade": "5",
+    "def": "有害物質進入土壤並累積，影響生物與農作物的現象。",
+    "example": "廢棄物任意掩埋可能造成土壤汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0172",
+    "term": "全球暖化",
+    "unit": "environment",
+    "grade": "6",
+    "def": "溫室氣體增加，使地球長期平均氣溫上升的現象。",
+    "example": "減少化石燃料使用有助於減緩全球暖化。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0173",
+    "term": "棲地破壞",
+    "unit": "environment",
+    "grade": "5",
+    "def": "生物原有生活環境因開發、汙染等因素縮小或消失。",
+    "example": "道路開發可能造成野生動物的棲地破壞。",
+    "category": "環境問題",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0174",
+    "term": "外來種",
+    "unit": "environment",
+    "grade": "5",
+    "def": "因人類有意或無意引入，進入原本未自然分布地區的物種。",
+    "example": "小花蔓澤蘭是臺灣常見的外來種。",
+    "category": "環境問題",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0175",
+    "term": "減量",
+    "unit": "environment",
+    "grade": "3",
+    "def": "從源頭減少資源使用和垃圾產生的環保做法。",
+    "example": "自備水壺能減少使用一次性容器，落實垃圾減量。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0176",
+    "term": "重複使用",
+    "unit": "environment",
+    "grade": "3",
+    "def": "物品不立刻丟棄，經整理後再次使用的環保做法。",
+    "example": "把單面紙當計算紙是重複使用。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0177",
+    "term": "回收",
+    "unit": "environment",
+    "grade": "3",
+    "def": "把可再利用的廢棄物分類收集，送去處理成資源。",
+    "example": "喝完飲料後應清洗容器並正確回收。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0178",
+    "term": "節約用水",
+    "unit": "environment",
+    "grade": "3",
+    "def": "在生活中採取省水行動，降低不必要的水資源消耗與浪費。",
+    "example": "刷牙時關閉水龍頭就是節約用水。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0179",
+    "term": "節約用電",
+    "unit": "environment",
+    "grade": "3",
+    "def": "減少不必要的電力使用，提升能源使用效率。",
+    "example": "離開教室隨手關燈可以節約用電。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0180",
+    "term": "生物多樣性",
+    "unit": "environment",
+    "grade": "6",
+    "def": "一個地區中生物種類與生活環境的豐富程度。",
+    "example": "保護棲息地有助於維持生物多樣性。",
+    "category": "永續行動",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0181",
+    "term": "爬蟲類",
+    "unit": "life",
+    "grade": "5",
+    "def": "皮膚多乾燥有鱗片、用肺呼吸的脊椎動物，例如烏龜、蛇、蜥蜴。",
+    "example": "烏龜和蜥蜴身上有鱗片、用肺呼吸，都屬於爬蟲類。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  }
+]

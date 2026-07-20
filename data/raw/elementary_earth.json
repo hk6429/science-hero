@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0121",
+    "term": "岩石",
+    "unit": "earth",
+    "grade": "4",
+    "def": "由一種或多種礦物組成，是構成地殼的主要物質。",
+    "example": "海邊和山區可以觀察到不同種類的岩石。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0122",
+    "term": "礦物",
+    "unit": "earth",
+    "grade": "4",
+    "def": "天然形成、具有特定成分和性質的固體，是組成岩石的材料。",
+    "example": "石英是一種常見礦物，可在許多岩石中找到。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0123",
+    "term": "土壤",
+    "unit": "earth",
+    "grade": "3",
+    "def": "岩石風化碎屑與腐植質、水和空氣等混合形成的地表物質。",
+    "example": "土壤能提供植物根部固定和生長所需的環境。",
+    "category": "地表物質",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0124",
+    "term": "風化",
+    "unit": "earth",
+    "grade": "5",
+    "def": "岩石在原地受溫度、水、生物等作用而逐漸破碎或改變的過程。",
+    "example": "岩縫中的植物根長大，可能促使岩石發生風化。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0125",
+    "term": "侵蝕",
+    "unit": "earth",
+    "grade": "5",
+    "def": "流水、風或海浪等外力，逐漸磨損並帶走地表土石的作用。",
+    "example": "豪雨形成的急流可能加速山坡侵蝕。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0126",
+    "term": "沉積",
+    "unit": "earth",
+    "grade": "5",
+    "def": "被搬運的泥沙因流水或風力減弱而堆積下來的作用。",
+    "example": "河流進入平緩地區後流速降低，泥沙容易沉積。",
+    "category": "地表物質",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0127",
+    "term": "天氣",
+    "unit": "earth",
+    "grade": "3",
+    "def": "某地短時間內大氣的溫度、風、雲和降水等狀況。",
+    "example": "今天的天氣晴朗，午後卻可能出現雷陣雨。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0128",
+    "term": "氣溫",
+    "unit": "earth",
+    "grade": "3",
+    "def": "表示空氣冷熱的程度，通常使用溫度計測量並以攝氏度表示。",
+    "example": "中央氣象署公布的氣溫可作為穿著參考。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0129",
+    "term": "風向",
+    "unit": "earth",
+    "grade": "4",
+    "def": "風吹來的方向，通常以東、西、南、北等方位名稱表示。",
+    "example": "北風的風向是由北方吹向南方。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0130",
+    "term": "風力",
+    "unit": "earth",
+    "grade": "4",
+    "def": "風的強弱程度，可由物體受風吹動的情形判斷。",
+    "example": "旗幟飄動得越劇烈，通常表示風力越強。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0131",
+    "term": "降雨量",
+    "unit": "earth",
+    "grade": "4",
+    "def": "一段時間內落到地面的雨水深度，通常以毫米表示。",
+    "example": "雨量筒可以用來測量降雨量。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0132",
+    "term": "雲量",
+    "unit": "earth",
+    "grade": "4",
+    "def": "天空被雲遮蔽面積的多寡，是描述天氣的要素之一。",
+    "example": "觀察雲量可以協助判斷當時是晴天或陰天。",
+    "category": "天氣要素",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0133",
+    "term": "太陽",
+    "unit": "earth",
+    "grade": "3",
+    "def": "距離地球最近的恆星，提供地球主要的光和熱。",
+    "example": "太陽是地球上大多數能量的最初來源。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0134",
+    "term": "地球",
+    "unit": "earth",
+    "grade": "3",
+    "def": "人類居住的行星，繞太陽公轉並繞自轉軸自轉。",
+    "example": "地球自轉造成晝夜交替。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0135",
+    "term": "月球",
+    "unit": "earth",
+    "grade": "3",
+    "def": "繞著地球公轉的天然衛星，本身不會發光，表面能反射太陽光。",
+    "example": "我們看到明亮的月球，是因為它反射太陽光。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0136",
+    "term": "恆星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "能自行發出光和熱，由極高溫物質組成的巨大球狀天體。",
+    "example": "太陽是一顆恆星，只是距離地球比其他恆星近。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0137",
+    "term": "行星",
+    "unit": "earth",
+    "grade": "5",
+    "def": "繞恆星運行、本身通常不發光的近球形天體。",
+    "example": "地球是一顆繞太陽公轉的行星。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0138",
+    "term": "太陽系",
+    "unit": "earth",
+    "grade": "5",
+    "def": "以太陽為中心，包含行星、衛星、小行星等天體的系統。",
+    "example": "地球和其他七顆行星都屬於太陽系。",
+    "category": "太陽系",
+    "distractor_pool": "solar_system"
+  },
+  {
+    "id": "e0139",
+    "term": "自轉",
+    "unit": "earth",
+    "grade": "5",
+    "def": "天體以自身的轉軸為中心持續旋轉的一種規律運動。",
+    "example": "地球自轉一周約需一天，造成晝夜交替。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0140",
+    "term": "公轉",
+    "unit": "earth",
+    "grade": "5",
+    "def": "一個天體沿著特定軌道，繞另一個天體持續運行的規律運動。",
+    "example": "地球繞太陽公轉一周約需一年。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0141",
+    "term": "晝夜交替",
+    "unit": "earth",
+    "grade": "5",
+    "def": "地球自轉使不同地區輪流面向或背向太陽的現象。",
+    "example": "地球持續自轉，因此各地會出現晝夜交替。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0142",
+    "term": "月相",
+    "unit": "earth",
+    "grade": "5",
+    "def": "從地球看見月球受光部分形狀隨日期規律改變的現象。",
+    "example": "月相會依新月、上弦月、滿月和下弦月的順序變化。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0143",
+    "term": "月相週期",
+    "unit": "earth",
+    "grade": "6",
+    "def": "月相由某一形狀變化後再回到相同形狀所需的時間，約二十九點五天。",
+    "example": "完整的月相週期約為二十九點五天。",
+    "category": "天體運動",
+    "distractor_pool": "celestial_motion"
+  },
+  {
+    "id": "e0144",
+    "term": "星座盤",
+    "unit": "earth",
+    "grade": "5",
+    "def": "依日期和時間調整後，用來辨認當時可見星座的工具。",
+    "example": "使用星座盤前，要先把觀察日期和時間對準。",
+    "category": "天體運動",
+    "distractor_pool": "investigation_tools"
+  },
+  {
+    "id": "e0145",
+    "term": "地震",
+    "unit": "earth",
+    "grade": "5",
+    "def": "地下岩層突然破裂或錯動，釋放能量使地面震動的現象。",
+    "example": "發生地震時應保護頭頸並遵守趴下、掩護、穩住原則。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0146",
+    "term": "海嘯",
+    "unit": "earth",
+    "grade": "6",
+    "def": "海底地震、火山活動或山崩等造成海水劇烈波動，形成的長波浪。",
+    "example": "若強震後收到海嘯警報，應立即往高處或內陸避難。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0147",
+    "term": "颱風",
+    "unit": "earth",
+    "grade": "4",
+    "def": "形成於熱帶海洋上的強烈低氣壓系統，常帶來強風和豪雨。",
+    "example": "颱風接近臺灣時，要留意中央氣象署發布的警報。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0148",
+    "term": "土石流",
+    "unit": "earth",
+    "grade": "5",
+    "def": "山坡上的土砂和石塊因大量水分混合後快速向下移動的現象。",
+    "example": "豪雨期間應遠離土石流潛勢溪流。",
+    "category": "天然災害",
+    "distractor_pool": "surface_processes"
+  },
+  {
+    "id": "e0149",
+    "term": "洪水",
+    "unit": "earth",
+    "grade": "4",
+    "def": "河川或排水系統無法容納大量水，使水淹到平常乾燥地區的災害。",
+    "example": "短時間強降雨可能造成洪水。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  },
+  {
+    "id": "e0150",
+    "term": "乾旱",
+    "unit": "earth",
+    "grade": "4",
+    "def": "一個地區長時間降雨明顯不足，造成土壤缺水和水資源短缺的現象。",
+    "example": "遇到乾旱時，更要節約用水。",
+    "category": "天然災害",
+    "distractor_pool": "natural_hazards"
+  }
+]

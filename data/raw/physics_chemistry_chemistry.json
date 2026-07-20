@@ -1,0 +1,362 @@
+[
+  {
+    "id": "pc0037",
+    "term": "原子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "保有元素化學性質的基本粒子，由原子核與核外電子組成。",
+    "example": "原子：金箔實驗模型中，每個原子都由中央原子核和核外電子構成。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0038",
+    "term": "分子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "由兩個或以上原子結合，可獨立存在並保有物質化學性質的粒子。",
+    "example": "分子：兩個氫原子與一個氧原子結合成一個水分子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0039",
+    "term": "原子核",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子中心帶正電的部分，通常由質子和中子組成；氫-1 原子核只有質子。",
+    "example": "原子核：氫-1 的原子核只有一個質子，沒有中子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0040",
+    "term": "質子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "位於原子核內、帶一個正電荷的粒子。",
+    "example": "質子：氫原子的原子核含一個質子，因此核內有一個正電荷。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0041",
+    "term": "中子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "位於原子核內、不帶電的粒子。",
+    "example": "中子：碳-12 原子核內有六個中子，中子本身不帶電。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0042",
+    "term": "電子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "存在於原子核外、帶一個負電荷的粒子。",
+    "example": "電子：摩擦塑膠尺時轉移的是電子，不是質子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0043",
+    "term": "原子序",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素原子核內的質子數，可用來確定元素種類。",
+    "example": "原子序：氧的原子序是 8，表示氧原子核內有 8 個質子。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0044",
+    "term": "質量數",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "一個原子核內質子數與中子數的總和。",
+    "example": "質量數：碳-12 含 6 個質子與 6 個中子，所以質量數是 12。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0045",
+    "term": "反應速率",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應中反應物消耗或生成物形成的快慢。",
+    "example": "反應速率：升高溫度後發泡錠在水中更快反應，可用時間比較反應速率。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0046",
+    "term": "離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團因得失電子而帶有淨電荷的粒子。",
+    "example": "離子：食鹽水中的鈉離子與氯離子能在水中移動。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0047",
+    "term": "陽離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團失去電子後形成的帶正電粒子。",
+    "example": "陽離子：鈉原子失去一個電子後形成陽離子 Na⁺。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0048",
+    "term": "陰離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團得到電子後形成的帶負電粒子。",
+    "example": "陰離子：氯原子得到一個電子後形成陰離子 Cl⁻。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0049",
+    "term": "元素符號",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用一個或兩個拉丁字母表示一種元素的國際通用符號。",
+    "example": "元素符號：氧的元素符號是 O，第一個字母必須大寫。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0050",
+    "term": "化學式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用元素符號和數字表示物質組成的式子。",
+    "example": "化學式：H₂O 是水的化學式，下標 2 表示每個水分子含兩個氫原子。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0051",
+    "term": "化學反應式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用化學式和係數表示反應物、生成物及數量關係的式子。",
+    "example": "化學反應式：以 2H₂＋O₂→2H₂O 表示氫氣燃燒，是一個化學反應式。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0052",
+    "term": "平衡化學反應式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "調整化學反應式的係數，使反應前後各元素的原子數相等。",
+    "example": "平衡化學反應式：將 H₂＋O₂→H₂O 改寫為 2H₂＋O₂→2H₂O，就是平衡化學反應式。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0053",
+    "term": "元素週期表",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "依原子序排列元素，並呈現元素性質週期性變化的表格。",
+    "example": "元素週期表：在元素週期表中可依原子序找到氧位於第 16 族。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0054",
+    "term": "族",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素週期表的直行，同族元素常具有相似化學性質。",
+    "example": "族：鈉和鉀位在元素週期表同一族，常表現相似的化學性質。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0055",
+    "term": "物理變化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "物質種類與化學組成不變、沒有生成新物質的變化，例如形狀或狀態改變。",
+    "example": "物理變化：冰融成水後仍是 H₂O，屬於物理變化。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0056",
+    "term": "化學變化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原物質轉變成具有不同性質新物質的變化。",
+    "example": "化學變化：鐵釘生鏽後形成新物質，屬於化學變化。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0057",
+    "term": "反應物",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應開始時參與反應，並在過程中被消耗的物質。",
+    "example": "反應物：鎂帶燃燒時，鎂和氧氣都是反應物。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0058",
+    "term": "生成物",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應後所形成的新物質。",
+    "example": "生成物：鎂帶燃燒後形成的氧化鎂是生成物。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0059",
+    "term": "質量守恆定律",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "密閉系統的化學反應中，反應前後總質量相等。",
+    "example": "質量守恆定律：在密閉瓶中讓醋與小蘇打反應，瓶內反應前後總質量相同，符合質量守恆定律。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0060",
+    "term": "催化劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "能改變反應速率，反應前後本身總量與化學性質不變的物質。",
+    "example": "催化劑：二氧化錳能讓雙氧水較快產生氧氣，在實驗中扮演催化劑。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0061",
+    "term": "氧化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "國中所學的狹義定義是物質得到氧的反應；電子轉移觀點則是失去電子。",
+    "example": "氧化：鎂帶燃燒並與氧結合形成氧化鎂，是氧化反應。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0062",
+    "term": "還原",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "國中所學的狹義定義是物質失去氧的反應；電子轉移觀點則是得到電子。",
+    "example": "還原：用碳把氧化銅中的氧移走生成銅，是還原反應。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0063",
+    "term": "氧化劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "使其他物質氧化，自身則被還原的物質。",
+    "example": "氧化劑：氧化銅使碳得到氧，因此在反應中是氧化劑。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0064",
+    "term": "還原劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "使其他物質還原，自身則被氧化的物質。",
+    "example": "還原劑：碳使氧化銅失去氧，因此在反應中是還原劑。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0065",
+    "term": "燃燒",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "物質快速氧化並伴隨放熱、發光等現象的反應。",
+    "example": "燃燒：點燃酒精時會快速放熱並發光，這是燃燒現象。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0066",
+    "term": "金屬對氧的活性",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "在相同條件下，不同金屬與氧反應難易程度的相對比較。",
+    "example": "金屬對氧的活性：把鎂、鋅、銅分別加熱，比較反應情形可判斷金屬對氧的活性。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0067",
+    "term": "酸",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後能增加水溶液中氫離子濃度的物質。",
+    "example": "酸：藍色石蕊試紙放入稀鹽酸會變紅，可判斷稀鹽酸是酸。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0068",
+    "term": "鹼",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後能增加水溶液中氫氧根離子濃度的物質。",
+    "example": "鹼：紅色石蕊試紙放入氫氧化鈉水溶液會變藍，可判斷它是鹼。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0069",
+    "term": "pH值",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "表示水溶液酸鹼程度的數值，一般小於 7 為酸性、大於 7 為鹼性。",
+    "example": "pH值：檸檬汁的 pH值 約為 2，顯示它呈酸性。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0070",
+    "term": "酸鹼指示劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "會隨溶液酸鹼性改變顏色，可用來判斷酸鹼的物質。",
+    "example": "酸鹼指示劑：廣用酸鹼指示劑滴入不同水溶液會呈現不同顏色。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0071",
+    "term": "中和反應",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "酸與鹼作用生成鹽和水的反應。",
+    "example": "中和反應：稀鹽酸與氫氧化鈉反應生成鹽和水，是中和反應。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0072",
+    "term": "電解質",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後會解離出可移動的陰、陽離子，使水溶液能導電的物質。",
+    "example": "電解質：食鹽溶於水後形成可移動離子，因此食鹽是電解質。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  }
+]

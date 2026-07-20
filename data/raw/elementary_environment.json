@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0151",
+    "term": "生態系",
+    "unit": "environment",
+    "grade": "5",
+    "def": "生物和周遭非生物環境互相作用所形成的整體。",
+    "example": "池塘生態系包含魚、水草、陽光、水和泥土。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0152",
+    "term": "生產者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "能利用陽光自行製造養分的生物，例如綠色植物。",
+    "example": "水草是池塘生態系中的生產者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0153",
+    "term": "消費者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "無法自行製造養分，必須攝食其他生物獲得能量的生物。",
+    "example": "兔子吃植物，因此兔子是消費者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0154",
+    "term": "分解者",
+    "unit": "environment",
+    "grade": "5",
+    "def": "分解生物遺體和排遺，使物質回到環境中的生物。",
+    "example": "真菌和部分細菌是重要的分解者。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0155",
+    "term": "食物鏈",
+    "unit": "environment",
+    "grade": "5",
+    "def": "用吃與被吃的關係，表示生態系中能量傳遞順序。",
+    "example": "草、蚱蜢和青蛙可以組成一條食物鏈。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0156",
+    "term": "食物網",
+    "unit": "environment",
+    "grade": "6",
+    "def": "生態系中多條食物鏈彼此交錯形成的攝食關係網絡。",
+    "example": "森林裡的多條食物鏈互相連結形成食物網。",
+    "category": "生態關係",
+    "distractor_pool": "ecosystem_relations"
+  },
+  {
+    "id": "e0157",
+    "term": "光照",
+    "unit": "environment",
+    "grade": "3",
+    "def": "環境中光線的強弱與照射時間，會影響生物的生長和活動。",
+    "example": "光照的強弱與時間會影響植物生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0158",
+    "term": "空氣",
+    "unit": "environment",
+    "grade": "3",
+    "def": "包圍地球的混合氣體，含有生物呼吸所需的氧氣。",
+    "example": "人和動物需要空氣中的氧氣維持生命。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0159",
+    "term": "水分",
+    "unit": "environment",
+    "grade": "3",
+    "def": "環境中可供生物利用的水，會影響生物生存與分布。",
+    "example": "水分不足時，許多植物會萎凋。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0160",
+    "term": "土壤條件",
+    "unit": "environment",
+    "grade": "4",
+    "def": "土壤的顆粒、有機質與含水量等特性，會影響生物生長。",
+    "example": "蚯蚓偏好溼潤、疏鬆的土壤條件。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0161",
+    "term": "環境溫度",
+    "unit": "environment",
+    "grade": "5",
+    "def": "環境冷熱條件，會影響生物生長、活動與分布。",
+    "example": "高山的環境溫度較低，會限制某些植物生長。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0162",
+    "term": "空氣溼度",
+    "unit": "environment",
+    "grade": "5",
+    "def": "空氣中水氣含量的多寡，會影響生物的水分散失與活動。",
+    "example": "空氣溼度高時，溼地周圍的環境通常較潮溼。",
+    "category": "環境因子",
+    "distractor_pool": "environmental_factors"
+  },
+  {
+    "id": "e0163",
+    "term": "地熱能",
+    "unit": "environment",
+    "grade": "5",
+    "def": "來自地球內部熱量，可用於發電或供熱的能源。",
+    "example": "地熱能可利用地下熱水或蒸氣來發電。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0164",
+    "term": "核能",
+    "unit": "environment",
+    "grade": "6",
+    "def": "由原子核反應釋放，可轉換為電能的能量。",
+    "example": "核能發電會產生放射性廢棄物，必須安全管理。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0165",
+    "term": "太陽能",
+    "unit": "environment",
+    "grade": "4",
+    "def": "利用太陽輻射的光和熱轉換成可用能量的能源。",
+    "example": "屋頂太陽能板能把光能轉換成電能。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0166",
+    "term": "風能",
+    "unit": "environment",
+    "grade": "4",
+    "def": "利用空氣流動帶動設備，轉換成機械能或電能的能源。",
+    "example": "沿海地區可設置風力發電機利用風能。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0167",
+    "term": "水力",
+    "unit": "environment",
+    "grade": "5",
+    "def": "利用流水或落水的能量，可轉換成機械能或電能。",
+    "example": "水庫可以利用水力推動渦輪機發電。",
+    "category": "能源資源",
+    "distractor_pool": "energy_resources"
+  },
+  {
+    "id": "e0168",
+    "term": "化石燃料",
+    "unit": "environment",
+    "grade": "5",
+    "def": "古代生物遺骸經長時間變化形成的煤、石油和天然氣。",
+    "example": "燃燒化石燃料會排放二氧化碳。",
+    "category": "能源資源",
+    "distractor_pool": "natural_earth_materials"
+  },
+  {
+    "id": "e0169",
+    "term": "空氣汙染",
+    "unit": "environment",
+    "grade": "4",
+    "def": "有害氣體或微粒進入空氣，危害健康與環境的現象。",
+    "example": "減少汽機車廢氣有助於降低空氣汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0170",
+    "term": "水汙染",
+    "unit": "environment",
+    "grade": "4",
+    "def": "有害物質進入河川、湖泊或海洋，使水質惡化的現象。",
+    "example": "未處理的廢水可能造成水汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0171",
+    "term": "土壤汙染",
+    "unit": "environment",
+    "grade": "5",
+    "def": "有害物質進入土壤並累積，影響生物與農作物的現象。",
+    "example": "廢棄物任意掩埋可能造成土壤汙染。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0172",
+    "term": "全球暖化",
+    "unit": "environment",
+    "grade": "6",
+    "def": "溫室氣體增加，使地球長期平均氣溫上升的現象。",
+    "example": "減少化石燃料使用有助於減緩全球暖化。",
+    "category": "環境問題",
+    "distractor_pool": "environmental_issues"
+  },
+  {
+    "id": "e0173",
+    "term": "棲地破壞",
+    "unit": "environment",
+    "grade": "5",
+    "def": "生物原有生活環境因開發、汙染等因素縮小或消失。",
+    "example": "道路開發可能造成野生動物的棲地破壞。",
+    "category": "環境問題",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0174",
+    "term": "外來種",
+    "unit": "environment",
+    "grade": "5",
+    "def": "因人類有意或無意引入，進入原本未自然分布地區的物種。",
+    "example": "小花蔓澤蘭是臺灣常見的外來種。",
+    "category": "環境問題",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0175",
+    "term": "減量",
+    "unit": "environment",
+    "grade": "3",
+    "def": "從源頭減少資源使用和垃圾產生的環保做法。",
+    "example": "自備水壺能減少使用一次性容器，落實垃圾減量。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0176",
+    "term": "重複使用",
+    "unit": "environment",
+    "grade": "3",
+    "def": "物品不立刻丟棄，經整理後再次使用的環保做法。",
+    "example": "把單面紙當計算紙是重複使用。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0177",
+    "term": "回收",
+    "unit": "environment",
+    "grade": "3",
+    "def": "把可再利用的廢棄物分類收集，送去處理成資源。",
+    "example": "喝完飲料後應清洗容器並正確回收。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0178",
+    "term": "節約用水",
+    "unit": "environment",
+    "grade": "3",
+    "def": "在生活中採取省水行動，降低不必要的水資源消耗與浪費。",
+    "example": "刷牙時關閉水龍頭就是節約用水。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0179",
+    "term": "節約用電",
+    "unit": "environment",
+    "grade": "3",
+    "def": "減少不必要的電力使用，提升能源使用效率。",
+    "example": "離開教室隨手關燈可以節約用電。",
+    "category": "永續行動",
+    "distractor_pool": "sustainability_actions"
+  },
+  {
+    "id": "e0180",
+    "term": "生物多樣性",
+    "unit": "environment",
+    "grade": "6",
+    "def": "一個地區中生物種類與生活環境的豐富程度。",
+    "example": "保護棲息地有助於維持生物多樣性。",
+    "category": "永續行動",
+    "distractor_pool": "ecosystem_concepts"
+  }
+]

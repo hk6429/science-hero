@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>科學英雄｜國中國小自然科練功站</title>
+<meta name="description" content="國小自然、國中生物、理化、地科背誦知識點練功站——閃卡、自測、弱點聚合。" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>" />
+</head>
+<body>
+<header class="site-header">
+  <h1>🧪 科學英雄</h1>
+  <p>國小自然・國中生物・國中理化・國中地科 知識點練功站</p>
+  <div class="hero-stats">
+    <span class="hero-stat">🔥 連續 <strong id="streak-days">0</strong> 天</span>
+    <span class="hero-stat">⭐ 已精通 <strong id="mastered-count">0</strong> 個</span>
+  </div>
+</header>
+
+<p class="trust-line">內容依 108 課綱自然科學領域編寫，並經教師逐條校對。</p>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main>
+  <div id="panels"></div>
+  <div class="io-row">
+    <button id="export-btn" class="io-btn">匯出進度</button>
+    <button id="import-btn" class="io-btn">匯入進度</button>
+    <input type="file" id="import-file" accept="application/json" hidden />
+  </div>
+</main>
+
+<script src="js/store.js"></script>
+<script src="js/flashcard.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/weak.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

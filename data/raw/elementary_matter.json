@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0061",
+    "term": "固體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "在一般條件下具有固定形狀和體積，不會隨容器改變外形的物質狀態。",
+    "example": "積木是固體，移到不同容器後形狀仍大致不變。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0062",
+    "term": "液體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "有固定體積但沒有固定形狀，會隨容器改變形狀的物質狀態。",
+    "example": "水是液體，倒入杯中後會呈現杯子的形狀。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0063",
+    "term": "氣體",
+    "unit": "matter",
+    "grade": "3",
+    "def": "沒有固定形狀和體積，會充滿所在空間的物質狀態。",
+    "example": "空氣是氣體，會充滿打氣後的氣球。",
+    "category": "物質狀態",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0064",
+    "term": "熔化",
+    "unit": "matter",
+    "grade": "4",
+    "def": "固體吸收足夠熱量後逐漸變成液體的一種物質狀態變化。",
+    "example": "冰塊在室溫下熔化，會變成液態水。",
+    "category": "物質狀態",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0065",
+    "term": "凝固",
+    "unit": "matter",
+    "grade": "4",
+    "def": "液體失去足夠熱量後逐漸變成固體的一種物質狀態變化。",
+    "example": "把水放入冷凍庫，水凝固後會成為冰。",
+    "category": "物質狀態",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0066",
+    "term": "蒸發",
+    "unit": "matter",
+    "grade": "4",
+    "def": "液體由表面慢慢變成氣體的現象。",
+    "example": "溼衣服晾在通風處，水分蒸發後就會變乾。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0067",
+    "term": "沸騰",
+    "unit": "matter",
+    "grade": "5",
+    "def": "液體達到沸點時，內部和表面同時快速汽化的現象。",
+    "example": "水加熱到沸點後會沸騰，產生大量氣泡。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0068",
+    "term": "凝結",
+    "unit": "matter",
+    "grade": "4",
+    "def": "氣態物質遇冷失去熱量，轉變成液態物質的一種狀態變化。",
+    "example": "冰杯外的小水滴是空氣中水蒸氣凝結形成的。",
+    "category": "水的變化",
+    "distractor_pool": "phase_changes"
+  },
+  {
+    "id": "e0069",
+    "term": "水蒸氣",
+    "unit": "matter",
+    "grade": "4",
+    "def": "水的氣態形式，無色透明，肉眼通常看不見。",
+    "example": "空氣中的水蒸氣遇冷可能凝結成小水滴。",
+    "category": "水的變化",
+    "distractor_pool": "matter_states"
+  },
+  {
+    "id": "e0070",
+    "term": "水循環",
+    "unit": "matter",
+    "grade": "5",
+    "def": "水在海洋、陸地與大氣間經由蒸發、凝結和降水不斷移動的過程。",
+    "example": "太陽能驅動水循環，使地球上的水持續移動。",
+    "category": "水的變化",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0071",
+    "term": "降水",
+    "unit": "matter",
+    "grade": "4",
+    "def": "雲中水滴或冰晶變大後落到地面的現象，包括雨、雪和冰雹。",
+    "example": "颱風來臨時常帶來大量降水。",
+    "category": "水的變化",
+    "distractor_pool": "weather_water_cycle"
+  },
+  {
+    "id": "e0072",
+    "term": "溶解",
+    "unit": "matter",
+    "grade": "4",
+    "def": "一種物質均勻分散在另一種物質中，形成溶液的過程。",
+    "example": "食鹽放入水中攪拌後會逐漸溶解。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0073",
+    "term": "溶質",
+    "unit": "matter",
+    "grade": "5",
+    "def": "在溶液中被溶劑溶解並均勻分散的成分。",
+    "example": "製作食鹽水時，食鹽是溶質。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0074",
+    "term": "溶劑",
+    "unit": "matter",
+    "grade": "5",
+    "def": "溶液中用來溶解溶質的成分。",
+    "example": "製作糖水時，水是溶劑。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0075",
+    "term": "溶液",
+    "unit": "matter",
+    "grade": "5",
+    "def": "溶質均勻分散在溶劑中形成的混合物，各處性質大致相同。",
+    "example": "糖完全溶在水中後形成均勻的糖水溶液。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0076",
+    "term": "飽和溶液",
+    "unit": "matter",
+    "grade": "6",
+    "def": "在一定溫度下，已無法再溶解更多該溶質的溶液。",
+    "example": "在固定水溫下持續加入食鹽，直到充分攪拌後仍有食鹽無法溶解，就可能得到飽和溶液。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0077",
+    "term": "攪拌",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用外力使液體流動，通常能增加溶質與溶劑接觸而加快溶解。",
+    "example": "泡糖水時進行攪拌，可以讓糖更快溶解。",
+    "category": "溶液",
+    "distractor_pool": "solutions"
+  },
+  {
+    "id": "e0078",
+    "term": "混合物",
+    "unit": "matter",
+    "grade": "4",
+    "def": "由兩種以上物質混合而成，各成分仍保有原來性質的物質。",
+    "example": "沙和鐵粉放在一起形成混合物，可以再分離。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0079",
+    "term": "過濾",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用濾紙或濾網孔隙大小，分離液體中不溶固體的方法。",
+    "example": "用濾紙進行過濾，可以把水中的細沙分離出來。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0080",
+    "term": "篩選",
+    "unit": "matter",
+    "grade": "3",
+    "def": "利用顆粒大小不同，讓混合物通過篩網進行分離的方法。",
+    "example": "工地用篩選的方式把大石塊和細沙分開。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0081",
+    "term": "磁力分離",
+    "unit": "matter",
+    "grade": "4",
+    "def": "利用物質是否會被磁鐵吸引，分離混合物的方法。",
+    "example": "可用磁力分離把鐵粉從沙堆中取出。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0082",
+    "term": "蒸發分離",
+    "unit": "matter",
+    "grade": "5",
+    "def": "讓溶劑蒸發，留下原本溶解在其中固體的方法。",
+    "example": "鹽田利用蒸發分離從海水中取得食鹽。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0083",
+    "term": "沉澱",
+    "unit": "matter",
+    "grade": "4",
+    "def": "讓密度較大且不溶的顆粒靜置後沉到容器底部的分離現象。",
+    "example": "混濁泥水靜置一段時間後，泥沙會形成沉澱。",
+    "category": "物質分離",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "e0084",
+    "term": "酸性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質在水溶液中呈現的一種性質，通常可使藍色石蕊試紙變紅。",
+    "example": "檸檬汁具有酸性，味道通常偏酸。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0085",
+    "term": "鹼性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質在水溶液中呈現的一種性質，通常可使紅色石蕊試紙變藍。",
+    "example": "小蘇打水呈弱鹼性。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0086",
+    "term": "中性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "水溶液既不呈現酸性也不呈現鹼性，酸鹼程度居中的性質。",
+    "example": "純水在一般情況下接近中性。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0087",
+    "term": "石蕊試紙",
+    "unit": "matter",
+    "grade": "6",
+    "def": "能用顏色變化初步判斷水溶液酸鹼性的試紙。",
+    "example": "使用石蕊試紙時，要分別觀察紅色和藍色試紙的變化。",
+    "category": "水溶液性質",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0088",
+    "term": "紫色高麗菜汁",
+    "unit": "matter",
+    "grade": "6",
+    "def": "含天然色素，可隨水溶液酸鹼性呈現不同顏色的指示劑。",
+    "example": "紫色高麗菜汁遇到不同酸鹼性的溶液會改變顏色。",
+    "category": "水溶液性質",
+    "distractor_pool": "lab_tools"
+  },
+  {
+    "id": "e0089",
+    "term": "導電性",
+    "unit": "matter",
+    "grade": "6",
+    "def": "物質讓電流通過的能力，不同水溶液的導電程度可能不同。",
+    "example": "食鹽水具有導電性，可以讓簡單電路中的燈泡發亮。",
+    "category": "水溶液性質",
+    "distractor_pool": "solution_properties"
+  },
+  {
+    "id": "e0090",
+    "term": "昇華",
+    "unit": "matter",
+    "grade": "5",
+    "def": "固體沒有先變成液體，而是直接變成氣體的物質狀態變化。",
+    "example": "乾冰在室溫下會昇華，直接變成二氧化碳氣體。",
+    "category": "物質變化",
+    "distractor_pool": "phase_changes"
+  }
+]

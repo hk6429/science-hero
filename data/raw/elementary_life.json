@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0031",
+    "term": "生物",
+    "unit": "life",
+    "grade": "3",
+    "def": "具有生長、繁殖、感應和新陳代謝等生命現象的個體。",
+    "example": "蝴蝶是生物，會攝食、生長並繁殖後代。",
+    "category": "生命現象",
+    "distractor_pool": "broad_life_classification"
+  },
+  {
+    "id": "e0032",
+    "term": "非生物",
+    "unit": "life",
+    "grade": "3",
+    "def": "不具有完整生命現象的物體，例如石頭、水和空氣。",
+    "example": "石頭屬於非生物，不會自行生長或繁殖。",
+    "category": "生命現象",
+    "distractor_pool": "broad_life_classification"
+  },
+  {
+    "id": "e0033",
+    "term": "生長",
+    "unit": "life",
+    "grade": "3",
+    "def": "生物體的體型或構造隨時間逐漸發育的現象。",
+    "example": "小雞逐漸長大成母雞的過程稱為生長。",
+    "category": "生命現象",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0034",
+    "term": "繁殖",
+    "unit": "life",
+    "grade": "3",
+    "def": "生物產生新個體，使同類能延續下去的生命現象。",
+    "example": "青蛙透過產卵進行繁殖。",
+    "category": "生命現象",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0035",
+    "term": "感應",
+    "unit": "life",
+    "grade": "4",
+    "def": "生物察覺光、聲音或碰觸等環境刺激後產生反應的生命現象。",
+    "example": "含羞草被碰觸後閉合葉片，是一種感應。",
+    "category": "生命現象",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0036",
+    "term": "棲息地",
+    "unit": "life",
+    "grade": "4",
+    "def": "生物長期生活並取得食物、水、空間和庇護等資源的環境。",
+    "example": "潮間帶是許多螃蟹和貝類的棲息地。",
+    "category": "生命現象",
+    "distractor_pool": "ecosystem_concepts"
+  },
+  {
+    "id": "e0037",
+    "term": "根",
+    "unit": "life",
+    "grade": "3",
+    "def": "多位於土壤中，負責固定植物並吸收水和礦物質的器官。",
+    "example": "植物的根能抓住土壤，也能吸收水分。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0038",
+    "term": "莖",
+    "unit": "life",
+    "grade": "3",
+    "def": "支撐葉、花和果實，並運送水分與養分的植物器官。",
+    "example": "鳳仙花的莖能把有色水向上運送。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0039",
+    "term": "葉",
+    "unit": "life",
+    "grade": "3",
+    "def": "多為扁平構造，是植物製造養分和進行氣體交換的重要器官。",
+    "example": "綠色的葉能利用陽光製造養分。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0040",
+    "term": "花",
+    "unit": "life",
+    "grade": "3",
+    "def": "種子植物進行有性生殖的重要器官，常含雄蕊和雌蕊。",
+    "example": "蜜蜂停在花上採蜜時也可能幫忙傳粉。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0041",
+    "term": "果實",
+    "unit": "life",
+    "grade": "3",
+    "def": "花受精後由子房等構造發育而成，能保護種子。",
+    "example": "番茄的果實裡包著許多種子。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0042",
+    "term": "種子",
+    "unit": "life",
+    "grade": "3",
+    "def": "含有胚和養分，適當條件下能萌發成新植物的構造。",
+    "example": "綠豆種子吸水後會逐漸發芽。",
+    "category": "植物構造",
+    "distractor_pool": "plant_parts"
+  },
+  {
+    "id": "e0043",
+    "term": "萌發",
+    "unit": "life",
+    "grade": "3",
+    "def": "種子在水分、空氣和適當溫度下開始生長的過程。",
+    "example": "綠豆的萌發需要水分、空氣和適當溫度。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0044",
+    "term": "光合作用",
+    "unit": "life",
+    "grade": "5",
+    "def": "綠色植物利用光能，把水和二氧化碳製造成養分並釋出氧氣的過程。",
+    "example": "植物進行光合作用時，需要陽光、水和二氧化碳。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0045",
+    "term": "蒸散作用",
+    "unit": "life",
+    "grade": "6",
+    "def": "植物體內水分主要由葉片氣孔散失到空氣中的現象。",
+    "example": "天氣炎熱時，植物的蒸散作用通常會加快。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0046",
+    "term": "傳粉",
+    "unit": "life",
+    "grade": "4",
+    "def": "花粉藉由風、動物或其他方式，從雄蕊移到同種花雌蕊柱頭上的過程。",
+    "example": "蜜蜂訪花能協助許多植物完成傳粉。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0047",
+    "term": "受精",
+    "unit": "life",
+    "grade": "5",
+    "def": "雄性生殖細胞與雌性生殖細胞結合，形成受精卵的過程。",
+    "example": "植物完成傳粉後，雄性與雌性生殖細胞結合，就是受精。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0048",
+    "term": "種子傳播",
+    "unit": "life",
+    "grade": "4",
+    "def": "種子藉由風、水、動物或果實彈力離開母株的過程。",
+    "example": "蒲公英利用風力進行種子傳播。",
+    "category": "植物生長",
+    "distractor_pool": "plant_processes"
+  },
+  {
+    "id": "e0049",
+    "term": "完全變態",
+    "unit": "life",
+    "grade": "4",
+    "def": "昆蟲一生經過卵、幼蟲、蛹和成蟲四個階段的生長方式。",
+    "example": "蝴蝶的完全變態包含毛毛蟲和蛹的階段。",
+    "category": "動物成長",
+    "distractor_pool": "animal_development_types"
+  },
+  {
+    "id": "e0050",
+    "term": "不完全變態",
+    "unit": "life",
+    "grade": "4",
+    "def": "昆蟲一生經過卵、若蟲和成蟲三個階段，不經過蛹期。",
+    "example": "蟋蟀採取不完全變態，若蟲外形像縮小的成蟲。",
+    "category": "動物成長",
+    "distractor_pool": "animal_development_types"
+  },
+  {
+    "id": "e0051",
+    "term": "胎生",
+    "unit": "life",
+    "grade": "4",
+    "def": "胚胎主要在母體內發育，出生時通常已是幼體的生殖方式。",
+    "example": "人類是胎生動物，胎兒在母體內發育。",
+    "category": "動物成長",
+    "distractor_pool": "animal_development_types"
+  },
+  {
+    "id": "e0052",
+    "term": "卵生",
+    "unit": "life",
+    "grade": "4",
+    "def": "動物產下卵，胚胎主要在卵內發育後孵化的生殖方式。",
+    "example": "雞屬於卵生動物，雛雞由蛋中孵出。",
+    "category": "動物成長",
+    "distractor_pool": "animal_development_types"
+  },
+  {
+    "id": "e0053",
+    "term": "幼體",
+    "unit": "life",
+    "grade": "3",
+    "def": "動物出生或孵化後，尚未發育成熟的早期階段。",
+    "example": "蝌蚪是青蛙的幼體，生活方式和成蛙不同。",
+    "category": "動物成長",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0054",
+    "term": "成體",
+    "unit": "life",
+    "grade": "3",
+    "def": "動物經過生長發育而成熟，外形完整且通常具有繁殖能力的階段。",
+    "example": "青蛙的成體有四肢，能在陸地和水邊活動。",
+    "category": "動物成長",
+    "distractor_pool": "life_cycle_concepts"
+  },
+  {
+    "id": "e0055",
+    "term": "脊椎動物",
+    "unit": "life",
+    "grade": "5",
+    "def": "體內具有脊椎的動物總稱，包括魚類、兩生類、爬蟲類、鳥類和哺乳類。",
+    "example": "臺灣黑熊是具有脊椎的脊椎動物。",
+    "category": "動物分類",
+    "distractor_pool": "broad_life_classification"
+  },
+  {
+    "id": "e0056",
+    "term": "無脊椎動物",
+    "unit": "life",
+    "grade": "5",
+    "def": "體內沒有脊椎的動物總稱，例如昆蟲、蜘蛛、蝸牛和水母。",
+    "example": "蝴蝶屬於無脊椎動物，體內沒有脊椎。",
+    "category": "動物分類",
+    "distractor_pool": "broad_life_classification"
+  },
+  {
+    "id": "e0057",
+    "term": "魚類",
+    "unit": "life",
+    "grade": "4",
+    "def": "通常生活在水中，以鰓呼吸並用鰭游動的脊椎動物。",
+    "example": "吳郭魚屬於魚類，利用鰓取得水中的氧氣。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0058",
+    "term": "兩生類",
+    "unit": "life",
+    "grade": "4",
+    "def": "幼體多生活在水中，成體可在水陸活動的脊椎動物。",
+    "example": "青蛙屬於兩生類，皮膚需要保持溼潤。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0059",
+    "term": "鳥類",
+    "unit": "life",
+    "grade": "4",
+    "def": "身體有羽毛、前肢多變成翼，通常產有硬殼卵的脊椎動物。",
+    "example": "麻雀屬於鳥類，身體表面覆蓋羽毛。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  },
+  {
+    "id": "e0060",
+    "term": "哺乳類",
+    "unit": "life",
+    "grade": "4",
+    "def": "多以肺呼吸、身體有毛，母體能分泌乳汁哺育幼兒的脊椎動物。",
+    "example": "石虎屬於哺乳類，幼兒會吸食母乳。",
+    "category": "動物分類",
+    "distractor_pool": "vertebrate_groups"
+  }
+]

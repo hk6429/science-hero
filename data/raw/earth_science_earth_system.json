@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d0145",
+    "term": "地球系統",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "由大氣、水、岩石、生物等圈層互相作用形成的整體。",
+    "example": "火山噴發同時影響空氣、水體與生物，需以地球系統觀點分析。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0146",
+    "term": "圈層交互作用",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "地球不同圈層間交換物質與能量並彼此影響的過程。",
+    "example": "豪雨沖刷坡地，泥沙進入河川，是大氣與岩石、水體的圈層交互作用。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0147",
+    "term": "物質循環",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "物質在地球不同儲存庫與過程間反覆移動和轉換。",
+    "example": "水從海洋進入大氣再回到地表，是物質循環的例子。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0148",
+    "term": "能量流動",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "能量進入、轉換並離開地球各系統的過程。",
+    "example": "太陽能加熱海面並驅動水循環，呈現能量流動。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0149",
+    "term": "動態平衡",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "系統中相反過程持續進行，但整體狀態在一段時間內大致穩定。",
+    "example": "湖泊進水量與出水量長期相近時，水位可維持動態平衡。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0150",
+    "term": "回饋作用",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "系統變化引發後續效應，可能放大或減弱原變化的機制。",
+    "example": "冰雪減少使地表吸收更多熱而加速融化，是放大型回饋作用。",
+    "category": "系統交互作用",
+    "distractor_pool": "system_interaction"
+  },
+  {
+    "id": "d0151",
+    "term": "水循環",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "水在海洋、陸地、大氣與生物間經蒸發、凝結、降水等過程移動。",
+    "example": "雨水流入河川再回到海洋，是水循環的一段路徑。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0152",
+    "term": "蒸發散",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "地表蒸發與植物蒸散合計向大氣輸送水氣的過程。",
+    "example": "森林地區晴天時，土壤與葉片共同產生蒸發散。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0153",
+    "term": "地表逕流",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "降水未滲入地下而沿地表流向河川或低處的水。",
+    "example": "豪雨落在水泥地後快速流入排水溝，形成地表逕流。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0154",
+    "term": "入滲",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "地表水進入土壤或岩層孔隙的過程。",
+    "example": "草地上的雨水比柏油路面更容易入滲。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0155",
+    "term": "地下水",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "儲存在地表下土壤與岩層孔隙中的水。",
+    "example": "水井抽出的水主要來自地下水。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0156",
+    "term": "集水區",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "降水最後匯集到同一河川、湖泊或出口的地表範圍。",
+    "example": "山稜線可作為相鄰兩個集水區的分界。",
+    "category": "水文循環",
+    "distractor_pool": "system_water"
+  },
+  {
+    "id": "d0157",
+    "term": "天氣與氣候",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "天氣描述短時間大氣狀態，氣候是長時間天氣統計特徵。",
+    "example": "今天下雨是天氣；某地冬季多雨是氣候，因此要分辨天氣與氣候。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0158",
+    "term": "氣候",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "某地區經長時間觀測所得的天氣平均狀態與變化特徵。",
+    "example": "分析一地至少數十年的氣溫與雨量資料，才能描述其氣候。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0159",
+    "term": "溫室效應",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "大氣吸收並放射地表紅外線，使近地表比沒有大氣時溫暖的自然作用。",
+    "example": "若沒有適度溫室效應，地球平均表面溫度會低得多。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0160",
+    "term": "全球暖化",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "全球平均表面溫度在較長時間尺度上持續上升的現象。",
+    "example": "比較百年以上溫度紀錄，可評估全球暖化趨勢而非只看單日寒流。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0161",
+    "term": "氣候變遷",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "氣候平均狀態或變異在數十年以上尺度出現持續改變。",
+    "example": "長期熱浪頻率、海平面和降雨型態改變，都是氣候變遷研究指標。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0162",
+    "term": "碳循環",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "碳在大氣、海洋、岩石與生物之間移動和轉換的過程。",
+    "example": "植物吸收二氧化碳、枯木分解再釋出碳，都是碳循環的一部分。",
+    "category": "氣候變遷",
+    "distractor_pool": "system_climate"
+  },
+  {
+    "id": "d0163",
+    "term": "天然災害",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "自然現象對人命、財產或環境造成重大損失的事件。",
+    "example": "同樣規模的颱風若未影響人口區，造成的天然災害程度可能不同。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0164",
+    "term": "震災",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "地震搖晃、斷層錯動或次生效應造成的災害。",
+    "example": "老舊建築倒塌與道路中斷都可能是震災。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0165",
+    "term": "山崩",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "坡地上的岩土在重力作用下快速向下移動的現象。",
+    "example": "連日豪雨後陡坡岩土突然滑落，可能發生山崩。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0166",
+    "term": "土石流",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "大量泥沙、石塊與水混合後沿溪谷快速流動的現象。",
+    "example": "土石流警戒發布時，居民應遠離溪床並依指示撤離。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0167",
+    "term": "洪水",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "河川或排水系統無法容納水量，導致水淹過平常範圍的現象。",
+    "example": "短時強降雨使河水越過堤岸，造成洪水。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0168",
+    "term": "乾旱",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "長時間降水不足，使可用水量顯著短缺的現象。",
+    "example": "水庫集水區數月少雨並限水，顯示乾旱已影響生活。",
+    "category": "災害與防救",
+    "distractor_pool": "system_hazard"
+  },
+  {
+    "id": "d0169",
+    "term": "自然資源",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "人類從自然環境取得並加以利用的物質、能量或條件。",
+    "example": "陽光、森林、礦產和水都可視為自然資源。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0170",
+    "term": "再生資源",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "在適當利用下可於人類時間尺度內補充或更新的資源。",
+    "example": "持續有日照時，太陽能屬於再生資源。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0171",
+    "term": "非再生資源",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "形成速度遠慢於消耗速度，在人類時間尺度內難以補充的資源。",
+    "example": "煤與石油被大量開採後難以迅速恢復，屬於非再生資源。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0172",
+    "term": "化石燃料",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "古代生物遺體經長期地質作用形成的煤、石油與天然氣等燃料。",
+    "example": "燃燒化石燃料發電會釋放二氧化碳。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0173",
+    "term": "水資源",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "可供生態與人類生活、生產使用的地表水和地下水。",
+    "example": "保護集水區水質有助於維持可用水資源。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0174",
+    "term": "能源轉型",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "能源系統由高碳或有限來源逐步改向低碳、多元與高效率來源的過程。",
+    "example": "增加再生能源並提升儲能與節能，是能源轉型的做法。",
+    "category": "資源與能源",
+    "distractor_pool": "system_resource"
+  },
+  {
+    "id": "d0175",
+    "term": "永續發展",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "在滿足當代需求時，也維持後代滿足需求能力的發展方式。",
+    "example": "城市規劃同時考量環境、社會與經濟，是永續發展的實踐。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0176",
+    "term": "減碳",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "減少溫室氣體排放或增加碳移除，以降低淨排放的行動。",
+    "example": "搭乘大眾運輸並提高能源效率，都能協助減碳。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0177",
+    "term": "氣候調適",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "調整生活、設施與制度，以降低氣候變遷衝擊或利用可能機會。",
+    "example": "城市增加遮蔭與滯洪空間，是面對高溫豪雨的氣候調適。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0178",
+    "term": "防災",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "災前減災整備、災時應變與災後復原等降低損失的行動。",
+    "example": "學校固定演練避難路線，是防災工作的一部分。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0179",
+    "term": "環境監測",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "持續或定期量測環境指標，以掌握狀態與變化。",
+    "example": "長期記錄河川水質和空氣品質，屬於環境監測。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  },
+  {
+    "id": "d0180",
+    "term": "循環經濟",
+    "unit": "earth_system",
+    "grade": "9",
+    "def": "透過減量、維修、再使用與回收，延長材料價值並減少廢棄的經濟模式。",
+    "example": "把舊電腦整修後再使用，而非直接丟棄，是循環經濟的例子。",
+    "category": "永續行動",
+    "distractor_pool": "system_sustainability"
+  }
+]

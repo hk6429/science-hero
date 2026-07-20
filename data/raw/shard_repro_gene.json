@@ -1,0 +1,382 @@
+[
+  {
+    "id": "gene_001",
+    "term": "無性生殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "不需要精卵結合，僅由親代直接產生後代的生殖方式，後代與親代基因幾乎相同。",
+    "example": "草莓可以靠匍匐莖進行無性生殖，長出與母株相同的新植株。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "gene_002",
+    "term": "有性生殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "經由精子與卵結合成受精卵，再發育成新個體的生殖方式，後代同時帶有雙親的基因。",
+    "example": "大多數動物都以有性生殖的方式繁衍下一代。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "gene_003",
+    "term": "分裂生殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "單一個體直接分裂成兩個獨立新個體的無性生殖方式，常見於單細胞生物。",
+    "example": "變形蟲會以分裂生殖的方式，一分為二產生兩個新個體。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "gene_004",
+    "term": "出芽生殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "親代體表長出突起的芽體，芽體長大成熟後脫離或留在原處成為新個體的無性生殖方式。",
+    "example": "酵母菌常以出芽生殖的方式快速增加族群數量。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "gene_005",
+    "term": "營養器官繁殖",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "植物利用根、莖、葉等營養器官長出新個體的無性生殖方式，不經過開花結果。",
+    "example": "馬鈴薯可以靠塊莖進行營養器官繁殖，長出新的植株。",
+    "category": "生殖方式",
+    "distractor_pool": "reproduction_type"
+  },
+  {
+    "id": "gene_006",
+    "term": "精子",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "雄性動物產生的生殖細胞，具有鞭毛可游動，與卵結合後形成受精卵。",
+    "example": "精子必須與卵結合，才能發育成新的生命個體。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_007",
+    "term": "卵",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "雌性動物產生的生殖細胞，體積通常較大且含有較多養分，供受精卵早期發育使用。",
+    "example": "卵與精子結合後，就會形成受精卵。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_008",
+    "term": "受精",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "精子與卵的細胞核融合成一個細胞核的過程，是有性生殖形成新生命的關鍵步驟。",
+    "example": "精子與卵完成受精後，會形成具有雙親基因的受精卵。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_009",
+    "term": "受精卵",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "精子與卵結合後形成的單一細胞，具有發育成完整新個體的能力。",
+    "example": "受精卵會經過多次細胞分裂，逐漸發育成胚胎。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_010",
+    "term": "胚胎",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "受精卵經過細胞分裂與分化後，尚未發育完全但已具備基本器官雛形的個體階段。",
+    "example": "人類的胚胎在母體子宮內逐漸發育出各項器官。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_011",
+    "term": "胚胎發育",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "受精卵經由細胞分裂、分化與器官形成，逐漸長成完整個體的過程。",
+    "example": "哺乳動物的胚胎發育大多在母體的子宮內完成。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_012",
+    "term": "月經週期",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "女性生殖系統中，子宮內膜隨排卵與荷爾蒙變化而週期性增厚、剝落出血的循環過程。",
+    "example": "月經週期通常以月經來潮的第一天作為週期的起始日。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_013",
+    "term": "排卵",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "卵巢釋放成熟的卵，使其進入輸卵管等待受精的過程。",
+    "example": "排卵通常發生在月經週期的中間階段。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_014",
+    "term": "子宮內膜",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "子宮壁內側會隨月經週期增厚變化的組織，若未受精便會剝落形成經血排出體外。",
+    "example": "若卵未受精，增厚的子宮內膜就會剝落形成月經排出。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_015",
+    "term": "生殖細胞",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "生物體內專門用來繁衍後代的細胞，如精子與卵，需經減數分裂產生。",
+    "example": "精子與卵都屬於生殖細胞，各帶有一半數量的染色體。",
+    "category": "生殖構造與過程",
+    "distractor_pool": "repro_process"
+  },
+  {
+    "id": "gene_016",
+    "term": "染色體",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "細胞核內由DNA與蛋白質組成、可攜帶遺傳訊息的構造，在細胞分裂時可清楚觀察到。",
+    "example": "人類體細胞的細胞核內共有二十三對染色體。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_017",
+    "term": "基因",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "位於染色體上，可決定生物性狀、具有特定功能的DNA片段。",
+    "example": "控制眼睛顏色的基因位在特定的染色體上。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_018",
+    "term": "DNA",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "去氧核醣核酸的縮寫，是構成染色體與基因的化學物質，攜帶生物體的遺傳訊息。",
+    "example": "DNA上排列的訊息決定了生物體各種性狀的表現。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_019",
+    "term": "對偶基因",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "位於一對同源染色體相同位置上，控制同一種性狀的一對基因。",
+    "example": "控制豌豆莖高矮的對偶基因，分別來自父方與母方。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_020",
+    "term": "遺傳因子",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "孟德爾用來稱呼控制生物性狀之遺傳單位的舊稱，其概念相當於現在所說的基因。",
+    "example": "孟德爾當時以遺傳因子來說明性狀如何一代代傳遞下去。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_021",
+    "term": "性染色體",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "決定生物性別的一對染色體，人類的性染色體組合為XX女性或XY男性。",
+    "example": "人類的性染色體若為XY組合，個體便會發育為男性。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_022",
+    "term": "體染色體",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "染色體中除性染色體以外，男女都相同、不直接決定性別的染色體。",
+    "example": "人類的二十三對染色體中，有二十二對是體染色體。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_023",
+    "term": "突變",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "基因或染色體結構發生改變，使生物性狀出現與原本不同變化的現象。",
+    "example": "突變可能使生物出現新的性狀，也可能對個體造成不利影響。",
+    "category": "遺傳物質",
+    "distractor_pool": "genetic_material"
+  },
+  {
+    "id": "gene_024",
+    "term": "顯性",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "一對對偶基因中，只要有一個顯性基因存在就會表現出來的性狀特性。",
+    "example": "豌豆的高莖是顯性，只要有一個高莖基因就會表現出高莖性狀。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_025",
+    "term": "隱性",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "一對對偶基因必須兩個都是隱性基因，該性狀才會表現出來的特性。",
+    "example": "豌豆的矮莖是隱性，要兩個矮莖基因同時存在才會表現出矮莖性狀。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_026",
+    "term": "孟德爾遺傳法則",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "孟德爾利用豌豆雜交實驗歸納出的遺傳原理，說明性狀由成對的遺傳因子控制並可傳遞給後代。",
+    "example": "孟德爾遺傳法則說明了顯性與隱性性狀在後代中出現的規律。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_027",
+    "term": "分離律",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "孟德爾提出的原理之一，指成對的對偶基因在形成生殖細胞時會分開，各自進入不同的生殖細胞。",
+    "example": "依照分離律，一對對偶基因會分別進入不同的精子或卵中。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_028",
+    "term": "性狀",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "生物體可觀察到的特徵，如身高、花色或血型，通常受基因控制。",
+    "example": "豌豆的莖高矮就是一種容易觀察的性狀。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_029",
+    "term": "表現型",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "生物體實際表現出來、可觀察到的性狀，是基因型與環境共同作用的結果。",
+    "example": "即使基因型不同，兩株豌豆也可能表現出相同的高莖表現型。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_030",
+    "term": "基因型",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "個體所擁有的對偶基因組合，用來表示控制某性狀的基因種類，未必能直接被觀察到。",
+    "example": "高莖豌豆的基因型可能是兩個顯性基因，也可能是一顯一隱。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_031",
+    "term": "純種",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "控制某性狀的一對對偶基因相同的個體，其後代該性狀不會發生分離變化。",
+    "example": "純種的高莖豌豆自交後，後代仍然全部都是高莖。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_032",
+    "term": "雜種",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "控制某性狀的一對對偶基因不相同的個體，帶有一個顯性基因與一個隱性基因。",
+    "example": "雜種的高莖豌豆雖然表現出高莖，卻同時帶有矮莖的隱性基因。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_033",
+    "term": "遺傳圖譜",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "用圖示呈現親代與子代之間性狀傳遞關係的示意圖，幫助說明基因如何一代代傳下去。",
+    "example": "老師利用遺傳圖譜說明親代的基因如何組合傳給子代。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_034",
+    "term": "自交",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "同一株植物或個體的花粉與卵細胞自行授粉受精，用來檢驗其基因型是否為純種的方法。",
+    "example": "孟德爾利用自交的方式，觀察高莖豌豆後代是否會出現矮莖性狀。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_035",
+    "term": "雜交",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "兩個基因型不同的個體互相授粉或交配，用來觀察後代性狀表現的遺傳方法。",
+    "example": "孟德爾將高莖豌豆與矮莖豌豆雜交，觀察子代表現出的性狀。",
+    "category": "遺傳原理",
+    "distractor_pool": "genetics_principle"
+  },
+  {
+    "id": "gene_036",
+    "term": "減數分裂",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "生殖細胞形成時進行的特殊細胞分裂，會使產生的細胞染色體數目減半。",
+    "example": "精子與卵都是經過減數分裂產生的，染色體數目只有體細胞的一半。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  },
+  {
+    "id": "gene_037",
+    "term": "體細胞分裂",
+    "unit": "repro_gene",
+    "grade": "8",
+    "def": "一般體細胞進行的細胞分裂方式，分裂後產生的兩個新細胞染色體數目與原細胞相同。",
+    "example": "人體受傷後的傷口癒合，主要依靠體細胞分裂增生新細胞。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  },
+  {
+    "id": "gene_038",
+    "term": "同源染色體",
+    "unit": "repro_gene",
+    "grade": "9",
+    "def": "一對形狀、大小相同，且分別來自父方與母方、攜帶相同種類基因的染色體。",
+    "example": "減數分裂時，同源染色體會先配對再分開，各自進入不同的生殖細胞。",
+    "category": "細胞分裂",
+    "distractor_pool": "cell_division"
+  }
+]

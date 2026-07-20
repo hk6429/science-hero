@@ -1,0 +1,362 @@
+[
+  {
+    "id": "pc0145",
+    "term": "電荷",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "物質粒子所帶的電性，分為正電荷與負電荷。",
+    "example": "電荷：玻璃棒摩擦後能吸起小紙片，表示玻璃棒帶有電荷。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0146",
+    "term": "電中性",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "物體正負電荷量相等，對外呈現淨電荷為零的狀態。",
+    "example": "電中性：未摩擦的金屬球正負電荷量相等，整體呈電中性。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0147",
+    "term": "電荷守恆",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "孤立系統的淨電荷總量保持不變；常見起電現象是電子在物體間轉移。",
+    "example": "電荷守恆：兩物體摩擦後一正一負，總電荷仍符合電荷守恆。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0148",
+    "term": "摩擦起電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "不同材質摩擦時發生電子轉移，使物體帶電的現象。",
+    "example": "摩擦起電：塑膠尺和毛料摩擦後能吸引紙屑，是摩擦起電。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0149",
+    "term": "靜電力",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "靜止帶電物體間的作用力，同號電荷相斥、異號電荷相吸。",
+    "example": "靜電力：兩個帶負電的小球互相排斥，顯示同號電荷間有排斥的靜電力。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0150",
+    "term": "靜電感應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "帶電體靠近導體時，使導體內電荷重新分布的現象。",
+    "example": "靜電感應：帶電棒靠近金屬球但不接觸，球內電荷重新分布，是靜電感應。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0151",
+    "term": "電流",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電荷的定向移動，大小為單位時間通過截面的電荷量。",
+    "example": "電流：導線中每秒通過截面的電荷量越多，電流越大。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0152",
+    "term": "安培",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流的國際單位，符號為 A。",
+    "example": "安培：小燈泡電流為 0.3 安培，可記作 0.3 A。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0153",
+    "term": "電壓",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路兩點間每單位正電荷的電位能差，也稱為電位差。",
+    "example": "電壓：乾電池兩端標示 1.5 V，表示它提供約 1.5 伏特的電壓。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0154",
+    "term": "伏特",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電壓的國際單位，符號為 V。",
+    "example": "伏特：家用插座的電壓以伏特為單位標示。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0155",
+    "term": "電阻",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "導體阻礙電流通過的程度。",
+    "example": "電阻：同電壓下，電阻較大的元件通過的電流較小。",
+    "category": "電路量",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0156",
+    "term": "歐姆定律",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "對歐姆性導體，在溫度等物理條件不變時，電流與兩端電壓成正比，且電壓與電流的比值為電阻。",
+    "example": "歐姆定律：某電阻兩端電壓加倍時電流也加倍，實驗結果符合歐姆定律。",
+    "category": "電路量",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0157",
+    "term": "電路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "由電源、導線與元件連接而成的系統；閉合時可形成電流路徑。",
+    "example": "電路：把電池、導線、開關與燈泡連接，可組成一個電路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0158",
+    "term": "通路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路完整連接，電流可以通過的狀態。",
+    "example": "通路：開關閉合且燈泡發亮時，電路處於通路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0159",
+    "term": "斷路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路某處中斷，電流無法通過的狀態。",
+    "example": "斷路：開關打開後燈泡熄滅，此時電路為斷路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0160",
+    "term": "短路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流繞過負載而通過極低電阻路徑，造成過大電流的危險情況。",
+    "example": "短路：導線直接跨接電池兩端會形成短路，可能造成過大電流。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0161",
+    "term": "串聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "元件首尾相接在同一電流路徑上的連接方式。",
+    "example": "串聯：兩顆燈泡接在同一條無分岔路徑上，屬於串聯。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0162",
+    "term": "並聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "元件兩端分別接在相同兩節點，形成多條電流路徑的方式。",
+    "example": "並聯：家中燈具各自跨接在相同兩條電線上，屬於並聯。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0163",
+    "term": "安培計",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "測量電流的儀表，使用時必須與欲測量電流的支路或元件串聯。",
+    "example": "安培計：測量燈泡電流時，安培計要串接在燈泡所在支路。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0164",
+    "term": "伏特計",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "測量元件兩端電壓的儀表，使用時必須與待測元件並聯。",
+    "example": "伏特計：測量電池兩端電壓時，伏特計要與電池並聯。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0165",
+    "term": "電功率",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電器每單位時間轉換的電能，可用電壓與電流乘積求得。",
+    "example": "電功率：110 伏特、2 安培的電器，其電功率為 220 瓦。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0166",
+    "term": "電能",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電場使電荷移動時所傳遞的能量；電路元件使用的電能可由電功率乘以時間求得。",
+    "example": "電能：1000 瓦吹風機使用半小時，消耗的電能為 0.5 千瓦小時。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0167",
+    "term": "度",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "家庭電能常用計費單位，一度等於一千瓦小時。",
+    "example": "度：1000 瓦電器使用 1 小時消耗一度電。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0168",
+    "term": "焦耳熱",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流通過電阻時，電能轉換為內能而發熱的現象。",
+    "example": "焦耳熱：電熱水壺的電阻絲通電後升溫，是焦耳熱的應用。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0169",
+    "term": "保險絲",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "過大電流時會熔斷以切斷電路的安全裝置。",
+    "example": "保險絲：電流過大時保險絲熔斷，可避免導線持續過熱。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0170",
+    "term": "無熔絲開關",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流過大時會自動跳脫，排除問題後可復原的安全裝置。",
+    "example": "無熔絲開關：同時使用多個高功率電器時，無熔絲開關可能因過流而跳脫。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0171",
+    "term": "接地",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "以保護導體將電器金屬外殼連接大地或接地系統，提供低電阻故障路徑，以降低觸電風險並促使保護裝置切斷電路。",
+    "example": "接地：洗衣機金屬外殼妥善接地，可在故障時降低觸電風險。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0172",
+    "term": "漏電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流離開原設計電路，流向外殼、人體或大地的現象。",
+    "example": "漏電：電線絕緣破損使電流流向外殼，屬於漏電。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0173",
+    "term": "過載",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "同一電路使用過多或高功率電器，使電流超過安全值的情況。",
+    "example": "過載：延長線同時接太多高功率電器，可能造成過載。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0174",
+    "term": "觸電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "人體成為電流路徑而受到電流傷害的事故。",
+    "example": "觸電：濕手碰觸裸露導線可能讓人體通電而觸電。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0175",
+    "term": "載流導線受力與電動機",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "載有電流的導線在磁場中會受力，電動機利用此效應把電能轉換為機械能。",
+    "example": "載流導線受力與電動機：簡易馬達通電後線圈受磁力而轉動，呈現載流導線受力與電動機原理。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0176",
+    "term": "磁場",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "磁鐵或電流周圍能產生磁力作用的空間。",
+    "example": "磁場：指南針靠近磁鐵會轉向，顯示周圍存在磁場。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0177",
+    "term": "磁力線",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "用來描述磁場方向與強弱的假想曲線。",
+    "example": "磁力線：在磁鐵旁撒鐵粉可觀察排列情形，用磁力線描述磁場。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0178",
+    "term": "電流磁效應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流通過導線時，導線周圍會產生磁場的現象。",
+    "example": "電流磁效應：通電直導線使旁邊指南針偏轉，證明電流磁效應。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0179",
+    "term": "電磁感應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "穿過迴路的磁通量改變時會產生感應電動勢；若迴路閉合，便形成感應電流。",
+    "example": "電磁感應：磁鐵快速進出閉合線圈時電流計偏轉，顯示發生電磁感應。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0180",
+    "term": "發電機",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "利用電磁感應將機械能轉換為電能的裝置。",
+    "example": "發電機：手搖發電機轉動線圈後點亮燈泡，把機械能轉成電能。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  }
+]

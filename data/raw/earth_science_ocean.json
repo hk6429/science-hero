@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d0073",
+    "term": "海洋",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "覆蓋大部分地表、彼此連通的大型鹹水水體。",
+    "example": "從衛星影像可看出海洋覆蓋的面積遠大於陸地。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0074",
+    "term": "鹽度",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海水中溶解鹽類含量的量度，會受蒸發、降水與河水注入影響。",
+    "example": "河口在大雨後混入大量淡水，表層海水的鹽度通常降低。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0075",
+    "term": "海表溫度",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海洋表層水溫，是監測洋流、颱風與氣候的重要資料。",
+    "example": "氣象衛星顯示颱風路徑前方海表溫度高，有利於能量供應。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0076",
+    "term": "海水密度",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "單位體積海水的質量，主要受溫度與鹽度影響。",
+    "example": "相同鹽度下冷海水通常具有較大的海水密度。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0077",
+    "term": "溫躍層",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海水溫度隨深度快速下降的水層。",
+    "example": "夏季量測海溫剖面時，中層溫度突然降低的區段是溫躍層。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0078",
+    "term": "溶氧量",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "水中溶解氧氣的含量，會影響海洋生物生存。",
+    "example": "養殖池的溶氧量過低時，魚群可能浮到水面呼吸。",
+    "category": "海水性質",
+    "distractor_pool": "ocean_water"
+  },
+  {
+    "id": "d0079",
+    "term": "海浪",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海面受到風等擾動而形成、主要傳遞能量的波動。",
+    "example": "浮標隨海浪上下振動，卻不會和每個浪峰一起一路漂到岸上。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0080",
+    "term": "波峰",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "波形中相對於平均水面的最高位置。",
+    "example": "拍攝規律水波時，可在照片上標出每一道波峰。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0081",
+    "term": "波谷",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "波形中相對於平均水面的最低位置。",
+    "example": "兩個相鄰浪頭之間最低處就是波谷。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0082",
+    "term": "波高",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "同一個波的波峰到波谷之垂直距離。",
+    "example": "浪峰高於平均水面 1 公尺、浪谷低 1 公尺時，波高為 2 公尺。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0083",
+    "term": "波浪週期",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "同一地點連續兩個波峰通過的時間間隔。",
+    "example": "浮標每 8 秒升到最高點一次，表示波浪週期約 8 秒。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0084",
+    "term": "碎波",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪進入淺水區後變陡並破碎的現象。",
+    "example": "海邊浪頭向前捲曲後崩落，可觀察到碎波。",
+    "category": "海浪觀測",
+    "distractor_pool": "ocean_wave"
+  },
+  {
+    "id": "d0085",
+    "term": "潮汐",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海面受月球與太陽引力等影響而規律升降的現象。",
+    "example": "漁港水位每天規律高低變化，是潮汐造成的。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0086",
+    "term": "滿潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "一個潮汐週期中海面上升到較高水位的時刻。",
+    "example": "船隻可依港口滿潮時間安排進出淺水航道。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0087",
+    "term": "乾潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "一個潮汐週期中海面下降到較低水位的時刻。",
+    "example": "乾潮時潮間帶露出，適合觀察螃蟹與貝類。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0088",
+    "term": "潮差",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "相鄰滿潮與乾潮水位高度的差。",
+    "example": "滿潮 2.8 公尺、乾潮 0.6 公尺，潮差為 2.2 公尺。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0089",
+    "term": "大潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "日、地、月大致成一直線時，潮差通常較大的潮汐。",
+    "example": "新月或滿月前後常出現大潮。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0090",
+    "term": "小潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "日、地、月方向大致成直角時，潮差通常較小的潮汐。",
+    "example": "上弦月或下弦月前後常出現小潮。",
+    "category": "潮汐變化",
+    "distractor_pool": "ocean_tide"
+  },
+  {
+    "id": "d0091",
+    "term": "海流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海水長時間沿一定方向的大規模流動。",
+    "example": "漂流浮標連續數月移動的路徑可用來分析海流。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0092",
+    "term": "暖流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "水溫比流經海域周圍海水高的海流。",
+    "example": "暖流經過時可把低緯度熱量帶往較高緯度。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0093",
+    "term": "寒流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "水溫比流經海域周圍海水低的海流。",
+    "example": "大陸西岸附近若有寒流經過，沿岸氣溫可能受到影響。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0094",
+    "term": "表面洋流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "主要由盛行風驅動、發生在海洋上層的海水流動。",
+    "example": "海面漂流物的移動方向常受到表面洋流影響。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0095",
+    "term": "深層環流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "因海水密度差異驅動、連結全球深海與表層的緩慢循環。",
+    "example": "高緯度冷而鹹的海水下沉，是深層環流的重要動力。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0096",
+    "term": "黑潮",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "流經臺灣東側、由低緯向北流的強勁暖流。",
+    "example": "臺灣東部外海水溫較高且流速快，常受到黑潮影響。",
+    "category": "海流系統",
+    "distractor_pool": "ocean_current"
+  },
+  {
+    "id": "d0097",
+    "term": "海岸線",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海水與陸地相接的界線，會隨潮汐與地形作用改變。",
+    "example": "比較多年航照圖可發現某地海岸線向陸地方向後退。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0098",
+    "term": "沙岸",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "以沙或細粒沉積物為主、坡度通常較平緩的海岸。",
+    "example": "退潮後可見寬廣沙灘的海岸，可判斷為沙岸。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0099",
+    "term": "岩岸",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "岩石直接出露、常有海崖或礁石的海岸。",
+    "example": "東北角可見陡峭海崖與岩礁，是岩岸景觀。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0100",
+    "term": "海岸侵蝕",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "海浪與沿岸流移除海岸物質，使陸地後退的作用。",
+    "example": "同一地點多年來沙灘變窄，可能受到海岸侵蝕影響。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0101",
+    "term": "海岸堆積",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "搬運的砂石在能量較弱處累積並形成地形的作用。",
+    "example": "港口防波堤一側沙量逐年增加，是海岸堆積的跡象。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0102",
+    "term": "沿岸流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "波浪斜向入射海岸時，沿著岸線方向形成的水流。",
+    "example": "染色浮標平行沙灘移動，可用來判斷沿岸流方向。",
+    "category": "海岸地形",
+    "distractor_pool": "ocean_coast"
+  },
+  {
+    "id": "d0103",
+    "term": "湧升流",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "深層冷水上升到表面的海水運動，常帶來豐富營養鹽。",
+    "example": "沿岸若出現低溫且漁產豐富的海水，可能受到湧升流影響。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0104",
+    "term": "聖嬰現象",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "赤道太平洋中東部海表異常偏暖，並改變大氣與海洋環流的現象。",
+    "example": "監測顯示赤道太平洋東部持續偏暖時，可能進入聖嬰現象。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0105",
+    "term": "反聖嬰現象",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "赤道太平洋中東部海表異常偏冷，並改變大氣與海洋環流的現象。",
+    "example": "赤道太平洋東部海溫持續低於平均值時，可能出現反聖嬰現象。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0106",
+    "term": "海洋資源",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "人類可由海洋取得的生物、礦物、能源與空間等資源。",
+    "example": "漁業、離岸風電和海鹽都屬於海洋資源的利用。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0107",
+    "term": "海洋污染",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "污染物進入海洋並危害生態、健康或海洋利用的情況。",
+    "example": "油污漂到海面並沾附海鳥羽毛，是海洋污染事件。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  },
+  {
+    "id": "d0108",
+    "term": "海洋保育",
+    "unit": "ocean",
+    "grade": "9",
+    "def": "保護海洋棲地與生物多樣性並維持資源永續的行動。",
+    "example": "設置禁漁區並長期監測魚群，是海洋保育的一種做法。",
+    "category": "海洋與環境",
+    "distractor_pool": "ocean_environment"
+  }
+]

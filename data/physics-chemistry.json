@@ -1,0 +1,1804 @@
+[
+  {
+    "id": "pc0001",
+    "term": "物理量",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "可用數值和單位表示，並能透過測量得到的性質。",
+    "example": "小安量得課桌長 120 公分，其中長度就是一個物理量。",
+    "category": "測量",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0002",
+    "term": "國際單位制",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "國際通用的測量單位系統，以公尺、公斤、秒等為基本單位。",
+    "example": "跑道長用公尺、計時用秒，這些都是國際單位制的單位。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0003",
+    "term": "溫度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "表示物體冷熱程度的物理量，常用攝氏溫標表示。",
+    "example": "體溫計顯示 38.2°C，這個溫度比一般體溫高。",
+    "category": "測量",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0004",
+    "term": "最小刻度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "測量工具上相鄰兩刻度線所代表量值的差。",
+    "example": "直尺每一小格是 1 毫米，因此它的最小刻度為 1 毫米。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0005",
+    "term": "視差",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "視線未與刻度面垂直而造成的讀值誤差。",
+    "example": "讀量筒時眼睛高於液面（由上往下看），所得數值會因視差而偏高。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0006",
+    "term": "科學記號",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "將數寫成 a 乘以 10 的 n 次方，且 a 大於等於 1、小於 10 的表示法。",
+    "example": "地球到太陽約 150000000 公里，可用科學記號寫成 1.5×10^8 公里。",
+    "category": "測量",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0007",
+    "term": "質量",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物體所含物質的量，不因所在位置改變。",
+    "example": "同一顆球帶到月球後，天平測得的質量仍不改變。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0008",
+    "term": "體積",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物體在空間中所占的大小。",
+    "example": "長 2 公分、寬 3 公分、高 4 公分的方塊，體積是 24 立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0009",
+    "term": "密度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "單位體積物質的質量，可用質量除以體積求得。",
+    "example": "某金屬塊質量 54 公克、體積 20 立方公分，密度為 2.7 公克／立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "physical_quantity"
+  },
+  {
+    "id": "pc0010",
+    "term": "排水法",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "把不溶於水且不吸水的物體完全浸沒，利用排開水的體積測定不規則物體體積的方法。",
+    "example": "石頭完全沒入量筒後水面由 50 毫升升到 68 毫升，排水法測得體積為 18 立方公分。",
+    "category": "物質性質",
+    "distractor_pool": "measurement_practice"
+  },
+  {
+    "id": "pc0011",
+    "term": "熔點",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "固體與液體在一定壓力下共存時的溫度。",
+    "example": "加熱冰時，冰水共存階段的溫度可用來判斷冰的熔點。",
+    "category": "物質性質",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0012",
+    "term": "沸點",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "液體在一定外界壓力下沸騰時的溫度。",
+    "example": "水沸騰後持續加熱，溫度在當地氣壓下維持的數值就是沸點。",
+    "category": "物質性質",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0013",
+    "term": "三態",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質常見的固態、液態與氣態三種狀態。",
+    "example": "冰塊、水和水蒸氣分別呈現水的三態。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0014",
+    "term": "熔化",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由固態變成液態的狀態變化，過程需吸熱。",
+    "example": "冰塊放在室溫下變成水，是熔化現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0015",
+    "term": "凝固",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由液態變成固態的狀態變化，過程會放熱。",
+    "example": "把水放進冷凍庫變成冰，是凝固現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0016",
+    "term": "氣化",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由液態變成氣態的狀態變化。",
+    "example": "濕衣服晾乾時，水發生氣化進入空氣。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0017",
+    "term": "凝結",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質由氣態變成液態的狀態變化。",
+    "example": "冰飲杯外出現小水珠，是空氣中的水蒸氣凝結而成。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0018",
+    "term": "昇華",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "物質不經液態，直接由固態變成氣態的過程。",
+    "example": "乾冰直接變成二氧化碳氣體，可觀察到昇華現象。",
+    "category": "物質狀態",
+    "distractor_pool": "state"
+  },
+  {
+    "id": "pc0019",
+    "term": "純物質",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "具有固定組成與特定性質，不能用物理方法分離成其他物質的物質。",
+    "example": "蒸餾水具有固定組成，可判斷為純物質。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0020",
+    "term": "混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由兩種以上純物質混合而成，成分比例可以改變。",
+    "example": "空氣含有氮氣、氧氣等多種成分，因此是混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0021",
+    "term": "元素",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由同一種原子組成，無法用一般化學方法分解成更簡單物質的純物質。",
+    "example": "銅導線中的銅和氧氣中的氧，都是元素的例子。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0022",
+    "term": "化合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "由兩種以上元素以固定比例化合而成的純物質。",
+    "example": "水由氫、氧兩種元素以固定比例組成，是化合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0023",
+    "term": "均勻混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "各部分組成與性質一致，無法直接分辨成分的混合物。",
+    "example": "食鹽水各處的鹹度一致，可視為均勻混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0024",
+    "term": "非均勻混合物",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "各部分組成或性質不一致，可看出不同成分或相的混合物。",
+    "example": "泥水靜置後可看見沉澱與上層水，是非均勻混合物。",
+    "category": "物質分類",
+    "distractor_pool": "matter_class"
+  },
+  {
+    "id": "pc0025",
+    "term": "溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "溶質均勻分散在溶劑中所形成的均勻混合物。",
+    "example": "食鹽完全溶於水後形成透明均勻的溶液。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0026",
+    "term": "溶質",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在溶液中被溶解、通常含量較少的成分。",
+    "example": "配製糖水時，加入並被溶解的糖是溶質。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0027",
+    "term": "溶劑",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在溶液中用來溶解其他物質、通常含量較多的成分。",
+    "example": "配製糖水時，用來溶解糖的水是溶劑。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0028",
+    "term": "飽和溶液",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在一定溫度下已無法再溶解更多該溶質的溶液。",
+    "example": "室溫下持續加鹽並攪拌，杯底仍有鹽不再溶解，上層液體是飽和溶液。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0029",
+    "term": "溶解度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "在一定溫度下，100 公克溶劑所能溶解溶質的最大量。",
+    "example": "查表可知 20°C 時 100 公克水最多能溶多少食鹽，這個數值就是該溫度的溶解度。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0030",
+    "term": "重量百分濃度",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "溶質質量占溶液總質量的百分比。",
+    "example": "10 公克食鹽加 90 公克水配成溶液，其重量百分濃度為 10%。",
+    "category": "溶液",
+    "distractor_pool": "solution"
+  },
+  {
+    "id": "pc0031",
+    "term": "過濾",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用濾材截留不溶性固體，將其與液體分離的方法。",
+    "example": "把泥水倒入漏斗，濾紙留下泥沙，這項操作稱為過濾。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0032",
+    "term": "蒸餾",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用各成分沸點不同，先氣化再冷凝以分離的方法。",
+    "example": "將鹽水加熱並收集冷凝水，可用蒸餾取得較純的水。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0033",
+    "term": "結晶",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "使溶液中的溶質形成規則排列固體晶體的過程。",
+    "example": "濃食鹽水蒸發部分水分後出現晶體，可用結晶分離食鹽。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0034",
+    "term": "色層分析",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用各成分在固定相與流動相間作用差異進行分離的方法。",
+    "example": "黑色水性筆墨在濾紙上展開成不同色帶，是色層分析的結果。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0035",
+    "term": "傾析",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用密度差使混合物先分層，再傾倒上層液體的分離方法。",
+    "example": "泥沙沉底後，緩慢倒出上層清水，這種靜置後倒出液體的操作稱為傾析。",
+    "category": "分離方法",
+    "distractor_pool": "separation",
+    "advanced": true
+  },
+  {
+    "id": "pc0036",
+    "term": "磁性分離",
+    "unit": "measure_matter",
+    "grade": "8",
+    "def": "利用成分磁性不同，以磁鐵分離混合物的方法。",
+    "example": "把磁鐵靠近鐵粉與砂的混合物，可用磁性分離取出鐵粉。",
+    "category": "分離方法",
+    "distractor_pool": "separation"
+  },
+  {
+    "id": "pc0037",
+    "term": "原子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "保有元素化學性質的基本粒子，由原子核與核外電子組成。",
+    "example": "金箔實驗模型中，每個原子都由中央原子核和核外電子構成。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0038",
+    "term": "分子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "由兩個或以上原子結合，可獨立存在並保有物質化學性質的粒子。",
+    "example": "兩個氫原子與一個氧原子結合成一個水分子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0039",
+    "term": "原子核",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子中心帶正電的部分，通常由質子和中子組成；氫-1 原子核只有質子。",
+    "example": "氫-1 的原子核只有一個質子，沒有中子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0040",
+    "term": "質子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "位於原子核內、帶一個正電荷的粒子。",
+    "example": "氫原子的原子核含一個質子，因此核內有一個正電荷。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0041",
+    "term": "中子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "位於原子核內、不帶電的粒子。",
+    "example": "碳-12 原子核內有六個中子，中子本身不帶電。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0042",
+    "term": "電子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "存在於原子核外、帶一個負電荷的粒子。",
+    "example": "摩擦塑膠尺時轉移的是電子，不是質子。",
+    "category": "微觀粒子",
+    "distractor_pool": "particle"
+  },
+  {
+    "id": "pc0043",
+    "term": "原子序",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素原子核內的質子數，可用來確定元素種類。",
+    "example": "氧的原子序是 8，表示氧原子核內有 8 個質子。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0044",
+    "term": "質量數",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "一個原子核內質子數與中子數的總和。",
+    "example": "碳-12 含 6 個質子與 6 個中子，所以質量數是 12。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0045",
+    "term": "反應速率",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應中反應物消耗或生成物形成的快慢。",
+    "example": "升高溫度後發泡錠在水中更快反應，可用時間比較反應速率。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0046",
+    "term": "離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團因得失電子而帶有淨電荷的粒子。",
+    "example": "食鹽水中的鈉離子與氯離子能在水中移動。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0047",
+    "term": "陽離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團失去電子後形成的帶正電粒子。",
+    "example": "鈉原子失去一個電子後形成陽離子 Na⁺。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0048",
+    "term": "陰離子",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原子或原子團得到電子後形成的帶負電粒子。",
+    "example": "氯原子得到一個電子後形成陰離子 Cl⁻。",
+    "category": "原子構造",
+    "distractor_pool": "atomic"
+  },
+  {
+    "id": "pc0049",
+    "term": "元素符號",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用一個或兩個拉丁字母表示一種元素的國際通用符號。",
+    "example": "氧的元素符號是 O，第一個字母必須大寫。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0050",
+    "term": "化學式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用元素符號和數字表示物質組成的式子。",
+    "example": "H₂O 是水的化學式，下標 2 表示每個水分子含兩個氫原子。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0051",
+    "term": "化學反應式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "用化學式和係數表示反應物、生成物及數量關係的式子。",
+    "example": "以 2H₂＋O₂→2H₂O 表示氫氣燃燒，是一個化學反應式。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0052",
+    "term": "平衡化學反應式",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "調整化學反應式的係數，使反應前後各元素的原子數相等。",
+    "example": "將 H₂＋O₂→H₂O 改寫為 2H₂＋O₂→2H₂O，就是平衡化學反應式。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0053",
+    "term": "元素週期表",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "依原子序排列元素，並呈現元素性質週期性變化的表格。",
+    "example": "鈉與鉀同屬元素週期表中的第 1 族（鹼金屬），化學性質相似。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0054",
+    "term": "族",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "元素週期表的直行，同族元素常具有相似化學性質。",
+    "example": "鈉和鉀位在元素週期表同一族，常表現相似的化學性質。",
+    "category": "化學語言",
+    "distractor_pool": "chem_language"
+  },
+  {
+    "id": "pc0055",
+    "term": "物理變化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "物質種類與化學組成不變、沒有生成新物質的變化，例如形狀或狀態改變。",
+    "example": "冰融成水後仍是 H₂O，屬於物理變化。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0056",
+    "term": "化學變化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "原物質轉變成具有不同性質新物質的變化。",
+    "example": "鐵釘生鏽後形成新物質，屬於化學變化。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0057",
+    "term": "反應物",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應開始時參與反應，並在過程中被消耗的物質。",
+    "example": "鎂帶燃燒時，鎂和氧氣都是反應物。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0058",
+    "term": "生成物",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "化學反應後所形成的新物質。",
+    "example": "鎂帶燃燒後形成的氧化鎂是生成物。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0059",
+    "term": "質量守恆定律",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "密閉系統的化學反應中，反應前後總質量相等。",
+    "example": "在密閉瓶中讓醋與小蘇打反應，瓶內反應前後總質量相同，符合質量守恆定律。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0060",
+    "term": "催化劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "能改變反應速率，反應前後本身總量與化學性質不變的物質。",
+    "example": "二氧化錳能讓雙氧水較快產生氧氣，在實驗中扮演催化劑。",
+    "category": "化學反應",
+    "distractor_pool": "reaction"
+  },
+  {
+    "id": "pc0061",
+    "term": "氧化",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "國中所學的狹義定義是物質得到氧的反應；電子轉移觀點則是失去電子。",
+    "example": "鎂帶燃燒並與氧結合形成氧化鎂，是氧化反應。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0062",
+    "term": "還原",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "國中所學的狹義定義是物質失去氧的反應；電子轉移觀點則是得到電子。",
+    "example": "用碳把氧化銅中的氧移走生成銅，是還原反應。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0063",
+    "term": "氧化劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "使其他物質氧化，自身則被還原的物質。",
+    "example": "氧化銅使碳得到氧，因此在反應中是氧化劑。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0064",
+    "term": "還原劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "使其他物質還原，自身則被氧化的物質。",
+    "example": "碳使氧化銅失去氧，因此在反應中是還原劑。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0065",
+    "term": "燃燒",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "物質快速氧化並伴隨放熱、發光等現象的反應。",
+    "example": "點燃酒精時會快速放熱並發光，這是燃燒現象。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0066",
+    "term": "金屬對氧的活性",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "在相同條件下，不同金屬與氧反應難易程度的相對比較。",
+    "example": "把鎂、鋅、銅分別加熱，比較反應情形可判斷金屬對氧的活性。",
+    "category": "氧化還原",
+    "distractor_pool": "redox"
+  },
+  {
+    "id": "pc0067",
+    "term": "酸",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後能增加水溶液中氫離子濃度的物質。",
+    "example": "藍色石蕊試紙放入稀鹽酸會變紅，可判斷稀鹽酸是酸。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0068",
+    "term": "鹼",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後能增加水溶液中氫氧根離子濃度的物質。",
+    "example": "紅色石蕊試紙放入氫氧化鈉水溶液會變藍，可判斷它是鹼。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0069",
+    "term": "pH值",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "表示水溶液酸鹼程度的數值，一般小於 7 為酸性、大於 7 為鹼性。",
+    "example": "檸檬汁的 pH值 約為 2，顯示它呈酸性。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0070",
+    "term": "酸鹼指示劑",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "會隨溶液酸鹼性改變顏色，可用來判斷酸鹼的物質。",
+    "example": "廣用酸鹼指示劑滴入不同水溶液會呈現不同顏色。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0071",
+    "term": "中和反應",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "酸與鹼作用生成鹽和水的反應。",
+    "example": "稀鹽酸與氫氧化鈉反應生成鹽和水，是中和反應。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0072",
+    "term": "電解質",
+    "unit": "chemistry",
+    "grade": "8",
+    "def": "溶於水後會解離出可移動的陰、陽離子，使水溶液能導電的物質。",
+    "example": "食鹽溶於水後形成可移動離子，因此食鹽是電解質。",
+    "category": "酸鹼",
+    "distractor_pool": "acid_base"
+  },
+  {
+    "id": "pc0073",
+    "term": "參考點",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "描述物體位置或運動時，用來比較的基準點。",
+    "example": "描述公車位置時，可以把站牌選為參考點。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0074",
+    "term": "位置",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體相對於參考點所在的地點，常需配合方向與距離描述。",
+    "example": "小球在原點東方 3 公尺處，這句話同時說明位置的方向與距離。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0075",
+    "term": "路徑長",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體運動軌跡的總長度，是只有大小的純量。",
+    "example": "選手沿 400 公尺跑道跑一圈，路徑長是 400 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0076",
+    "term": "位移",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體由起點指向終點的位置變化，具有大小和方向。",
+    "example": "選手沿 400 公尺跑道跑一圈回到起點，位移為零。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0077",
+    "term": "速率",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體單位時間內所走的路徑長。",
+    "example": "腳踏車 10 秒走 50 公尺，其平均速率為每秒 5 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0078",
+    "term": "速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體單位時間內的位移，具有大小和方向。",
+    "example": "汽車以每秒 10 公尺向東行駛，這個速度包含大小和方向。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0079",
+    "term": "平均速率",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體運動的總路徑長除以總時間。",
+    "example": "小明 5 分鐘走 300 公尺，平均速率為每分鐘 60 公尺。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0080",
+    "term": "等速度運動",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體速度的大小和方向都不隨時間改變的運動。",
+    "example": "火車沿直線以固定大小與方向行駛，可視為等速度運動。",
+    "category": "運動描述",
+    "distractor_pool": "motion"
+  },
+  {
+    "id": "pc0081",
+    "term": "加速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "單位時間內速度的變化量，可描述速度改變的快慢。",
+    "example": "汽車速度每秒增加 2 公尺／秒，其加速度為 2 公尺／秒²。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0082",
+    "term": "等加速度運動",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體的加速度在運動過程中保持不變。",
+    "example": "小車沿斜面下滑時，每秒速度增加相同數值，可視為等加速度運動。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0083",
+    "term": "自由落體",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體由靜止開始下落，忽略空氣阻力時只受重力作用的運動。",
+    "example": "把球鬆手讓它從靜止落下，忽略空氣阻力，這個下落過程屬於自由落體。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0084",
+    "term": "重力加速度",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體自由落下時因重力產生的加速度，近地表方向指向地心。",
+    "example": "近地表自由落下的球，其重力加速度方向始終指向地心。",
+    "category": "加速度",
+    "distractor_pool": "acceleration"
+  },
+  {
+    "id": "pc0085",
+    "term": "力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體間的互相作用，可改變物體的運動狀態或形狀。",
+    "example": "推車後車子開始移動，顯示力能改變運動狀態。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0086",
+    "term": "合力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "多個力作用時，能產生相同效果的單一等效力。",
+    "example": "兩人從相反方向各推箱子，可先求合力判斷箱子如何運動。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0087",
+    "term": "力的平衡",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受合力為零的狀態。",
+    "example": "書靜放桌面時重力與桌面作用力互相抵消，處於力的平衡。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0088",
+    "term": "慣性",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體傾向保持原有靜止或等速度直線運動狀態的性質。",
+    "example": "公車突然煞車時乘客身體傾向維持前進，表現出慣性。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0089",
+    "term": "牛頓第二運動定律",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體加速度與合力成正比、與質量成反比，方向與合力相同。",
+    "example": "同一台車所受合力加倍時，加速度也加倍，符合牛頓第二運動定律。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0090",
+    "term": "牛頓第三運動定律",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "兩物體互相作用時，作用力與反作用力大小相等、方向相反且同時發生。",
+    "example": "手推牆時，牆也同時推手，這對力符合牛頓第三運動定律。",
+    "category": "牛頓定律",
+    "distractor_pool": "newton"
+  },
+  {
+    "id": "pc0091",
+    "term": "重力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "天體對物體的引力，在地表附近方向指向地心。",
+    "example": "鬆手後球落向地面，是地球重力作用的結果。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0092",
+    "term": "重量",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受重力的大小，會隨重力場強弱而改變。",
+    "example": "同一物體到月球後重量變小，但質量不變。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0093",
+    "term": "正向力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "接觸面對物體施以垂直於接觸面的力。",
+    "example": "書放在桌上時，桌面對書施加向上的正向力。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0094",
+    "term": "張力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "繩索被拉緊時，沿其方向傳遞的拉力。",
+    "example": "用繩子拉雪橇時，繩上的張力沿繩方向作用。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0095",
+    "term": "彈力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體發生彈性形變時，為恢復原狀而產生的力。",
+    "example": "壓縮彈簧後放手，彈力使彈簧恢復原狀。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0096",
+    "term": "摩擦力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "兩接觸面間阻礙相對運動或運動趨勢的力。",
+    "example": "鞋底與地面間的摩擦力讓人走路時不易滑倒。",
+    "category": "力的種類",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0097",
+    "term": "壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "垂直作用於單位面積上的力，可用力除以受力面積求得。",
+    "example": "同樣的力作用在較小面積上會產生較大的壓力。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0098",
+    "term": "大氣壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "大氣因本身重量而對其中物體和地表施加的壓力。",
+    "example": "用吸盤貼在牆面時，內外大氣壓力差幫助吸盤固定。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0099",
+    "term": "液體壓力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "液體因重力產生的壓力，會隨深度增加。",
+    "example": "潛水者越往深處，受到的液體壓力越大。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0100",
+    "term": "帕斯卡原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "密閉液體中某處壓力的變化，會大小不變地傳到各處。",
+    "example": "按壓密閉油壓裝置的小活塞，壓力依帕斯卡原理傳到大活塞。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0101",
+    "term": "浮力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體浸在靜止流體中時，由流體壓力差所形成的向上合力。",
+    "example": "把木塊壓入水中時，水對木塊產生向上的浮力。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0102",
+    "term": "阿基米德原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "物體所受浮力等於它所排開流體的重量。",
+    "example": "物體排開 2 牛頓重的水時，依阿基米德原理所受浮力為 2 牛頓。",
+    "category": "壓力與浮力",
+    "distractor_pool": "pressure"
+  },
+  {
+    "id": "pc0103",
+    "term": "力矩",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "力使物體繞轉軸轉動的效應，大小與力及力臂有關。",
+    "example": "用扳手轉螺帽時，加長握柄可增大力矩。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0104",
+    "term": "力臂",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "從轉軸到力的作用線之垂直距離。",
+    "example": "門把裝在遠離鉸鏈處，是為了增加力臂。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0105",
+    "term": "槓桿原理",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "槓桿平衡時，支點兩側順時針與逆時針方向的力矩相等。",
+    "example": "翹翹板平衡時，支點兩側順、逆時針力矩相等，符合槓桿原理。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0106",
+    "term": "重心",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "在近地表可將物體所受重力視為集中作用的點。",
+    "example": "把直尺支在重心位置附近，直尺可以保持平衡。",
+    "category": "轉動與引力",
+    "distractor_pool": "rotation"
+  },
+  {
+    "id": "pc0107",
+    "term": "向心力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "使物體做圓周運動、方向指向圓心的合力。",
+    "example": "繩子拉著小球繞圈時，繩張力提供指向圓心的向心力。",
+    "category": "轉動與引力",
+    "distractor_pool": "force_type",
+    "advanced": true
+  },
+  {
+    "id": "pc0108",
+    "term": "萬有引力",
+    "unit": "force_motion",
+    "grade": "9",
+    "def": "任何兩個有質量的物體之間都存在的相互吸引力。",
+    "example": "地球繞太陽運行所需的吸引力來自萬有引力。",
+    "category": "轉動與引力",
+    "distractor_pool": "force_type"
+  },
+  {
+    "id": "pc0109",
+    "term": "功",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "力對物體所做的功，等於力在位移方向的分量乘以位移；同方向時為力乘位移。",
+    "example": "用 10 牛頓水平力把箱子推 3 公尺，這個力所做的功為 30 焦耳。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0110",
+    "term": "功率",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "單位時間內所做的功，用來表示做功的快慢。",
+    "example": "兩人做相同的功，花較少時間的人功率較大。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0111",
+    "term": "動能",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體因運動而具有的能量，與質量和速率平方有關。",
+    "example": "同一顆球跑得越快，具有的動能越大。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0112",
+    "term": "重力位能",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體因在重力場中所在位置而具有的能量。",
+    "example": "把書抬到更高的書架，書的重力位能增加。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0113",
+    "term": "力學能",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體動能與位能的總和。",
+    "example": "忽略阻力的單擺擺動時，動能與位能互換而力學能不變。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0114",
+    "term": "能量守恆",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "孤立系統的總能量保持不變，只會在不同形式間轉換。",
+    "example": "雲霄飛車下滑時位能轉成動能，整體符合能量守恆。",
+    "category": "功與能",
+    "distractor_pool": "work_energy"
+  },
+  {
+    "id": "pc0115",
+    "term": "熱量",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "因溫度差而在物體間傳遞的能量。",
+    "example": "熱水與冷水混合時，熱量由高溫的水傳向低溫的水。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0116",
+    "term": "比熱",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "單位質量物質升高一度所需吸收的熱量。",
+    "example": "同質量的水和油吸收相同熱量後溫升不同，可用比熱解釋。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0117",
+    "term": "熱平衡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "彼此能交換能量的物體達到相同溫度，且不再有淨熱量傳遞的狀態。",
+    "example": "熱水與冷水混合到溫度相同後達成熱平衡。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0118",
+    "term": "熱傳導",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "熱能透過物質粒子間互動，由高溫處向低溫處傳遞。",
+    "example": "金屬湯匙放進熱湯後握柄逐漸變熱，是熱傳導。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0119",
+    "term": "熱對流",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "藉由液體或氣體的整體流動來傳遞熱能。",
+    "example": "煮水時熱水上升、冷水下降形成循環，是熱對流。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0120",
+    "term": "熱輻射",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體以電磁波傳遞熱能的方式，不需要介質。",
+    "example": "站在營火旁未碰到火也感到溫暖，主要來自熱輻射。",
+    "category": "熱學",
+    "distractor_pool": "heat"
+  },
+  {
+    "id": "pc0121",
+    "term": "波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "擾動向外傳播並傳遞能量的現象；機械波的介質粒子只在平衡位置附近振動，不隨波前進。",
+    "example": "輕抖繩端後擾動沿繩傳開，波傳遞能量，但繩子本身沒有隨波前進。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0122",
+    "term": "機械波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "必須依靠介質才能傳播的波。",
+    "example": "聲音無法在真空傳播，因為聲音屬於機械波。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0123",
+    "term": "橫波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "振動方向與波傳播方向垂直的波。",
+    "example": "上下振動繩端時，振動方向與波前進方向垂直，形成橫波。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0124",
+    "term": "縱波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "振動方向與波傳播方向平行的波。",
+    "example": "壓縮彈簧後形成的疏密波，振動方向與傳播方向平行，是縱波。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0125",
+    "term": "振幅",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "振動量偏離平衡值的最大程度；位移振動時就是最大距離。",
+    "example": "把繩端上下移得更遠，波形的振幅會變大。",
+    "category": "波動",
+    "distractor_pool": "wave"
+  },
+  {
+    "id": "pc0126",
+    "term": "波長",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "波上相鄰兩個同相位點之間的距離。",
+    "example": "相鄰兩個波峰相距 20 公分，這段距離就是波長。",
+    "category": "波的量",
+    "distractor_pool": "wave_quantity"
+  },
+  {
+    "id": "pc0127",
+    "term": "頻率",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "每秒振動的次數，單位為赫茲。",
+    "example": "音叉每秒振動 440 次，其頻率為 440 赫茲。",
+    "category": "波的量",
+    "distractor_pool": "wave_quantity"
+  },
+  {
+    "id": "pc0128",
+    "term": "振動週期",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "完成一次完整振動所需的時間。",
+    "example": "擺錘每 2 秒完成一次往返，其振動週期為 2 秒。",
+    "category": "波的量",
+    "distractor_pool": "wave_quantity"
+  },
+  {
+    "id": "pc0129",
+    "term": "波速",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "波形傳播的速率，在週期波中等於頻率與波長的乘積。",
+    "example": "頻率 5 赫茲、波長 2 公尺的波，波速為每秒 10 公尺。",
+    "category": "波的量",
+    "distractor_pool": "wave_quantity"
+  },
+  {
+    "id": "pc0130",
+    "term": "透鏡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "利用光的折射使光線會聚或發散的透明光學元件，可分為凸透鏡與凹透鏡。",
+    "example": "放大鏡使用凸透鏡讓近物形成放大的虛像。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0131",
+    "term": "面鏡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "利用光的反射形成影像的光學元件，常見有平面鏡、凹面鏡與凸面鏡。",
+    "example": "照鏡子時，平面鏡利用反射形成正立等大的虛像。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0132",
+    "term": "眼睛與眼鏡",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "眼睛以角膜和水晶體使光線聚焦在視網膜上，眼鏡可用適當透鏡協助矯正視力。",
+    "example": "近視者配戴凹透鏡眼鏡，協助光線重新聚焦在視網膜上，這是眼睛與眼鏡的應用。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0133",
+    "term": "聲音",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "物體振動所產生，並透過介質傳播的機械波。",
+    "example": "音叉振動後，空氣中的聲音可傳到耳朵。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0134",
+    "term": "音調",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "人耳對聲音高低的感覺，主要由頻率決定。",
+    "example": "女高音與男低音的音調不同，主要是聲音頻率不同。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0135",
+    "term": "響度",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "人耳對聲音強弱的主觀感受，主要由振幅決定，振幅越大響度越大。",
+    "example": "同一音叉敲得較用力時，聽到的響度通常較大。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0136",
+    "term": "音色",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "使人能分辨不同發聲體的聲音特性。",
+    "example": "小提琴和長笛演奏同一音高時仍可分辨，原因是音色不同。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0137",
+    "term": "回聲",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "反射聲與原聲有足夠時間差，而被分辨為兩次聲音的現象。",
+    "example": "在山谷中呼喊後隔一段時間再次聽到聲音，是回聲。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0138",
+    "term": "超聲波",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "頻率高於一般人耳可聽上限約 20000 赫茲的聲波。",
+    "example": "醫療超音波檢查使用人耳聽不到的超聲波。",
+    "category": "聲學",
+    "distractor_pool": "sound"
+  },
+  {
+    "id": "pc0139",
+    "term": "光的直進",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光在同一均勻介質中大致沿直線傳播的性質。",
+    "example": "手電筒照向不透明紙板會形成影子，可驗證光的直進。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0140",
+    "term": "反射定律",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光反射時入射角等於反射角，入射線、反射線與法線共面。",
+    "example": "雷射照到平面鏡時，量得入射角與反射角相等，符合反射定律。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0141",
+    "term": "鏡面反射",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "平滑表面使平行入射光規則反射，能形成清楚影像的現象。",
+    "example": "平靜水面能映出清楚景物，是鏡面反射的結果。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0142",
+    "term": "漫反射",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "粗糙表面使平行入射光向不同方向反射的現象。",
+    "example": "白紙從多個方向都看得見，是表面發生漫反射。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0143",
+    "term": "折射",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "光斜向進入另一介質時，因速率改變而偏折的現象。",
+    "example": "筷子斜插水中看似彎折，是光由水進入空氣時發生折射。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0144",
+    "term": "色散",
+    "unit": "energy_wave",
+    "grade": "9",
+    "def": "白光因不同色光折射程度不同，而分散成色光帶的現象。",
+    "example": "白光通過三稜鏡形成彩色光帶，是色散現象。",
+    "category": "光學",
+    "distractor_pool": "light"
+  },
+  {
+    "id": "pc0145",
+    "term": "電荷",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "物質粒子所帶的電性，分為正電荷與負電荷。",
+    "example": "玻璃棒摩擦後能吸起小紙片，表示玻璃棒帶有電荷。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0146",
+    "term": "電中性",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "物體正負電荷量相等，對外呈現淨電荷為零的狀態。",
+    "example": "未摩擦的金屬球正負電荷量相等，整體呈電中性。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0147",
+    "term": "電荷守恆",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "孤立系統的淨電荷總量保持不變；常見起電現象是電子在物體間轉移。",
+    "example": "兩物體摩擦後一正一負，總電荷量仍維持不變，符合電荷守恆定律。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0148",
+    "term": "摩擦起電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "不同材質摩擦時發生電子轉移，使物體帶電的現象。",
+    "example": "塑膠尺和毛料摩擦後能吸引紙屑，是摩擦起電。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0149",
+    "term": "靜電力",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "靜止帶電物體間的作用力，同號電荷相斥、異號電荷相吸。",
+    "example": "兩個帶負電的小球互相排斥，顯示同號電荷間有排斥的靜電力。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0150",
+    "term": "靜電感應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "帶電體靠近導體時，使導體內電荷重新分布的現象。",
+    "example": "帶電棒靠近金屬球但不接觸，球內電荷重新分布，是靜電感應。",
+    "category": "靜電",
+    "distractor_pool": "electrostatic"
+  },
+  {
+    "id": "pc0151",
+    "term": "電流",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電荷的定向移動，大小為單位時間通過截面的電荷量。",
+    "example": "導線中每秒通過截面的電荷量越多，電流越大。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0152",
+    "term": "安培",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流的國際單位，符號為 A。",
+    "example": "小燈泡電流為 0.3 安培，可記作 0.3 A。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0153",
+    "term": "電壓",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路兩點間每單位正電荷的電位能差，也稱為電位差。",
+    "example": "乾電池兩端標示 1.5 V，表示它提供約 1.5 伏特的電壓。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0154",
+    "term": "伏特",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電壓的國際單位，符號為 V。",
+    "example": "家用插座的電壓以伏特為單位標示。",
+    "category": "電路量",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0155",
+    "term": "電阻",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "導體阻礙電流通過的程度。",
+    "example": "同電壓下，電阻較大的元件通過的電流較小。",
+    "category": "電路量",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0156",
+    "term": "歐姆定律",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "在溫度不變的情況下，通過導體的電流與其兩端電壓成正比，電壓與電流的比值稱為電阻，此關係稱為歐姆定律。",
+    "example": "某電阻兩端電壓加倍時電流也加倍，實驗結果符合歐姆定律。",
+    "category": "電路量",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0157",
+    "term": "電路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "由電源、導線與元件連接而成的系統；閉合時可形成電流路徑。",
+    "example": "把電池、導線、開關與燈泡連接，可組成一個電路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0158",
+    "term": "通路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路完整連接，電流可以通過的狀態。",
+    "example": "開關閉合且燈泡發亮時，電路處於通路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0159",
+    "term": "斷路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電路某處中斷，電流無法通過的狀態。",
+    "example": "開關打開後燈泡熄滅，此時電路為斷路。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0160",
+    "term": "短路",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流繞過負載而通過極低電阻路徑，造成過大電流的危險情況。",
+    "example": "導線直接跨接電池兩端會形成短路，可能造成過大電流。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0161",
+    "term": "串聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "元件首尾相接在同一電流路徑上的連接方式。",
+    "example": "兩顆燈泡接在同一條無分岔路徑上，屬於串聯。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0162",
+    "term": "並聯",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "元件兩端分別接在相同兩節點，形成多條電流路徑的方式。",
+    "example": "家中燈具各自跨接在相同兩條電線上，屬於並聯。",
+    "category": "電路連接",
+    "distractor_pool": "circuit"
+  },
+  {
+    "id": "pc0163",
+    "term": "安培計",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "測量電流的儀表，使用時必須與欲測量電流的支路或元件串聯。",
+    "example": "測量燈泡電流時，安培計要串接在燈泡所在支路。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0164",
+    "term": "伏特計",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "測量元件兩端電壓的儀表，使用時必須與待測元件並聯。",
+    "example": "測量電池兩端電壓時，伏特計要與電池並聯。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_measurement"
+  },
+  {
+    "id": "pc0165",
+    "term": "電功率",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電器每單位時間轉換的電能，可用電壓與電流乘積求得。",
+    "example": "110 伏特、2 安培的電器，其電功率為 220 瓦。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0166",
+    "term": "電能",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電場使電荷移動時所傳遞的能量；電路元件使用的電能可由電功率乘以時間求得。",
+    "example": "1000 瓦吹風機使用半小時，消耗的電能為 0.5 千瓦小時。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0167",
+    "term": "度",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "家庭電能常用計費單位，一度等於一千瓦小時。",
+    "example": "1000 瓦電器使用 1 小時消耗一度電。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0168",
+    "term": "焦耳熱",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流通過電阻時，電能轉換為內能而發熱的現象。",
+    "example": "電熱水壺的電阻絲通電後升溫，是焦耳熱的應用。",
+    "category": "測量與用電",
+    "distractor_pool": "electric_calculation"
+  },
+  {
+    "id": "pc0169",
+    "term": "保險絲",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "過大電流時會熔斷以切斷電路的安全裝置。",
+    "example": "電流過大時保險絲熔斷，可避免導線持續過熱。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0170",
+    "term": "無熔絲開關",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流過大時會自動跳脫，排除問題後可復原的安全裝置。",
+    "example": "同時使用多個高功率電器時，無熔絲開關可能因過流而跳脫。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0171",
+    "term": "接地",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "將電器金屬外殼用導線連接到大地，使漏電時電流優先流入大地，以降低人體觸電的風險。",
+    "example": "洗衣機金屬外殼妥善接地，可在故障時降低觸電風險。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0172",
+    "term": "漏電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流離開原設計電路，流向外殼、人體或大地的現象。",
+    "example": "電線絕緣破損使電流流向外殼，屬於漏電。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0173",
+    "term": "過載",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "同一電路使用過多或高功率電器，使電流超過安全值的情況。",
+    "example": "延長線同時接太多高功率電器，可能造成過載。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0174",
+    "term": "觸電",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "人體成為電流路徑而受到電流傷害的事故。",
+    "example": "濕手碰觸裸露導線可能讓人體通電而觸電。",
+    "category": "用電安全",
+    "distractor_pool": "electric_safety"
+  },
+  {
+    "id": "pc0175",
+    "term": "電動機",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電動機利用載流導線在磁場中受力轉動的效應，把電能轉換為機械能。",
+    "example": "簡易馬達通電後線圈受磁力而轉動，這就是電動機的基本原理。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0176",
+    "term": "磁場",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "磁鐵或電流周圍能產生磁力作用的空間。",
+    "example": "指南針靠近磁鐵會轉向，顯示周圍存在磁場。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0177",
+    "term": "磁力線",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "用來描述磁場方向與強弱的假想曲線。",
+    "example": "在磁鐵旁撒鐵粉可觀察排列情形，用磁力線描述磁場。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0178",
+    "term": "電流磁效應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "電流通過導線時，導線周圍會產生磁場的現象。",
+    "example": "通電直導線使旁邊指南針偏轉，證明電流磁效應。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0179",
+    "term": "電磁感應",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "當線圈附近的磁場發生變化時，線圈中會產生感應電流的現象。",
+    "example": "磁鐵快速進出閉合線圈時電流計偏轉，顯示發生電磁感應。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  },
+  {
+    "id": "pc0180",
+    "term": "發電機",
+    "unit": "electricity",
+    "grade": "9",
+    "def": "利用電磁感應將機械能轉換為電能的裝置。",
+    "example": "手搖發電機轉動線圈後點亮燈泡，把機械能轉成電能。",
+    "category": "電磁學",
+    "distractor_pool": "electromagnetism"
+  }
+]

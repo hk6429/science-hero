@@ -1,0 +1,302 @@
+[
+  {
+    "id": "e0091",
+    "term": "力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "能使物體運動狀態或形狀改變的推或拉作用。",
+    "example": "用手推車時施加了力，車子才會開始移動。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0092",
+    "term": "推力",
+    "unit": "energy",
+    "grade": "3",
+    "def": "施力者推動物體，使物體朝遠離施力者方向運動或變形的作用力。",
+    "example": "用手關門時，手對門施加推力。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0093",
+    "term": "拉力",
+    "unit": "energy",
+    "grade": "3",
+    "def": "施力者拉動物體，使物體朝接近施力者方向運動或變形的作用力。",
+    "example": "拔河時，雙方都對繩子施加拉力。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0094",
+    "term": "摩擦力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個接觸面相對運動或有運動趨勢時，阻礙其滑動的力。",
+    "example": "鞋底和地面間的摩擦力能避免走路時滑倒。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0095",
+    "term": "重力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "地球對附近物體產生的吸引力，方向大致朝向地球中心。",
+    "example": "球被拋向空中後，會因重力再落回地面。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0096",
+    "term": "彈力",
+    "unit": "energy",
+    "grade": "4",
+    "def": "彈性物體受力變形後，想要恢復原來形狀而產生的作用力。",
+    "example": "拉長橡皮筋後放手，彈力會使橡皮筋縮回去。",
+    "category": "力與運動",
+    "distractor_pool": "force_motion"
+  },
+  {
+    "id": "e0097",
+    "term": "槓桿",
+    "unit": "energy",
+    "grade": "5",
+    "def": "能繞固定支點轉動，利用力臂關係省力或改變施力方向的工具。",
+    "example": "使用開瓶器時，槓桿原理能幫助我們省力。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0098",
+    "term": "支點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "槓桿受到作用力而轉動時，槓桿所繞著旋轉的固定位置。",
+    "example": "使用剪刀時，中央螺絲的位置就是支點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0099",
+    "term": "施力點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "操作槓桿時，使用者所施加外力作用在槓桿上的位置。",
+    "example": "用釘書機時，手指按壓的位置是施力點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0100",
+    "term": "抗力點",
+    "unit": "energy",
+    "grade": "5",
+    "def": "使用槓桿時，負載或阻力作用在槓桿上的位置。",
+    "example": "用鑷子夾物品時，鑷子尖端是抗力點。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0101",
+    "term": "輪軸",
+    "unit": "energy",
+    "grade": "6",
+    "def": "由大小不同且同軸轉動的輪和軸組成，可省力或加快轉動的工具。",
+    "example": "門把運用輪軸原理，轉動較大的把手就能帶動軸心。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0102",
+    "term": "滑輪",
+    "unit": "energy",
+    "grade": "6",
+    "def": "邊緣有凹槽、可繞中心軸轉動，用來改變施力方向或省力的輪子。",
+    "example": "升旗臺使用滑輪，讓人向下拉繩就能把國旗升高。",
+    "category": "簡單機械",
+    "distractor_pool": "simple_machines"
+  },
+  {
+    "id": "e0103",
+    "term": "磁鐵",
+    "unit": "energy",
+    "grade": "3",
+    "def": "能吸引鐵、鎳等特定金屬，並具有南北兩極的物體。",
+    "example": "磁鐵可以隔著薄紙吸起鐵製迴紋針。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0104",
+    "term": "磁極",
+    "unit": "energy",
+    "grade": "4",
+    "def": "磁鐵上磁力較強的區域，通常位於兩端並分為北極和南極。",
+    "example": "長條磁鐵兩端的磁極最容易吸附鐵粉。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0105",
+    "term": "同極相斥",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個相同磁極互相靠近時，會彼此推開的現象。",
+    "example": "兩個磁鐵的北極接近時會出現同極相斥。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0106",
+    "term": "異極相吸",
+    "unit": "energy",
+    "grade": "4",
+    "def": "兩個不同磁極互相靠近時，會彼此吸引的現象。",
+    "example": "磁鐵的北極靠近另一個南極時會異極相吸。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0107",
+    "term": "磁力線",
+    "unit": "energy",
+    "grade": "6",
+    "def": "用來表示磁場方向與強弱的假想線，磁鐵外部由北極指向南極。",
+    "example": "撒上鐵粉可以看出近似磁力線的排列圖樣，但不能直接看出方向。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0108",
+    "term": "電磁鐵",
+    "unit": "energy",
+    "grade": "6",
+    "def": "電流通過線圈時產生磁性，斷電後磁性大多消失的裝置。",
+    "example": "起重機可利用電磁鐵吸起大型廢鐵。",
+    "category": "磁力",
+    "distractor_pool": "magnetism"
+  },
+  {
+    "id": "e0109",
+    "term": "電路",
+    "unit": "energy",
+    "grade": "4",
+    "def": "電流能從電源出發，經導線和用電器再回到電源的完整路徑。",
+    "example": "燈泡要接成完整電路才會發亮。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0110",
+    "term": "電池",
+    "unit": "energy",
+    "grade": "3",
+    "def": "把化學能轉換成電能，提供電路能量的裝置。",
+    "example": "手電筒裡的電池能提供燈泡所需的電能。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0111",
+    "term": "導線",
+    "unit": "energy",
+    "grade": "3",
+    "def": "用來連接電路元件、讓電流通過的線材，內芯常由金屬製成。",
+    "example": "用導線連接電池和燈泡，才能形成通路。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0112",
+    "term": "開關",
+    "unit": "energy",
+    "grade": "3",
+    "def": "用來控制電路接通或斷開，進而決定電流是否通過的元件。",
+    "example": "按下開關接通電路後，燈泡就會發亮。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0113",
+    "term": "導體",
+    "unit": "energy",
+    "grade": "4",
+    "def": "容易讓電流通過的物質，例如銅、鋁等多數金屬材料。",
+    "example": "銅是良好的導體，常被用作電線內芯。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0114",
+    "term": "絕緣體",
+    "unit": "energy",
+    "grade": "4",
+    "def": "不容易讓電流通過的物質，例如塑膠和橡膠。",
+    "example": "電線外層使用絕緣體包覆，可以降低觸電風險。",
+    "category": "電與電路",
+    "distractor_pool": "electricity"
+  },
+  {
+    "id": "e0115",
+    "term": "振動",
+    "unit": "energy",
+    "grade": "4",
+    "def": "物體在平衡位置附近快速來回運動的現象，常會產生聲音。",
+    "example": "撥動橡皮筋造成振動，就能聽見聲音。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0116",
+    "term": "音量",
+    "unit": "energy",
+    "grade": "4",
+    "def": "人耳感受到聲音強弱大小的程度，通常和振動幅度有關。",
+    "example": "用力敲鼓時振動較大，聽到的音量也較大。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0117",
+    "term": "音調",
+    "unit": "energy",
+    "grade": "4",
+    "def": "人耳感受到聲音高低的特性，通常和振動快慢有關。",
+    "example": "短而緊的弦振動較快，產生的音調較高。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0118",
+    "term": "聲音傳播",
+    "unit": "energy",
+    "grade": "4",
+    "def": "聲音可以經由空氣、水或固體向外傳遞。",
+    "example": "聲音傳播需要空氣、水或固體等物質，在真空中無法傳播。",
+    "category": "聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0119",
+    "term": "反射",
+    "unit": "energy",
+    "grade": "5",
+    "def": "光或聲音遇到物體表面後，改變方向返回原介質的現象。",
+    "example": "鏡子能成像，是因為光發生反射。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  },
+  {
+    "id": "e0120",
+    "term": "折射",
+    "unit": "energy",
+    "grade": "5",
+    "def": "光從一種透明介質進入另一種介質時，傳播方向改變的現象。",
+    "example": "吸管插入水中看似彎折，是光的折射造成的。",
+    "category": "光與聲音",
+    "distractor_pool": "sound_light"
+  }
+]
