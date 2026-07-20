@@ -63,6 +63,7 @@ const SciApp = (() => {
   let terms = [];
   let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'weak'
   let unitFilter = null; // 目前選定的單元（null = 全部）
+  let gradeFilter = null; // 目前選定的年級（null = 全部）
 
   // ---- 閃卡狀態（依科目分開保留，切分頁不會弄丟進度）----
   const flashState = new Map();
@@ -127,7 +128,9 @@ const SciApp = (() => {
   }
 
   function currentPool() {
-    return unitFilter ? terms.filter((t) => t.unit === unitFilter) : terms;
+    let pool = unitFilter ? terms.filter((t) => t.unit === unitFilter) : terms;
+    if (gradeFilter) pool = pool.filter((t) => String(t.grade) === gradeFilter);
+    return pool;
   }
 
   function masteryPct(list) {
@@ -160,6 +163,7 @@ const SciApp = (() => {
     activeSubject = key;
     terms = subjectTerms.get(key);
     unitFilter = null;
+    gradeFilter = null;
 
     const savedFlash = flashState.get(key);
     if (savedFlash) {
@@ -195,6 +199,7 @@ const SciApp = (() => {
         if (body) body.innerHTML = '';
         p.querySelector('.mode-switch')?.remove();
         p.querySelector('.unit-map')?.remove();
+        p.querySelector('.grade-filter')?.remove();
       }
     });
     renderLearningBody(document.querySelector(`.panel[data-key="${key}"]`));
@@ -227,6 +232,32 @@ const SciApp = (() => {
     flashQueue = [];
     quizQueue = [];
     renderLearningBody(panel);
+  }
+
+  // ================= 年級篩選（只在該科有跨年級內容時顯示）=================
+  function selectGradeFilter(grade, panel) {
+    gradeFilter = grade || null;
+    flashQueue = [];
+    quizQueue = [];
+    renderLearningBody(panel);
+  }
+
+  function renderGradeFilter(panel) {
+    const grades = [...new Set(terms.map((t) => String(t.grade)))].sort();
+    if (grades.length < 2) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'grade-filter';
+    const chips = ['', ...grades].map((g) => {
+      const isAll = g === '';
+      const label = isAll ? '全部年級' : `${g} 年級`;
+      const active = (isAll && !gradeFilter) || g === gradeFilter;
+      return `<button class="grade-chip${active ? ' active' : ''}" data-grade="${g}">${label}</button>`;
+    }).join('');
+    wrap.innerHTML = chips;
+    wrap.querySelectorAll('.grade-chip').forEach((btn) => {
+      btn.addEventListener('click', () => selectGradeFilter(btn.dataset.grade, panel));
+    });
+    return wrap;
   }
 
   function unitStatus(list) {
@@ -273,9 +304,12 @@ const SciApp = (() => {
     body.innerHTML = '';
     panel.querySelector('.mode-switch')?.remove();
     panel.querySelector('.unit-map')?.remove();
+    panel.querySelector('.grade-filter')?.remove();
     panel.insertBefore(renderModeSwitch(panel), body);
 
     if (mode === 'flashcard' || mode === 'quiz') {
+      const gradeWrap = renderGradeFilter(panel);
+      if (gradeWrap) panel.insertBefore(gradeWrap, body);
       panel.insertBefore(renderUnitMap(panel), body);
     }
 
@@ -366,6 +400,7 @@ const SciApp = (() => {
         <div class="flash-def ${flashRevealed ? '' : 'hidden'}" id="flash-def">
           ${flashRevealed ? t.def : '先想想看，答案準備好了再翻開'}
         </div>
+        ${flashRevealed && t.example ? `<div class="flash-example">💡 ${t.example}</div>` : ''}
         <div class="btn-row">
           ${flashRevealed
             ? `<button class="btn btn-danger" id="flash-wrong">還沒抓到</button>

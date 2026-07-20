@@ -240,6 +240,42 @@ main {
 
 .flash-def.hidden { color: var(--muted); }
 
+.flash-example {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  padding: 8px 10px;
+  margin-top: 4px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+.grade-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 4px 0 10px;
+}
+
+.grade-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border, #ddd);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.grade-chip.active {
+  background: var(--green, #2e9e5b);
+  border-color: var(--green, #2e9e5b);
+  color: #fff;
+}
+
 .btn-row { display: flex; gap: 10px; margin-top: 18px; }
 
 .btn {
