@@ -34,8 +34,11 @@ const SciStore = (() => {
   function touchDailyStreak(state) {
     const today = todayStr();
     if (state.stats.lastActiveDate === today) return;
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    state.stats.streakDays = state.stats.lastActiveDate === yesterday ? state.stats.streakDays + 1 : 1;
+    const oneDayAgo = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().slice(0, 10);
+    // 給一天寬限：漏一天沒練也不會直接砍回 1，避免學生一斷就放棄整個連續紀錄。
+    const continues = state.stats.lastActiveDate === oneDayAgo || state.stats.lastActiveDate === twoDaysAgo;
+    state.stats.streakDays = continues ? state.stats.streakDays + 1 : 1;
     state.stats.lastActiveDate = today;
   }
 

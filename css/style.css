@@ -306,6 +306,38 @@ main {
   box-shadow: 0 0 0 3px rgba(232,163,61,0.15);
 }
 
+.quiz-result-banner {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  animation: bannerPop 0.3s ease;
+}
+
+.quiz-result-banner.is-correct { background: #e7f6ec; color: var(--green-dark); }
+.quiz-result-banner.is-wrong { background: var(--warn-bg); color: #b5690a; }
+
+@keyframes bannerPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.03); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.card.flash-correct { animation: cardFlashGreen 0.5s ease; }
+.card.flash-wrong { animation: cardFlashRed 0.5s ease; }
+
+@keyframes cardFlashGreen {
+  0% { background: #e7f6ec; }
+  100% { background: var(--card-bg); }
+}
+
+@keyframes cardFlashRed {
+  0% { background: var(--warn-bg); }
+  100% { background: var(--card-bg); }
+}
+
 @keyframes correctPop {
   0% { transform: scale(1); }
   40% { transform: scale(1.03); }
@@ -404,15 +436,70 @@ main {
 .unit-chip.active .unit-chip-label { color: var(--green-dark); font-weight: 800; }
 .unit-chip.active .unit-chip-icon { box-shadow: 0 0 0 2px var(--green); }
 
+.unit-chip[data-status="untouched"] .unit-chip-ring { opacity: 0.55; }
+.unit-chip[data-status="weak"] .unit-chip-ring { --ring-color: var(--warn); }
+.unit-chip[data-status="mastered"] .unit-chip-ring { --ring-color: var(--green); }
+
+.unit-chip-ring { position: relative; }
+
+.unit-chip-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px #fff;
+}
+
 .panel[data-key="nature"]   .unit-chip-ring { --ring-color: var(--sci-nature); }
 .panel[data-key="biology"]  .unit-chip-ring { --ring-color: var(--sci-biology); }
 .panel[data-key="chemphys"] .unit-chip-ring { --ring-color: var(--sci-chemphys); }
 .panel[data-key="earth"]    .unit-chip-ring { --ring-color: var(--sci-earth); }
 
-.milestone-card { text-align: center; }
-.milestone-icon { font-size: 2.6rem; margin-bottom: 6px; }
+.milestone-card { text-align: center; position: relative; overflow: hidden; }
+.milestone-icon { font-size: 2.6rem; margin-bottom: 6px; animation: milestoneIconPop 0.5s ease; }
 .milestone-card h3 { margin: 4px 0 8px; }
 .milestone-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+.milestone-stat { font-size: 0.85rem; }
+.milestone-stat strong { color: var(--green-dark); font-size: 1rem; }
+
+@keyframes milestoneIconPop {
+  0% { transform: scale(0.4) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.confetti-burst { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+.confetti-bit {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 6px;
+  height: 10px;
+  background: hsl(calc(var(--i) * 35deg), 80%, 55%);
+  animation: confettiFly 0.9s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.02s);
+  transform-origin: center;
+}
+
+@keyframes confettiFly {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% {
+    transform:
+      translate(calc((cos(calc(var(--i) * 30deg))) * 90px), calc((sin(calc(var(--i) * 30deg))) * 90px - 20px))
+      rotate(360deg);
+    opacity: 0;
+  }
+}
 
 .progress-bar {
   height: 6px;

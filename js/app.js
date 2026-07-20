@@ -69,6 +69,7 @@ const SciApp = (() => {
   let flashQueue = [];
   let flashIdx = 0;
   let flashRevealed = false;
+  let flashAnswering = false;
 
   // ---- 自測狀態（依科目分開保留）----
   const quizState = new Map();
@@ -80,6 +81,41 @@ const SciApp = (() => {
   let quizAnswered = false;
 
   function el(sel) { return document.querySelector(sel); }
+
+  // 換題/翻卡時常見的手機瀏覽器怪癖：舊按鈕被拿掉時，focus 掉回 body 會把畫面拉回最頂端。
+  // 換內容前先讓目前的按鈕失焦、記住捲動位置，換完再退回去，避免每答一題就跳回頁首。
+  function preserveScroll(renderFn) {
+    const y = window.scrollY;
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    renderFn();
+    requestAnimationFrame(() => window.scrollTo(0, y));
+  }
+
+  let audioCtx = null;
+  function playTone(freq, duration, type = 'sine') {
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch {
+      // 部分瀏覽器政策會擋自動播音，靜默失敗即可，不影響其他功能。
+    }
+  }
+
+  function playCorrectTone() { playTone(880, 0.18); }
+  function playWrongTone() { playTone(220, 0.28, 'triangle'); }
+  function playMilestoneTone() {
+    playTone(660, 0.15);
+    setTimeout(() => playTone(880, 0.22), 120);
+  }
 
   function shuffleArr(arr) {
     const a = [...arr];
@@ -193,18 +229,35 @@ const SciApp = (() => {
     renderLearningBody(panel);
   }
 
+  function unitStatus(list) {
+    const seen = list.filter((t) => SciStore.getCard(state, t.id).seen > 0);
+    if (seen.length === 0) return 'untouched';
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const mastered = seen.every((t) => SciStore.getCard(state, t.id).box >= maxBox) && seen.length === list.length;
+    if (mastered) return 'mastered';
+    const wrongRate = seen.reduce((sum, t) => sum + SciStore.getCard(state, t.id).wrong, 0) / seen.length;
+    return wrongRate > 0.3 ? 'weak' : 'progress';
+  }
+
   function renderUnitMap(panel) {
     const wrap = document.createElement('div');
     wrap.className = 'unit-map';
     const units = [...new Set(terms.map((t) => t.unit))];
+    const celebrated = new Set(state.stats.celebratedUnits || []);
     const chips = ['', ...units].map((u) => {
       const isAll = u === '';
       const label = isAll ? '全部' : (UNIT_LABELS[u] || u);
       const icon = isAll ? '📚' : (UNIT_ICONS[u] || '📘');
-      const pct = isAll ? masteryPct(terms) : masteryPct(terms.filter((t) => t.unit === u));
+      const list = isAll ? terms : terms.filter((t) => t.unit === u);
+      const pct = masteryPct(list);
       const active = (isAll && !unitFilter) || u === unitFilter;
-      return `<button class="unit-chip${active ? ' active' : ''}" data-unit="${u}" style="--progress:${pct}">
-        <span class="unit-chip-ring"><span class="unit-chip-icon">${icon}</span></span>
+      const status = isAll ? 'progress' : unitStatus(list);
+      const isCelebrated = !isAll && celebrated.has(`${activeSubject}:${u}`);
+      return `<button class="unit-chip${active ? ' active' : ''}" data-unit="${u}" data-status="${status}" style="--progress:${pct}">
+        <span class="unit-chip-ring">
+          <span class="unit-chip-icon">${icon}</span>
+          ${isCelebrated ? '<span class="unit-chip-badge">✓</span>' : ''}
+        </span>
         <span class="unit-chip-label">${label}</span>
       </button>`;
     }).join('');
@@ -252,13 +305,18 @@ const SciApp = (() => {
     const icon = UNIT_ICONS[unit] || '📘';
     const label = UNIT_LABELS[unit] || unit;
     const subjectLabel = SUBJECTS.find((s) => s.key === activeSubject)?.label || '';
+    const clearedCount = (state.stats.celebratedUnits || []).length;
+    const confetti = Array.from({ length: 12 }, (_, i) => `<span class="confetti-bit" style="--i:${i}"></span>`).join('');
     container.innerHTML = `
       <div class="card milestone-card celebrate-in">
+        <div class="confetti-burst">${confetti}</div>
         <div class="milestone-icon">${icon}</div>
         <h3>${label} · 全數精通！</h3>
         <p>這個單元的詞條你都穩了，${subjectLabel}的戰功又推進一格。</p>
+        <p class="milestone-stat">目前累積已攻克 <strong>${clearedCount}</strong> 個單元</p>
         <div class="btn-row"><button class="btn btn-primary" id="milestone-continue">繼續</button></div>
       </div>`;
+    playMilestoneTone();
     container.querySelector('#milestone-continue').addEventListener('click', () => {
       onContinue();
     });
@@ -328,21 +386,28 @@ const SciApp = (() => {
   }
 
   function answerFlash(body, correct) {
+    if (flashAnswering) return;
+    flashAnswering = true;
+
     const t = flashQueue[flashIdx];
     SciFlashcard.markResult(state, t.id, correct);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
+    correct ? playCorrectTone() : playWrongTone();
 
     const milestoneUnit = correct ? checkUnitMilestone(t.unit) : null;
     flashIdx += 1;
     flashRevealed = false;
 
-    if (milestoneUnit) {
-      renderMilestone(body, milestoneUnit, () => renderFlashcard(body));
-    } else {
-      renderFlashcard(body);
-    }
+    preserveScroll(() => {
+      if (milestoneUnit) {
+        renderMilestone(body, milestoneUnit, () => { flashAnswering = false; renderFlashcard(body); });
+      } else {
+        flashAnswering = false;
+        renderFlashcard(body);
+      }
+    });
   }
 
   // ================= 自測 =================
@@ -411,18 +476,27 @@ const SciApp = (() => {
         const correct = chosenId === q.answerId;
         if (correct) quizCorrect += 1;
 
+        const cardEl = body.querySelector('.card');
+        cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
         body.querySelectorAll('.quiz-option').forEach((b) => {
           b.disabled = true;
           if (b.dataset.id === q.answerId) b.classList.add('correct');
           else if (b.dataset.id === chosenId) b.classList.add('wrong');
         });
 
+        const resultBanner = document.createElement('div');
+        resultBanner.className = `quiz-result-banner ${correct ? 'is-correct' : 'is-wrong'}`;
+        resultBanner.textContent = correct ? '✓ 答對了！' : '✗ 答錯了';
+        cardEl.insertBefore(resultBanner, cardEl.firstChild);
+
         if (!correct) {
           const note = document.createElement('div');
           note.className = 'quiz-feedback';
           note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>正確答案：<strong>${target.term}</strong> — ${target.def}`;
-          body.querySelector('.card').appendChild(note);
+          cardEl.appendChild(note);
         }
+
+        correct ? playCorrectTone() : playWrongTone();
 
         SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs: elapsed });
         state.stats.totalReviews += 1;
@@ -434,18 +508,20 @@ const SciApp = (() => {
         const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
         if (milestoneUnit) {
           setTimeout(() => {
-            renderMilestone(body, milestoneUnit, () => {
+            preserveScroll(() => renderMilestone(body, milestoneUnit, () => {
               quizIdx += 1;
               renderQuiz(body);
-            });
-          }, 700);
+            }));
+          }, 900);
           return;
         }
 
         setTimeout(() => {
-          quizIdx += 1;
-          renderQuiz(body);
-        }, correct ? 700 : 1800);
+          preserveScroll(() => {
+            quizIdx += 1;
+            renderQuiz(body);
+          });
+        }, correct ? 900 : 2000);
       });
     });
   }
