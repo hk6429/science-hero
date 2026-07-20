@@ -23,7 +23,9 @@ const SciFlashcard = (() => {
     return queue.map((x) => x.term);
   }
 
-  function markResult(state, id, correct) {
+  // 只更新盒序本身，不動 totalReviews/streak——給呼叫端（自測/閃卡）自己決定何時記那些全域統計，
+  // 避免同一次作答被算兩次。閃卡與自測共用這個函式，讓「戰功」不再只認閃卡、自測答對也算數。
+  function bumpBox(state, id, correct) {
     const card = SciStore.getCard(state, id);
     const nextBox = correct ? Math.min(card.box + 1, BOX_INTERVAL_DAYS.length - 1) : 0;
     const updated = {
@@ -33,10 +35,15 @@ const SciFlashcard = (() => {
       wrong: card.wrong + (correct ? 0 : 1),
     };
     SciStore.setCard(state, id, updated);
+    return updated;
+  }
+
+  function markResult(state, id, correct) {
+    const updated = bumpBox(state, id, correct);
     state.stats.totalReviews += 1;
     SciStore.touchDailyStreak(state);
     return updated;
   }
 
-  return { getRoundQueue, markResult, BOX_INTERVAL_DAYS, ROUND_SIZE };
+  return { getRoundQueue, markResult, bumpBox, BOX_INTERVAL_DAYS, ROUND_SIZE };
 })();

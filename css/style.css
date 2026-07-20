@@ -36,7 +36,9 @@ header.site-header {
 header.site-header h1 { margin: 0 0 4px; font-size: 1.5rem; font-weight: 900; letter-spacing: 0.02em; }
 header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity: 0.85; }
 
-.hero-stats { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+.hero-tagline { margin-top: 4px !important; font-size: 0.74rem !important; opacity: 0.75 !important; }
+
+.hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
 
 .hero-stat {
   font-size: 0.78rem;
@@ -47,6 +49,8 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 }
 
 .hero-stat strong { font-size: 0.88rem; }
+
+.hero-rank { background: rgba(255, 212, 59, 0.25); color: #ffd43b; }
 
 .daily-goal { max-width: 320px; margin: 10px auto 0; }
 
@@ -421,6 +425,13 @@ main {
   letter-spacing: 0.05em;
   color: var(--warn);
   margin-bottom: 4px;
+}
+
+.quiz-feedback-compare {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+  opacity: 0.85;
 }
 
 .weak-intro {

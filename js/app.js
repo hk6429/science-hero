@@ -535,9 +535,13 @@ const SciApp = (() => {
         cardEl.insertBefore(resultBanner, cardEl.firstChild);
 
         if (!correct) {
+          const chosenTerm = terms.find((t) => t.id === chosenId);
           const note = document.createElement('div');
           note.className = 'quiz-feedback';
-          note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>正確答案：<strong>${target.term}</strong> — ${target.def}`;
+          const compareLine = chosenTerm
+            ? `<div class="quiz-feedback-compare">你選的「${chosenTerm.term}」：${chosenTerm.def}</div>`
+            : '';
+          note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>${compareLine}正確答案：<strong>${target.term}</strong> — ${target.def}`;
           cardEl.appendChild(note);
         }
 
@@ -549,6 +553,7 @@ const SciApp = (() => {
         correct ? playCorrectTone() : playWrongTone();
 
         SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs: elapsed });
+        SciFlashcard.bumpBox(state, target.id, correct);
         state.stats.totalReviews += 1;
         SciStore.touchDailyStreak(state);
         SciStore.bumpDailyCount(state);
@@ -614,9 +619,9 @@ const SciApp = (() => {
     }
 
     body.innerHTML = `
-      <p class="weak-intro">🧭 戰情室：這是你目前卡住的地方</p>
+      <p class="weak-intro">🧭 進步地圖：這幾個地方再練一次就會更熟</p>
       <div class="card">
-        <h3>這幾個單元該回頭看看了</h3>
+        <h3>這幾個單元再複習一輪吧</h3>
         <ul class="weak-list">
           ${weakUnits.map((w) => `
             <li>
@@ -629,7 +634,7 @@ const SciApp = (() => {
         </ul>
       </div>
       <div class="card">
-        <h3>這幾個詞卡在半路了</h3>
+        <h3>這幾個詞快到手了</h3>
         <ul class="weak-list">
           ${weakTerms.map((w) => `
             <li>
@@ -651,14 +656,46 @@ const SciApp = (() => {
   }
 
   // ================= Header 統計 =================
+  const RANK_TIERS = [
+    [0, '見習生'],
+    [1, '初階英雄'],
+    [10, '進階英雄'],
+    [30, '資深英雄'],
+    [80, '領域專家'],
+  ];
+
+  function rankLabel(masteredCount) {
+    let label = RANK_TIERS[0][1];
+    for (const [threshold, name] of RANK_TIERS) {
+      if (masteredCount >= threshold) label = name;
+    }
+    return label;
+  }
+
+  function masteredCardCount() {
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    return Object.values((state && state.cards) || {}).filter((c) => c.box >= maxBox).length;
+  }
+
+  function countMasteredUnits() {
+    let count = 0;
+    subjectTerms.forEach((list) => {
+      const units = [...new Set(list.map((t) => t.unit))];
+      units.forEach((u) => {
+        if (unitStatus(list.filter((t) => t.unit === u)) === 'mastered') count += 1;
+      });
+    });
+    return count;
+  }
+
   function renderHeroStats() {
     const streakEl = el('#streak-days');
     const masteredEl = el('#mastered-count');
+    const rankEl = el('#hero-rank');
+    const mastered = masteredCardCount();
     if (streakEl) streakEl.textContent = (state.stats && state.stats.streakDays) || 0;
-    if (masteredEl) {
-      const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
-      masteredEl.textContent = Object.values((state && state.cards) || {}).filter((c) => c.box >= maxBox).length;
-    }
+    if (masteredEl) masteredEl.textContent = mastered;
+    if (rankEl) rankEl.textContent = rankLabel(mastered);
 
     const labelEl = el('#daily-goal-label');
     const fillEl = el('#daily-goal-fill');
@@ -674,11 +711,85 @@ const SciApp = (() => {
     }
   }
 
+  // ================= 戰績卡片（免帳號免雲端的「被看見」管道）=================
+  function drawStatsCard() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 640;
+    canvas.height = 760;
+    const ctx = canvas.getContext('2d');
+
+    const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grad.addColorStop(0, '#eafbf0');
+    grad.addColorStop(1, '#ffffff');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#2e9e5b';
+    ctx.lineWidth = 8;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#1c2b22';
+    ctx.font = 'bold 44px sans-serif';
+    ctx.fillText('🧪 科學英雄戰績卡', canvas.width / 2, 110);
+
+    const mastered = masteredCardCount();
+    const masteredUnits = countMasteredUnits();
+    const streak = (state.stats && state.stats.streakDays) || 0;
+
+    ctx.font = '26px sans-serif';
+    ctx.fillStyle = '#2e9e5b';
+    ctx.fillText(rankLabel(mastered), canvas.width / 2, 160);
+
+    ctx.font = '18px sans-serif';
+    ctx.fillStyle = '#5c6b62';
+    ctx.fillText(new Date().toLocaleDateString('zh-TW'), canvas.width / 2, 195);
+
+    const rows = [
+      ['🔥 連續複習', `${streak} 天`],
+      ['⭐ 戰功', `${mastered} 個`],
+      ['🏅 精通單元', `${masteredUnits} 個`],
+    ];
+    let y = 300;
+    rows.forEach(([label, value]) => {
+      ctx.textAlign = 'left';
+      ctx.font = '28px sans-serif';
+      ctx.fillStyle = '#1c2b22';
+      ctx.fillText(label, 80, y);
+      ctx.textAlign = 'right';
+      ctx.font = 'bold 34px sans-serif';
+      ctx.fillStyle = '#2e9e5b';
+      ctx.fillText(value, canvas.width - 80, y);
+      y += 90;
+    });
+
+    ctx.textAlign = 'center';
+    ctx.font = '16px sans-serif';
+    ctx.fillStyle = '#8a978f';
+    ctx.fillText('science-hero-hk6429.vercel.app', canvas.width / 2, canvas.height - 50);
+
+    return canvas;
+  }
+
+  function shareStatsCard() {
+    const canvas = drawStatsCard();
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `科學英雄戰績卡-${SciStore.todayStr()}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
   // ================= 進度匯出／匯入 =================
   function wireIoButtons() {
     const exportBtn = el('#export-btn');
     const importBtn = el('#import-btn');
     const importFile = el('#import-file');
+    const shareBtn = el('#share-card-btn');
+    if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
     if (!exportBtn || !importBtn || !importFile) return;
 
     exportBtn.addEventListener('click', () => {

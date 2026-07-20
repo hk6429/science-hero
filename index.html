@@ -12,9 +12,11 @@
 <header class="site-header">
   <h1>🧪 科學英雄</h1>
   <p>國小自然・國中生物・國中理化・國中地科 知識點練功站</p>
+  <p class="hero-tagline">每精通一個知識點，就離「科學英雄」的稱號更近一步</p>
   <div class="hero-stats">
     <span class="hero-stat">🔥 連續 <strong id="streak-days">0</strong> 天</span>
     <span class="hero-stat">⭐ 戰功 <strong id="mastered-count">0</strong> 個</span>
+    <span class="hero-stat hero-rank" id="hero-rank">見習生</span>
   </div>
   <div class="daily-goal" id="daily-goal">
     <div class="daily-goal-label" id="daily-goal-label">今日目標：複習 0 / 10 題</div>
@@ -30,6 +32,7 @@
 <main>
   <div id="panels"></div>
   <div class="io-row">
+    <button id="share-card-btn" class="io-btn">🏆 產生戰績卡片</button>
     <button id="export-btn" class="io-btn">匯出進度</button>
     <button id="import-btn" class="io-btn">匯入進度</button>
     <input type="file" id="import-file" accept="application/json" hidden />
