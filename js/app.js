@@ -335,7 +335,9 @@ const SciApp = (() => {
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
   function recordAnswer(target, correct, elapsedMs) {
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs });
-    SciFlashcard.bumpBox(state, target.id, correct);
+    const prevBox = SciStore.getCard(state, target.id).box;
+    const updated = SciFlashcard.bumpBox(state, target.id, correct);
+    SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
     state.stats.totalReviews += 1;
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
@@ -884,6 +886,10 @@ const SciApp = (() => {
     }
 
     wireIoButtons();
+    SciBaseUI.init({
+      getState: () => state,
+      getTermsBySubject: () => Object.fromEntries(subjectTerms),
+    });
     renderHeroStats();
     renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
   }

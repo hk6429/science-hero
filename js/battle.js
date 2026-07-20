@@ -296,6 +296,7 @@ const SciBattle = (() => {
         if (!beaten.includes(opp.id)) beaten.push(opp.id);
       }
       SciStore.save(state);
+      if (win) SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
       el.innerHTML = `<div class="card celebrate-in">
         <div class="bat-result-emoji">${win ? '🏆' : '💀'}</div>
         <p>${win ? `擊敗 ${opp.name}！` : `不敵 ${opp.name}……`}</p>
