@@ -95,6 +95,25 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 
 .io-btn:hover { border-color: var(--green); color: var(--green-dark); }
 
+.io-hint {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 4px 0 0;
+  padding: 0 16px;
+}
+
+.site-footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 20px 16px 28px;
+}
+
+.site-footer a { color: var(--green-dark); }
+
+.quiz-next-btn { width: 100%; margin-top: 10px; }
+
 nav.tabs {
   display: flex;
   overflow-x: auto;
@@ -568,6 +587,17 @@ main {
   padding: 10px 14px;
   border-bottom: 1px solid var(--border);
   gap: 10px;
+}
+
+.weak-list li:has(.weak-term-def) { flex-direction: column; align-items: stretch; }
+
+.weak-term-row { display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 10px; }
+
+.weak-term-def {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
 }
 
 .weak-list li:last-child { border-bottom: none; }

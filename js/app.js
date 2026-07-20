@@ -376,12 +376,16 @@ const SciApp = (() => {
         <div class="card celebrate-in">
           <p>這輪 ${flashQueue.length} 張都過完了，手感應該還在，要不要趁勢再來一輪？</p>
           <div class="btn-row">
+            <button class="btn btn-secondary" id="flash-stop">今天先這樣</button>
             <button class="btn btn-primary" id="flash-again">再戰一輪</button>
           </div>
         </div>`;
       body.querySelector('#flash-again').addEventListener('click', () => {
         startFlashRound();
         renderFlashcard(body);
+      });
+      body.querySelector('#flash-stop').addEventListener('click', () => {
+        body.innerHTML = `<div class="card"><p>今天練到這裡很棒了，休息一下吧！想再練的時候隨時回來。</p></div>`;
       });
       return;
     }
@@ -474,12 +478,16 @@ const SciApp = (() => {
         <div class="card celebrate-in">
           <p>${quizSummaryText(quizCorrect, quizQueue.length)}</p>
           <div class="btn-row">
+            <button class="btn btn-secondary" id="quiz-stop">今天先這樣</button>
             <button class="btn btn-primary" id="quiz-again">再來測一次</button>
           </div>
         </div>`;
       body.querySelector('#quiz-again').addEventListener('click', () => {
         startQuizRound();
         renderQuiz(body);
+      });
+      body.querySelector('#quiz-stop').addEventListener('click', () => {
+        body.innerHTML = `<div class="card"><p>今天練到這裡很棒了，休息一下吧！想再練的時候隨時回來。</p></div>`;
       });
       return;
     }
@@ -533,6 +541,11 @@ const SciApp = (() => {
           cardEl.appendChild(note);
         }
 
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'btn btn-secondary quiz-next-btn';
+        nextBtn.textContent = '下一題 →';
+        cardEl.appendChild(nextBtn);
+
         correct ? playCorrectTone() : playWrongTone();
 
         SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs: elapsed });
@@ -548,24 +561,28 @@ const SciApp = (() => {
         // 題目悄悄跳過——這正是多位審查者回報「答完題畫面亂跳到別科」的根因。
         const stillSameContext = () => activeSubject === subjectAtAnswer && mode === modeAtAnswer;
 
-        if (milestoneUnit) {
-          setTimeout(() => {
-            if (!stillSameContext()) return;
+        const goNext = () => {
+          if (!stillSameContext()) return;
+          if (milestoneUnit) {
             preserveScroll(() => renderMilestone(body, milestoneUnit, () => {
               quizIdx += 1;
               renderQuiz(body);
             }));
-          }, 900);
-          return;
-        }
+          } else {
+            preserveScroll(() => {
+              quizIdx += 1;
+              renderQuiz(body);
+            });
+          }
+        };
 
-        setTimeout(() => {
-          if (!stillSameContext()) return;
-          preserveScroll(() => {
-            quizIdx += 1;
-            renderQuiz(body);
-          });
-        }, correct ? 900 : 2000);
+        // 拉長停留時間讓陪讀家長來得及唸出解說；同時保留手動「下一題」按鈕給想自己掌控節奏的人。
+        const delay = milestoneUnit ? 1400 : (correct ? 1400 : 3200);
+        const timer = setTimeout(goNext, delay);
+        nextBtn.addEventListener('click', () => {
+          clearTimeout(timer);
+          goNext();
+        });
       });
     });
   }
@@ -616,11 +633,14 @@ const SciApp = (() => {
         <ul class="weak-list">
           ${weakTerms.map((w) => `
             <li>
-              <span>${w.term.term}</span>
-              <span class="weak-actions">
-                <span class="weak-score">${w.score}</span>
-                <button class="btn-weak-practice" data-type="term" data-key="${w.termId}">複習這個</button>
-              </span>
+              <div class="weak-term-row">
+                <span>${w.term.term}</span>
+                <span class="weak-actions">
+                  <span class="weak-score">${w.score}</span>
+                  <button class="btn-weak-practice" data-type="term" data-key="${w.termId}">複習這個</button>
+                </span>
+              </div>
+              <div class="weak-term-def">${w.term.def}</div>
             </li>`).join('') || '<li>目前沒有卡住的地方</li>'}
         </ul>
       </div>`;

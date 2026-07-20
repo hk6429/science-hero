@@ -61,7 +61,7 @@ try {
   for (let i = 0; i < 5; i++) {
     await page.waitForSelector('.quiz-option');
     await page.click('.quiz-option >> nth=0');
-    await page.waitForTimeout(2300); // 答錯現在會多停留顯示正確答案，需等長一點
+    await page.waitForTimeout(3400); // 答錯現在會多停留顯示正確答案，需等長一點
   }
   console.log('✅ 自測 5 題');
 
