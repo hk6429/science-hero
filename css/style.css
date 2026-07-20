@@ -638,3 +638,98 @@ main {
   header.site-header h1 { font-size: 1.2rem; }
   .flash-term { font-size: 1.35rem; }
 }
+
+/* ================= 答題對戰 ================= */
+.bat-hint { font-size: 0.82rem; color: var(--muted); margin: 0 0 10px; }
+
+.bat-oppgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.bat-oppcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  cursor: pointer;
+  text-align: center;
+}
+
+.bat-oppcard.locked { opacity: 0.55; cursor: not-allowed; }
+.bat-oppcard:not(.locked):hover { border-color: var(--green); transform: translateY(-1px); }
+
+.bat-face { font-size: 2rem; line-height: 1; }
+.bat-face.big { font-size: 3rem; }
+
+.bat-name { font-size: 0.85rem; font-weight: 700; }
+.bat-tier { font-size: 0.7rem; color: var(--muted); }
+.bat-locknote { font-size: 0.65rem; color: var(--muted); }
+
+.bat-trophy { text-align: center; font-size: 0.8rem; color: var(--muted); }
+
+.bat-arena {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.bat-side { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bat-side.foe { align-items: center; }
+
+.bat-hp {
+  width: 100%;
+  max-width: 260px;
+  height: 16px;
+  background: #eef4f0;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bat-hp-fill {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s ease;
+}
+
+.bat-hp.foe .bat-hp-fill { background: var(--danger); }
+.bat-hp.low .bat-hp-fill { background: var(--warn); }
+
+.bat-hp span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.bat-log {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text);
+  min-height: 1.3em;
+}
+
+.bat-result-emoji { font-size: 3rem; text-align: center; }
+.bat-quote { text-align: center; font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 6px 0 14px; }
+
+.panel[data-key="nature"]   .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-nature); }
+.panel[data-key="biology"]  .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-biology); }
+.panel[data-key="chemphys"] .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-chemphys); }
+.panel[data-key="earth"]    .bat-hp:not(.foe) .bat-hp-fill { background: var(--sci-earth); }

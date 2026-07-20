@@ -211,6 +211,7 @@ const SciApp = (() => {
     [
       ['flashcard', '閃卡複習'],
       ['quiz', '自我測驗'],
+      ['battle', '答題對戰'],
       ['weak', '弱點清單'],
     ].forEach(([key, label]) => {
       const btn = document.createElement('button');
@@ -307,7 +308,7 @@ const SciApp = (() => {
     panel.querySelector('.grade-filter')?.remove();
     panel.insertBefore(renderModeSwitch(panel), body);
 
-    if (mode === 'flashcard' || mode === 'quiz') {
+    if (mode === 'flashcard' || mode === 'quiz' || mode === 'battle') {
       const gradeWrap = renderGradeFilter(panel);
       if (gradeWrap) panel.insertBefore(gradeWrap, body);
       panel.insertBefore(renderUnitMap(panel), body);
@@ -315,7 +316,31 @@ const SciApp = (() => {
 
     if (mode === 'flashcard') renderFlashcard(body);
     else if (mode === 'quiz') renderQuiz(body);
+    else if (mode === 'battle') renderBattle(body);
     else renderWeak(body);
+  }
+
+  // ================= 答題對戰 =================
+  function renderBattle(body) {
+    const subjectLabel = SUBJECTS.find((s) => s.key === activeSubject)?.label || '';
+    SciBattle.mount(body, {
+      pool: currentPool(),
+      state,
+      subjectLabel,
+      recordAnswer,
+    });
+  }
+
+  // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
+  function recordAnswer(target, correct, elapsedMs) {
+    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs });
+    SciFlashcard.bumpBox(state, target.id, correct);
+    state.stats.totalReviews += 1;
+    SciStore.touchDailyStreak(state);
+    SciStore.bumpDailyCount(state);
+    SciStore.save(state);
+    renderHeroStats();
+    correct ? playCorrectTone() : playWrongTone();
   }
 
   // ================= 里程碑：單元全數精通 =================
@@ -550,15 +575,7 @@ const SciApp = (() => {
         nextBtn.textContent = '下一題 →';
         cardEl.appendChild(nextBtn);
 
-        correct ? playCorrectTone() : playWrongTone();
-
-        SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs: elapsed });
-        SciFlashcard.bumpBox(state, target.id, correct);
-        state.stats.totalReviews += 1;
-        SciStore.touchDailyStreak(state);
-        SciStore.bumpDailyCount(state);
-        SciStore.save(state);
-        renderHeroStats();
+        recordAnswer(target, correct, elapsed);
 
         const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
         // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
