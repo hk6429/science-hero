@@ -50,5 +50,13 @@ const SciStore = (() => {
     return parsed;
   }
 
-  return { load, save, getCard, setCard, touchDailyStreak, todayStr, exportState, importState };
+  function bumpDailyCount(state) {
+    const today = todayStr();
+    if (!state.stats.dailyReviews || state.stats.dailyReviews.date !== today) {
+      state.stats.dailyReviews = { date: today, count: 0 };
+    }
+    state.stats.dailyReviews.count += 1;
+  }
+
+  return { load, save, getCard, setCard, touchDailyStreak, todayStr, exportState, importState, bumpDailyCount };
 })();

@@ -48,6 +48,31 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 
 .hero-stat strong { font-size: 0.88rem; }
 
+.daily-goal { max-width: 320px; margin: 10px auto 0; }
+
+.daily-goal-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.daily-goal-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.daily-goal-bar > div {
+  height: 100%;
+  background: #ffd43b;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.daily-goal.done .daily-goal-bar > div { background: #69db7c; }
+.daily-goal.done .daily-goal-label { color: #d3f9d8; }
+
 .trust-line {
   text-align: center;
   font-size: 0.72rem;
@@ -302,6 +327,92 @@ main {
   font-size: 0.88rem;
   line-height: 1.6;
 }
+
+.quiz-feedback-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--warn);
+  margin-bottom: 4px;
+}
+
+.weak-intro {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 4px 0 10px;
+}
+
+.unit-map {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  margin-bottom: 4px;
+}
+
+.unit-chip {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  width: 64px;
+}
+
+.unit-chip-ring {
+  --ring-color: var(--green);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(var(--ring-color) calc(var(--progress) * 3.6deg), var(--border) 0);
+  transition: background 0.3s ease;
+}
+
+.unit-chip-ring::before {
+  content: '';
+  position: absolute;
+}
+
+.unit-chip-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.unit-chip-label {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 64px;
+}
+
+.unit-chip.active .unit-chip-label { color: var(--green-dark); font-weight: 800; }
+.unit-chip.active .unit-chip-icon { box-shadow: 0 0 0 2px var(--green); }
+
+.panel[data-key="nature"]   .unit-chip-ring { --ring-color: var(--sci-nature); }
+.panel[data-key="biology"]  .unit-chip-ring { --ring-color: var(--sci-biology); }
+.panel[data-key="chemphys"] .unit-chip-ring { --ring-color: var(--sci-chemphys); }
+.panel[data-key="earth"]    .unit-chip-ring { --ring-color: var(--sci-earth); }
+
+.milestone-card { text-align: center; }
+.milestone-icon { font-size: 2.6rem; margin-bottom: 6px; }
+.milestone-card h3 { margin: 4px 0 8px; }
+.milestone-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
 .progress-bar {
   height: 6px;

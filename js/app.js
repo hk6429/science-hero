@@ -24,13 +24,45 @@ const SciApp = (() => {
     force_motion: '力與運動',
     energy_wave: '能量、熱、聲與光',
     electricity: '電與磁',
+    geology: '地質作用',
+    weather: '天氣現象',
+    ocean: '海洋與海流',
+    astronomy: '天文與太陽系',
+    earth_system: '地球系統交互作用',
   };
+
+  const UNIT_ICONS = {
+    inquiry: '🔍',
+    life: '🌱',
+    matter: '⚗️',
+    energy: '💡',
+    earth: '🌍',
+    environment: '♻️',
+    cell: '🔬',
+    body: '🫀',
+    repro_gene: '🧬',
+    evo_classify: '🦴',
+    ecology: '🌿',
+    measure_matter: '⚖️',
+    chemistry: '🧪',
+    force_motion: '⚙️',
+    energy_wave: '🌡️',
+    electricity: '⚡',
+    geology: '🪨',
+    weather: '🌦️',
+    ocean: '🌊',
+    astronomy: '🪐',
+    earth_system: '🔄',
+  };
+
+  const DAILY_GOAL = 10;
 
   let state = null;
   let activeSubject = 'biology';
   const subjectTerms = new Map();
   let terms = [];
   let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'weak'
+  let unitFilter = null; // 目前選定的單元（null = 全部）
 
   // ---- 閃卡狀態（依科目分開保留，切分頁不會弄丟進度）----
   const flashState = new Map();
@@ -58,6 +90,17 @@ const SciApp = (() => {
     return a;
   }
 
+  function currentPool() {
+    return unitFilter ? terms.filter((t) => t.unit === unitFilter) : terms;
+  }
+
+  function masteryPct(list) {
+    if (!list.length) return 0;
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const mastered = list.filter((t) => SciStore.getCard(state, t.id).box >= maxBox).length;
+    return Math.round((mastered / list.length) * 100);
+  }
+
   function renderTabs() {
     const nav = el('#tabs');
     nav.innerHTML = '';
@@ -80,6 +123,7 @@ const SciApp = (() => {
 
     activeSubject = key;
     terms = subjectTerms.get(key);
+    unitFilter = null;
 
     const savedFlash = flashState.get(key);
     if (savedFlash) {
@@ -114,6 +158,7 @@ const SciApp = (() => {
         const body = p.querySelector('.subject-body');
         if (body) body.innerHTML = '';
         p.querySelector('.mode-switch')?.remove();
+        p.querySelector('.unit-map')?.remove();
       }
     });
     renderLearningBody(document.querySelector(`.panel[data-key="${key}"]`));
@@ -140,20 +185,88 @@ const SciApp = (() => {
     return bar;
   }
 
+  // ================= 單元關卡地圖（選擇範圍用，不強制流程）=================
+  function selectUnitFilter(key, panel) {
+    unitFilter = key || null;
+    flashQueue = [];
+    quizQueue = [];
+    renderLearningBody(panel);
+  }
+
+  function renderUnitMap(panel) {
+    const wrap = document.createElement('div');
+    wrap.className = 'unit-map';
+    const units = [...new Set(terms.map((t) => t.unit))];
+    const chips = ['', ...units].map((u) => {
+      const isAll = u === '';
+      const label = isAll ? '全部' : (UNIT_LABELS[u] || u);
+      const icon = isAll ? '📚' : (UNIT_ICONS[u] || '📘');
+      const pct = isAll ? masteryPct(terms) : masteryPct(terms.filter((t) => t.unit === u));
+      const active = (isAll && !unitFilter) || u === unitFilter;
+      return `<button class="unit-chip${active ? ' active' : ''}" data-unit="${u}" style="--progress:${pct}">
+        <span class="unit-chip-ring"><span class="unit-chip-icon">${icon}</span></span>
+        <span class="unit-chip-label">${label}</span>
+      </button>`;
+    }).join('');
+    wrap.innerHTML = chips;
+    wrap.querySelectorAll('.unit-chip').forEach((btn) => {
+      btn.addEventListener('click', () => selectUnitFilter(btn.dataset.unit, panel));
+    });
+    return wrap;
+  }
+
   function renderLearningBody(panel) {
     const body = panel.querySelector('.subject-body');
     body.innerHTML = '';
     panel.querySelector('.mode-switch')?.remove();
+    panel.querySelector('.unit-map')?.remove();
     panel.insertBefore(renderModeSwitch(panel), body);
+
+    if (mode === 'flashcard' || mode === 'quiz') {
+      panel.insertBefore(renderUnitMap(panel), body);
+    }
 
     if (mode === 'flashcard') renderFlashcard(body);
     else if (mode === 'quiz') renderQuiz(body);
     else renderWeak(body);
   }
 
+  // ================= 里程碑：單元全數精通 =================
+  function checkUnitMilestone(unit) {
+    if (!unit) return null;
+    const list = terms.filter((t) => t.unit === unit);
+    if (!list.length) return null;
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const allMastered = list.every((t) => SciStore.getCard(state, t.id).box >= maxBox);
+    if (!allMastered) return null;
+
+    state.stats.celebratedUnits = state.stats.celebratedUnits || [];
+    const key = `${activeSubject}:${unit}`;
+    if (state.stats.celebratedUnits.includes(key)) return null;
+    state.stats.celebratedUnits.push(key);
+    SciStore.save(state);
+    return unit;
+  }
+
+  function renderMilestone(container, unit, onContinue) {
+    const icon = UNIT_ICONS[unit] || '📘';
+    const label = UNIT_LABELS[unit] || unit;
+    const subjectLabel = SUBJECTS.find((s) => s.key === activeSubject)?.label || '';
+    container.innerHTML = `
+      <div class="card milestone-card celebrate-in">
+        <div class="milestone-icon">${icon}</div>
+        <h3>${label} · 全數精通！</h3>
+        <p>這個單元的詞條你都穩了，${subjectLabel}的戰功又推進一格。</p>
+        <div class="btn-row"><button class="btn btn-primary" id="milestone-continue">繼續</button></div>
+      </div>`;
+    container.querySelector('#milestone-continue').addEventListener('click', () => {
+      onContinue();
+    });
+  }
+
   // ================= 閃卡 =================
   function startFlashRound() {
-    flashQueue = SciFlashcard.getRoundQueue(state, terms);
+    flashQueue = SciFlashcard.getRoundQueue(state, currentPool());
     flashIdx = 0;
     flashRevealed = false;
   }
@@ -190,7 +303,7 @@ const SciApp = (() => {
       </div>
       <div class="progress-bar"><div style="width:${((flashIdx) / flashQueue.length) * 100}%"></div></div>
       <div class="card">
-        <div class="flash-meta">${UNIT_LABELS[t.unit] || t.unit} · ${t.category}</div>
+        <div class="flash-meta">${UNIT_ICONS[t.unit] || ''} ${UNIT_LABELS[t.unit] || t.unit} · ${t.category}</div>
         <div class="flash-term">${t.term}</div>
         <div class="flash-def ${flashRevealed ? '' : 'hidden'}" id="flash-def">
           ${flashRevealed ? t.def : '先想想看，答案準備好了再翻開'}
@@ -217,15 +330,23 @@ const SciApp = (() => {
   function answerFlash(body, correct) {
     const t = flashQueue[flashIdx];
     SciFlashcard.markResult(state, t.id, correct);
+    SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
+
+    const milestoneUnit = correct ? checkUnitMilestone(t.unit) : null;
     flashIdx += 1;
     flashRevealed = false;
-    renderFlashcard(body);
+
+    if (milestoneUnit) {
+      renderMilestone(body, milestoneUnit, () => renderFlashcard(body));
+    } else {
+      renderFlashcard(body);
+    }
   }
 
   // ================= 自測 =================
-  function startQuizRound(pool = terms) {
+  function startQuizRound(pool = currentPool()) {
     quizPool = terms;
     quizQueue = shuffleArr(pool).slice(0, Math.min(15, pool.length));
     quizIdx = 0;
@@ -299,15 +420,27 @@ const SciApp = (() => {
         if (!correct) {
           const note = document.createElement('div');
           note.className = 'quiz-feedback';
-          note.innerHTML = `正確答案：<strong>${target.term}</strong> — ${target.def}`;
+          note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>正確答案：<strong>${target.term}</strong> — ${target.def}`;
           body.querySelector('.card').appendChild(note);
         }
 
         SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs: elapsed });
         state.stats.totalReviews += 1;
         SciStore.touchDailyStreak(state);
+        SciStore.bumpDailyCount(state);
         SciStore.save(state);
         renderHeroStats();
+
+        const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
+        if (milestoneUnit) {
+          setTimeout(() => {
+            renderMilestone(body, milestoneUnit, () => {
+              quizIdx += 1;
+              renderQuiz(body);
+            });
+          }, 700);
+          return;
+        }
 
         setTimeout(() => {
           quizIdx += 1;
@@ -344,12 +477,13 @@ const SciApp = (() => {
     }
 
     body.innerHTML = `
+      <p class="weak-intro">🧭 戰情室：這是你目前卡住的地方</p>
       <div class="card">
         <h3>這幾個單元該回頭看看了</h3>
         <ul class="weak-list">
           ${weakUnits.map((w) => `
             <li>
-              <span>${w.label}</span>
+              <span>${UNIT_ICONS[w.unit] || ''} ${w.label}</span>
               <span class="weak-actions">
                 <span class="weak-score">${w.score}</span>
                 <button class="btn-weak-practice" data-type="unit" data-key="${w.unit}">複習這個</button>
@@ -380,11 +514,24 @@ const SciApp = (() => {
   function renderHeroStats() {
     const streakEl = el('#streak-days');
     const masteredEl = el('#mastered-count');
-    if (!streakEl || !masteredEl) return;
-    streakEl.textContent = (state.stats && state.stats.streakDays) || 0;
-    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
-    const mastered = Object.values((state && state.cards) || {}).filter((c) => c.box >= maxBox).length;
-    masteredEl.textContent = mastered;
+    if (streakEl) streakEl.textContent = (state.stats && state.stats.streakDays) || 0;
+    if (masteredEl) {
+      const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+      masteredEl.textContent = Object.values((state && state.cards) || {}).filter((c) => c.box >= maxBox).length;
+    }
+
+    const labelEl = el('#daily-goal-label');
+    const fillEl = el('#daily-goal-fill');
+    const wrapEl = el('#daily-goal');
+    if (labelEl && fillEl && wrapEl && state.stats) {
+      const today = SciStore.todayStr();
+      const daily = (state.stats.dailyReviews && state.stats.dailyReviews.date === today) ? state.stats.dailyReviews.count : 0;
+      const capped = Math.min(daily, DAILY_GOAL);
+      const pct = Math.round((capped / DAILY_GOAL) * 100);
+      fillEl.style.width = `${pct}%`;
+      wrapEl.classList.toggle('done', daily >= DAILY_GOAL);
+      labelEl.textContent = daily >= DAILY_GOAL ? '今日目標已達成 🎉' : `今日目標：複習 ${capped} / ${DAILY_GOAL} 題`;
+    }
   }
 
   // ================= 進度匯出／匯入 =================
@@ -453,6 +600,7 @@ const SciApp = (() => {
       const filtered = terms.filter((t) => t.unit === paramUnit);
       if (filtered.length) {
         mode = 'quiz';
+        unitFilter = paramUnit;
         startQuizRound(filtered);
       }
     }
