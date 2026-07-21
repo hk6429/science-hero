@@ -61,21 +61,32 @@ const SciWeak = (() => {
       const subjectTerms = termsBySubject[subject.key] || [];
       const mastered = subjectTerms.filter((term) => ((state.cards || {})[term.id] || {}).box >= maxBox).length;
       const recent = accuracyBySubject(state, subject.key);
-      const pct = recent.total ? Math.round(recent.accuracy * 100) : 0;
-      return `${subject.label}：精通 ${mastered} 張｜近 30 題正確率 ${pct}%（${recent.total} 題）`;
+      // 0 題不寫「正確率 0%」——不誠實也打擊士氣，改標「尚無作答紀錄」。
+      const acc = recent.total ? `近 30 題正確率 ${Math.round(recent.accuracy * 100)}%（${recent.total} 題）` : '尚無作答紀錄';
+      return `${subject.label}：精通 ${mastered} 張｜${acc}`;
     });
     const weakLines = getWeakTerms(state, 10)
       .map((entry) => termById.get(entry.termId))
       .filter(Boolean)
       .map((term, index) => `${index + 1}. ${term.term}`);
+    // 誠實透明：把系統已算好的「疑似用猜的」訊號攤給家長（資料已在 weakLog，不新增追蹤）。
+    const luckyCount = (state.weakLog || []).filter((entry) => entry.luckyGuess).length;
+    const guessLine = luckyCount
+      ? `最近有 ${luckyCount} 題疑似靠猜答對（建議請孩子解釋為什麼對，確認是真的理解）。`
+      : '最近沒有明顯「疑似靠猜」的作答，答對大多是真的想過的。';
     return [
       '科學英雄學習摘要',
       '',
       '各科學習概況',
       ...subjectLines,
       '',
+      '學習誠實度',
+      guessLine,
+      '',
       '目前最需要加強的詞（最多 10 個）',
       ...(weakLines.length ? weakLines : ['目前尚無明顯弱點詞。']),
+      '',
+      '＊以上為本裝置的自我練習紀錄，未經雲端驗證，供陪伴孩子時參考。',
     ].join('\n');
   }
 

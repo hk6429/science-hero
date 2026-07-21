@@ -796,7 +796,10 @@ const SciApp = (() => {
       .map((w) => ({ ...w, term: terms.find((t) => t.id === w.termId) }))
       .filter((w) => w.term);
     const accuracy = SciFusionStore.accuracyBySubject(subjectState, activeSubject);
-    const accuracyHtml = `<p class="weak-accuracy">本科近 30 題正確率 <strong>${accuracy.total ? Math.round(accuracy.accuracy * 100) : 0}%</strong>（${accuracy.total} 題）</p>`;
+    // 0 題不能顯示「正確率 0%」——那既不誠實（0 題何來 0%）又是自我羞辱。有紀錄才給百分比。
+    const accuracyHtml = accuracy.total
+      ? `<p class="weak-accuracy">本科近 30 題正確率 <strong>${Math.round(accuracy.accuracy * 100)}%</strong>（${accuracy.total} 題）</p>`
+      : '<p class="weak-accuracy">本科還沒有作答紀錄，先去自測練幾題吧。</p>';
     const exportHtml = '<button id="family-summary-btn" class="btn btn-secondary family-summary-btn" type="button">📋 給老師／家長看</button>';
 
     if (weakUnits.length === 0 && weakTerms.length === 0) {
@@ -965,7 +968,7 @@ const SciApp = (() => {
     ctx.fillText(new Date().toLocaleDateString('zh-TW'), canvas.width / 2, 195);
 
     const rows = [
-      ['🔥 連續複習', `${streak} 天`],
+      ['📅 累計練習', `${streak} 天`],
       ['⭐ 戰功', `${mastered} 個`],
       ['🏅 精通單元', `${masteredUnits} 個`],
       ['🔭 研究捐獻', `${researchDonations} 次`],

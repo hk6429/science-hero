@@ -34,11 +34,10 @@ const SciStore = (() => {
   function touchDailyStreak(state) {
     const today = todayStr();
     if (state.stats.lastActiveDate === today) return;
-    const oneDayAgo = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    const twoDaysAgo = new Date(Date.now() - 172800000).toISOString().slice(0, 10);
-    // 給一天寬限：漏一天沒練也不會直接砍回 1，避免學生一斷就放棄整個連續紀錄。
-    const continues = state.stats.lastActiveDate === oneDayAgo || state.stats.lastActiveDate === twoDaysAgo;
-    state.stats.streakDays = continues ? state.stats.streakDays + 1 : 1;
+    // 累計型：每逢新的活躍日 +1，永不歸零。刻意不做「連續」重置——
+    // 「連續 N 天、斷了砍回 1」是損失趨避型黑帽鉤子，對兒童不負責任；
+    // 改成單調累加的「累計練習天數」，保留正向累積感、拿掉損失威脅。
+    state.stats.streakDays = (state.stats.streakDays || 0) + 1;
     state.stats.lastActiveDate = today;
   }
 
@@ -50,6 +49,16 @@ const SciStore = (() => {
     const parsed = JSON.parse(json);
     parsed.cards = parsed.cards || {};
     parsed.stats = parsed.stats || { streakDays: 0, lastActiveDate: null, totalReviews: 0 };
+    // 匯入時把 SRS 欄位夾回合法範圍，擋掉最粗糙的越界偽造
+    //（例如手改匯出檔把每張卡設成超高 box 假裝精通）。純前端無法根絕作弊，但至少不放行明顯造假。
+    for (const id of Object.keys(parsed.cards)) {
+      const card = parsed.cards[id] || {};
+      card.box = Math.max(0, Math.min(4, Math.round(Number(card.box) || 0)));
+      card.seen = Math.max(0, Math.round(Number(card.seen) || 0));
+      card.wrong = Math.max(0, Math.round(Number(card.wrong) || 0));
+      card.due = Number(card.due) || 0;
+      parsed.cards[id] = card;
+    }
     return parsed;
   }
 
