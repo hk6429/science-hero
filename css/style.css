@@ -115,6 +115,21 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 }
 
 .site-footer a { color: var(--green-dark); }
+.visitor-badge { max-width: 180px; height: auto; }
+.text-link-btn { border: 0; padding: 0; color: var(--green-dark); background: transparent; font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+.info-overlay { position: fixed; inset: 0; z-index: 1300; display: grid; place-items: center; padding: 16px; background: rgba(15, 29, 23, .78); }
+.info-overlay[hidden] { display: none; }
+.info-panel { width: min(680px, 96vw); max-height: 90vh; overflow-y: auto; border-radius: 18px; background: #fff; padding: 20px; box-shadow: 0 24px 70px rgba(0,0,0,.35); text-align: left; }
+.info-head { display: flex; align-items: flex-start; gap: 12px; }
+.info-head h2 { flex: 1; margin: 0 0 12px; font-size: 1.25rem; }
+.info-head button { border: 0; background: transparent; color: var(--muted); font-size: 1.2rem; cursor: pointer; }
+.family-summary-text { width: 100%; resize: vertical; border: 1px solid var(--border); border-radius: 12px; padding: 12px; background: #f8fbf9; color: var(--text); font: .9rem/1.6 ui-monospace, "SFMono-Regular", Menlo, monospace; }
+.family-summary-btn { display: block; width: 100%; margin: 0 0 14px; }
+.copy-status { min-height: 1.5em; margin: 8px 0 0; color: var(--green-dark); font-weight: 700; text-align: center; }
+.parent-guide { line-height: 1.75; }
+.parent-guide h3 { margin: 18px 0 6px; color: var(--green-dark); }
+.parent-guide li + li { margin-top: 8px; }
 
 .quiz-next-btn { width: 100%; margin-top: 10px; }
 
@@ -794,7 +809,8 @@ main {
   margin-bottom: 10px;
 }
 
-.bat-companion-face { font-size: 2rem; }
+.bat-companion-face { width: 48px; height: 48px; object-fit: contain; font-size: 2rem; flex: 0 0 auto; }
+.bat-assist-img { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; }
 .bat-companion-body { display: flex; flex-direction: column; gap: 2px; }
 .bat-companion-name { font-size: 0.85rem; font-weight: 700; }
 .bat-companion-desc, .bat-companion-next { font-size: 0.7rem; color: var(--muted); }

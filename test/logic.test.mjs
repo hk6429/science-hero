@@ -247,6 +247,34 @@ test('SciWeak.recordFlash 餵入閃卡診斷但不推進盒序', () => {
   assert.equal(lib.SciStore.getCard(state, t.id).box, 0);
 });
 
+test('SciWeak.buildFamilySummary 彙整四科精通、近 30 題正確率與前十弱點詞', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  const subjects = [
+    { key: 'nature', label: '國小自然' },
+    { key: 'biology', label: '國中生物' },
+    { key: 'chemphys', label: '國中理化' },
+    { key: 'earth', label: '國中地科' },
+  ];
+  const termsBySubject = Object.fromEntries(subjectFiles.map((file, index) => [
+    subjects[index].key,
+    JSON.parse(readFileSync(path.join(ROOT, 'data', file), 'utf8')).slice(0, 3),
+  ]));
+  state.cards[termsBySubject.nature[0].id] = { box: 4, due: 0, seen: 5, wrong: 0 };
+  state.cards[termsBySubject.biology[0].id] = { box: 4, due: 0, seen: 5, wrong: 0 };
+  state.cards[termsBySubject.biology[1].id] = { box: 4, due: 0, seen: 5, wrong: 0 };
+  state.weakLog = [
+    { termId: termsBySubject.nature[1].id, unit: 'x', correct: false, guessed: true, t: 1 },
+    { termId: termsBySubject.nature[1].id, unit: 'x', correct: false, guessed: false, t: 2 },
+    { termId: termsBySubject.biology[2].id, unit: 'x', correct: true, guessed: false, t: 3 },
+  ];
+
+  const summary = lib.SciWeak.buildFamilySummary(state, subjects, termsBySubject, 4, lib.SciFusionStore.accuracyBySubject);
+  assert.match(summary, /國小自然：精通 1 張｜近 30 題正確率 0%（2 題）/);
+  assert.match(summary, /國中生物：精通 2 張｜近 30 題正確率 100%（1 題）/);
+  assert.match(summary, new RegExp(`1\\. ${termsBySubject.nature[1].term}`));
+});
+
 test('SciDailyQuests 只用今日答對、勝場與單元推進判定三項任務', () => {
   const lib = makeSandbox();
   const state = lib.SciStore.load();
@@ -335,6 +363,18 @@ test('SciBattle.companionForSubject 四科各自五階、名字取自該科線',
   assert.equal(lib.SciBattle.companionForSubject('chemphys', 50).name, '電光之靈');
   assert.equal(lib.SciBattle.companionForSubject('earth', 100).next, null);
   assert.equal(lib.SciBattle.companionForSubject('earth', 100).atk, lib.SciBattle.companionFor(100).atk);
+});
+
+test('SciBattle.subjectCompanionArt 產生四科階級圖片並保留 emoji fallback', () => {
+  const lib = makeSandbox();
+  const companion = lib.SciBattle.companionForSubject('chemphys', 50);
+  const html = lib.SciBattle.subjectCompanionArt('chemphys', companion, 'bat-companion-face');
+  assert.match(html, /src="assets\/battle\/sprite-chemphys-s4\.png"/);
+  assert.match(html, /textContent:'⚡'/);
+  assert.match(html, /className:'bat-companion-face'/);
+  const generic = lib.SciBattle.companionFor(50);
+  assert.equal(generic.emoji, '🐉');
+  assert.equal('src' in generic, false);
 });
 
 test('SciBattle.SUBJECT_LINES 四科各五階、門檻對齊 COMPANION_TIERS', () => {
@@ -1058,14 +1098,14 @@ test('SciBaseUI.rankWallHtml 依歷史最高段位點亮徽章並列出賽季稱
   assert.match(html, /銀河研究員/);
 });
 
-test('守護者與稚靈美術槽都使用指定路徑並具 emoji onerror fallback', () => {
+test('守護者、四科精靈與稚靈美術槽都使用指定路徑並具 emoji onerror fallback', () => {
   const battle = readFileSync(path.join(ROOT, 'js', 'battle.js'), 'utf8');
   const app = readFileSync(path.join(ROOT, 'js', 'app.js'), 'utf8');
   assert.match(battle, /assets\/battle\/foe-\$\{opponent\.id\}\.png/);
   assert.match(battle, /onerror="this\.replaceWith/);
   assert.match(app, /assets\/fusion\/cub-\$\{assetId\}\.png/);
   assert.match(app, /onerror="this\.replaceWith/);
-  assert.doesNotMatch(`${battle}\n${app}`, /sprite-\$\{.*\}-s/);
+  assert.match(battle, /assets\/battle\/sprite-\$\{subjectKey\}-s\$\{companion\.level\}\.png/);
 });
 
 test('SciBaseUI.stylePanelHtml 列 3 樣式、標記生效與價格', () => {

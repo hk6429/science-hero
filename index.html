@@ -34,6 +34,7 @@
 
 <p class="trust-line">內容依 108 課綱自然科學領域編寫，並經教師逐條校對；本站為知識點複習小工具，非官方會考題庫或歷屆試題。</p>
 <p class="trust-line">本站無帳號系統、不上傳任何資料，練習進度僅存於本裝置瀏覽器。</p>
+<p class="trust-line"><button id="parent-guide-btn" class="text-link-btn" type="button">這站在教什麼、家長怎麼陪</button></p>
 
 <nav class="tabs" id="tabs"></nav>
 
@@ -49,6 +50,43 @@
     <input type="file" id="import-file" accept="application/json" hidden />
   </div></details>
   <p class="io-hint">換手機、換電腦想接著練？先「匯出進度」存一個檔案，再到新裝置上「匯入進度」讀回來即可。</p>
+
+  <!-- 老師／家長學習摘要 -->
+  <div id="family-summary-overlay" class="info-overlay" hidden>
+    <section class="info-panel" role="dialog" aria-modal="true" aria-labelledby="family-summary-title">
+      <div class="info-head">
+        <h2 id="family-summary-title">📋 給老師／家長看的學習摘要</h2>
+        <button id="family-summary-close" type="button" aria-label="關閉學習摘要">✕</button>
+      </div>
+      <p>以下只整理這台裝置已記錄的真實練習結果，不會上傳資料。</p>
+      <textarea id="family-summary-text" class="family-summary-text" rows="16" readonly aria-label="可複製的學習摘要"></textarea>
+      <div class="btn-row">
+        <button id="family-summary-copy" class="btn btn-primary" type="button">複製摘要</button>
+        <button id="family-summary-done" class="btn btn-secondary" type="button">關閉</button>
+      </div>
+      <p id="family-summary-status" class="copy-status" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <!-- 家長說明 -->
+  <div id="parent-guide-overlay" class="info-overlay" hidden>
+    <article class="info-panel parent-guide" role="dialog" aria-modal="true" aria-labelledby="parent-guide-title">
+      <div class="info-head">
+        <h2 id="parent-guide-title">這站在教什麼、家長怎麼陪</h2>
+        <button id="parent-guide-close" type="button" aria-label="關閉家長說明">✕</button>
+      </div>
+      <p>親愛的家長，這是一個讓孩子反覆練習自然科基礎知識的小工具。內容涵蓋國小自然，以及國中生物、理化、地科中需要記熟、理解後才能靈活運用的詞彙與概念。</p>
+      <h3>精通不是點得多，而是真的記得住</h3>
+      <p>孩子答對後，詞卡會依間隔複習安排下一次出現；必須隔一段時間仍能答對，才會逐步走到「精通」。站內的養成進度連結的是這些真實學習紀錄，不是登入天數或隨意點擊次數。</p>
+      <h3>家長可以怎麼陪</h3>
+      <ul>
+        <li>請孩子說明答案為什麼正確，比只問分數更能看出理解。</li>
+        <li>一起查看「弱點清單」，一次挑一個單元或一個詞複習，不必整份重來。</li>
+        <li>需要和老師討論時，可在弱點頁按「給老師／家長看」，複製摘要再分享。</li>
+      </ul>
+      <p>不需要每天練很久。短時間、隔天再回來想一次，通常比一次背很多更有幫助。</p>
+    </article>
+  </div>
 
   <!-- 精靈融合坊 -->
   <div id="fusion-overlay" class="fusion-overlay" hidden>
@@ -134,6 +172,8 @@
 
 <footer class="site-footer">
   <p>科學英雄由大乃老師製作維護，如發現內容錯誤歡迎來信 <a href="mailto:hk6429@gmail.com">hk6429@gmail.com</a> 指正。</p>
+  <img class="visitor-badge" src="https://visitor-badge.laobi.icu/badge?page_id=hk6429.science-hero" alt="訪客數">
+  <script data-goatcounter="https://hk6429.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </footer>
 
 <script src="js/store.js"></script>

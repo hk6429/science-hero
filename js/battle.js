@@ -175,6 +175,10 @@ const SciBattle = (() => {
     return { ...cur, level: i + 1, mastered: n, next: line[i + 1] || null };
   }
 
+  function subjectCompanionArt(subjectKey, companion, extraClass = '') {
+    return `<img class="${extraClass}" src="assets/battle/sprite-${subjectKey}-s${companion.level}.png" alt="${companion.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${companion.emoji}',className:'${extraClass}'}))">`;
+  }
+
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -219,8 +223,11 @@ const SciBattle = (() => {
 
     function companionCard() {
       const c = currentCompanion();
+      const face = ctx.subjectKey
+        ? subjectCompanionArt(ctx.subjectKey, c, 'bat-companion-face')
+        : `<span class="bat-companion-face">${c.emoji}</span>`;
       return `<div class="bat-companion">
-        <span class="bat-companion-face">${c.emoji}</span>
+        ${face}
         <span class="bat-companion-body">
           <span class="bat-companion-name">${c.name}　Lv.${c.level}</span>
           <span class="bat-companion-desc">${c.atk > 0 ? `對戰時追擊 +${c.atk}${c.leech ? `・${Math.round(c.leechChance * 100)}% 機率回血 +${c.leech}` : ''}` : '再精通幾張詞卡就會孵化'}</span>
@@ -232,7 +239,10 @@ const SciBattle = (() => {
     function assistTag() {
       const c = currentCompanion();
       if (!c.atk) return '';
-      return `<div class="bat-assist">${c.emoji} ${c.name} 助戰（追擊 ${c.atk}${c.leech ? '・機率回血' : ''}）</div>`;
+      const icon = ctx.subjectKey
+        ? subjectCompanionArt(ctx.subjectKey, c, 'bat-assist-img')
+        : c.emoji;
+      return `<div class="bat-assist">${icon} ${c.name} 助戰（追擊 ${c.atk}${c.leech ? '・機率回血' : ''}）</div>`;
     }
 
     function renderPicker() {
@@ -541,6 +551,6 @@ const SciBattle = (() => {
     OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
-    SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject,
+    SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject, subjectCompanionArt,
   };
 })();

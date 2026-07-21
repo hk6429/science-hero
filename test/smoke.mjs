@@ -22,6 +22,10 @@ function runRestrictedStaticSmoke() {
   ok('精通到期把關與每日任務模組已接線', /bumpBoxIfDue/.test(app) && /js\/daily-quests\.js/.test(html));
   ok('PvE 血條、跳字與戰功結算條存在', /bat-hp-fill/.test(css) && /bat-damage-pop/.test(css) && /bat-record-summary/.test(battle));
   ok('守護者與稚靈圖片槽含 fallback', /assets\/battle\/foe-/.test(battle) && /assets\/fusion\/cub-/.test(app) && /onerror="this\.replaceWith/.test(`${battle}\n${app}`));
+  ok('四科精靈圖片槽依科別階級載入且含 fallback', /sprite-\$\{subjectKey\}-s\$\{companion\.level\}/.test(battle) && /subjectCompanionArt/.test(battle));
+  ok('老師家長摘要入口與可複製文字框已接線', /id="family-summary-btn"/.test(app) && /id="family-summary-text"/.test(html) && /buildFamilySummary/.test(app));
+  ok('家長說明入口與教師口吻內容已接線', /id="parent-guide-btn"/.test(html) && /id="parent-guide-overlay"/.test(html) && /精通不是點得多/.test(html));
+  ok('訪客徽章與 GoatCounter 已接線', /visitor-badge\.laobi\.icu\/badge\?page_id=hk6429\.science-hero/.test(html) && /hk6429\.goatcounter\.com\/count/.test(html) && /gc\.zgo\.at\/count\.js/.test(html));
   ok('融合坊六格與基地成就牆入口仍在', /fusion-pair-card/.test(app) && /id="base-wall-btn"/.test(html));
   ok('390px 響應式規則仍存在', /@media[^\{]*\(max-width:\s*420px\)/s.test(css));
   console.log(`SMOKE STATIC PASS ${checks.length}/${checks.length}（瀏覽器受執行環境限制）`);
@@ -67,6 +71,12 @@ try {
   await page.waitForSelector('#new-player-guide:not([hidden])');
   if (await page.locator('#more-tools').evaluate((node) => node.open)) fails.push('首次進站的更多功能應預設摺疊');
   console.log('✅ 首次進站看得到新手引導卡、更多功能預設摺疊');
+
+  await page.click('#parent-guide-btn');
+  await page.waitForSelector('#parent-guide-overlay:not([hidden])');
+  if (!(await page.locator('#parent-guide-overlay').textContent()).includes('家長可以怎麼陪')) fails.push('家長說明內容未顯示');
+  await page.click('#parent-guide-close');
+  console.log('✅ 首頁家長說明入口可開啟、內容可閱讀');
 
   // 生物分頁預設是 active，直接檢查內容有渲染
   await page.waitForSelector('.mode-switch button');
@@ -152,7 +162,12 @@ try {
   // 4. 弱點清單（此時應該已經有作答紀錄）
   await page.click('.mode-switch button[data-mode="weak"]');
   await page.waitForSelector('.card');
-  console.log('✅ 弱點清單頁可開啟');
+  await page.click('#family-summary-btn');
+  await page.waitForSelector('#family-summary-overlay:not([hidden])');
+  const familySummary = await page.locator('#family-summary-text').inputValue();
+  if (!familySummary.includes('各科學習概況') || !familySummary.includes('目前最需要加強的詞')) fails.push('老師家長摘要內容不完整');
+  await page.click('#family-summary-done');
+  console.log('✅ 弱點清單頁可開啟、老師家長摘要可產生');
 
   // 4b. 融合坊：開啟→看到晶能餘額與六格配對牆→關閉
   await page.click('#fusion-lab-btn');

@@ -52,5 +52,32 @@ const SciWeak = (() => {
       .map(([termId, s]) => ({ termId, score: s }));
   }
 
-  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, FAST_GUESS_MS, LUCKY_GUESS_MS };
+  function buildFamilySummary(state, subjects, termsBySubject, maxBox, accuracyBySubject) {
+    const termById = new Map();
+    subjects.forEach((subject) => {
+      (termsBySubject[subject.key] || []).forEach((term) => termById.set(term.id, term));
+    });
+    const subjectLines = subjects.map((subject) => {
+      const subjectTerms = termsBySubject[subject.key] || [];
+      const mastered = subjectTerms.filter((term) => ((state.cards || {})[term.id] || {}).box >= maxBox).length;
+      const recent = accuracyBySubject(state, subject.key);
+      const pct = recent.total ? Math.round(recent.accuracy * 100) : 0;
+      return `${subject.label}：精通 ${mastered} 張｜近 30 題正確率 ${pct}%（${recent.total} 題）`;
+    });
+    const weakLines = getWeakTerms(state, 10)
+      .map((entry) => termById.get(entry.termId))
+      .filter(Boolean)
+      .map((term, index) => `${index + 1}. ${term.term}`);
+    return [
+      '科學英雄學習摘要',
+      '',
+      '各科學習概況',
+      ...subjectLines,
+      '',
+      '目前最需要加強的詞（最多 10 個）',
+      ...(weakLines.length ? weakLines : ['目前尚無明顯弱點詞。']),
+    ].join('\n');
+  }
+
+  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, buildFamilySummary, FAST_GUESS_MS, LUCKY_GUESS_MS };
 })();

@@ -652,8 +652,30 @@ const SciApp = (() => {
     renderLearningBody(panel);
   }
 
+  function openFamilySummary() {
+    const overlay = el('#family-summary-overlay');
+    const textarea = el('#family-summary-text');
+    if (!overlay || !textarea) return;
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    textarea.value = SciWeak.buildFamilySummary(
+      state,
+      SUBJECTS,
+      Object.fromEntries(subjectTerms),
+      maxBox,
+      SciFusionStore.accuracyBySubject,
+    );
+    el('#family-summary-status').textContent = '';
+    overlay.hidden = false;
+  }
+
+  function wireWeakActions(body) {
+    body.querySelector('#family-summary-btn')?.addEventListener('click', openFamilySummary);
+    body.querySelectorAll('.btn-weak-practice').forEach((btn) => {
+      btn.addEventListener('click', () => practiceWeak(btn.dataset.type, btn.dataset.key, body.closest('.panel')));
+    });
+  }
+
   function renderWeak(body) {
-    const panel = body.closest('.panel');
     const currentIds = new Set(terms.map((t) => t.id));
     const subjectState = {
       ...state,
@@ -665,14 +687,17 @@ const SciApp = (() => {
       .filter((w) => w.term);
     const accuracy = SciFusionStore.accuracyBySubject(subjectState, activeSubject);
     const accuracyHtml = `<p class="weak-accuracy">本科近 30 題正確率 <strong>${accuracy.total ? Math.round(accuracy.accuracy * 100) : 0}%</strong>（${accuracy.total} 題）</p>`;
+    const exportHtml = '<button id="family-summary-btn" class="btn btn-secondary family-summary-btn" type="button">📋 給老師／家長看</button>';
 
     if (weakUnits.length === 0 && weakTerms.length === 0) {
-      body.innerHTML = `${accuracyHtml}<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
+      body.innerHTML = `${accuracyHtml}${exportHtml}<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
+      wireWeakActions(body);
       return;
     }
 
     body.innerHTML = `
       ${accuracyHtml}
+      ${exportHtml}
       <p class="weak-intro">🧭 進步地圖：這幾個地方再練一次就會更熟</p>
       <div class="card">
         <h3>這幾個單元再複習一輪吧</h3>
@@ -703,10 +728,7 @@ const SciApp = (() => {
             </li>`).join('') || '<li>目前沒有卡住的地方</li>'}
         </ul>
       </div>`;
-
-    body.querySelectorAll('.btn-weak-practice').forEach((btn) => {
-      btn.addEventListener('click', () => practiceWeak(btn.dataset.type, btn.dataset.key, panel));
-    });
+    wireWeakActions(body);
   }
 
   // ================= Header 統計 =================
@@ -1160,9 +1182,33 @@ const SciApp = (() => {
     const shareBtn = el('#share-card-btn');
     const fusionBtn = el('#fusion-lab-btn');
     const fusionClose = el('#fusion-close');
+    const familyOverlay = el('#family-summary-overlay');
+    const closeFamilySummary = () => { if (familyOverlay) familyOverlay.hidden = true; };
+    const parentGuideOverlay = el('#parent-guide-overlay');
+    const closeParentGuide = () => { if (parentGuideOverlay) parentGuideOverlay.hidden = true; };
     if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
     if (fusionBtn) fusionBtn.addEventListener('click', openFusionLab);
     if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);
+    el('#family-summary-close')?.addEventListener('click', closeFamilySummary);
+    el('#family-summary-done')?.addEventListener('click', closeFamilySummary);
+    el('#family-summary-copy')?.addEventListener('click', async () => {
+      const textarea = el('#family-summary-text');
+      const status = el('#family-summary-status');
+      if (!textarea) return;
+      try {
+        if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(textarea.value);
+        else {
+          textarea.select();
+          document.execCommand('copy');
+          textarea.setSelectionRange(0, 0);
+        }
+        if (status) status.textContent = '摘要已複製。';
+      } catch {
+        if (status) status.textContent = '無法自動複製，請長按文字後手動複製。';
+      }
+    });
+    el('#parent-guide-btn')?.addEventListener('click', () => { if (parentGuideOverlay) parentGuideOverlay.hidden = false; });
+    el('#parent-guide-close')?.addEventListener('click', closeParentGuide);
     if (!exportBtn || !importBtn || !importFile) return;
 
     exportBtn.addEventListener('click', () => {
