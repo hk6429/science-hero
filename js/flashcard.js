@@ -8,6 +8,27 @@ const SciFlashcard = (() => {
     return Date.now() + days * 86400000;
   }
 
+  // 把同單元叢集的新字交錯打散（round-robin across units），避免 blocked practice、
+  // 讓同回合的新字跨單元交錯出現＝interleaving，強化辨異學習。
+  function interleaveByUnit(items) {
+    const groups = new Map();
+    for (const item of items) {
+      const unit = (item.term && item.term.unit) || '';
+      if (!groups.has(unit)) groups.set(unit, []);
+      groups.get(unit).push(item);
+    }
+    const buckets = [...groups.values()];
+    const out = [];
+    let progressed = true;
+    while (progressed) {
+      progressed = false;
+      for (const bucket of buckets) {
+        if (bucket.length) { out.push(bucket.shift()); progressed = true; }
+      }
+    }
+    return out;
+  }
+
   // 回傳本回合要複習的詞條：逾期優先，不足補新字（box===0 且 seen===0）。
   function getRoundQueue(state, terms, roundSize = ROUND_SIZE) {
     const now = Date.now();
@@ -17,7 +38,8 @@ const SciFlashcard = (() => {
       .filter((x) => x.card.seen > 0 && x.card.due <= now)
       .sort((a, b) => a.card.due - b.card.due);
 
-    const fresh = withCard.filter((x) => x.card.seen === 0);
+    // 新字段做跨單元交錯（逾期段維持到期先後不動）。
+    const fresh = interleaveByUnit(withCard.filter((x) => x.card.seen === 0));
 
     const queue = [...due, ...fresh].slice(0, roundSize);
     return queue.map((x) => x.term);

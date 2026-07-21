@@ -614,7 +614,14 @@ const SciApp = (() => {
   // ================= 自測 =================
   function startQuizRound(pool = currentPool()) {
     quizPool = terms;
-    quizQueue = shuffleArr(pool).slice(0, Math.min(15, pool.length));
+    // 加權選題：到期＋弱點＋新字優先，取代純隨機——讓自測真正接上間隔複習排程。
+    const weakScores = new Map(SciWeak.getWeakTerms(state, 999).map((w) => [w.termId, w.score]));
+    const now = Date.now();
+    quizQueue = SciQuiz.weightedSample(
+      pool,
+      (t) => SciQuiz.quizWeight(SciStore.getCard(state, t.id), weakScores.get(t.id) || 0, now),
+      Math.min(15, pool.length),
+    );
     quizIdx = 0;
     quizCorrect = 0;
   }
@@ -659,7 +666,8 @@ const SciApp = (() => {
     }
 
     const target = quizQueue[quizIdx];
-    const q = SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms);
+    // 傳入該詞盒序，讓誘答難度隨精熟度調整（新學者放水、熟手加難）。
+    const q = SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, null, SciStore.getCard(state, target.id).box);
     quizAnswered = false;
     quizStartTime = Date.now();
 
