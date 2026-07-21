@@ -18,5 +18,185 @@
     "id": "trivia-ice-density",
     "text": "水結冰後，冰的密度約降低 9%，因此冰會浮在液態水上。",
     "basis": "USGS 水的密度資料"
+  },
+  {
+    "id": "trivia-light-speed",
+    "text": "光速約每秒 30 萬公里，一秒鐘能繞地球赤道約七圈半。",
+    "basis": "光速 299,792 km/s、地球赤道約 4 萬公里"
+  },
+  {
+    "id": "trivia-sound-water",
+    "text": "聲音在水中傳得比在空氣中快，約每秒 1,500 公尺，是空氣中的四倍多。",
+    "basis": "聲速在不同介質的比較"
+  },
+  {
+    "id": "trivia-neutron-star",
+    "text": "中子星的物質密度極高，一茶匙的量質量就可達數十億噸。",
+    "basis": "中子星密度資料"
+  },
+  {
+    "id": "trivia-glass-solid",
+    "text": "「古老玻璃因為會流動而下緣變厚」其實是常見迷思，室溫下的玻璃並不會像液體般流動。",
+    "basis": "材料科學：玻璃為非晶質固體"
+  },
+  {
+    "id": "trivia-diamond-graphite",
+    "text": "鑽石和鉛筆芯的石墨都由純碳組成，差別只在碳原子的排列方式。",
+    "basis": "碳的同素異形體"
+  },
+  {
+    "id": "trivia-helium-sun",
+    "text": "氦是先在太陽的光譜中被發現（1868 年），二十多年後才在地球上分離出來，名字就來自希臘文的「太陽」。",
+    "basis": "氦元素發現史"
+  },
+  {
+    "id": "trivia-mercury-liquid",
+    "text": "水銀（汞）是在常溫下唯一呈液態的金屬。",
+    "basis": "元素物理性質"
+  },
+  {
+    "id": "trivia-air-composition",
+    "text": "我們呼吸的空氣中，氮氣約占 78%，氧氣只占約 21%。",
+    "basis": "大氣組成資料"
+  },
+  {
+    "id": "trivia-salt-water",
+    "text": "在水裡加鹽會讓沸點升高、凝固點降低，這也是冬天在結冰路面撒鹽的原理。",
+    "basis": "溶液的依數性質"
+  },
+  {
+    "id": "trivia-supercooling",
+    "text": "乾淨的水可以被小心冷卻到 0°C 以下仍不結冰（過冷水），一受到擾動就會瞬間結成冰。",
+    "basis": "過冷現象"
+  },
+  {
+    "id": "trivia-baking-soda",
+    "text": "小蘇打加醋會冒泡，是因為兩者反應產生了二氧化碳氣體。",
+    "basis": "酸鹼反應"
+  },
+  {
+    "id": "trivia-sun-mass",
+    "text": "太陽的質量約占整個太陽系的 99.8%，其餘所有行星加起來還不到 0.2%。",
+    "basis": "太陽系質量分布"
+  },
+  {
+    "id": "trivia-jupiter-spot",
+    "text": "木星的大紅斑是一個持續了數百年的巨大風暴，它比整個地球還要大。",
+    "basis": "NASA 木星大紅斑資料"
+  },
+  {
+    "id": "trivia-moon-receding",
+    "text": "月球正以每年約 3.8 公分的速度慢慢遠離地球，大約和指甲生長的速度差不多。",
+    "basis": "阿波羅雷射測距實驗"
+  },
+  {
+    "id": "trivia-day-lengthening",
+    "text": "因為潮汐摩擦，地球自轉正逐漸變慢，一天的長度每過一世紀約增加千分之一到千分之二秒。",
+    "basis": "潮汐減速資料"
+  },
+  {
+    "id": "trivia-chimborazo",
+    "text": "離地心最遠的山不是聖母峰，而是厄瓜多的欽波拉索山——因為地球在赤道會向外隆起。",
+    "basis": "地球扁球形與 GPS 測量"
+  },
+  {
+    "id": "trivia-rainbow-circle",
+    "text": "彩虹其實是一個完整的圓，只是地面擋住了下半部，在高空的飛機上有時能看到整圈。",
+    "basis": "彩虹的幾何成因"
+  },
+  {
+    "id": "trivia-snowflake-six",
+    "text": "雪花總是有六個角，因為水分子結冰時會排成六角形的晶格。",
+    "basis": "冰晶結構"
+  },
+  {
+    "id": "trivia-inner-core-hot",
+    "text": "地球最內部的內核溫度約 5,000～6,000°C，和太陽表面差不多熱，卻因壓力極大而保持固態。",
+    "basis": "地核溫度科學估計"
+  },
+  {
+    "id": "trivia-sea-blue",
+    "text": "海水看起來是藍色，因為水會吸收較多的紅光、散射藍光。",
+    "basis": "光的吸收與散射"
+  },
+  {
+    "id": "trivia-antarctica-desert",
+    "text": "依照降水量的定義，冰天雪地的南極洲其實是地球上最大的沙漠。",
+    "basis": "沙漠定義：年降水少於約 250 mm"
+  },
+  {
+    "id": "trivia-cloud-weight",
+    "text": "一朵普通的積雲雖然飄在空中，含有的水量卻重達數十萬公斤。",
+    "basis": "雲的含水量估算"
+  },
+  {
+    "id": "trivia-tornado-speed",
+    "text": "強烈龍捲風內部的風速可以超過每小時 300 公里。",
+    "basis": "龍捲風強度分級"
+  },
+  {
+    "id": "trivia-body-water",
+    "text": "成年人的身體大約有 60% 是水。",
+    "basis": "人體組成資料"
+  },
+  {
+    "id": "trivia-bones-count",
+    "text": "成人有 206 塊骨頭，但嬰兒出生時骨頭更多（約 270 塊），有些之後會癒合在一起。",
+    "basis": "人體骨骼發育"
+  },
+  {
+    "id": "trivia-small-intestine",
+    "text": "人的小腸如果拉直，長度約 6～7 公尺，遠比一個人的身高還長。",
+    "basis": "消化系統解剖"
+  },
+  {
+    "id": "trivia-tardigrade",
+    "text": "水熊蟲（緩步動物）能在極度乾燥、高輻射，甚至太空真空中存活下來。",
+    "basis": "緩步動物耐受性研究"
+  },
+  {
+    "id": "trivia-hummingbird",
+    "text": "蜂鳥是少數能真正向後飛的鳥類，翅膀每秒可拍動數十次。",
+    "basis": "蜂鳥飛行研究"
+  },
+  {
+    "id": "trivia-giraffe-neck",
+    "text": "長頸鹿和人類的頸椎都是 7 節，只是長頸鹿的每一節都很長。",
+    "basis": "哺乳動物頸椎"
+  },
+  {
+    "id": "trivia-sharks-trees",
+    "text": "鯊魚比樹木更早出現在地球上——鯊魚約 4 億年前就存在，樹木約 3.9 億年前才出現。",
+    "basis": "演化年代研究"
+  },
+  {
+    "id": "trivia-dna-length",
+    "text": "一個細胞裡的 DNA 若拉直約有 2 公尺長，卻能摺疊收進看不見的細胞核裡。",
+    "basis": "人類基因組長度"
+  },
+  {
+    "id": "trivia-bee-dance",
+    "text": "蜜蜂會用「搖擺舞」告訴同伴花蜜的方向和距離。",
+    "basis": "弗里希的蜜蜂溝通研究"
+  },
+  {
+    "id": "trivia-wood-wide-web",
+    "text": "森林裡的樹木會透過地下的真菌網路交換養分和訊息，這被稱為「木維網」。",
+    "basis": "菌根網路研究"
+  },
+  {
+    "id": "trivia-blink-count",
+    "text": "人平均每天會眨眼上萬次，多數時候自己完全沒有察覺。",
+    "basis": "眨眼頻率研究"
+  },
+  {
+    "id": "trivia-apple-brown",
+    "text": "蘋果切開後變褐色，和鐵生鏽一樣，都是因為接觸到空氣中的氧氣而發生氧化。",
+    "basis": "氧化反應"
+  },
+  {
+    "id": "trivia-galaxy-stars",
+    "text": "銀河系裡估計有數千億顆恆星，我們的太陽只是其中很普通的一顆。",
+    "basis": "銀河系恆星數量估計"
   }
 ]
