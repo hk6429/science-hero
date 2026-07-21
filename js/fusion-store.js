@@ -15,6 +15,7 @@ const SciFusionStore = (() => {
       lastFuseDate: '',
       fuseCount: 0,
       activeCub: '',
+      grandBorn: false,
     };
   }
 
@@ -34,6 +35,7 @@ const SciFusionStore = (() => {
         lastFuseDate: typeof parsed.lastFuseDate === 'string' ? parsed.lastFuseDate : '',
         fuseCount: Number.isFinite(parsed.fuseCount) ? parsed.fuseCount : 0,
         activeCub: typeof parsed.activeCub === 'string' ? parsed.activeCub : '',
+        grandBorn: parsed.grandBorn === true,
       };
     } catch {
       return defaults();
@@ -148,6 +150,62 @@ const SciFusionStore = (() => {
 
   function cubForPair(a, b) {
     return CUB_BY_PAIR.get(pairKey(a, b)) || null;
+  }
+
+  // 終局融合：集滿六稚靈（＝全四科各精通滿階＋近期正確率達標）後迎接的元靈聖獸。
+  // 這是收藏天花板的頂點，掛在真實學習量上；一次性、保證成功、不再賭博。
+  const GRAND = {
+    id: 'cub_primordial', name: '元靈聖獸', emoji: '🌌',
+    bornLine: '六隻稚靈的光在牠身上重新匯流，自然、生命、物質與大地的規律，終於在同一顆心跳裡合而為一。',
+  };
+  const GRAND_COST = 100;
+
+  function canFuseGrand(fstate) {
+    const reasons = [];
+    const hatched = Array.isArray(fstate.hatched) ? fstate.hatched : [];
+    const missing = CUBS.filter((cub) => !hatched.includes(cub.id)).length;
+    if (missing > 0) reasons.push(`cubs:${missing}`);
+    if (fstate.grandBorn) reasons.push('already-grand');
+    return { ok: reasons.length === 0, reasons, missing };
+  }
+
+  function fuseGrand(fstate) {
+    const gate = canFuseGrand(fstate);
+    if (!gate.ok) return { ok: false, reason: 'ineligible', reasons: gate.reasons };
+    const paid = spendCrystals(GRAND_COST);
+    if (!paid.ok) return { ok: false, reason: 'crystals' };
+    fstate.grandBorn = true;
+    return { ok: true, result: 'success', fstate, grand: { ...GRAND } };
+  }
+
+  // 科學守護者巡禮：純正向紀念冊資料（四科滿階精靈＋六稚靈誕生語＋元靈＋旅程統計）。
+  // 只讀既有學習統計，不含任何 reset／倒數／掉段語意。
+  function buildPrestigeData(fstate, state, opts = {}) {
+    const maxBox = opts && Number.isFinite(opts.maxBox) ? opts.maxBox : 4;
+    const mastered = SciBattle.masteredBySubject(state, maxBox);
+    const spirits = SUBJECT_ORDER.map((key) => {
+      const count = mastered[key] || 0;
+      const spirit = SciBattle.companionForSubject(key, count);
+      return {
+        key, label: SUBJECT_LABELS[key] || key, mastered: count,
+        spiritName: spirit.name, spiritEmoji: spirit.emoji, level: spirit.level,
+      };
+    });
+    const hatched = Array.isArray(fstate.hatched) ? fstate.hatched : [];
+    const cubs = CUBS.map((cub) => ({
+      id: cub.id, name: cub.name, emoji: cub.emoji, bornLine: cub.bornLine,
+      owned: hatched.includes(cub.id),
+      displayName: (fstate.nicknames && fstate.nicknames[cub.id]) || cub.name,
+    }));
+    const totalMastered = spirits.reduce((sum, item) => sum + item.mastered, 0);
+    return {
+      grandBorn: !!fstate.grandBorn,
+      grand: { ...GRAND },
+      spirits,
+      cubs,
+      cubCount: cubs.filter((cub) => cub.owned).length,
+      totalMastered,
+    };
   }
 
   function canFuse(meta, state, subjA, subjB) {
@@ -324,6 +382,7 @@ const SciFusionStore = (() => {
     MASTER_GATE, ACC_GATE, ACC_WINDOW, ACC_MIN_SAMPLE, SUBJECT_ORDER,
     pairKey, accuracyBySubject, canFuse,
     CUBS, cubForPair, FUSE_COST, FAIL_RATE, fuse, listCubs,
+    GRAND, GRAND_COST, canFuseGrand, fuseGrand, buildPrestigeData,
     MAX_FUSE_PER_DAY, FAIL_LINES, failLine,
     isRevealed, revealPair, buildRevealQuestion, getFusionPreview,
     setActiveCub, clearActiveCub, cubBattleMods,

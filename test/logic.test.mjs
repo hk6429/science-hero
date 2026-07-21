@@ -706,6 +706,105 @@ test('FAIL_LINES：至少 3 句、每句非空殼', () => {
   for (const line of lib.SciFusionStore.FAIL_LINES) assert.ok(line.length >= 10);
 });
 
+// ===== 終局融合：元靈聖獸 + prestige 巡禮 =====
+function allCubsHatched(lib) {
+  return lib.SciFusionStore.CUBS.map((cub) => cub.id);
+}
+
+test('GRAND 元靈：設定完整、bornLine 非空殼、emoji 存在', () => {
+  const lib = makeSandbox();
+  const g = lib.SciFusionStore.GRAND;
+  assert.equal(g.id, 'cub_primordial');
+  assert.ok(g.name.length >= 2 && g.emoji);
+  assert.ok(g.bornLine.length >= 12);
+  assert.ok(Number.isFinite(lib.SciFusionStore.GRAND_COST) && lib.SciFusionStore.GRAND_COST > 0);
+});
+
+test('canFuseGrand：六隻稚靈未集滿 → 不可、回報缺幾隻', () => {
+  const lib = makeSandbox();
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib).slice(0, 5);
+  const gate = lib.SciFusionStore.canFuseGrand(fstate);
+  assert.equal(gate.ok, false);
+  assert.equal(gate.missing, 1);
+  assert.ok(gate.reasons.includes('cubs:1'));
+});
+
+test('canFuseGrand：六隻集滿且未誕生 → ok', () => {
+  const lib = makeSandbox();
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib);
+  const gate = lib.SciFusionStore.canFuseGrand(fstate);
+  assert.equal(gate.ok, true);
+  assert.deepEqual(gate.reasons, []);
+});
+
+test('fuseGrand：集滿後扣 GRAND_COST 晶能、保證成功、標記 grandBorn', () => {
+  const lib = makeSandbox();
+  lib.__setRaw('sci_econ', JSON.stringify({ balance: 100 }));
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib);
+  const result = lib.SciFusionStore.fuseGrand(fstate);
+  assert.equal(result.ok, true);
+  assert.equal(result.result, 'success');
+  assert.equal(result.grand.id, 'cub_primordial');
+  assert.equal(fstate.grandBorn, true);
+  assert.equal(lib.SciFusionStore.crystalBalance(), 0);
+});
+
+test('fuseGrand：晶能不足 → crystals，不標記', () => {
+  const lib = makeSandbox();
+  lib.__setRaw('sci_econ', JSON.stringify({ balance: 99 }));
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib);
+  const result = lib.SciFusionStore.fuseGrand(fstate);
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, 'crystals');
+  assert.notEqual(fstate.grandBorn, true);
+});
+
+test('fuseGrand：已誕生不可重複、already-grand', () => {
+  const lib = makeSandbox();
+  lib.__setRaw('sci_econ', JSON.stringify({ balance: 999 }));
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib);
+  fstate.grandBorn = true;
+  const gate = lib.SciFusionStore.canFuseGrand(fstate);
+  assert.equal(gate.ok, false);
+  assert.ok(gate.reasons.includes('already-grand'));
+  const result = lib.SciFusionStore.fuseGrand(fstate);
+  assert.equal(result.ok, false);
+  assert.equal(lib.SciFusionStore.crystalBalance(), 999, '不可重複扣費');
+});
+
+test('grandBorn 欄位 save/load round-trip、壞資料回退 false', () => {
+  const lib = makeSandbox();
+  assert.equal(lib.SciFusionStore.load().grandBorn, false);
+  const fstate = lib.SciFusionStore.load();
+  fstate.grandBorn = true;
+  lib.SciFusionStore.save(fstate);
+  assert.equal(lib.SciFusionStore.load().grandBorn, true);
+  lib.__setRaw('sci_fusion', JSON.stringify({ v: 1, grandBorn: 'yes' }));
+  assert.equal(lib.SciFusionStore.load().grandBorn, false);
+});
+
+test('buildPrestigeData：四科精靈＋六稚靈誕生語＋總精通量，純正向不含 reset', () => {
+  const lib = makeSandbox();
+  const state = fusionReadyState(lib);
+  const fstate = lib.SciFusionStore.load();
+  fstate.hatched = allCubsHatched(lib);
+  fstate.grandBorn = true;
+  const data = lib.SciFusionStore.buildPrestigeData(fstate, state, { maxBox: 4 });
+  assert.equal(data.grandBorn, true);
+  assert.equal(data.spirits.length, 4);
+  assert.equal(data.cubs.length, 6);
+  assert.equal(data.cubCount, 6);
+  for (const cub of data.cubs) assert.ok(cub.bornLine.length >= 12);
+  // fusionReadyState 讓 nature/biology 各精通 100 → 總量至少 200
+  assert.ok(data.totalMastered >= 200);
+  assert.equal(data.grand.id, 'cub_primordial');
+});
+
 test('未揭曉前 preview 未知；revealPair 後看得見稚靈真身', () => {
   const lib = makeSandbox();
   const fstate = lib.SciFusionStore.load();

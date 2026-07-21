@@ -997,6 +997,46 @@ body.base-open { overflow: hidden; }
 .fusion-notice { margin-bottom: 14px; border: 1px solid #b8dcc5; border-radius: 12px; background: #fff; padding: 12px; text-align: center; }
 .fusion-notice.is-success { border-color: #e0b64e; background: #fffbed; }
 .fusion-notice.is-gentle { border-color: #8ab7d8; background: #f0f8ff; }
+.fusion-notice.is-grand { border-color: #7b5cd6; background: linear-gradient(160deg, #f3efff, #eaf4ff); }
+
+/* ── 終局融合：元靈聖獸 ── */
+.fusion-grand { margin-top: 20px; padding: 18px; border-radius: 16px; display: flex; gap: 16px; align-items: center;
+  background: linear-gradient(150deg, #1f2450, #3a2c66); color: #f4f1ff; border: 1px solid #6a53c0; }
+.fusion-grand.is-locked { background: linear-gradient(150deg, #eef2f5, #e4ecf2); color: #33414d; border-color: #cdd8e0; }
+.fusion-grand-face { flex: 0 0 108px; width: 108px; text-align: center; }
+.fusion-grand-face .fusion-cub-img.grand, .fusion-grand-face .fusion-cub-emoji.grand { width: 108px; height: 108px; font-size: 76px; }
+.fusion-grand-face.is-silhouette { font-size: 64px; filter: grayscale(1); opacity: .5; }
+.fusion-grand-face.is-dormant .fusion-cub-img.grand { filter: brightness(.72) saturate(.7); }
+.fusion-grand-body { flex: 1 1 auto; }
+.fusion-grand-body h3 { margin: 4px 0 6px; }
+.fusion-grand-body p { margin: 0 0 10px; font-size: .9rem; line-height: 1.6; opacity: .95; }
+.fusion-grand-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .05em; opacity: .85; }
+.fusion-grand-hint { color: #ffd9a6; }
+.fusion-grand.is-locked .fusion-grand-hint { color: #b8632a; }
+
+/* ── 科學守護者巡禮 ── */
+.prestige-scroll { text-align: center; background: linear-gradient(180deg, #f7f4ff, #eef4ff); border: 1px solid #d6cef0; }
+.prestige-crown { margin: 0 auto 6px; }
+.prestige-crown .fusion-cub-img.grand, .prestige-crown .fusion-cub-emoji.grand { width: 150px; height: 150px; font-size: 96px; }
+.prestige-kicker { color: #6a53c0; font-weight: 800; letter-spacing: .06em; margin: 0; }
+.prestige-scroll h2 { margin: 2px 0 8px; }
+.prestige-lead { max-width: 40em; margin: 0 auto 16px; color: #3a4653; line-height: 1.7; }
+.prestige-stats { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin: 12px 0 18px; }
+.prestige-stats > div { min-width: 90px; }
+.prestige-stats b { display: block; font-size: 1.7rem; color: #6a53c0; line-height: 1.1; }
+.prestige-stats small { color: var(--muted); }
+.prestige-scroll h3 { margin: 18px 0 10px; }
+.prestige-spirit-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.prestige-spirit { background: #fff; border: 1px solid #e0dcf2; border-radius: 12px; padding: 10px 6px; }
+.prestige-spirit span { font-size: 30px; }
+.prestige-spirit b { display: block; font-size: .82rem; margin: 4px 0 2px; }
+.prestige-spirit small { color: var(--muted); font-size: .72rem; }
+.prestige-cub-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+.prestige-cub { display: flex; gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid #e4e0f2; }
+.prestige-cub-face .fusion-cub-img.small, .prestige-cub-face .fusion-cub-emoji.small { width: 46px; height: 46px; font-size: 34px; }
+.prestige-cub-text b { display: block; }
+.prestige-cub-text em { color: var(--muted); font-style: normal; font-size: .85rem; line-height: 1.5; }
+.prestige-foot { max-width: 40em; margin: 18px auto 0; color: var(--muted); font-size: .86rem; line-height: 1.6; }
 .fusion-collection { margin-top: 18px; }
 .fusion-collection-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #d9e9de; padding: 10px 0; }
 .fusion-collection-name { min-width: 8em; }
@@ -1014,6 +1054,9 @@ body.base-open { overflow: hidden; }
   .fusion-spirit-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fusion-pair-grid { grid-template-columns: 1fr; }
   .fusion-collection-row { align-items: flex-start; flex-direction: column; }
+  .fusion-grand { flex-direction: column; text-align: center; }
+  .prestige-spirit-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prestige-stats { gap: 14px; }
 }
 
 /* ── 科學市集 ── */

@@ -1117,7 +1117,37 @@ const SciApp = (() => {
       return `<div class="fusion-notice is-gentle"><strong>這次光暈散開了</strong><p>${escapeHtml(fusionNotice.line)}</p>
         <p>已返還 ${fusionNotice.refund} 晶能，精靈與學習進度都完好無缺。</p></div>`;
     }
+    if (fusionNotice.type === 'grand') {
+      const g = fusionNotice.grand;
+      return `<div class="fusion-notice is-grand celebrate-in">
+        <div class="fusion-result-emoji">${cubArt(g, 'grand')}</div>
+        <strong>${escapeHtml(g.name)} 降臨了！</strong><p>${escapeHtml(g.bornLine)}</p>
+        <div class="fusion-actions"><button class="btn btn-primary" data-prestige="1">開啟科學守護者巡禮</button></div></div>`;
+    }
     return `<div class="fusion-notice">${escapeHtml(fusionNotice.text || '')}</div>`;
+  }
+
+  function grandSectionHtml(fstate, balance) {
+    const grand = SciFusionStore.GRAND;
+    const cost = SciFusionStore.GRAND_COST;
+    if (fstate.grandBorn) {
+      return `<section class="fusion-grand is-born"><div class="fusion-grand-face">${cubArt(grand, 'grand')}</div>
+        <div class="fusion-grand-body"><span class="fusion-grand-kicker">終局・科學守護者</span>
+        <h3>${escapeHtml(grand.name)}</h3><p>${escapeHtml(grand.bornLine)}</p>
+        <button class="btn btn-primary" data-prestige="1">開啟科學守護者巡禮</button></div></section>`;
+    }
+    const gate = SciFusionStore.canFuseGrand(fstate);
+    if (gate.ok) {
+      const enough = balance >= cost;
+      return `<section class="fusion-grand is-ready"><div class="fusion-grand-face is-dormant">${cubArt(grand, 'grand')}</div>
+        <div class="fusion-grand-body"><span class="fusion-grand-kicker">終局融合已解鎖</span>
+        <h3>六道稚靈之光即將匯流……</h3><p>你已在四門科學各自登頂，這是收藏的最後一步——一次性、保證成功、不再需要碰運氣。</p>
+        ${enough ? '' : `<p class="fusion-grand-hint">還差 ${cost - balance} 晶能（需 ${cost}）。持續作答就能補齊。</p>`}
+        <button class="btn btn-primary" data-grand="1" ${enough ? '' : 'disabled'}>迎接元靈（${cost} 晶能）</button></div></section>`;
+    }
+    return `<section class="fusion-grand is-locked"><div class="fusion-grand-face is-silhouette">🌌</div>
+      <div class="fusion-grand-body"><span class="fusion-grand-kicker">終局・尚未解鎖</span>
+      <h3>集滿六隻稚靈，元靈聖獸將降臨</h3><p>還差 <b>${gate.missing}</b> 隻稚靈。每一隻都對應你在兩門科學的真實精通——慢慢來，牠會等你。</p></div></section>`;
   }
 
   function renderFusionLab() {
@@ -1174,7 +1204,8 @@ const SciApp = (() => {
         <span class="fusion-collection-name">${cubArt(cub, 'small')} <b>${escapeHtml(cub.displayName)}</b>${cub.isActive ? ' · 隨行中' : ''}</span>
         <span class="fusion-actions"><button class="btn btn-secondary" data-active="${escapeHtml(cub.id)}">${cub.isActive ? '取消隨行' : '隨行出戰'}</button>
         <button class="btn btn-secondary" data-nick="${escapeHtml(cub.id)}">改暱稱</button><button class="btn btn-secondary" data-card="${escapeHtml(cub.id)}">看名片</button></span></div>`).join('')
-        : '<p class="fusion-empty">答對隱藏題揭曉配方，學習量達標後就能迎接第一隻稚靈。</p>'}</section>`;
+        : '<p class="fusion-empty">答對隱藏題揭曉配方，學習量達標後就能迎接第一隻稚靈。</p>'}</section>
+      ${grandSectionHtml(fstate, balance)}`;
 
     body.querySelectorAll('[data-reveal]').forEach((button) => button.addEventListener('click', () => {
       const [a, b] = button.dataset.reveal.split('|');
@@ -1206,6 +1237,45 @@ const SciApp = (() => {
     }));
     body.querySelectorAll('[data-nick]').forEach((button) => button.addEventListener('click', () => renderNicknamePanel(button.dataset.nick)));
     body.querySelectorAll('[data-card]').forEach((button) => button.addEventListener('click', () => shareCubCard(button.dataset.card)));
+    body.querySelectorAll('[data-grand]').forEach((button) => button.addEventListener('click', () => {
+      if (!confirm(`集滿六隻稚靈的終局融合，將花費 ${SciFusionStore.GRAND_COST} 晶能迎接元靈聖獸。保證成功，確定進行？`)) return;
+      const next = SciFusionStore.load();
+      const result = SciFusionStore.fuseGrand(next);
+      if (result.ok) {
+        fusionNotice = { type: 'grand', grand: result.grand };
+        SciFusionStore.save(next);
+      } else {
+        fusionNotice = { type: 'info', text: result.reason === 'crystals' ? '晶能不足。' : '終局融合條件還沒有全部達成。' };
+      }
+      renderFusionLab();
+    }));
+    body.querySelectorAll('[data-prestige]').forEach((button) => button.addEventListener('click', renderPrestige));
+  }
+
+  function renderPrestige() {
+    const body = el('#fusion-body');
+    if (!body) return;
+    const fstate = SciFusionStore.load();
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const data = SciFusionStore.buildPrestigeData(fstate, state, { maxBox });
+    const spiritCards = data.spirits.map((s) => `<div class="prestige-spirit"><span>${escapeHtml(s.spiritEmoji)}</span>
+      <b>${escapeHtml(s.label)}</b><small>${escapeHtml(s.spiritName)} Lv.${s.level}<br>精通 ${s.mastered} 張</small></div>`).join('');
+    const cubRows = data.cubs.map((cub) => `<li class="prestige-cub"><span class="prestige-cub-face">${cubArt(cub, 'small')}</span>
+      <span class="prestige-cub-text"><b>${escapeHtml(cub.displayName)}</b><em>${escapeHtml(cub.bornLine)}</em></span></li>`).join('');
+    body.innerHTML = `<button class="fusion-back" type="button">← 回融合坊</button>
+      <div class="prestige-scroll card">
+        <div class="prestige-crown">${cubArt(data.grand, 'grand')}</div>
+        <p class="prestige-kicker">科學守護者巡禮</p>
+        <h2>${escapeHtml(data.grand.name)}</h2>
+        <p class="prestige-lead">你點亮了整座科學宇宙。四門科學、六隻稚靈，最後在元靈身上合而為一。這一頁，記下你走過的路。</p>
+        <div class="prestige-stats"><div><b>${data.totalMastered}</b><small>累計精通詞卡</small></div>
+          <div><b>${data.cubCount} / 6</b><small>稚靈圖鑑</small></div>
+          <div><b>4 / 4</b><small>科學領域登頂</small></div></div>
+        <h3>四科滿階精靈</h3><div class="prestige-spirit-row">${spiritCards}</div>
+        <h3>六稚靈誕生語</h3><ul class="prestige-cub-list">${cubRows}</ul>
+        <p class="prestige-foot">這是永久的榮譽，不會過期、不會清零。你隨時可以回來看看牠們，也可以繼續陪弱項一起變強。</p>
+      </div>`;
+    body.querySelector('.fusion-back').addEventListener('click', renderFusionLab);
   }
 
   function renderRevealQuestion(a, b) {

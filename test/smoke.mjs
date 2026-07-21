@@ -212,10 +212,35 @@ try {
   if (crystalTxt == null) fails.push('融合坊未顯示晶能餘額');
   const pairCards = await page.locator('.fusion-pair-card').count();
   if (pairCards !== 6) fails.push(`融合坊配對牆應有 6 格，實得 ${pairCards}`);
+  // 終局融合區塊：新手應看到「尚未解鎖」的元靈預告（不崩、有 CTA 敘事）
+  const grandLocked = await page.locator('.fusion-grand.is-locked').count();
+  if (grandLocked !== 1) fails.push('融合坊未渲染終局元靈（尚未解鎖）區塊');
   await page.keyboard.press('Escape');
   // 關閉後 overlay 帶 hidden 屬性＝不可見，需用 state:'hidden' 等待（預設 state 等「可見」會逾時）。
   await page.waitForSelector('#fusion-overlay', { state: 'hidden' });
-  console.log('✅ 融合坊可開啟、六格配對牆渲染、可以 Esc 關閉');
+  console.log('✅ 融合坊可開啟、六格配對牆渲染、終局元靈預告在、可以 Esc 關閉');
+
+  // 4c. 終局 prestige：注入「元靈已誕生」存檔 → 重開融合坊 → 開啟科學守護者巡禮頁
+  await page.evaluate(() => {
+    const cubs = ['cub_forestdeer', 'cub_crystalfox', 'cub_windhawk', 'cub_alchemydragon', 'cub_deepwhale', 'cub_starcore'];
+    localStorage.setItem('sci_fusion', JSON.stringify({ v: 1, hatched: cubs, grandBorn: true }));
+  });
+  await page.click('#fusion-lab-btn');
+  await page.waitForSelector('#fusion-overlay:not([hidden])');
+  const grandBorn = await page.locator('.fusion-grand.is-born').count();
+  if (grandBorn !== 1) fails.push('元靈誕生後未渲染已降臨狀態');
+  await page.click('[data-prestige]');
+  await page.waitForSelector('.prestige-scroll', { timeout: 3000 }).catch(() => fails.push('科學守護者巡禮頁未開啟'));
+  const spiritCount = await page.locator('.prestige-spirit').count();
+  if (spiritCount !== 4) fails.push(`巡禮頁應有 4 科精靈，實得 ${spiritCount}`);
+  const prestigeCubs = await page.locator('.prestige-cub').count();
+  if (prestigeCubs !== 6) fails.push(`巡禮頁應有 6 隻稚靈誕生語，實得 ${prestigeCubs}`);
+  await page.click('.fusion-back');
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#fusion-overlay', { state: 'hidden' });
+  // 清掉注入存檔，避免污染後續步驟
+  await page.evaluate(() => localStorage.removeItem('sci_fusion'));
+  console.log('✅ 終局元靈誕生後可開啟科學守護者巡禮（四科精靈＋六稚靈巡禮）');
 
   // 5. 重新整理後進度還在（localStorage 應保留 totalReviews > 0）
   const before = await page.evaluate(() => JSON.parse(localStorage.getItem('science-hero:v1')).stats.totalReviews);
