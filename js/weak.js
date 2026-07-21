@@ -52,6 +52,25 @@ const SciWeak = (() => {
       .map(([termId, s]) => ({ termId, score: s }));
   }
 
+  // 校準落差：孩子在閃卡自評「我記住了」(flash+correct)，之後同一個詞在自測答錯(quiz+wrong)。
+  // 代表「自認會、其實還沒真的會」——純從 weakLog 依時間序推導，不新增追蹤欄位。
+  function getCalibrationMisses(state) {
+    const log = state.weakLog || [];
+    const lastClaimed = {}; // termId -> 最近一次自評記住的時間
+    const misses = {};      // termId -> 落差次數（純物件，跨測試 realm 也安全）
+    for (const entry of log) {
+      if (entry.source === 'flash' && entry.correct) {
+        lastClaimed[entry.termId] = entry.t;
+      } else if (entry.source === 'quiz' && !entry.correct && entry.termId in lastClaimed) {
+        if (entry.t >= lastClaimed[entry.termId]) {
+          misses[entry.termId] = (misses[entry.termId] || 0) + 1;
+          delete lastClaimed[entry.termId]; // 一次落差只記一次，下次自評才會重新計
+        }
+      }
+    }
+    return misses;
+  }
+
   function buildFamilySummary(state, subjects, termsBySubject, maxBox, accuracyBySubject) {
     const termById = new Map();
     subjects.forEach((subject) => {
@@ -74,6 +93,16 @@ const SciWeak = (() => {
     const guessLine = luckyCount
       ? `最近有 ${luckyCount} 題疑似靠猜答對（建議請孩子解釋為什麼對，確認是真的理解）。`
       : '最近沒有明顯「疑似靠猜」的作答，答對大多是真的想過的。';
+    // 校準落差：自認記住卻在自測答錯的詞，最需要回頭複習。
+    const calibMisses = getCalibrationMisses(state);
+    const calibTerms = Object.keys(calibMisses)
+      .map((termId) => termById.get(termId))
+      .filter(Boolean)
+      .slice(0, 5)
+      .map((term) => term.term);
+    const calibLine = calibTerms.length
+      ? `有 ${calibTerms.length} 個詞孩子自認「記住了」，之後自測卻答錯（${calibTerms.join('、')}）——這幾個最值得再一起看一次。`
+      : '目前沒有「自認記住卻答錯」的落差，自我評估算準。';
     return [
       '科學英雄學習摘要',
       '',
@@ -82,6 +111,7 @@ const SciWeak = (() => {
       '',
       '學習誠實度',
       guessLine,
+      calibLine,
       '',
       '目前最需要加強的詞（最多 10 個）',
       ...(weakLines.length ? weakLines : ['目前尚無明顯弱點詞。']),
@@ -90,5 +120,5 @@ const SciWeak = (() => {
     ].join('\n');
   }
 
-  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, buildFamilySummary, FAST_GUESS_MS, LUCKY_GUESS_MS };
+  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, getCalibrationMisses, buildFamilySummary, FAST_GUESS_MS, LUCKY_GUESS_MS };
 })();

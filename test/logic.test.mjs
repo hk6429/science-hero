@@ -456,6 +456,35 @@ test('SciFlashcard.getRoundQueue：新字跨單元交錯（interleaving）不叢
   assert.ok(maxRun < 3, `新字應交錯，實得連續 ${maxRun}`);
 });
 
+test('getCalibrationMisses：自評記住→之後自測答錯才算落差；自測先於自評不算', () => {
+  const lib = makeSandbox();
+  const state = { weakLog: [
+    { termId: 'x', unit: 'u', correct: true, source: 'flash', t: 100 },
+    { termId: 'x', unit: 'u', correct: false, source: 'quiz', t: 200 }, // 落差
+    { termId: 'y', unit: 'u', correct: false, source: 'quiz', t: 100 },
+    { termId: 'y', unit: 'u', correct: true, source: 'flash', t: 200 }, // 自測先於自評，不算
+    { termId: 'z', unit: 'u', correct: true, source: 'flash', t: 100 },
+    { termId: 'z', unit: 'u', correct: true, source: 'quiz', t: 200 },  // 自測答對，不算
+  ] };
+  const misses = lib.SciWeak.getCalibrationMisses(state);
+  assert.equal(misses.x, 1);
+  assert.equal('y' in misses, false);
+  assert.equal('z' in misses, false);
+});
+
+test('buildFamilySummary 攤露校準落差詞給家長', () => {
+  const lib = makeSandbox();
+  const subjects = [{ key: 'nature', label: '自然' }];
+  const termsBySubject = { nature: [{ id: 'x', term: '光合作用', unit: 'u' }] };
+  const state = { cards: {}, weakLog: [
+    { termId: 'x', unit: 'u', correct: true, source: 'flash', t: 100 },
+    { termId: 'x', unit: 'u', correct: false, source: 'quiz', t: 200 },
+  ] };
+  const summary = lib.SciWeak.buildFamilySummary(state, subjects, termsBySubject, 4, () => ({ total: 0, accuracy: 0 }));
+  assert.ok(summary.includes('光合作用'), '應列出自認記住卻答錯的詞');
+  assert.ok(summary.includes('自認'), '應有校準落差說明');
+});
+
 test('SciDailyQuests 只用今日答對、勝場、單元推進與指定科答對判定任務', () => {
   const lib = makeSandbox();
   const state = lib.SciStore.load();
