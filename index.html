@@ -13,6 +13,7 @@
   <h1><img class="brand-ico" src="assets/ui/ui-brand.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧪',className:'io-ico-emoji'}))"> 科學英雄</h1>
   <p>國小自然・國中生物・國中理化・國中地科 知識點練功站</p>
   <p class="hero-tagline">每精通一個知識點，就離「科學英雄」的稱號更近一步</p>
+  <p class="hero-mission" id="science-lore-progress">已點亮 0 / 0 個科學領域</p>
   <div class="hero-stats">
     <span class="hero-stat">🔥 連續 <strong id="streak-days">0</strong> 天</span>
     <span class="hero-stat hero-stat--primary">⭐ 戰功 <strong id="mastered-count">0</strong> 個</span>
@@ -46,6 +47,7 @@
   <div id="panels"></div>
   <details id="more-tools" class="more-tools"><summary>連線・基地・市集・融合坊</summary><div class="io-row">
     <button id="rtbattle-tool-btn" class="io-btn">🌐 連線對戰</button>
+    <button id="classboard-btn" class="io-btn">🏫 班級協力榜（國中）</button>
     <button id="btn-market" class="io-btn"><img class="io-ico" src="assets/ui/ui-market.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🛒',className:'io-ico-emoji'}))"> 科學市集（每週五開市）</button>
     <button id="fusion-lab-btn" class="io-btn"><img class="io-ico" src="assets/ui/ui-fusion.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧬',className:'io-ico-emoji'}))"> 精靈融合坊</button>
     <button id="share-card-btn" class="io-btn"><img class="io-ico" src="assets/ui/ui-records.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🏆',className:'io-ico-emoji'}))"> 產生戰績卡片</button>
@@ -110,6 +112,7 @@
       <div class="sh-head base-topbar">
         <h2 id="base-title">🏕️ 科學基地</h2>
         <button id="base-wall-btn" class="base-tool-btn" type="button">成就牆</button>
+        <button id="base-donate" class="base-tool-btn" type="button">研究捐獻 💠50</button>
         <button id="base-reset" class="base-tool-btn" type="button">還原擺設</button>
         <button id="base-close" class="base-tool-btn" type="button">關閉</button>
       </div>
@@ -186,11 +189,13 @@
 <script src="js/weak.js"></script>
 <script src="js/economy.js"></script>
 <script src="js/daily-quests.js"></script>
+<script src="js/science-rewards.js"></script>
 <script src="js/battle.js"></script>
 <script src="js/fusion-store.js"></script>
 <script src="js/shapi.js"></script>
 <script src="js/rtbattle.js"></script>
 <script src="js/rtbattle-ui.js"></script>
+<script src="js/leaderboard.js"></script>
 <script src="js/base-store.js"></script>
 <script src="js/base-ui.js"></script>
 <script src="js/market-store.js"></script>

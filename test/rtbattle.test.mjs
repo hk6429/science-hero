@@ -133,7 +133,7 @@ test('safeBoard：只露前 5＋自己的名次', () => {
   const { SciRtBattle } = makeSandbox();
   const board = plain(SciRtBattle.safeBoard(boardRows, '熱血的恐龍07'));
   assert.deepEqual(board.top.map((row) => row.nick), boardRows.slice(0, 5).map((row) => row.nick));
-  assert.deepEqual(board.me, { rank: 7, nick: '熱血的恐龍07', score: 1 });
+  assert.deepEqual(board.me, { rank: 7, nick: '熱血的恐龍07', score: 1, wins: 0, battles: 0, streak: 0, winRate: 0 });
   assert.equal(board.total, 7);
   assert.ok(!('rows' in board) && !('list' in board));
   assert.equal(SciRtBattle.safeBoard(boardRows, '好奇的電子01').me, null);
@@ -172,4 +172,17 @@ test('recordSeasonResult：勝 +20、敗/平 +5；跨季歸零＋上季稱號入
   assert.equal(state.rtSeason.titles['2026-07'], '見習觀測員');
   assert.equal(state.stats.totalReviews, 0);
   assert.equal(state.rank, undefined);
+});
+
+test('R7 賽季勝率與連勝正確變動，連敗不使積分下降', () => {
+  const { SciRtBattle, SciStore } = makeSandbox();
+  const state = SciStore.load();
+  let result = plain(SciRtBattle.recordSeasonResult(state, '2026-07-20', 'win'));
+  assert.deepEqual([result.pts, result.winRate, result.streak], [20, 100, 1]);
+  result = plain(SciRtBattle.recordSeasonResult(state, '2026-07-21', 'win'));
+  assert.deepEqual([result.pts, result.winRate, result.streak], [40, 100, 2]);
+  result = plain(SciRtBattle.recordSeasonResult(state, '2026-07-22', 'lose'));
+  assert.deepEqual([result.pts, result.winRate, result.streak], [45, 67, 0]);
+  result = plain(SciRtBattle.recordSeasonResult(state, '2026-07-23', 'lose'));
+  assert.deepEqual([result.pts, result.winRate, result.streak], [50, 50, 0]);
 });

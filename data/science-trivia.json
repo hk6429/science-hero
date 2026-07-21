@@ -1,0 +1,22 @@
+[
+  {
+    "id": "trivia-venus-day",
+    "text": "金星自轉一圈約需 243 個地球日，比它繞太陽一圈的約 225 個地球日還久。",
+    "basis": "NASA 金星軌道與自轉資料"
+  },
+  {
+    "id": "trivia-lightning-heat",
+    "text": "閃電通道可把周圍空氣瞬間加熱到約攝氏 30,000 度，急速膨脹的空氣形成雷聲。",
+    "basis": "NOAA 雷電與雷聲資料"
+  },
+  {
+    "id": "trivia-octopus-hearts",
+    "text": "章魚有三顆心臟，血液因含血藍蛋白而呈藍色。",
+    "basis": "Smithsonian 章魚生物資料"
+  },
+  {
+    "id": "trivia-ice-density",
+    "text": "水結冰後，冰的密度約降低 9%，因此冰會浮在液態水上。",
+    "basis": "USGS 水的密度資料"
+  }
+]

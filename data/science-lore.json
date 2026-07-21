@@ -1,0 +1,82 @@
+[
+  {
+    "id": "lore-galileo-1610",
+    "subject": "nature",
+    "unit": "inquiry",
+    "title": "望遠鏡改變天空",
+    "who": "伽利略",
+    "year": "1610",
+    "blurb": "伽利略以望遠鏡持續觀測木星，判斷四個光點其實是繞木星運行的衛星。",
+    "icon": "🔭"
+  },
+  {
+    "id": "lore-faraday-1831",
+    "subject": "nature",
+    "unit": "energy",
+    "title": "磁場也能生電",
+    "who": "法拉第",
+    "year": "1831",
+    "blurb": "法拉第以線圈與鐵環實驗證實電磁感應，奠定發電機與變壓器的科學基礎。",
+    "icon": "⚡"
+  },
+  {
+    "id": "lore-hooke-1665",
+    "subject": "biology",
+    "unit": "cell",
+    "title": "顯微鏡下的新世界",
+    "who": "胡克",
+    "year": "1665",
+    "blurb": "胡克出版《顯微圖譜》，留下軟木等材料的顯微觀察圖，成為顯微研究史的重要里程碑。",
+    "icon": "🔬"
+  },
+  {
+    "id": "lore-mendel-1865",
+    "subject": "biology",
+    "unit": "repro_gene",
+    "title": "豌豆寫下遺傳規律",
+    "who": "孟德爾",
+    "year": "1865",
+    "blurb": "孟德爾整理多年豌豆雜交實驗，說明性狀能以離散單位傳遞，並呈現顯性與隱性規律。",
+    "icon": "🫛"
+  },
+  {
+    "id": "lore-newton-1687",
+    "subject": "chemphys",
+    "unit": "force_motion",
+    "title": "把運動寫成定律",
+    "who": "牛頓",
+    "year": "1687",
+    "blurb": "牛頓出版《自然哲學的數學原理》，系統提出運動三定律與萬有引力。",
+    "icon": "⚙️"
+  },
+  {
+    "id": "lore-lavoisier-1789",
+    "subject": "chemphys",
+    "unit": "chemistry",
+    "title": "反應前後的總質量",
+    "who": "拉瓦節",
+    "year": "1789",
+    "blurb": "拉瓦節在《化學原論》中系統整理近代化學，並清楚表述化學反應中的質量守恆。",
+    "icon": "⚗️"
+  },
+  {
+    "id": "lore-wegener-1912",
+    "subject": "earth",
+    "unit": "geology",
+    "title": "大陸曾經相連",
+    "who": "魏格納",
+    "year": "1912",
+    "blurb": "魏格納整合海岸形狀、化石與岩層等證據，提出大陸漂移學說，引發長期科學辯論。",
+    "icon": "🌍"
+  },
+  {
+    "id": "lore-kepler-1609",
+    "subject": "earth",
+    "unit": "astronomy",
+    "title": "行星沿橢圓前進",
+    "who": "克卜勒",
+    "year": "1609–1619",
+    "blurb": "克卜勒先後發表行星運動三定律，說明行星軌道與運行速度、週期之間的規律。",
+    "icon": "🪐"
+  }
+]

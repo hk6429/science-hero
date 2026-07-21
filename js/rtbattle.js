@@ -102,9 +102,13 @@ const SciRtBattle = (() => {
 
   function safeBoard(rows, myNick, topN = 5) {
     const sorted = [...rows].sort((a, b) => b.score - a.score);
-    const top = sorted.slice(0, topN).map(({ nick, score }) => ({ nick, score }));
+    const safeRow = ({ nick, score, wins = 0, battles = 0, streak = 0, winRate }) => ({
+      nick, score, wins, battles, streak,
+      winRate: Number.isFinite(winRate) ? winRate : (battles ? Math.round(wins / battles * 100) : 0),
+    });
+    const top = sorted.slice(0, topN).map(safeRow);
     const index = sorted.findIndex((row) => row.nick === myNick);
-    const me = index >= topN ? { rank: index + 1, nick: myNick, score: sorted[index].score } : null;
+    const me = index >= topN ? { rank: index + 1, ...safeRow(sorted[index]) } : null;
     return { top, me, total: sorted.length };
   }
 
@@ -135,12 +139,13 @@ const SciRtBattle = (() => {
     if (!season || season.key !== key) {
       const titles = season?.titles || {};
       if (season?.key) titles[season.key] = titleFor(season.pts);
-      season = state.rtSeason = { key, pts: 0, wins: 0, battles: 0, titles };
+      season = state.rtSeason = { key, pts: 0, wins: 0, battles: 0, streak: 0, titles };
     }
+    season.streak = Math.max(0, Math.floor(Number(season.streak) || 0));
     season.battles += 1;
-    if (verdict === 'win') { season.pts += WIN_PTS; season.wins += 1; }
-    else season.pts += LOSE_PTS;
-    return { key: season.key, pts: season.pts, wins: season.wins, battles: season.battles, title: titleFor(season.pts) };
+    if (verdict === 'win') { season.pts += WIN_PTS; season.wins += 1; season.streak += 1; }
+    else { season.pts += LOSE_PTS; season.streak = 0; }
+    return { key: season.key, pts: season.pts, wins: season.wins, battles: season.battles, streak: season.streak, winRate: Math.round(season.wins / season.battles * 100), title: titleFor(season.pts) };
   }
 
   return { ROUNDS, ROUND_SEC, POLL_MS, DEAD_MS, MAX_HP, mulberry32, withSeededRandom, buildQuestions, answerResult, hpOf, judge, NICK_ADJ, NICK_NOUN, genNick, ADVENTURE_EVERY, ADVENTURE_RATE, ADVENTURES, buildAdventureScript, safeBoard, loadClass, saveClass, SEASON_TITLES, WIN_PTS, LOSE_PTS, seasonKey, titleFor, recordSeasonResult };

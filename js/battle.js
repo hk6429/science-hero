@@ -38,6 +38,19 @@ const SciBattle = (() => {
     return dmg;
   }
 
+  // 流暢度曲線本身保留完整 1.3→0.7 規格；實戰只把 >1 的部分當正向加成，
+  // 因此慢答維持普通傷害，不形成倒數或懲罰。此函式只由 PvE 呼叫。
+  function speedMultiplier(elapsedMs) {
+    const ms = Math.max(0, Number(elapsedMs) || 0);
+    if (ms <= 3000) return 1.3;
+    if (ms >= 8000) return 0.7;
+    return 1.3 - ((ms - 3000) / 5000) * 0.6;
+  }
+
+  function calcPveDamage(combo, hp, elapsedMs) {
+    return Math.round(calcDamage(combo, hp) * Math.max(1, speedMultiplier(elapsedMs)));
+  }
+
   function enemyDamage(opponent, round) {
     const tierGrowth = { 入門: 1, 進階: 2, 高手: 3, 宗師: 4 };
     const turn = Math.max(1, Math.floor(round) || 1);
@@ -372,7 +385,7 @@ const SciBattle = (() => {
       recordAnswer(target, correct, elapsedMs);
 
       if (correct) {
-        const dmg = calcDamage(battleState.combo, battleState.pHp);
+        const dmg = calcPveDamage(battleState.combo, battleState.pHp, elapsedMs);
         battleState.foeDamage = dmg;
         battleState.meDamage = 0;
         battleState.oHp = Math.max(0, battleState.oHp - dmg);
@@ -548,7 +561,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject, subjectCompanionArt,

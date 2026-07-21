@@ -60,6 +60,15 @@ const SciBaseUI = (() => {
       ).join('') + `</div>${state ? rankWallHtml(state) : ''}`;
   }
 
+  function loreWallHtml(cards, state) {
+    const unlocked = new Set(state?.stats?.scienceLore || []);
+    const items = cards.filter((card) => unlocked.has(card.id)).map((card) =>
+      `<article class="sb-lore-card"><span>${esc(card.icon)}</span><h4>${esc(card.title)}</h4>` +
+      `<b>${esc(card.who)}・${esc(card.year)}</b><p>${esc(card.blurb)}</p></article>`,
+    ).join('');
+    return `<h3 class="sb-sub">科學史圖鑑</h3><div class="sb-lore-grid">${items || '<p>精通一個對應單元，就會在這裡點亮科學史卡。</p>'}</div>`;
+  }
+
   // 純函式：樣式面板／門牌面板／慶典卡
   function stylePanelHtml(subjectKey, baseState, balance) {
     const shop = SciBaseStore.STYLE_SHOP[subjectKey] || [];
@@ -105,6 +114,7 @@ const SciBaseUI = (() => {
   const $ = (id) => document.getElementById(id);
   let getState = () => null;
   let getTermsBySubject = () => null;
+  let getLore = () => [];
   let base = null;
   let showingWall = false;
   let plaquePick = [];
@@ -237,7 +247,7 @@ const SciBaseUI = (() => {
   function toggleWall() {
     showingWall = !showingWall;
     if (showingWall) {
-      $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState()), getState());
+      $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState(), base), getState()) + loreWallHtml(getLore(), getState());
       $('base-wall-btn').textContent = '回場景';
     } else {
       renderScene();
@@ -269,6 +279,7 @@ const SciBaseUI = (() => {
   function init(opts) {
     getState = opts.getState;
     getTermsBySubject = opts.getTermsBySubject;
+    getLore = opts.getLore || (() => []);
     $('btn-base').addEventListener('click', open);
     $('base-close').addEventListener('click', close);
     bindDrag($('base-scene'));
@@ -280,6 +291,13 @@ const SciBaseUI = (() => {
       }
     });
     $('base-wall-btn').addEventListener('click', toggleWall);
+    $('base-donate').addEventListener('click', () => {
+      const result = SciBaseStore.donateResearch(base);
+      if (!result.ok) { alert(result.msg); return; }
+      SciBaseStore.saveBase(base);
+      if (showingWall) $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState(), base), getState()) + loreWallHtml(getLore(), getState());
+      else renderScene();
+    });
     $('base-reset').addEventListener('click', () => {
       if (confirm('把所有裝飾放回預設位置嗎？裝飾不會消失，只是回到原位。')) {
         SciBaseStore.resetPlacements(base);
@@ -289,5 +307,5 @@ const SciBaseUI = (() => {
     });
   }
 
-  return { sceneHtml, wallHtml, rankWallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init };
+  return { sceneHtml, wallHtml, loreWallHtml, rankWallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init };
 })();

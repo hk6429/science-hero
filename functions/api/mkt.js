@@ -225,6 +225,7 @@ export async function onRequestPost({ request, env }) {
       db: env.SCIENCE_HERO_DB,
     }));
   } catch (error) {
-    return reply(request, { ok: 0, error: String(error?.message || error) }, 500);
+    console.error('mkt api failure', error);
+    return reply(request, { ok: 0, error: '伺服器忙線，稍後再試' }, 500);
   }
 }

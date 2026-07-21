@@ -112,16 +112,30 @@ export async function onRequestPost({ request, env }) {
     if (!isValidNick(body.nick)) return reply(request, { ok: 0, error: '暱稱不符合詞庫' });
     const season = new Date().toISOString().slice(0, 7);
     const key = `rt:season:${season}`;
-    const total = await kv.zincrby(key, clamp(body.pts, 20), body.nick);
+    const verdict = ['win', 'lose', 'draw'].includes(body.verdict) ? body.verdict : (Number(body.pts) >= 20 ? 'win' : 'lose');
+    const total = await kv.zincrby(key, verdict === 'win' ? 20 : 5, body.nick);
+    const statsKey = `${key}:stats`;
+    const previous = parse(await kv.hget(statsKey, body.nick)) || { wins: 0, battles: 0, streak: 0 };
+    const stats = {
+      wins: previous.wins + (verdict === 'win' ? 1 : 0),
+      battles: previous.battles + 1,
+      streak: verdict === 'win' ? previous.streak + 1 : 0,
+    };
+    await kv.hset(statsKey, { [body.nick]: stats });
+    await kv.expire(statsKey, 100 * 86400);
     await kv.expire(key, 100 * 86400);
-    return reply(request, { ok: 1, total });
+    return reply(request, { ok: 1, total, ...stats, winRate: Math.round(stats.wins / stats.battles * 100) });
   }
 
   if (body.op === 'seasonTop') {
     const season = /^\d{4}-\d{2}$/.test(body.season || '') ? body.season : new Date().toISOString().slice(0, 7);
     const rows = await kv.zrange(`rt:season:${season}`, 0, 9, { rev: true, withScores: true });
     const top = [];
-    for (let index = 0; index < rows.length; index += 2) top.push({ nick: rows[index], pts: rows[index + 1] });
+    const statsKey = `rt:season:${season}:stats`;
+    for (let index = 0; index < rows.length; index += 2) {
+      const stats = parse(await kv.hget(statsKey, rows[index])) || { wins: 0, battles: 0, streak: 0 };
+      top.push({ nick: rows[index], pts: rows[index + 1], ...stats, winRate: stats.battles ? Math.round(stats.wins / stats.battles * 100) : 0 });
+    }
     return reply(request, { ok: 1, season, top });
   }
 

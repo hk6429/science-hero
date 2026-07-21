@@ -251,7 +251,7 @@ const SciRtBattleUI = (() => {
       const top = remote.ok ? remote.top : [];
       const season = remote.ok ? remote.season : (local?.key || SciRtBattle.seasonKey(SciStore.todayStr()));
       const history = Object.entries(local?.titles || {});
-      el.innerHTML = `<div class="card"><h3>🏆 ${esc(season)} 賽季排位</h3>${remote.ok ? `<ol>${top.map((row) => `<li>${esc(row.nick)}・${row.pts} 分</li>`).join('') || '<li>還沒有人上榜</li>'}</ol>` : '<p>連上網路才看得到全服排行。</p>'}${local ? `<p>你：${esc(SciRtBattle.titleFor(local.pts))}・${local.pts} 分</p>` : '<p>完成一場連線對戰就會開始累積。</p>'}${history.length ? `<h4>歷季稱號</h4><ul>${history.map(([key, title]) => `<li>${esc(key)}・${esc(title)}</li>`).join('')}</ul>` : ''}<p>每月 1 日換季重新起算；輸了也有參與分，不倒扣。</p><button class="btn" id="rt-home">回連線對戰</button></div>`;
+      el.innerHTML = `<div class="card"><h3>🏆 ${esc(season)} 賽季排位</h3>${remote.ok ? `<ol>${top.map((row) => `<li>${esc(row.nick)}・${row.pts} 分・勝率 ${row.winRate || 0}%・連勝 ${row.streak || 0}</li>`).join('') || '<li>還沒有人上榜</li>'}</ol>` : '<p>連上網路才看得到全服排行。</p>'}${local ? `<p>你：${esc(SciRtBattle.titleFor(local.pts))}・${local.pts} 分・勝率 ${local.battles ? Math.round(local.wins / local.battles * 100) : 0}%・連勝 ${local.streak || 0}</p>` : '<p>完成一場連線對戰就會開始累積。</p>'}${history.length ? `<h4>歷季稱號</h4><ul>${history.map(([key, title]) => `<li>${esc(key)}・${esc(title)}</li>`).join('')}</ul>` : ''}<p>每月 1 日換季重新起算；輸了也有參與分，不倒扣。</p><button class="btn" id="rt-home">回連線對戰</button></div>`;
       on('#rt-home', 'click', home);
     }
 
@@ -357,9 +357,9 @@ const SciRtBattleUI = (() => {
       clearTimers();
       const season = SciRtBattle.recordSeasonResult(ctx.state, SciStore.todayStr(), verdict);
       SciStore.save(ctx.state);
-      api({ op: 'seasonAdd', nick: myNick(), pts: verdict === 'win' ? SciRtBattle.WIN_PTS : SciRtBattle.LOSE_PTS });
+      api({ op: 'seasonAdd', nick: myNick(), verdict });
       const titles = { win: '🏆 獲勝！', lose: '💪 惜敗', draw: '🤝 平手' };
-      el.innerHTML = `<div class="card celebrate-in"><h3>${titles[verdict]}</h3><p>答對 ${state.correct}/${questions.length}・總輸出 ${state.dmg}</p><p>🗓️ ${season.key} 賽季・${esc(season.title)}（${season.pts} 分，勝+20/其餘+5）</p>${verdict === 'lose' ? '<p>段位分不扣——把知識點記牢，下次贏回來！</p>' : ''}<button class="btn btn-primary" id="rt-home">回連線對戰</button></div>`;
+      el.innerHTML = `<div class="card celebrate-in"><h3>${titles[verdict]}</h3><p>答對 ${state.correct}/${questions.length}・總輸出 ${state.dmg}</p><p>🗓️ ${season.key} 賽季・${esc(season.title)}（${season.pts} 分，勝率 ${season.winRate}%・連勝 ${season.streak}）</p>${verdict === 'lose' ? '<p>段位分不扣——把知識點記牢，下次贏回來！</p>' : ''}<button class="btn btn-primary" id="rt-home">回連線對戰</button></div>`;
       on('#rt-home', 'click', home);
     }
 

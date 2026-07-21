@@ -60,6 +60,8 @@ const SciApp = (() => {
   let state = null;
   let activeSubject = 'nature';
   const subjectTerms = new Map();
+  let scienceLore = [];
+  let scienceTrivia = [];
   let terms = [];
   let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'battle' | 'rtbattle' | 'weak'
   let unitFilter = null; // 目前選定的單元（null = 全部）
@@ -425,6 +427,12 @@ const SciApp = (() => {
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct);
     SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
     state.stats.totalReviews += 1;
+    const surprise = SciScienceRewards.triggerSurprise({
+      correct,
+      rng: SciScienceRewards.mulberry32(SciScienceRewards.hashSeed(`${SciStore.todayStr()}:${target.id}:${state.stats.totalReviews}`)),
+      facts: scienceTrivia,
+      economy: SciEconomy,
+    });
     if (state.stats.totalReviews === 1) renderOnboarding();
     if (correct) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
@@ -432,6 +440,19 @@ const SciApp = (() => {
     SciStore.save(state);
     renderHeroStats();
     correct ? playCorrectTone() : playWrongTone();
+    if (surprise.hit) showScienceSurprise(surprise);
+  }
+
+  function showScienceSurprise(surprise) {
+    const toast = document.createElement('aside');
+    toast.className = 'science-surprise celebrate-in';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = surprise.type === 'crystals'
+      ? `✨ 科學奇遇：研究補給 +${surprise.earned} 晶能`
+      : `✨ 科學奇遇：${surprise.fact.text}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
   }
 
   // ================= 里程碑：單元全數精通 =================
@@ -447,6 +468,7 @@ const SciApp = (() => {
     const key = `${activeSubject}:${unit}`;
     if (state.stats.celebratedUnits.includes(key)) return null;
     state.stats.celebratedUnits.push(key);
+    SciScienceRewards.unlockForMasteredUnit(state, scienceLore, activeSubject, unit, terms, maxBox);
     recordDailySignal('unitProgress', false);
     SciStore.save(state);
     return unit;
@@ -457,6 +479,8 @@ const SciApp = (() => {
     const label = UNIT_LABELS[unit] || unit;
     const subjectLabel = SUBJECTS.find((s) => s.key === activeSubject)?.label || '';
     const clearedCount = (state.stats.celebratedUnits || []).length;
+    const loreCard = scienceLore.find((card) => card.subject === activeSubject && card.unit === unit && (state.stats.scienceLore || []).includes(card.id));
+    const loreHtml = loreCard ? `<div class="milestone-lore"><b>${loreCard.icon} 科學史卡・${loreCard.title}</b><span>${loreCard.who}・${loreCard.year}</span><p>${loreCard.blurb}</p></div>` : '';
     const confetti = Array.from({ length: 12 }, (_, i) => `<span class="confetti-bit" style="--i:${i}"></span>`).join('');
     container.innerHTML = `
       <div class="card milestone-card celebrate-in">
@@ -465,6 +489,7 @@ const SciApp = (() => {
         <h3>${label} · 全數精通！</h3>
         <p>這個單元的詞條你都穩了，${subjectLabel}的戰功又推進一格。</p>
         <p class="milestone-stat">目前累積已攻克 <strong>${clearedCount}</strong> 個單元</p>
+        ${loreHtml}
         <div class="btn-row"><button class="btn btn-primary" id="milestone-continue">繼續</button></div>
       </div>`;
     playMilestoneTone();
@@ -862,6 +887,8 @@ const SciApp = (() => {
     if (streakEl) streakEl.textContent = (state.stats && state.stats.streakDays) || 0;
     if (masteredEl) masteredEl.textContent = mastered;
     if (rankEl) rankEl.textContent = rankLabel(mastered);
+    const loreProgress = el('#science-lore-progress');
+    if (loreProgress) loreProgress.textContent = `已點亮 ${SciScienceRewards.unlockedLore(state, scienceLore).length} / ${scienceLore.length} 個科學領域`;
 
     const labelEl = el('#daily-goal-label');
     const fillEl = el('#daily-goal-fill');
@@ -881,9 +908,9 @@ const SciApp = (() => {
   }
 
   function recordDailySignal(signal, rerender = true) {
-    SciDailyQuests.record(state, signal);
+    SciDailyQuests.record(state, signal, SciStore.todayStr(), activeSubject);
     const rewards = SciDailyQuests.claimNewlyCompleted(state);
-    rewards.forEach(() => SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.master, 'dailyQuest'));
+    rewards.forEach((claimId) => SciEconomy.earnCrystals(SciDailyQuests.rewardFor(claimId), claimId === SciDailyQuests.ALL_CLEAR_ID ? 'dailyQuestBonus' : 'dailyQuest'));
     SciStore.save(state);
     if (rerender) renderHeroStats();
   }
@@ -927,6 +954,7 @@ const SciApp = (() => {
     const mastered = masteredCardCount();
     const masteredUnits = countMasteredUnits();
     const streak = (state.stats && state.stats.streakDays) || 0;
+    const researchDonations = SciBaseStore.loadBase().researchDonations || 0;
 
     ctx.font = '26px sans-serif';
     ctx.fillStyle = themeColor('--green', '#1f9d55');
@@ -940,6 +968,7 @@ const SciApp = (() => {
       ['🔥 連續複習', `${streak} 天`],
       ['⭐ 戰功', `${mastered} 個`],
       ['🏅 精通單元', `${masteredUnits} 個`],
+      ['🔭 研究捐獻', `${researchDonations} 次`],
     ];
     let y = 300;
     rows.forEach(([label, value]) => {
@@ -1284,6 +1313,15 @@ const SciApp = (() => {
       renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
       el('#tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+    const classboardBtn = el('#classboard-btn');
+    if (classboardBtn) classboardBtn.addEventListener('click', () => {
+      const juniorSubjects = new Set(['biology', 'chemphys', 'earth']);
+      if (!juniorSubjects.has(activeSubject)) {
+        alert('班級協力榜為國中生物／理化／地科而設，請先切到國中科目分頁。');
+        return;
+      }
+      window.SciClassBoard?.open({ subject: activeSubject, mastered: masteredCountForSubject(activeSubject) });
+    });
     if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);
     el('#family-summary-close')?.addEventListener('click', closeFamilySummary);
     el('#family-summary-done')?.addEventListener('click', closeFamilySummary);
@@ -1344,12 +1382,19 @@ const SciApp = (() => {
     panels.innerHTML = '';
 
     try {
-      const loaded = await Promise.all(SUBJECTS.map(async (subject) => {
-        const res = await fetch(subject.file);
-        if (!res.ok) throw new Error(`${subject.label}資料載入失敗（HTTP ${res.status}）`);
-        return [subject.key, await res.json()];
-      }));
+      const [loaded, loreData, triviaData] = await Promise.all([
+        Promise.all(SUBJECTS.map(async (subject) => {
+          const res = await fetch(subject.file);
+          if (!res.ok) throw new Error(`${subject.label}資料載入失敗（HTTP ${res.status}）`);
+          return [subject.key, await res.json()];
+        })),
+        fetch('data/science-lore.json').then((res) => { if (!res.ok) throw new Error(`科學史資料載入失敗（HTTP ${res.status}）`); return res.json(); }),
+        fetch('data/science-trivia.json').then((res) => { if (!res.ok) throw new Error(`科學奇遇資料載入失敗（HTTP ${res.status}）`); return res.json(); }),
+      ]);
       loaded.forEach(([key, data]) => subjectTerms.set(key, data));
+      if (!SciScienceRewards.validateLore(loreData)) throw new Error('科學史資料格式不正確');
+      scienceLore = loreData;
+      scienceTrivia = triviaData;
     } catch (err) {
       panels.insertAdjacentHTML('afterbegin', `<div class="card">這科資料一時載不出來，重新整理一次通常就好了（技術訊息：${err.message}）</div>`);
       return;
@@ -1384,6 +1429,7 @@ const SciApp = (() => {
     SciBaseUI.init({
       getState: () => state,
       getTermsBySubject: () => Object.fromEntries(subjectTerms),
+      getLore: () => scienceLore,
     });
     renderHeroStats();
     renderOnboarding();

@@ -2,9 +2,10 @@
 // 主樓/展館/裝飾/成就牆一律由 science-hero:v1 與 sci_econ 唯讀 derive，本模組絕不寫回它們。零 DOM。
 const SciBaseStore = (() => {
   const BASE_KEY = 'sci_base';
+  const RESEARCH_DONATION_COST = 50;
 
   function defaultBase() {
-    return { v: 1, placements: {}, styles: {}, plaques: {}, celebrated: [] };
+    return { v: 1, placements: {}, styles: {}, plaques: {}, celebrated: [], researchDonations: 0 };
   }
 
   function loadBase() {
@@ -14,6 +15,7 @@ const SciBaseStore = (() => {
       if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return def;
       const merged = { ...def, ...parsed, v: 1 };
       if (!Array.isArray(merged.celebrated)) merged.celebrated = [];
+      merged.researchDonations = Math.max(0, Math.floor(Number(merged.researchDonations) || 0));
       return merged;
     } catch { return def; }
   }
@@ -261,6 +263,14 @@ const SciBaseStore = (() => {
     return { ok: true, balance: paid.balance };
   }
 
+  // 可重複的晶能出口：晶能仍只從既有學習行為取得；捐獻不新增任何收入。
+  function donateResearch(base) {
+    const paid = SciEconomy.spendCrystals(RESEARCH_DONATION_COST, 'research-donation');
+    if (!paid.ok) return paid;
+    base.researchDonations = Math.max(0, Math.floor(Number(base.researchDonations) || 0)) + 1;
+    return { ok: true, balance: paid.balance, donations: base.researchDonations, spent: RESEARCH_DONATION_COST };
+  }
+
   // 慶典佇列：主樓升階/展館升級/新金級裝飾各慶祝一次（只加不扣，白帽）
   function pendingCelebrations(state, termsBySubject, base) {
     const out = [];
@@ -297,7 +307,7 @@ const SciBaseStore = (() => {
     return base;
   }
 
-  function getWall(state) {
+  function getWall(state, base = defaultBase()) {
     const rank = (state && state.rank) || { pts: 0, peak: 0 };
     const peak = rank.peak || 0;
     let rankValue = '尚未出戰';
@@ -326,19 +336,19 @@ const SciBaseStore = (() => {
       plaques,
       motto: getMotto(base),
       balance: SciEconomy.getBalance(),
-      wall: getWall(state),
+      wall: getWall(state, base),
     };
   }
 
   return {
-    BASE_KEY, defaultBase, loadBase, saveBase,
+    BASE_KEY, RESEARCH_DONATION_COST, defaultBase, loadBase, saveBase,
     STAGES, countMastered, mainStage,
     PAVILIONS, FLOURISH_TIERS, flourishTier, getPavilions,
     DECOR_THEMES, GRADES, gradeOf, DECOR_CAP, getDecorations, decorSummary,
     idHash, defaultPos, placeDecor, resetPlacements,
     PLAQUE_TARGETS, PLAQUE_BANK, PLAQUE_MIN, PLAQUE_MAX, setPlaque, getPlaqueText,
     MOTTO_BANK, setMotto, getMotto,
-    STYLE_SHOP, styleOf, buyStyle,
+    STYLE_SHOP, styleOf, buyStyle, donateResearch,
     pendingCelebrations, markCelebrated, seedCelebrated, isSeeded, getWall, getBaseView,
   };
 })();

@@ -12,13 +12,33 @@ import {
   okClass,
   sigOf,
 } from '../functions/lib/market-core.js';
-import { mktOp } from '../functions/api/mkt.js';
+import { mktOp, onRequestPost } from '../functions/api/mkt.js';
 import { kvFor } from '../functions/lib/_kv.js';
 import { createFakeD1 } from './fake-d1.mjs';
 
 const ENV = { secret: 'test-secret', forceOpen: true };
 const OPEN_TS = Date.UTC(2026, 6, 24, 4, 0);
 const fakeKv = () => kvFor(createFakeD1());
+
+test('R11 市集 API 只回固定 500 文案，內部錯誤僅寫 server log', async () => {
+  const secretDetail = new Error('D1 SQL internal table secret');
+  const request = new Request('https://science-hero.pages.dev/api/mkt', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'cf-connecting-ip': '1.2.3.4' },
+    body: JSON.stringify({ op: 'wallet' }),
+  });
+  const original = console.error;
+  const logged = [];
+  console.error = (...args) => logged.push(args);
+  try {
+    const response = await onRequestPost({ request, env: { SCIENCE_HERO_DB: { prepare() { throw secretDetail; } } } });
+    assert.equal(response.status, 500);
+    assert.deepEqual(await response.json(), { ok: 0, error: '伺服器忙線，稍後再試' });
+    assert.equal(logged[0][1], secretDetail);
+  } finally {
+    console.error = original;
+  }
+});
 
 test('ITEM_CATALOG：恰好 6 件、tool/deco 各 3；tierOf 白名單 fail-closed', () => {
   const ids = Object.keys(ITEM_CATALOG);
