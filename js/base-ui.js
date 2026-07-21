@@ -41,12 +41,23 @@ const SciBaseUI = (() => {
       `<span class="sb-balance">💠 ${view.balance}</span>${motto}${main}${pavs}${decors}`;
   }
 
-  function wallHtml(entries) {
+  function rankWallHtml(state) {
+    const peak = Math.max(state?.rank?.peak || 0, state?.rank?.pts || 0);
+    const badges = SciBattle.RANKS.map((rank) =>
+      `<button type="button" class="sb-rank-badge${peak >= rank.at ? ' is-lit' : ''}" aria-pressed="${peak >= rank.at}">` +
+      `<span>${rank.ico}</span><b>${esc(rank.name)}</b><small>${peak >= rank.at ? '已點亮' : `${rank.at} 分解鎖`}</small></button>`,
+    ).join('');
+    const titles = Object.entries(state?.rtSeason?.titles || {});
+    return `<h3 class="sb-sub">段位徽章牆</h3><div class="sb-rank-wall">${badges}</div>` +
+      (titles.length ? `<h4>賽季稱號</h4><ul class="sb-season-titles">${titles.map(([season, title]) => `<li>${esc(season)}・${esc(title)}</li>`).join('')}</ul>` : '');
+  }
+
+  function wallHtml(entries, state) {
     return `<h3 class="sb-sub">基地成就牆</h3><div class="sb-wall-grid">` +
       entries.map((e) =>
         `<div class="sb-wall-item"><span class="sb-wall-icon">${e.icon}</span>` +
         `<b>${esc(e.label)}</b><span>${esc(e.value)}</span></div>`,
-      ).join('') + `</div>`;
+      ).join('') + `</div>${state ? rankWallHtml(state) : ''}`;
   }
 
   // 純函式：樣式面板／門牌面板／慶典卡
@@ -226,7 +237,7 @@ const SciBaseUI = (() => {
   function toggleWall() {
     showingWall = !showingWall;
     if (showingWall) {
-      $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState()));
+      $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState()), getState());
       $('base-wall-btn').textContent = '回場景';
     } else {
       renderScene();
@@ -278,5 +289,5 @@ const SciBaseUI = (() => {
     });
   }
 
-  return { sceneHtml, wallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init };
+  return { sceneHtml, wallHtml, rankWallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init };
 })();

@@ -259,7 +259,7 @@ const SciRtBattleUI = (() => {
       const pool = ctx.poolForScope ? ctx.poolForScope(room.scope) : ctx.pool;
       if (!pool || pool.length < 4) return failCard('這個範圍的詞條不足 4 筆，請請房主換個範圍');
       questions = SciRtBattle.buildQuestions(room.seed, pool);
-      state = { pool, idx: 0, dmg: 0, heal: 0, combo: 0, correct: 0, done: false, oppDmg: 0, oppHeal: 0, oppDone: false, oppHb: Date.now(), boost: {}, finished: false, locked: false, advScript: SciRtBattle.buildAdventureScript(room.seed, room.role), lastAdventure: null };
+      state = { pool, idx: 0, dmg: 0, heal: 0, combo: 0, correct: 0, done: false, oppDmg: 0, oppHeal: 0, oppCorrect: 0, oppCombo: 0, oppDone: false, oppHb: Date.now(), boost: {}, finished: false, locked: false, hitFlash: false, advScript: SciRtBattle.buildAdventureScript(room.seed, room.role), lastAdventure: null };
       pollTimer = setInterval(tick, SciRtBattle.POLL_MS);
       nextRound();
     }
@@ -275,8 +275,11 @@ const SciRtBattleUI = (() => {
       if (!result.ok) return;
       if (result.opp) {
         room.opp ||= result.opp.snap;
+        state.hitFlash = result.opp.state.correct > state.oppCorrect;
         state.oppDmg = result.opp.state.dmg;
         state.oppHeal = result.opp.state.heal;
+        state.oppCorrect = result.opp.state.correct || 0;
+        state.oppCombo = result.opp.state.combo || 0;
         state.oppDone = !!result.opp.state.done;
         state.oppHb = result.opp.state.hb;
         paintHud();
@@ -287,7 +290,8 @@ const SciRtBattleUI = (() => {
 
     function paintHud() {
       const hud = el.querySelector('#rt-hud');
-      if (hud && state) hud.innerHTML = `<div class="rt-vs">${hpBar(myNick(), myHp(), 'me')}<b>VS</b>${hpBar(room.opp?.nick || '對手', oppHp(), 'foe')}</div><p>連擊 ${state.combo}・答對 ${state.correct}</p>`;
+      if (hud && state) hud.innerHTML = `<div class="rt-vs${state.hitFlash ? ' rt-hit-flash' : ''}">${hpBar(myNick(), myHp(), 'me')}<b>VS</b>${hpBar(room.opp?.nick || '對手', oppHp(), 'foe')}</div><p>你：連擊 ${state.combo}・答對 ${state.correct}　｜　對手答對 ${state.oppCorrect} 題${state.oppCombo > 1 ? `・連擊中 ×${state.oppCombo}` : ''}</p>`;
+      state.hitFlash = false;
     }
 
     function nextRound() {

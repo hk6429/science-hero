@@ -23,6 +23,10 @@ const SciBattle = (() => {
 
   const TIER_UNLOCK = { 入門: 0, 進階: 0, 高手: 30, 宗師: 80 };
 
+  function foeArt(opponent, extraClass = '') {
+    return `<img class="bat-foe-img ${extraClass}" src="assets/battle/foe-${opponent.id}.png" alt="${opponent.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${opponent.emoji}',className:'bat-face ${extraClass}'}))">`;
+  }
+
   function isUnlocked(opponent, totalReviews) {
     return (totalReviews || 0) >= (TIER_UNLOCK[opponent.tier] || 0);
   }
@@ -32,6 +36,22 @@ const SciBattle = (() => {
     let dmg = 12 + combo * 3;
     if (hp < 30) dmg = Math.round(dmg * 1.5);
     return dmg;
+  }
+
+  function enemyDamage(opponent, round) {
+    const tierGrowth = { 入門: 1, 進階: 2, 高手: 3, 宗師: 4 };
+    const turn = Math.max(1, Math.floor(round) || 1);
+    const base = 8 + Math.round(opponent.acc * 8);
+    const scaled = base + Math.floor((turn - 1) / 3) * (tierGrowth[opponent.tier] || 1);
+    const special = (opponent.tier === '高手' || opponent.tier === '宗師') && turn % 3 === 0;
+    return special ? scaled * 2 : scaled;
+  }
+
+  function recordPlayerHit(summary, damage, combo) {
+    summary.bestCombo = Math.max(summary.bestCombo || 0, combo || 0);
+    summary.totalDamage = (summary.totalDamage || 0) + damage;
+    summary.maxDamage = Math.max(summary.maxDamage || 0, damage);
+    return summary;
   }
 
   function applyWrongAnswer(state) {
@@ -238,7 +258,7 @@ const SciBattle = (() => {
             const unlocked = isUnlocked(o, totalReviews());
             const won = beaten.has(o.id);
             return `<button class="bat-oppcard${unlocked ? '' : ' locked'}" data-id="${o.id}" data-open="${unlocked ? 1 : 0}">
-              <span class="bat-face">${unlocked ? o.emoji : '🔒'}</span>
+              ${unlocked ? foeArt(o) : '<span class="bat-face">🔒</span>'}
               <span class="bat-name">${unlocked ? o.name : '？？？'}${won ? ' 🏆' : ''}</span>
               <span class="bat-tier">${o.tier}</span>
               ${unlocked ? '' : `<span class="bat-locknote">累積答對 ${TIER_UNLOCK[o.tier]} 題解鎖</span>`}
@@ -263,7 +283,7 @@ const SciBattle = (() => {
     // ── PvE ──
     function start(o) {
       opp = o;
-      battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, log: opp.taunt };
+      battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, round: 0, bestCombo: 0, totalDamage: 0, maxDamage: 0, log: opp.taunt };
       if (typeof SciMarketStore !== 'undefined') {
         const carried = SciMarketStore.takeCarry();
         if (carried) {
@@ -280,6 +300,7 @@ const SciBattle = (() => {
     function nextRound() {
       if (battleState.oHp <= 0) return finish(true);
       if (battleState.pHp <= 0) return finish(false);
+      battleState.round += 1;
       battleState.q = SciQuiz.buildQuestion(pool[Math.floor(Math.random() * pool.length)], pool);
       battleState.qStart = Date.now();
       locked = false;
@@ -296,12 +317,14 @@ const SciBattle = (() => {
       el.innerHTML = `
         <div class="bat-arena">
           <div class="bat-side foe">
-            <span class="bat-face big">${opp.emoji}</span>
+            ${foeArt(opp, 'big')}
+            ${battleState.foeDamage ? `<span class="bat-damage-pop">-${battleState.foeDamage}</span>` : ''}
             <div class="bat-name">${opp.name}</div>
             ${hpBar(battleState.oHp, 'foe')}
           </div>
           <div class="bat-log" role="status" aria-live="polite">${battleState.log}</div>
           <div class="bat-side me">
+            ${battleState.meDamage ? `<span class="bat-damage-pop">-${battleState.meDamage}</span>` : ''}
             ${hpBar(battleState.pHp, 'me')}
             <div class="bat-name">你 ${battleState.pHp < 30 ? '💢背水一戰' : battleState.combo >= 2 ? `🔥連擊 ×${battleState.combo}` : ''}</div>
             ${assistTag()}
@@ -340,12 +363,16 @@ const SciBattle = (() => {
 
       if (correct) {
         const dmg = calcDamage(battleState.combo, battleState.pHp);
+        battleState.foeDamage = dmg;
+        battleState.meDamage = 0;
         battleState.oHp = Math.max(0, battleState.oHp - dmg);
         battleState.combo++;
+        recordPlayerHit(battleState, dmg, battleState.combo);
         battleState.log = `命中！對 ${opp.name} 造成 ${dmg} 點傷害${battleState.combo >= 2 ? `（連擊 ×${battleState.combo}）` : ''}`;
         const c = currentCompanion();
         if (c.atk > 0 && battleState.oHp > 0) {
           battleState.oHp = Math.max(0, battleState.oHp - c.atk);
+          recordPlayerHit(battleState, c.atk, battleState.combo);
           battleState.log += `　${c.emoji} ${c.name} 追擊 -${c.atk}`;
           if (c.leech && Math.random() < c.leechChance) {
             battleState.pHp = Math.min(MAX_HP, battleState.pHp + c.leech);
@@ -357,8 +384,9 @@ const SciBattle = (() => {
         if (cubMods.atk > 0 && battleState.oHp > 0) {
           const cubAtk = Math.min(cubMods.atk, 5);
           battleState.oHp = Math.max(0, battleState.oHp - cubAtk);
+          recordPlayerHit(battleState, cubAtk, battleState.combo);
           const activeCub = SciFusionStore.listCubs(SciFusionStore.load()).find((cub) => cub.isActive);
-          battleState.log += `　${activeCub ? `${activeCub.emoji} ${activeCub.displayName}` : '稚靈'} 追擊 -${cubAtk}`;
+          battleState.log += `　${activeCub ? `${ctx.cubArt?.(activeCub, 'bat-cub-chase') || activeCub.emoji} ${activeCub.displayName}` : '稚靈'} 追擊 -${cubAtk}`;
           if (cubMods.leech && Math.random() < cubMods.leechChance) {
             battleState.pHp = Math.min(MAX_HP, battleState.pHp + cubMods.leech);
             battleState.log += `・回血 +${cubMods.leech}`;
@@ -377,16 +405,19 @@ const SciBattle = (() => {
         if (battleState.pHp <= 0) return finish(false);
         const hit = Math.random() < opp.acc;
         if (hit) {
-          const dmg = 8 + Math.round(opp.acc * 8);
+          const dmg = enemyDamage(opp, battleState.round);
+          battleState.meDamage = dmg;
+          battleState.foeDamage = 0;
           battleState.pHp = Math.max(0, battleState.pHp - dmg);
-          battleState.log = `${opp.name} 出招——你受到 ${dmg} 點傷害`;
+          const special = (opp.tier === '高手' || opp.tier === '宗師') && battleState.round % 3 === 0;
+          battleState.log = `${opp.name}${special ? ' 施放大招' : ' 出招'}——你受到 ${dmg} 點傷害`;
         } else {
           battleState.oHp = Math.max(0, battleState.oHp - 4);
           battleState.log = `${opp.name} 一時語塞，自損 4`;
         }
         render(true);
-        setTimeout(nextRound, 1000);
-      }, correct ? 700 : 1200);
+        setTimeout(nextRound, 400);
+      }, correct ? 300 : 500);
     }
 
     function finish(win) {
@@ -397,11 +428,13 @@ const SciBattle = (() => {
       }
       SciStore.save(state);
       if (win) SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
+      if (win) ctx.onBattleWin?.();
       el.innerHTML = `<div class="card celebrate-in">
         <div class="bat-result-emoji">${win ? '🏆' : '💀'}</div>
         <p>${win ? `擊敗 ${opp.name}！` : `不敵 ${opp.name}……`}</p>
         <div class="bat-quote">「${win ? opp.lose : opp.win}」</div>
         <div class="bat-rankdelta ${win ? 'up' : 'down'}">${rk.ico} ${rk.name}　${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）${rk.shield ? '　🛡️ 本週首敗保護，不扣分！' : ''}</div>
+        <div class="bat-record-summary"><span>最高連擊 <b>${battleState.bestCombo}</b></span><span>總輸出 <b>${battleState.totalDamage}</b></span><span>最高傷害 <b>${battleState.maxDamage}</b></span></div>
         <div class="btn-row">
           <button class="btn btn-secondary" id="bat-back">回對手選單</button>
           <button class="btn btn-primary" id="bat-again">再戰一場</button>
@@ -505,7 +538,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, isUnlocked, calcDamage, applyWrongAnswer, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject,

@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
+import { findMainlandTerms } from '../scripts/validate-all.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -17,7 +18,7 @@ function loadScripts(context, files) {
   const combined = files
     .map((file) => readFileSync(path.join(ROOT, file), 'utf8'))
     .join('\n;\n');
-  const code = `${combined}\nglobalThis.__exports = { SciStore, SciFlashcard, SciQuiz, SciWeak, SciBattle, SciEconomy, SciFusionStore, SciBaseStore, SciBaseUI, __setRaw: (k, v) => localStorage.setItem(k, v) };`;
+  const code = `${combined}\nglobalThis.__exports = { SciStore, SciFlashcard, SciQuiz, SciWeak, SciBattle, SciEconomy, SciDailyQuests, SciFusionStore, SciBaseStore, SciBaseUI, __setRaw: (k, v) => localStorage.setItem(k, v) };`;
   vm.runInContext(code, context, { filename: 'combined.js' });
   // node:assert/strict 會把 vm realm 的 Object/Array 原型視為不同；橋接回 host realm，
   // 讓 deepEqual 比較行為值與結構，同時保留原函式對傳入 state 的修改。
@@ -58,7 +59,7 @@ function makeSandbox(seed = {}) {
   };
   const sandbox = { localStorage, console, Date, Math, JSON };
   const context = vm.createContext(sandbox);
-  return loadScripts(context, ['js/store.js', 'js/flashcard.js', 'js/quiz.js', 'js/weak.js', 'js/economy.js', 'js/battle.js', 'js/fusion-store.js', 'js/base-store.js', 'js/base-ui.js']);
+  return loadScripts(context, ['js/store.js', 'js/flashcard.js', 'js/quiz.js', 'js/weak.js', 'js/economy.js', 'js/daily-quests.js', 'js/battle.js', 'js/fusion-store.js', 'js/base-store.js', 'js/base-ui.js']);
 }
 
 const terms = JSON.parse(readFileSync(path.join(ROOT, 'data', 'biology.json'), 'utf8'));
@@ -80,6 +81,11 @@ function fusionReadyState(lib) {
 
 const okRng = () => 0.5;
 const failRng = () => 0.1;
+
+test('validate-all 中國用語守門會回報題號與命中詞', () => {
+  const hits = findMainlandTerms([{ id: 'pc-test', term: '聲音', def: '超聲波會顯示在屏幕上' }]);
+  assert.deepEqual(hits, [{ id: 'pc-test', word: '超聲波' }, { id: 'pc-test', word: '屏幕' }]);
+});
 
 function metaWithForestdeer(lib) {
   const state = fusionReadyState(lib);
@@ -108,6 +114,22 @@ test('SciFlashcard.markResult 答對推進盒序、答錯歸零', () => {
   card = lib.SciFlashcard.markResult(state, id, false);
   assert.equal(card.box, 0, '答錯應該歸零盒序');
   assert.equal(state.stats.totalReviews, 3);
+});
+
+test('SciFlashcard.bumpBoxIfDue 同日連續答對不會刷到精通，僅到期後才推進', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  const id = terms[0].id;
+  const now = Date.now();
+
+  for (let i = 0; i < 4; i++) lib.SciFlashcard.bumpBoxIfDue(state, id, true, now);
+  assert.equal(lib.SciStore.getCard(state, id).box, 1, '同一天重答只能推進第一次');
+
+  for (let i = 0; i < 3; i++) {
+    state.cards[id].due = now - 1;
+    lib.SciFlashcard.bumpBoxIfDue(state, id, true, now);
+  }
+  assert.equal(lib.SciStore.getCard(state, id).box, 4, '每次等到到期後才能逐盒精通');
 });
 
 test('SciFlashcard.getRoundQueue 逾期優先於未到期', () => {
@@ -164,6 +186,14 @@ test('四科資料都能建立四選一題目，且 id 不跨科重複', () => {
   }
 });
 
+test('生物全標 G7，地科地質／天氣／海洋標 G9', () => {
+  const biology = JSON.parse(readFileSync(path.join(ROOT, 'data', 'biology.json'), 'utf8'));
+  const earth = JSON.parse(readFileSync(path.join(ROOT, 'data', 'earth-science.json'), 'utf8'));
+  assert.ok(biology.every((term) => String(term.grade) === '7'));
+  assert.ok(earth.filter((term) => ['geology', 'weather', 'ocean'].includes(term.unit))
+    .every((term) => String(term.grade) === '9'));
+});
+
 test('SciWeak.getWeakUnits 依答錯次數＋猜測加權排序', () => {
   const lib = makeSandbox();
   const state = lib.SciStore.load();
@@ -190,12 +220,91 @@ test('SciWeak.recordAnswer 判定秒答錯誤為「用猜的」', () => {
   assert.equal(state.weakLog[1].guessed, false);
 });
 
+test('SciWeak.recordAnswer 將低熟悉度且 800ms 內答對標成 luckyGuess', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  const t = terms[0];
+  lib.SciWeak.recordAnswer(state, { termId: t.id, unit: t.unit, correct: true, elapsedMs: 500, seen: 0 });
+  lib.SciWeak.recordAnswer(state, { termId: t.id, unit: t.unit, correct: true, elapsedMs: 500, seen: 5 });
+  assert.equal(state.weakLog[0].luckyGuess, true);
+  assert.equal(state.weakLog[1].luckyGuess, false);
+  assert.ok(lib.SciWeak.getWeakTerms(state).some((entry) => entry.termId === t.id));
+});
+
+test('弱點頁固定顯示本科近 30 題正確率', () => {
+  const app = readFileSync(path.join(ROOT, 'js', 'app.js'), 'utf8');
+  assert.match(app, /本科近 30 題正確率/);
+  assert.match(app, /SciFusionStore\.accuracyBySubject\(subjectState, activeSubject\)/);
+});
+
+test('SciWeak.recordFlash 餵入閃卡診斷但不推進盒序', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  const t = terms[0];
+  lib.SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct: false });
+  assert.equal(state.weakLog[0].source, 'flash');
+  assert.equal(state.weakLog[0].correct, false);
+  assert.equal(lib.SciStore.getCard(state, t.id).box, 0);
+});
+
+test('SciDailyQuests 只用今日答對、勝場與單元推進判定三項任務', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  for (let i = 0; i < 10; i++) lib.SciDailyQuests.record(state, 'correct', '2026-07-21');
+  lib.SciDailyQuests.record(state, 'battleWin', '2026-07-21');
+  lib.SciDailyQuests.record(state, 'unitProgress', '2026-07-21');
+  assert.deepEqual(lib.SciDailyQuests.list(state, '2026-07-21').map((quest) => quest.done), [true, true, true]);
+  assert.deepEqual(lib.SciDailyQuests.list(state, '2026-07-22').map((quest) => quest.done), [false, false, false]);
+});
+
+test('即時對戰 HUD 顯示對手答對數與連擊，答對時觸發我方受擊閃動', () => {
+  const ui = readFileSync(path.join(ROOT, 'js', 'rtbattle-ui.js'), 'utf8');
+  assert.match(ui, /oppCorrect/);
+  assert.match(ui, /對手答對/);
+  assert.match(ui, /rt-hit-flash/);
+});
+
+test('SciBattle.recordPlayerHit 累計最高連擊、總輸出與最高傷害', () => {
+  const lib = makeSandbox();
+  const summary = {};
+  lib.SciBattle.recordPlayerHit(summary, 12, 1);
+  lib.SciBattle.recordPlayerHit(summary, 21, 4);
+  assert.deepEqual(summary, { bestCombo: 4, totalDamage: 33, maxDamage: 21 });
+});
+
 test('SciBattle.calcDamage 連擊遞增、血量<30 背水一戰 1.5 倍', () => {
   const lib = makeSandbox();
   assert.equal(lib.SciBattle.calcDamage(0, 100), 12);
   assert.equal(lib.SciBattle.calcDamage(2, 100), 18);
   assert.equal(lib.SciBattle.calcDamage(0, 20), 18, '血量<30時應該套用1.5倍背水一戰加成');
   assert.equal(lib.SciBattle.calcDamage(2, 20), 27);
+});
+
+test('SciBattle.enemyDamage 隨回合與階級升高，宗師每 3 回合施放大招', () => {
+  const lib = makeSandbox();
+  const master = lib.SciBattle.OPPONENTS.find((opponent) => opponent.tier === '宗師');
+  assert.ok(lib.SciBattle.enemyDamage(master, 9) > lib.SciBattle.enemyDamage(master, 1));
+  assert.ok(lib.SciBattle.enemyDamage(master, 3) > lib.SciBattle.enemyDamage(master, 2));
+});
+
+test('PvE 節奏縮為 300/400/500ms 且血條與傷害跳字動畫就位', () => {
+  const battle = readFileSync(path.join(ROOT, 'js', 'battle.js'), 'utf8');
+  const css = readFileSync(path.join(ROOT, 'css', 'style.css'), 'utf8');
+  assert.match(battle, /correct \? 300 : 500/);
+  assert.match(battle, /setTimeout\(nextRound, 400\)/);
+  assert.match(battle, /bat-damage-pop/);
+  assert.match(css, /\.bat-hp-fill[^}]*transition:\s*width \.3s/s);
+  assert.match(css, /@keyframes\s+bat-damage-pop/);
+});
+
+test('首次進站有單線新手引導，六個工具摺進更多且老手可展開', () => {
+  const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const app = readFileSync(path.join(ROOT, 'js', 'app.js'), 'utf8');
+  assert.match(html, /id="new-player-guide"/);
+  assert.match(html, /今天從這裡開始/);
+  assert.match(html, /id="more-tools"/);
+  assert.match(app, /state\.stats\.totalReviews === 0/);
+  assert.match(app, /moreTools\.open = !isNew/);
 });
 
 test('SciBattle.subjectOfId 依 id 前綴分流四科', () => {
@@ -938,6 +1047,25 @@ test('SciBaseUI.wallHtml 陳列三面榮譽；不含催促字眼', () => {
   ]);
   assert.ok(html.includes('金牌學者') && html.includes('9 題') && html.includes('成就牆'));
   assert.ok(!html.includes('還差'), '成就牆只陳列不催促（白帽）');
+});
+
+test('SciBaseUI.rankWallHtml 依歷史最高段位點亮徽章並列出賽季稱號', () => {
+  const lib = makeSandbox();
+  const html = lib.SciBaseUI.rankWallHtml({ rank: { pts: 120, peak: 260 }, rtSeason: { titles: { '2026-06': '銀河研究員' } } });
+  assert.match(html, /銅牌探索者/);
+  assert.match(html, /金牌學者/);
+  assert.match(html, /is-lit/);
+  assert.match(html, /銀河研究員/);
+});
+
+test('守護者與稚靈美術槽都使用指定路徑並具 emoji onerror fallback', () => {
+  const battle = readFileSync(path.join(ROOT, 'js', 'battle.js'), 'utf8');
+  const app = readFileSync(path.join(ROOT, 'js', 'app.js'), 'utf8');
+  assert.match(battle, /assets\/battle\/foe-\$\{opponent\.id\}\.png/);
+  assert.match(battle, /onerror="this\.replaceWith/);
+  assert.match(app, /assets\/fusion\/cub-\$\{assetId\}\.png/);
+  assert.match(app, /onerror="this\.replaceWith/);
+  assert.doesNotMatch(`${battle}\n${app}`, /sprite-\$\{.*\}-s/);
 });
 
 test('SciBaseUI.stylePanelHtml 列 3 樣式、標記生效與價格', () => {

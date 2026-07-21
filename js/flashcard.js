@@ -38,6 +38,13 @@ const SciFlashcard = (() => {
     return updated;
   }
 
+  // 自測與對戰必須尊重 Leitner 到期時間：尚未到期的答對只算作答紀錄，不推進盒序。
+  function bumpBoxIfDue(state, id, correct, now = Date.now()) {
+    const card = SciStore.getCard(state, id);
+    if (correct && card.seen > 0 && card.due > now) return card;
+    return bumpBox(state, id, correct);
+  }
+
   function markResult(state, id, correct) {
     const updated = bumpBox(state, id, correct);
     state.stats.totalReviews += 1;
@@ -45,5 +52,5 @@ const SciFlashcard = (() => {
     return updated;
   }
 
-  return { getRoundQueue, markResult, bumpBox, BOX_INTERVAL_DAYS, ROUND_SIZE };
+  return { getRoundQueue, markResult, bumpBox, bumpBoxIfDue, BOX_INTERVAL_DAYS, ROUND_SIZE };
 })();

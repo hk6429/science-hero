@@ -21,8 +21,16 @@
   <div class="daily-goal" id="daily-goal">
     <div class="daily-goal-label" id="daily-goal-label">今日目標：複習 0 / 10 題</div>
     <div class="daily-goal-bar"><div id="daily-goal-fill" style="width:0%"></div></div>
+    <ul id="daily-quests" class="daily-quests"></ul>
   </div>
 </header>
+
+<section id="new-player-guide" class="new-player-guide" hidden aria-label="新手任務">
+  <h2>▶ 今天從這裡開始</h2>
+  <ol><li><button type="button" data-onboard="flashcard">先練 5 張閃卡</button></li>
+    <li><button type="button" data-onboard="quiz">完成一輪自測</button></li>
+    <li><button type="button" data-onboard="battle">挑戰見習研究員</button></li></ol>
+</section>
 
 <p class="trust-line">內容依 108 課綱自然科學領域編寫，並經教師逐條校對；本站為知識點複習小工具，非官方會考題庫或歷屆試題。</p>
 <p class="trust-line">本站無帳號系統、不上傳任何資料，練習進度僅存於本裝置瀏覽器。</p>
@@ -31,7 +39,7 @@
 
 <main>
   <div id="panels"></div>
-  <div class="io-row">
+  <details id="more-tools" class="more-tools"><summary>更多功能</summary><div class="io-row">
     <button id="btn-market" class="io-btn">🛒 科學市集（每週五開市）</button>
     <button id="btn-base" class="io-btn io-btn--base">🏕️ 我的科學基地</button>
     <button id="fusion-lab-btn" class="io-btn">🧬 精靈融合坊</button>
@@ -39,7 +47,7 @@
     <button id="export-btn" class="io-btn">匯出進度</button>
     <button id="import-btn" class="io-btn">匯入進度</button>
     <input type="file" id="import-file" accept="application/json" hidden />
-  </div>
+  </div></details>
   <p class="io-hint">換手機、換電腦想接著練？先「匯出進度」存一個檔案，再到新裝置上「匯入進度」讀回來即可。</p>
 
   <!-- 精靈融合坊 -->
@@ -133,6 +141,7 @@
 <script src="js/quiz.js"></script>
 <script src="js/weak.js"></script>
 <script src="js/economy.js"></script>
+<script src="js/daily-quests.js"></script>
 <script src="js/battle.js"></script>
 <script src="js/fusion-store.js"></script>
 <script src="js/shapi.js"></script>

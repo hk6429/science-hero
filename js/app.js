@@ -334,6 +334,8 @@ const SciApp = (() => {
       subjectKey: activeSubject,
       masteredCountForSubject: masteredCountForSubject(activeSubject),
       cubMods: SciFusionStore.cubBattleMods(SciFusionStore.load()),
+      cubArt,
+      onBattleWin: () => recordDailySignal('battleWin'),
     });
   }
 
@@ -356,11 +358,14 @@ const SciApp = (() => {
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
   function recordAnswer(target, correct, elapsedMs) {
-    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs });
-    const prevBox = SciStore.getCard(state, target.id).box;
-    const updated = SciFlashcard.bumpBox(state, target.id, correct);
+    const previousCard = SciStore.getCard(state, target.id);
+    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, seen: previousCard.seen });
+    const prevBox = previousCard.box;
+    const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct);
     SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
     state.stats.totalReviews += 1;
+    if (state.stats.totalReviews === 1) renderOnboarding();
+    if (correct) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
@@ -381,6 +386,7 @@ const SciApp = (() => {
     const key = `${activeSubject}:${unit}`;
     if (state.stats.celebratedUnits.includes(key)) return null;
     state.stats.celebratedUnits.push(key);
+    recordDailySignal('unitProgress', false);
     SciStore.save(state);
     return unit;
   }
@@ -479,7 +485,10 @@ const SciApp = (() => {
     flashAnswering = true;
 
     const t = flashQueue[flashIdx];
+    SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
     SciFlashcard.markResult(state, t.id, correct);
+    if (state.stats.totalReviews === 1) renderOnboarding();
+    if (correct) recordDailySignal('correct', false);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
@@ -654,13 +663,16 @@ const SciApp = (() => {
     const weakTerms = SciWeak.getWeakTerms(subjectState, 10)
       .map((w) => ({ ...w, term: terms.find((t) => t.id === w.termId) }))
       .filter((w) => w.term);
+    const accuracy = SciFusionStore.accuracyBySubject(subjectState, activeSubject);
+    const accuracyHtml = `<p class="weak-accuracy">本科近 30 題正確率 <strong>${accuracy.total ? Math.round(accuracy.accuracy * 100) : 0}%</strong>（${accuracy.total} 題）</p>`;
 
     if (weakUnits.length === 0 && weakTerms.length === 0) {
-      body.innerHTML = `<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
+      body.innerHTML = `${accuracyHtml}<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
       return;
     }
 
     body.innerHTML = `
+      ${accuracyHtml}
       <p class="weak-intro">🧭 進步地圖：這幾個地方再練一次就會更熟</p>
       <div class="card">
         <h3>這幾個單元再複習一輪吧</h3>
@@ -756,6 +768,32 @@ const SciApp = (() => {
       wrapEl.classList.toggle('done', daily >= DAILY_GOAL);
       labelEl.textContent = daily >= DAILY_GOAL ? '今日目標已達成 🎉' : `今日目標：複習 ${capped} / ${DAILY_GOAL} 題`;
     }
+    const questList = el('#daily-quests');
+    if (questList) questList.innerHTML = SciDailyQuests.list(state).map((quest) =>
+      `<li class="${quest.done ? 'done' : ''}">${quest.done ? '✓' : '○'} ${quest.label}（${quest.value}/${quest.target}）</li>`).join('');
+  }
+
+  function recordDailySignal(signal, rerender = true) {
+    SciDailyQuests.record(state, signal);
+    const rewards = SciDailyQuests.claimNewlyCompleted(state);
+    rewards.forEach(() => SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.master, 'dailyQuest'));
+    SciStore.save(state);
+    if (rerender) renderHeroStats();
+  }
+
+  function renderOnboarding() {
+    const guide = el('#new-player-guide');
+    const moreTools = el('#more-tools');
+    const isNew = state.stats.totalReviews === 0;
+    if (guide) guide.hidden = !isNew;
+    if (moreTools) moreTools.open = !isNew;
+    guide?.querySelectorAll('[data-onboard]').forEach((button) => {
+      button.addEventListener('click', () => {
+        mode = button.dataset.onboard;
+        renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
+        el('#tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
   }
 
   // ================= 戰績卡片（免帳號免雲端的「被看見」管道）=================
@@ -910,6 +948,11 @@ const SciApp = (() => {
     })[char]);
   }
 
+  function cubArt(cub, extraClass = '') {
+    const assetId = String(cub.id).replace(/^cub_/, '');
+    return `<img class="fusion-cub-img ${extraClass}" src="assets/fusion/cub-${assetId}.png" alt="${escapeHtml(cub.displayName || cub.name)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${escapeHtml(cub.emoji)}',className:'fusion-cub-emoji ${extraClass}'}))">`;
+  }
+
   function fusionReasonText(reason) {
     if (reason === 'same-subject') return '請選兩個不同科目。';
     if (reason === 'already-hatched') return '這組配對的稚靈已經孵化。';
@@ -929,7 +972,7 @@ const SciApp = (() => {
     if (fusionNotice.type === 'success') {
       const cub = fusionNotice.cub;
       return `<div class="fusion-notice is-success celebrate-in">
-        <div class="fusion-result-emoji">${escapeHtml(cub.emoji)}</div>
+        <div class="fusion-result-emoji">${cubArt(cub)}</div>
         <strong>${escapeHtml(cub.name)} 誕生了！</strong><p>${escapeHtml(cub.bornLine)}</p>
         <div class="fusion-actions"><button class="btn btn-secondary" data-nick="${escapeHtml(cub.id)}">幫牠取名</button>
         <button class="btn btn-primary" data-card="${escapeHtml(cub.id)}">產生名片</button></div></div>`;
@@ -967,7 +1010,7 @@ const SciApp = (() => {
       const parentLabel = `${SciFusionStore.SUBJECT_LABELS[a]} × ${SciFusionStore.SUBJECT_LABELS[b]}`;
       const ownedCub = owned.get(cub.id);
       if (ownedCub) {
-        return `<article class="fusion-pair-card is-owned"><div class="fusion-cub-face">${escapeHtml(ownedCub.emoji)}</div>
+        return `<article class="fusion-pair-card is-owned"><div class="fusion-cub-face">${cubArt(ownedCub)}</div>
           <strong>${escapeHtml(ownedCub.displayName)}</strong><small>${escapeHtml(parentLabel)}</small>
           <span class="fusion-owned-tag">${ownedCub.isActive ? '隨行中 ✓' : '已孵化'}</span></article>`;
       }
@@ -981,7 +1024,7 @@ const SciApp = (() => {
       if (balance < SciFusionStore.FUSE_COST) reasons.push(`晶能不足（需 ${SciFusionStore.FUSE_COST}）。`);
       if (todayCount >= SciFusionStore.MAX_FUSE_PER_DAY) reasons.push('今日融合次數已用完。');
       const canStart = gate.ok && balance >= SciFusionStore.FUSE_COST && todayCount < SciFusionStore.MAX_FUSE_PER_DAY;
-      return `<article class="fusion-pair-card is-known"><div class="fusion-cub-face">${escapeHtml(preview.cub.emoji)}</div>
+      return `<article class="fusion-pair-card is-known"><div class="fusion-cub-face">${cubArt(preview.cub)}</div>
         <strong>${escapeHtml(preview.cub.name)}</strong><small>${escapeHtml(parentLabel)}</small><p>${escapeHtml(preview.cub.bornLine)}</p>
         ${reasons.length ? `<ul class="fusion-reasons">${reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join('')}</ul>` : ''}
         <button class="btn btn-primary" data-fuse="${a}|${b}" ${canStart ? '' : 'disabled'}>融合（${SciFusionStore.FUSE_COST} 晶能）</button></article>`;
@@ -992,7 +1035,7 @@ const SciApp = (() => {
       <h3>四科精靈</h3><div class="fusion-spirit-strip">${spiritStrip}</div>
       <h3>稚靈配對牆</h3><div class="fusion-pair-grid">${pairCards}</div>
       <section class="fusion-collection"><h3>稚靈收藏</h3>${collection.length ? collection.map((cub) => `<div class="fusion-collection-row">
-        <span class="fusion-collection-name">${escapeHtml(cub.emoji)} <b>${escapeHtml(cub.displayName)}</b>${cub.isActive ? ' · 隨行中' : ''}</span>
+        <span class="fusion-collection-name">${cubArt(cub, 'small')} <b>${escapeHtml(cub.displayName)}</b>${cub.isActive ? ' · 隨行中' : ''}</span>
         <span class="fusion-actions"><button class="btn btn-secondary" data-active="${escapeHtml(cub.id)}">${cub.isActive ? '取消隨行' : '隨行出戰'}</button>
         <button class="btn btn-secondary" data-nick="${escapeHtml(cub.id)}">改暱稱</button><button class="btn btn-secondary" data-card="${escapeHtml(cub.id)}">看名片</button></span></div>`).join('')
         : '<p class="fusion-empty">答對隱藏題揭曉配方，學習量達標後就能迎接第一隻稚靈。</p>'}</section>`;
@@ -1067,7 +1110,7 @@ const SciApp = (() => {
     const cub = SciFusionStore.listCubs(SciFusionStore.load()).find((item) => item.id === cubId);
     if (!cub) return renderFusionLab();
     body.innerHTML = `<button class="fusion-back" type="button">← 回融合坊</button><div class="fusion-nickname card">
-      <div class="fusion-result-emoji">${escapeHtml(cub.emoji)}</div><h3>幫 ${escapeHtml(cub.name)} 選個暱稱</h3>
+      <div class="fusion-result-emoji">${cubArt(cub)}</div><h3>幫 ${escapeHtml(cub.name)} 選個暱稱</h3>
       <p>只從預設詞庫組合，不開放自由輸入。</p><div class="fusion-nick-selects">
       <select id="fusion-nick-prefix">${SciFusionStore.NICK_PREFIXES.map((word, index) => `<option value="${index}">${escapeHtml(word)}</option>`).join('')}</select>
       <select id="fusion-nick-suffix">${SciFusionStore.NICK_SUFFIXES.map((word, index) => `<option value="${index}">${escapeHtml(word)}</option>`).join('')}</select></div>
@@ -1201,6 +1244,7 @@ const SciApp = (() => {
       getTermsBySubject: () => Object.fromEntries(subjectTerms),
     });
     renderHeroStats();
+    renderOnboarding();
     renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
   }
 

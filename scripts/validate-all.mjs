@@ -14,6 +14,17 @@ const SUBJECTS = [
 ];
 const REQUIRED = ['id', 'term', 'unit', 'grade', 'def', 'example', 'category', 'distractor_pool'];
 const SIMPLIFIED_BLACKLIST = /[们体现应对国学习为经济时间过发现问题这样实际]/;
+export const MAINLAND_TERMS = ['超聲波', '光標', '鼠標', '激光', '視頻', '屏幕', '缺省', '內存'];
+export function findMainlandTerms(entries) {
+  const hits = [];
+  for (const entry of entries) {
+    const text = ['term', 'def', 'example'].map((field) => entry[field] || '').join('\n');
+    for (const word of MAINLAND_TERMS) {
+      if (text.includes(word)) hits.push({ id: entry.id || '（無題號）', word });
+    }
+  }
+  return hits;
+}
 const MIN_TOTAL = 180;
 const MAX_TOTAL = 260;
 const globalIds = new Map();
@@ -69,6 +80,10 @@ for (const subject of SUBJECTS) {
     }
     if (entry.unit) units.set(entry.unit, (units.get(entry.unit) || 0) + 1);
     if (entry.distractor_pool) pools.set(entry.distractor_pool, (pools.get(entry.distractor_pool) || 0) + 1);
+  });
+
+  findMainlandTerms(data).forEach(({ id, word }) => {
+    errors.push(`${subject.name}題號 ${id}：命中中國用語「${word}」`);
   });
 
   for (const [pool, count] of pools) {
