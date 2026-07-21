@@ -13,12 +13,15 @@ function runRestrictedStaticSmoke() {
   const ok = (name, condition) => { if (!condition) throw new Error(`static smoke failed: ${name}`); checks.push(name); console.log(`✅ ${name}`); };
   const html = readFileSync(join(root, 'index.html'), 'utf8');
   const app = readFileSync(join(root, 'js/app.js'), 'utf8');
+  const uiLogic = readFileSync(join(root, 'js/ui-logic.js'), 'utf8');
   const battle = readFileSync(join(root, 'js/battle.js'), 'utf8');
   const css = readFileSync(join(root, 'css/style.css'), 'utf8');
   const subjects = ['elementary.json', 'biology.json', 'physics-chemistry.json', 'earth-science.json'];
   ok('四科資料可解析且均有至少 180 筆', subjects.every((file) => JSON.parse(readFileSync(join(root, 'data', file), 'utf8')).length >= 180));
   ok('首頁共用腳本與四科分頁容器接線完整', /id="tabs"/.test(html) && /js\/app\.js/.test(html));
   ok('首次進站引導卡與更多功能摺疊區存在', /id="new-player-guide"/.test(html) && /id="more-tools"/.test(html));
+  ok('viewport 允許使用者縮放', /width=device-width, initial-scale=1/.test(html) && !/maximum-scale/.test(html));
+  ok('收尾卡保留弱點、換科與再練 CTA', /data-rest-action="weak"/.test(uiLogic) && /data-rest-action="subject"/.test(uiLogic) && /data-rest-action="restart"/.test(uiLogic));
   ok('精通到期把關與每日任務模組已接線', /bumpBoxIfDue/.test(app) && /js\/daily-quests\.js/.test(html));
   ok('PvE 血條、跳字與戰功結算條存在', /bat-hp-fill/.test(css) && /bat-damage-pop/.test(css) && /bat-record-summary/.test(battle));
   ok('守護者與稚靈圖片槽含 fallback', /assets\/battle\/foe-/.test(battle) && /assets\/fusion\/cub-/.test(app) && /onerror="this\.replaceWith/.test(`${battle}\n${app}`));
@@ -28,6 +31,12 @@ function runRestrictedStaticSmoke() {
   ok('訪客徽章與 GoatCounter 已接線', /visitor-badge\.laobi\.icu\/badge\?page_id=hk6429\.science-hero/.test(html) && /hk6429\.goatcounter\.com\/count/.test(html) && /gc\.zgo\.at\/count\.js/.test(html));
   ok('融合坊六格與基地成就牆入口仍在', /fusion-pair-card/.test(app) && /id="base-wall-btn"/.test(html));
   ok('390px 響應式規則仍存在', /@media[^\{]*\(max-width:\s*420px\)/s.test(css));
+  ok('彈窗共用 sh base 與舊 class 相容選擇器已接線', /class="sh-overlay info-overlay"/.test(html) && /\.sh-overlay,\s*\.info-overlay/.test(css));
+  ok('44px 關閉鍵與觸控間距已接線', /\.info-head button[^}]*min-width:\s*44px[^}]*min-height:\s*44px/s.test(css) && /\.io-btn\s*\{[^}]*padding:\s*11px 16px/s.test(css));
+  ok('375px 連線碼使用 clamp 並允許斷行', /\.rt-code[^}]*clamp\(1\.8rem, 10vw, 3rem\)[^}]*word-break:\s*break-all/s.test(css));
+  ok('全域焦點、分頁 aria-selected 與減少動畫已接線', /:focus-visible/.test(css) && /role="tablist"/.test(html) && /aria-selected/.test(app) && /prefers-reduced-motion/.test(css));
+  ok('三個對話框共用焦點管理並支援 Esc', /createDialogController/.test(app) && /familySummaryDialog = createDialogController/.test(app) && /parentGuideDialog = createDialogController/.test(app) && /fusionDialog = createDialogController/.test(app) && /event\.key === 'Escape'/.test(app));
+  ok('答題結果容器使用 polite status 報讀', /setAttribute\('role', 'status'\)/.test(app) && /setAttribute\('aria-live', 'polite'\)/.test(app));
   console.log(`SMOKE STATIC PASS ${checks.length}/${checks.length}（瀏覽器受執行環境限制）`);
 }
 
@@ -75,12 +84,16 @@ try {
   await page.click('#parent-guide-btn');
   await page.waitForSelector('#parent-guide-overlay:not([hidden])');
   if (!(await page.locator('#parent-guide-overlay').textContent()).includes('家長可以怎麼陪')) fails.push('家長說明內容未顯示');
-  await page.click('#parent-guide-close');
-  console.log('✅ 首頁家長說明入口可開啟、內容可閱讀');
+  if (!(await page.locator('#parent-guide-overlay [role="dialog"]').evaluate((node) => node === document.activeElement))) fails.push('家長說明開啟後焦點未移入 dialog');
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#parent-guide-overlay', { state: 'hidden' });
+  console.log('✅ 首頁家長說明入口可開啟、移入焦點並以 Esc 關閉');
 
-  // 生物分頁預設是 active，直接檢查內容有渲染
+  // 第一分頁「國小自然」預設 active，且用 aria-selected 表達狀態。
   await page.waitForSelector('.mode-switch button');
-  console.log('✅ 生物分頁預設載入（含模式切換列）');
+  const activeTab = page.locator('#tabs button[aria-selected="true"]');
+  if (await activeTab.getAttribute('data-key') !== 'nature') fails.push('預設科目不是國小自然');
+  console.log('✅ 國小自然預設載入，active 分頁有 aria-selected=true');
 
   // 四科都應掛上共用學習模組，切換後能看到各自詞條。
   const firstTerms = new Set();
@@ -93,6 +106,19 @@ try {
   }
   if (firstTerms.size < 4) fails.push('四科分頁疑似共用了同一份資料');
   console.log('✅ 四科分頁均載入各自資料與學習模組');
+
+  // D7：完整跑完當前閃卡回合，按「今天先這樣」後仍有可行動 CTA，且可再練。
+  for (let guard = 0; guard < 30 && !(await page.locator('#flash-stop').count()); guard++) {
+    await page.click('#flash-reveal');
+    await page.click('#flash-correct');
+  }
+  await page.waitForSelector('#flash-stop');
+  await page.click('#flash-stop');
+  const restCtas = await page.locator('[data-rest-action]').count();
+  if (restCtas < 1) fails.push('閃卡「今天先這樣」後沒有可點 CTA');
+  await page.click('[data-rest-action="restart"]');
+  await page.waitForSelector('#flash-reveal');
+  console.log('✅ 閃卡收尾卡有 CTA，「再練一輪」可回到出題');
 
   // 1. 閃卡翻 5 張
   for (let i = 0; i < 5; i++) {
@@ -157,6 +183,10 @@ try {
     .then(() => true)
     .catch(() => false);
   if (!offlineShown) fails.push('連線對戰離線時未顯示降級卡');
+  await page.setViewportSize({ width: 375, height: 844 });
+  const rtOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  if (rtOverflow) fails.push('375px 連線對戰頁出現水平滾動');
+  await page.setViewportSize({ width: 390, height: 844 });
   console.log('✅ 連線對戰入口存在、離線降級正常');
 
   // 4. 弱點清單（此時應該已經有作答紀錄）
@@ -166,20 +196,23 @@ try {
   await page.waitForSelector('#family-summary-overlay:not([hidden])');
   const familySummary = await page.locator('#family-summary-text').inputValue();
   if (!familySummary.includes('各科學習概況') || !familySummary.includes('目前最需要加強的詞')) fails.push('老師家長摘要內容不完整');
-  await page.click('#family-summary-done');
-  console.log('✅ 弱點清單頁可開啟、老師家長摘要可產生');
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#family-summary-overlay', { state: 'hidden' });
+  console.log('✅ 弱點清單頁可開啟、老師家長摘要可產生並以 Esc 關閉');
 
-  // 4b. 融合坊：開啟→看到晶能餘額與六格配對牆→關閉
+  // 4b. 融合坊：先展開「更多功能」摺疊（D6 起預設收合、D8 起融合坊留在其中）→開啟→看到晶能餘額與六格配對牆→關閉
+  await page.locator('#more-tools > summary').click();
+  await page.waitForSelector('#fusion-lab-btn', { state: 'visible' });
   await page.click('#fusion-lab-btn');
   await page.waitForSelector('#fusion-overlay:not([hidden])');
   const crystalTxt = await page.locator('#fusion-crystal-balance').textContent();
   if (crystalTxt == null) fails.push('融合坊未顯示晶能餘額');
   const pairCards = await page.locator('.fusion-pair-card').count();
   if (pairCards !== 6) fails.push(`融合坊配對牆應有 6 格，實得 ${pairCards}`);
-  await page.click('#fusion-close');
+  await page.keyboard.press('Escape');
   // 關閉後 overlay 帶 hidden 屬性＝不可見，需用 state:'hidden' 等待（預設 state 等「可見」會逾時）。
   await page.waitForSelector('#fusion-overlay', { state: 'hidden' });
-  console.log('✅ 融合坊可開啟、六格配對牆渲染、可關閉');
+  console.log('✅ 融合坊可開啟、六格配對牆渲染、可以 Esc 關閉');
 
   // 5. 重新整理後進度還在（localStorage 應保留 totalReviews > 0）
   const before = await page.evaluate(() => JSON.parse(localStorage.getItem('science-hero:v1')).stats.totalReviews);
@@ -225,8 +258,12 @@ try {
   await page.click('#btn-base');
   await page.waitForSelector('#base-scene .sb-decor');
   const styleLeft = await page.locator(`#base-scene .sb-decor[data-decor="${decorId}"]`).evaluate((el) => el.style.left);
-  const expected = await page.evaluate((id) => `${JSON.parse(localStorage.getItem('sci_base')).placements[id].x}%`, decorId);
-  if (styleLeft !== expected) fails.push(`重整後裝飾座標未還原：style=${styleLeft} 存檔=${expected}`);
+  const expectedX = await page.evaluate((id) => JSON.parse(localStorage.getItem('sci_base')).placements[id].x, decorId);
+  // 瀏覽器讀 el.style.left 會把極小尾數序列化（存檔 70.0000017% → getter 回 70%），故以數值容差比對還原位置而非嚴格字串。
+  const styleX = parseFloat(styleLeft);
+  if (!Number.isFinite(styleX) || Math.abs(styleX - expectedX) > 0.01) {
+    fails.push(`重整後裝飾座標未還原：style=${styleLeft} 存檔=${expectedX}%`);
+  }
   console.log('✅ 重整後基地擺設持久化還原');
 } catch (e) {
   fails.push('flow error: ' + e.message);

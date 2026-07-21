@@ -58,12 +58,15 @@ const SciApp = (() => {
   const DAILY_GOAL = 10;
 
   let state = null;
-  let activeSubject = 'biology';
+  let activeSubject = 'nature';
   const subjectTerms = new Map();
   let terms = [];
   let mode = 'flashcard'; // 'flashcard' | 'quiz' | 'battle' | 'rtbattle' | 'weak'
   let unitFilter = null; // 目前選定的單元（null = 全部）
   let gradeFilter = null; // 目前選定的年級（null = 全部）
+  let familySummaryDialog = null;
+  let parentGuideDialog = null;
+  let fusionDialog = null;
 
   // ---- 閃卡狀態（依科目分開保留，切分頁不會弄丟進度）----
   const flashState = new Map();
@@ -83,6 +86,10 @@ const SciApp = (() => {
 
   function el(sel) { return document.querySelector(sel); }
 
+  function themeColor(token, fallback) {
+    return getComputedStyle(document.documentElement).getPropertyValue(token).trim() || fallback;
+  }
+
   // 換題/翻卡時常見的手機瀏覽器怪癖：舊按鈕被拿掉時，focus 掉回 body 會把畫面拉回最頂端。
   // 換內容前先讓目前的按鈕失焦、記住捲動位置，換完再退回去，避免每答一題就跳回頁首。
   function preserveScroll(renderFn) {
@@ -90,6 +97,55 @@ const SciApp = (() => {
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     renderFn();
     requestAnimationFrame(() => window.scrollTo(0, y));
+  }
+
+  function createDialogController(overlay) {
+    if (!overlay) return null;
+    const panel = overlay.querySelector('[role="dialog"]');
+    let previousFocus = null;
+    const focusableSelector = 'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const close = () => {
+      if (overlay.hidden) return;
+      overlay.hidden = true;
+      document.removeEventListener('keydown', onKeydown);
+      if (previousFocus?.focus) previousFocus.focus();
+      previousFocus = null;
+    };
+
+    const onKeydown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== 'Tab' || !panel) return;
+      const focusable = [...panel.querySelectorAll(focusableSelector)]
+        .filter((node) => !node.hidden && node.getAttribute('aria-hidden') !== 'true');
+      if (!focusable.length) {
+        event.preventDefault();
+        panel.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const open = () => {
+      previousFocus = document.activeElement;
+      overlay.hidden = false;
+      document.addEventListener('keydown', onKeydown);
+      panel?.focus();
+    };
+
+    return { open, close };
   }
 
   let audioCtx = null;
@@ -147,6 +203,8 @@ const SciApp = (() => {
       const btn = document.createElement('button');
       btn.textContent = s.label;
       btn.dataset.key = s.key;
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', String(s.key === activeSubject));
       if (s.key === activeSubject) btn.classList.add('active');
       btn.addEventListener('click', () => switchSubject(s.key));
       nav.appendChild(btn);
@@ -189,7 +247,11 @@ const SciApp = (() => {
       quizCorrect = 0;
     }
 
-    document.querySelectorAll('#tabs button').forEach((b) => b.classList.toggle('active', b.dataset.key === key));
+    document.querySelectorAll('#tabs button').forEach((b) => {
+      const isActive = b.dataset.key === key;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', String(isActive));
+    });
     document.querySelectorAll('.panel').forEach((p) => {
       const isActive = p.dataset.key === key;
       p.classList.toggle('active', isActive);
@@ -419,6 +481,19 @@ const SciApp = (() => {
     flashRevealed = false;
   }
 
+  function wireRestCard(body, restartRound) {
+    body.querySelector('[data-rest-action="weak"]')?.addEventListener('click', () => {
+      mode = 'weak';
+      renderLearningBody(body.closest('.panel'));
+    });
+    body.querySelector('[data-rest-action="subject"]')?.addEventListener('click', () => {
+      const currentIndex = SUBJECTS.findIndex((subject) => subject.key === activeSubject);
+      const nextSubject = SUBJECTS[(currentIndex + 1) % SUBJECTS.length];
+      switchSubject(nextSubject.key);
+    });
+    body.querySelector('[data-rest-action="restart"]')?.addEventListener('click', restartRound);
+  }
+
   function renderFlashcard(body) {
     if (flashQueue.length === 0) startFlashRound();
 
@@ -441,7 +516,11 @@ const SciApp = (() => {
         renderFlashcard(body);
       });
       body.querySelector('#flash-stop').addEventListener('click', () => {
-        body.innerHTML = `<div class="card"><p>今天練到這裡很棒了，休息一下吧！想再練的時候隨時回來。</p></div>`;
+        body.innerHTML = SciUiLogic.restCardHtml();
+        wireRestCard(body, () => {
+          startFlashRound();
+          renderFlashcard(body);
+        });
       });
       return;
     }
@@ -546,7 +625,11 @@ const SciApp = (() => {
         renderQuiz(body);
       });
       body.querySelector('#quiz-stop').addEventListener('click', () => {
-        body.innerHTML = `<div class="card"><p>今天練到這裡很棒了，休息一下吧！想再練的時候隨時回來。</p></div>`;
+        body.innerHTML = SciUiLogic.restCardHtml();
+        wireRestCard(body, () => {
+          startQuizRound();
+          renderQuiz(body);
+        });
       });
       return;
     }
@@ -590,6 +673,8 @@ const SciApp = (() => {
 
         const resultBanner = document.createElement('div');
         resultBanner.className = `quiz-result-banner ${correct ? 'is-correct' : 'is-wrong'}`;
+        resultBanner.setAttribute('role', 'status');
+        resultBanner.setAttribute('aria-live', 'polite');
         resultBanner.textContent = correct ? '✓ 答對了！' : '✗ 答錯了';
         cardEl.insertBefore(resultBanner, cardEl.firstChild);
 
@@ -665,7 +750,8 @@ const SciApp = (() => {
       SciFusionStore.accuracyBySubject,
     );
     el('#family-summary-status').textContent = '';
-    overlay.hidden = false;
+    if (familySummaryDialog) familySummaryDialog.open();
+    else overlay.hidden = false;
   }
 
   function wireWeakActions(body) {
@@ -808,7 +894,7 @@ const SciApp = (() => {
     const moreTools = el('#more-tools');
     const isNew = state.stats.totalReviews === 0;
     if (guide) guide.hidden = !isNew;
-    if (moreTools) moreTools.open = !isNew;
+    if (moreTools) moreTools.open = SciUiLogic.moreToolsDefaultOpen({ isNew });
     guide?.querySelectorAll('[data-onboard]').forEach((button) => {
       button.addEventListener('click', () => {
         mode = button.dataset.onboard;
@@ -830,7 +916,7 @@ const SciApp = (() => {
     grad.addColorStop(1, '#ffffff');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#2e9e5b';
+    ctx.strokeStyle = themeColor('--green', '#1f9d55');
     ctx.lineWidth = 8;
     ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
 
@@ -844,7 +930,7 @@ const SciApp = (() => {
     const streak = (state.stats && state.stats.streakDays) || 0;
 
     ctx.font = '26px sans-serif';
-    ctx.fillStyle = '#2e9e5b';
+    ctx.fillStyle = themeColor('--green', '#1f9d55');
     ctx.fillText(rankLabel(mastered), canvas.width / 2, 160);
 
     ctx.font = '18px sans-serif';
@@ -864,7 +950,7 @@ const SciApp = (() => {
       ctx.fillText(label, 80, y);
       ctx.textAlign = 'right';
       ctx.font = 'bold 34px sans-serif';
-      ctx.fillStyle = '#2e9e5b';
+      ctx.fillStyle = themeColor('--green', '#1f9d55');
       ctx.fillText(value, canvas.width - 80, y);
       y += 90;
     });
@@ -900,7 +986,7 @@ const SciApp = (() => {
     gradient.addColorStop(1, '#ffffff');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#2e9e5b';
+    ctx.strokeStyle = themeColor('--green', '#1f9d55');
     ctx.lineWidth = 18;
     ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
 
@@ -918,7 +1004,7 @@ const SciApp = (() => {
       ctx.fillText(`稚靈：${data.name}`, canvas.width / 2, 585);
     }
 
-    ctx.fillStyle = '#2e9e5b';
+    ctx.fillStyle = themeColor('--green', '#1f9d55');
     ctx.font = 'bold 38px sans-serif';
     ctx.fillText(`${data.parents[0].label} × ${data.parents[1].label}`, canvas.width / 2, 670);
     ctx.fillStyle = '#33473a';
@@ -1165,13 +1251,15 @@ const SciApp = (() => {
     const overlay = el('#fusion-overlay');
     if (!overlay) return;
     fusionNotice = null;
-    overlay.hidden = false;
     renderFusionLab();
+    if (fusionDialog) fusionDialog.open();
+    else overlay.hidden = false;
   }
 
   function closeFusionLab() {
     const overlay = el('#fusion-overlay');
-    if (overlay) overlay.hidden = true;
+    if (fusionDialog) fusionDialog.close();
+    else if (overlay) overlay.hidden = true;
   }
 
   // ================= 進度匯出／匯入 =================
@@ -1183,9 +1271,12 @@ const SciApp = (() => {
     const fusionBtn = el('#fusion-lab-btn');
     const fusionClose = el('#fusion-close');
     const familyOverlay = el('#family-summary-overlay');
-    const closeFamilySummary = () => { if (familyOverlay) familyOverlay.hidden = true; };
     const parentGuideOverlay = el('#parent-guide-overlay');
-    const closeParentGuide = () => { if (parentGuideOverlay) parentGuideOverlay.hidden = true; };
+    familySummaryDialog = createDialogController(familyOverlay);
+    parentGuideDialog = createDialogController(parentGuideOverlay);
+    fusionDialog = createDialogController(el('#fusion-overlay'));
+    const closeFamilySummary = () => familySummaryDialog?.close();
+    const closeParentGuide = () => parentGuideDialog?.close();
     if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
     if (fusionBtn) fusionBtn.addEventListener('click', openFusionLab);
     if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);
@@ -1207,7 +1298,7 @@ const SciApp = (() => {
         if (status) status.textContent = '無法自動複製，請長按文字後手動複製。';
       }
     });
-    el('#parent-guide-btn')?.addEventListener('click', () => { if (parentGuideOverlay) parentGuideOverlay.hidden = false; });
+    el('#parent-guide-btn')?.addEventListener('click', () => parentGuideDialog?.open());
     el('#parent-guide-close')?.addEventListener('click', closeParentGuide);
     if (!exportBtn || !importBtn || !importFile) return;
 
@@ -1262,7 +1353,7 @@ const SciApp = (() => {
     // 支援老師分享連結指定範圍：?subject=biology&unit=cell
     const params = new URLSearchParams(location.search);
     const paramSubject = params.get('subject');
-    if (paramSubject && subjectTerms.has(paramSubject)) activeSubject = paramSubject;
+    activeSubject = SciUiLogic.resolveInitialSubject(paramSubject, [...subjectTerms.keys()]);
     terms = subjectTerms.get(activeSubject);
 
     const paramUnit = params.get('unit');

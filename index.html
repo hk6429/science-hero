@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>科學英雄｜國中國小自然科練功站</title>
 <meta name="description" content="國小自然、國中生物、理化、地科背誦知識點練功站——閃卡、自測、弱點聚合。" />
 <link rel="stylesheet" href="css/style.css" />
@@ -36,13 +36,16 @@
 <p class="trust-line">本站無帳號系統、不上傳任何資料，練習進度僅存於本裝置瀏覽器。</p>
 <p class="trust-line"><button id="parent-guide-btn" class="text-link-btn" type="button">這站在教什麼、家長怎麼陪</button></p>
 
-<nav class="tabs" id="tabs"></nav>
+<nav class="tabs" id="tabs" role="tablist" aria-label="科目分頁"></nav>
+
+<div class="primary-tools">
+  <button id="btn-base" class="io-btn io-btn--base" type="button">🏕️ 我的科學基地</button>
+</div>
 
 <main>
   <div id="panels"></div>
-  <details id="more-tools" class="more-tools"><summary>更多功能</summary><div class="io-row">
+  <details id="more-tools" class="more-tools"><summary>基地・市集・融合坊</summary><div class="io-row">
     <button id="btn-market" class="io-btn">🛒 科學市集（每週五開市）</button>
-    <button id="btn-base" class="io-btn io-btn--base">🏕️ 我的科學基地</button>
     <button id="fusion-lab-btn" class="io-btn">🧬 精靈融合坊</button>
     <button id="share-card-btn" class="io-btn">🏆 產生戰績卡片</button>
     <button id="export-btn" class="io-btn">匯出進度</button>
@@ -52,9 +55,9 @@
   <p class="io-hint">換手機、換電腦想接著練？先「匯出進度」存一個檔案，再到新裝置上「匯入進度」讀回來即可。</p>
 
   <!-- 老師／家長學習摘要 -->
-  <div id="family-summary-overlay" class="info-overlay" hidden>
-    <section class="info-panel" role="dialog" aria-modal="true" aria-labelledby="family-summary-title">
-      <div class="info-head">
+  <div id="family-summary-overlay" class="sh-overlay info-overlay" hidden>
+    <section class="sh-panel info-panel" role="dialog" aria-modal="true" aria-labelledby="family-summary-title" tabindex="-1">
+      <div class="sh-head info-head">
         <h2 id="family-summary-title">📋 給老師／家長看的學習摘要</h2>
         <button id="family-summary-close" type="button" aria-label="關閉學習摘要">✕</button>
       </div>
@@ -69,9 +72,9 @@
   </div>
 
   <!-- 家長說明 -->
-  <div id="parent-guide-overlay" class="info-overlay" hidden>
-    <article class="info-panel parent-guide" role="dialog" aria-modal="true" aria-labelledby="parent-guide-title">
-      <div class="info-head">
+  <div id="parent-guide-overlay" class="sh-overlay info-overlay" hidden>
+    <article class="sh-panel info-panel parent-guide" role="dialog" aria-modal="true" aria-labelledby="parent-guide-title" tabindex="-1">
+      <div class="sh-head info-head">
         <h2 id="parent-guide-title">這站在教什麼、家長怎麼陪</h2>
         <button id="parent-guide-close" type="button" aria-label="關閉家長說明">✕</button>
       </div>
@@ -89,9 +92,9 @@
   </div>
 
   <!-- 精靈融合坊 -->
-  <div id="fusion-overlay" class="fusion-overlay" hidden>
-    <div class="fusion-panel" role="dialog" aria-modal="true" aria-label="精靈融合坊">
-      <div class="fusion-head">
+  <div id="fusion-overlay" class="sh-overlay fusion-overlay" hidden>
+    <div class="sh-panel fusion-panel" role="dialog" aria-modal="true" aria-label="精靈融合坊" tabindex="-1">
+      <div class="sh-head fusion-head">
         <h2>🧬 精靈融合坊</h2>
         <span class="fusion-crystals">晶能 <b id="fusion-crystal-balance">0</b></span>
         <button id="fusion-close" type="button" aria-label="關閉融合坊">✕</button>
@@ -101,9 +104,9 @@
   </div>
 
   <!-- 科學基地 -->
-  <div id="base-overlay" class="base-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="base-title">
-    <div class="base-panel">
-      <div class="base-topbar">
+  <div id="base-overlay" class="sh-overlay base-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="base-title">
+    <div class="sh-panel base-panel">
+      <div class="sh-head base-topbar">
         <h2 id="base-title">🏕️ 科學基地</h2>
         <button id="base-wall-btn" class="base-tool-btn" type="button">成就牆</button>
         <button id="base-reset" class="base-tool-btn" type="button">還原擺設</button>
@@ -115,9 +118,9 @@
   </div>
 
   <!-- 科學市集 -->
-  <div id="mkt-overlay" class="mkt-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="mkt-title">
-    <div class="mkt-panel">
-      <div class="mkt-head">
+  <div id="mkt-overlay" class="sh-overlay mkt-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="mkt-title">
+    <div class="sh-panel mkt-panel">
+      <div class="sh-head mkt-head">
         <h2 id="mkt-title">🛒 科學市集</h2>
         <button id="mkt-close" type="button" aria-label="關閉科學市集">✕</button>
       </div>
@@ -191,6 +194,7 @@
 <script src="js/base-ui.js"></script>
 <script src="js/market-store.js"></script>
 <script src="js/market-ui.js"></script>
+<script src="js/ui-logic.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

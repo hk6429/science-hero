@@ -325,14 +325,15 @@ test('PvE 節奏縮為 300/400/500ms 且血條與傷害跳字動畫就位', () =
   assert.match(css, /@keyframes\s+bat-damage-pop/);
 });
 
-test('首次進站有單線新手引導，六個工具摺進更多且老手可展開', () => {
+test('首次進站有單線新手引導，進階工具預設收合且基地常駐', () => {
   const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   const app = readFileSync(path.join(ROOT, 'js', 'app.js'), 'utf8');
   assert.match(html, /id="new-player-guide"/);
   assert.match(html, /今天從這裡開始/);
   assert.match(html, /id="more-tools"/);
+  assert.ok(html.indexOf('id="btn-base"') < html.indexOf('id="more-tools"'), '科學基地應在摺疊區之外');
   assert.match(app, /state\.stats\.totalReviews === 0/);
-  assert.match(app, /moreTools\.open = !isNew/);
+  assert.match(app, /SciUiLogic\.moreToolsDefaultOpen/);
 });
 
 test('SciBattle.subjectOfId 依 id 前綴分流四科', () => {
