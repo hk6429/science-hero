@@ -12,7 +12,7 @@
   --border: #dcecE2;
 
   /* 四科主題色 */
-  --sci-nature: #2f9e44;
+  --sci-nature: #527e0e;
   --sci-biology: #0d9488;
   --sci-chemphys: #e8590c;
   --sci-earth: #4263eb;
@@ -41,31 +41,43 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 
 .hero-tagline { margin-top: 4px !important; font-size: 0.74rem !important; opacity: 0.75 !important; }
 
-.hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
+.hero-stats { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin-top: 10px; }
 
 .hero-stat {
-  font-size: 0.78rem;
-  font-weight: 700;
-  background: rgba(255,255,255,0.15);
-  padding: 5px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  padding: 4px 9px;
   border-radius: 999px;
+  opacity: 0.82;
 }
 
-.hero-stat strong { font-size: 0.88rem; }
+.hero-stat strong { font-size: 0.78rem; }
+
+.hero-stat--primary {
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.32);
+  padding: 6px 14px;
+  opacity: 1;
+}
+
+.hero-stat--primary strong { font-size: 1.15rem; }
 
 .hero-rank { background: rgba(255, 212, 59, 0.25); color: #ffd43b; }
 
-.daily-goal { max-width: 320px; margin: 10px auto 0; }
+.daily-goal { max-width: 340px; margin: 12px auto 0; }
 
 .daily-goal-label {
-  font-size: 0.74rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   opacity: 0.9;
   margin-bottom: 4px;
 }
 
 .daily-goal-bar {
-  height: 6px;
+  height: 8px;
   background: rgba(255,255,255,0.2);
   border-radius: 3px;
   overflow: hidden;
@@ -103,6 +115,11 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 }
 
 .io-btn:hover { border-color: var(--green); color: var(--green-dark); }
+
+/* 介面圖示：專案美術風格真圖，缺圖 onerror 換回 emoji（.io-ico-emoji 維持原字級） */
+.io-ico { width: 1.9em; height: 1.9em; object-fit: contain; vertical-align: middle; margin-right: 0.15em; }
+.io-ico-emoji { vertical-align: middle; }
+header.site-header h1 .brand-ico { width: 1.4em; height: 1.4em; object-fit: contain; vertical-align: -0.3em; margin-right: 0.1em; }
 
 .io-hint {
   text-align: center;
@@ -852,7 +869,7 @@ body.base-open { overflow: hidden; }
 .sb-emoji { display: grid; place-items: center; width: 100%; height: 100%; font-size: clamp(1.5rem, 6vw, 3.6rem); }
 .sb-balance { position: absolute; z-index: 6; top: 2%; right: 2%; border-radius: 999px; background: rgba(255,255,255,.92); padding: .3em .65em; font-weight: 700; }
 .sb-motto { position: absolute; z-index: 5; top: 2%; left: 50%; transform: translateX(-50%); max-width: 58%; background: rgba(255,255,255,.86); border-radius: 999px; padding: .25em .65em; font-size: .72rem; text-align: center; }
-.sb-plaque, .sb-main-rank, .sb-pav-meta { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; border-radius: 5px; background: rgba(255,255,255,.9); color: var(--green-dark); font-size: clamp(.6rem, 1.7vw, .72rem); padding: .12em .35em; }
+.sb-plaque, .sb-main-rank, .sb-pav-meta { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; border-radius: 5px; background: rgba(255,255,255,.9); color: var(--green-dark); font-size: clamp(.72rem, 1.7vw, .78rem); padding: .12em .35em; }
 .sb-plaque { bottom: 18%; font-weight: 700; }
 .sb-main-rank, .sb-pav-meta { bottom: 4%; }
 .sb-plaque--small { bottom: 18%; }

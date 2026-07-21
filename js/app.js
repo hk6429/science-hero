@@ -274,7 +274,6 @@ const SciApp = (() => {
       ['flashcard', '閃卡複習'],
       ['quiz', '自我測驗'],
       ['battle', '答題對戰'],
-      ['rtbattle', '連線對戰'],
       ['weak', '弱點清單'],
     ].forEach(([key, label]) => {
       const btn = document.createElement('button');
@@ -1269,6 +1268,7 @@ const SciApp = (() => {
     const importFile = el('#import-file');
     const shareBtn = el('#share-card-btn');
     const fusionBtn = el('#fusion-lab-btn');
+    const rtBattleBtn = el('#rtbattle-tool-btn');
     const fusionClose = el('#fusion-close');
     const familyOverlay = el('#family-summary-overlay');
     const parentGuideOverlay = el('#parent-guide-overlay');
@@ -1279,6 +1279,11 @@ const SciApp = (() => {
     const closeParentGuide = () => parentGuideDialog?.close();
     if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
     if (fusionBtn) fusionBtn.addEventListener('click', openFusionLab);
+    if (rtBattleBtn) rtBattleBtn.addEventListener('click', () => {
+      mode = 'rtbattle';
+      renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
+      el('#tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
     if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);
     el('#family-summary-close')?.addEventListener('click', closeFamilySummary);
     el('#family-summary-done')?.addEventListener('click', closeFamilySummary);

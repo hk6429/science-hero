@@ -10,12 +10,12 @@
 </head>
 <body>
 <header class="site-header">
-  <h1>🧪 科學英雄</h1>
+  <h1><img class="brand-ico" src="assets/ui/ui-brand.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧪',className:'io-ico-emoji'}))"> 科學英雄</h1>
   <p>國小自然・國中生物・國中理化・國中地科 知識點練功站</p>
   <p class="hero-tagline">每精通一個知識點，就離「科學英雄」的稱號更近一步</p>
   <div class="hero-stats">
     <span class="hero-stat">🔥 連續 <strong id="streak-days">0</strong> 天</span>
-    <span class="hero-stat">⭐ 戰功 <strong id="mastered-count">0</strong> 個</span>
+    <span class="hero-stat hero-stat--primary">⭐ 戰功 <strong id="mastered-count">0</strong> 個</span>
     <span class="hero-stat hero-rank" id="hero-rank">見習生</span>
   </div>
   <div class="daily-goal" id="daily-goal">
@@ -39,15 +39,16 @@
 <nav class="tabs" id="tabs" role="tablist" aria-label="科目分頁"></nav>
 
 <div class="primary-tools">
-  <button id="btn-base" class="io-btn io-btn--base" type="button">🏕️ 我的科學基地</button>
+  <button id="btn-base" class="io-btn io-btn--base" type="button"><img class="io-ico" src="assets/ui/ui-base.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🏕️',className:'io-ico-emoji'}))"> 我的科學基地</button>
 </div>
 
 <main>
   <div id="panels"></div>
-  <details id="more-tools" class="more-tools"><summary>基地・市集・融合坊</summary><div class="io-row">
-    <button id="btn-market" class="io-btn">🛒 科學市集（每週五開市）</button>
-    <button id="fusion-lab-btn" class="io-btn">🧬 精靈融合坊</button>
-    <button id="share-card-btn" class="io-btn">🏆 產生戰績卡片</button>
+  <details id="more-tools" class="more-tools"><summary>連線・基地・市集・融合坊</summary><div class="io-row">
+    <button id="rtbattle-tool-btn" class="io-btn">🌐 連線對戰</button>
+    <button id="btn-market" class="io-btn"><img class="io-ico" src="assets/ui/ui-market.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🛒',className:'io-ico-emoji'}))"> 科學市集（每週五開市）</button>
+    <button id="fusion-lab-btn" class="io-btn"><img class="io-ico" src="assets/ui/ui-fusion.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧬',className:'io-ico-emoji'}))"> 精靈融合坊</button>
+    <button id="share-card-btn" class="io-btn"><img class="io-ico" src="assets/ui/ui-records.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🏆',className:'io-ico-emoji'}))"> 產生戰績卡片</button>
     <button id="export-btn" class="io-btn">匯出進度</button>
     <button id="import-btn" class="io-btn">匯入進度</button>
     <input type="file" id="import-file" accept="application/json" hidden />

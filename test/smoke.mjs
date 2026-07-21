@@ -20,6 +20,7 @@ function runRestrictedStaticSmoke() {
   ok('四科資料可解析且均有至少 180 筆', subjects.every((file) => JSON.parse(readFileSync(join(root, 'data', file), 'utf8')).length >= 180));
   ok('首頁共用腳本與四科分頁容器接線完整', /id="tabs"/.test(html) && /js\/app\.js/.test(html));
   ok('首次進站引導卡與更多功能摺疊區存在', /id="new-player-guide"/.test(html) && /id="more-tools"/.test(html));
+  ok('連線對戰入口位於更多功能摺疊區', /id="more-tools"[\s\S]*id="rtbattle-tool-btn"/.test(html));
   ok('viewport 允許使用者縮放', /width=device-width, initial-scale=1/.test(html) && !/maximum-scale/.test(html));
   ok('收尾卡保留弱點、換科與再練 CTA', /data-rest-action="weak"/.test(uiLogic) && /data-rest-action="subject"/.test(uiLogic) && /data-rest-action="restart"/.test(uiLogic));
   ok('精通到期把關與每日任務模組已接線', /bumpBoxIfDue/.test(app) && /js\/daily-quests\.js/.test(html));
@@ -30,6 +31,7 @@ function runRestrictedStaticSmoke() {
   ok('家長說明入口與教師口吻內容已接線', /id="parent-guide-btn"/.test(html) && /id="parent-guide-overlay"/.test(html) && /精通不是點得多/.test(html));
   ok('訪客徽章與 GoatCounter 已接線', /visitor-badge\.laobi\.icu\/badge\?page_id=hk6429\.science-hero/.test(html) && /hk6429\.goatcounter\.com\/count/.test(html) && /gc\.zgo\.at\/count\.js/.test(html));
   ok('融合坊六格與基地成就牆入口仍在', /fusion-pair-card/.test(app) && /id="base-wall-btn"/.test(html));
+  ok('介面圖示接專案美術真圖且含 emoji fallback', /class="io-ico" src="assets\/ui\/ui-/.test(html) && /class="brand-ico" src="assets\/ui\/ui-brand/.test(html) && /io-ico-emoji/.test(html));
   ok('390px 響應式規則仍存在', /@media[^\{]*\(max-width:\s*420px\)/s.test(css));
   ok('彈窗共用 sh base 與舊 class 相容選擇器已接線', /class="sh-overlay info-overlay"/.test(html) && /\.sh-overlay,\s*\.info-overlay/.test(css));
   ok('44px 關閉鍵與觸控間距已接線', /\.info-head button[^}]*min-width:\s*44px[^}]*min-height:\s*44px/s.test(css) && /\.io-btn\s*\{[^}]*padding:\s*11px 16px/s.test(css));
@@ -66,7 +68,7 @@ page.on('pageerror', (e) => fails.push('pageerror: ' + e.message));
 // /api/ 一律 404 正是觸發「離線降級卡」的機制。其餘 404（真缺檔）照樣算失敗。
 page.on('response', (r) => {
   const u = r.url();
-  if (r.status() === 404 && !u.includes('/assets/base/') && !u.includes('/assets/battle/') && !u.includes('/assets/fusion/') && !u.includes('/api/')) fails.push('unexpected 404: ' + u);
+  if (r.status() === 404 && !u.includes('/assets/base/') && !u.includes('/assets/battle/') && !u.includes('/assets/fusion/') && !u.includes('/assets/ui/') && !u.includes('/api/')) fails.push('unexpected 404: ' + u);
 });
 page.on('console', (msg) => {
   // resource load 失敗（含 assets/base 佔位圖 404）改由上面的 response handler 依 URL 判斷，這裡不重複計。
@@ -174,7 +176,8 @@ try {
   console.log('✅ PvP 雙人對戰可開打、答題後血量變化且正確換手');
 
   // 3c. 連線對戰：入口存在；靜態 server 無 Functions，應顯示離線降級卡而非白畫面。
-  await page.click('.mode-switch button[data-mode="rtbattle"]');
+  if (!(await page.locator('#more-tools').evaluate((node) => node.open))) await page.locator('#more-tools > summary').click();
+  await page.click('#more-tools #rtbattle-tool-btn');
   await page.waitForSelector('#rt-create');
   await page.click('#rt-create');
   // 開房走 fetch → 靜態 server 404 → offline，降級卡非同步渲染，等文字出現再判定（避免讀太早）。
@@ -201,7 +204,7 @@ try {
   console.log('✅ 弱點清單頁可開啟、老師家長摘要可產生並以 Esc 關閉');
 
   // 4b. 融合坊：先展開「更多功能」摺疊（D6 起預設收合、D8 起融合坊留在其中）→開啟→看到晶能餘額與六格配對牆→關閉
-  await page.locator('#more-tools > summary').click();
+  if (!(await page.locator('#more-tools').evaluate((node) => node.open))) await page.locator('#more-tools > summary').click();
   await page.waitForSelector('#fusion-lab-btn', { state: 'visible' });
   await page.click('#fusion-lab-btn');
   await page.waitForSelector('#fusion-overlay:not([hidden])');
