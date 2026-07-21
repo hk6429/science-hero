@@ -64,4 +64,5 @@ SHAPI（鏡像站絕對 URL 打回 pages.dev）、_kv Redis-over-D1 shim（scien
 id 403a5481-7335-46b7-b382-fb62ddf64408，四表 kv/hash/list/zset，rt:/mkt: 前綴）、
 RT_SECRET/MKT_SECRET 分離。全站三平台：science-hero.pages.dev（含後端）/
 science-hero-hk6429.vercel.app / science-hero.netlify.app。
-未做（不阻塞）：各子系統美術生圖清單維持 emoji 佔位。
+美術（2026-07-21 補完，commit 60bdcfd 三平台）：科學基地 38 張扁平插畫全上線（assets/base/），
+取代 emoji 佔位。其餘子系統（對戰/融合/市集）維持 emoji（無 <img> 槽，設計即用 emoji）。
