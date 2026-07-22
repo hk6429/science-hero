@@ -1450,7 +1450,7 @@ const SciApp = (() => {
   function fusionNoticeHtml() {
     if (!fusionNotice) return '';
     if (fusionNotice.type === 'hatching') {
-      return '<div class="fusion-notice is-hatching" role="status" aria-live="polite"><div class="fusion-egg" aria-hidden="true">🥚</div><strong>雙科光芒正在匯聚……</strong></div>';
+      return '<div class="fusion-notice is-hatching" role="status" aria-live="polite"><div class="fusion-egg" aria-hidden="true"><img class="fusion-egg-img" src="assets/companion/companion-egg.png" alt=""></div><strong>雙科光芒正在匯聚……</strong></div>';
     }
     if (fusionNotice.type === 'success') {
       const cub = fusionNotice.cub;
@@ -1762,7 +1762,7 @@ const SciApp = (() => {
     body.innerHTML = `<p class="journey-intro">你走過的每一步，都來自真正答過、記住與精通的內容。</p>
       <div class="journey-grid">
         <article><span>⭐</span><b>精通稱號</b><strong>${escapeHtml(rankLabel(mastered))}</strong><small>${mastered} 張精通詞卡</small></article>
-        <article><span>${rank.ico}</span><b>PvE 段位</b><strong>${escapeHtml(rank.name)}</strong><small>${rank.next ? `距下一段 ${rank.next.at - rank.pts} 分` : '已達頂點'}</small></article>
+        <article><span>${rank.img ? `<img class="journey-rank-img" src="${rank.img}" alt="${escapeHtml(rank.name)}">` : rank.ico}</span><b>PvE 段位</b><strong>${escapeHtml(rank.name)}</strong><small>${rank.next ? `距下一段 ${rank.next.at - rank.pts} 分` : '已達頂點'}</small></article>
         <article><span>📜</span><b>科學史圖鑑</b><strong>${loreCount} / ${scienceLore.length}</strong><small>已點亮的科學故事</small></article>
         <article><span>🧬</span><b>融合收藏</b><strong>${cubCount} / ${SciFusionStore.CUBS.length}</strong><small>已迎接的稚靈</small></article>
         <article><span>🌌</span><b>元靈巡禮</b><strong>${fusion.grandBorn ? '里程碑達成' : '探索中'}</strong><small>${fusion.grandBorn ? '已迎接元靈，繼續收藏知識' : '依自己的步調前進'}</small></article>

@@ -51,7 +51,7 @@ const SciBaseUI = (() => {
     const peak = Math.max(state?.rank?.peak || 0, state?.rank?.pts || 0);
     const badges = SciBattle.RANKS.map((rank) =>
       `<button type="button" class="sb-rank-badge${peak >= rank.at ? ' is-lit' : ''}" aria-pressed="${peak >= rank.at}">` +
-      `<span>${rank.ico}</span><b>${esc(rank.name)}</b><small>${peak >= rank.at ? '已點亮' : `${rank.at} 分解鎖`}</small></button>`,
+      `<span>${rank.img ? `<img class="sb-rank-img" src="${rank.img}" alt="${esc(rank.name)}">` : rank.ico}</span><b>${esc(rank.name)}</b><small>${peak >= rank.at ? '已點亮' : `${rank.at} 分解鎖`}</small></button>`,
     ).join('');
     const titles = Object.entries(state?.rtSeason?.titles || {});
     return `<h3 class="sb-sub">段位徽章牆</h3><div class="sb-rank-wall">${badges}</div>` +

@@ -108,12 +108,12 @@ const SciBattle = (() => {
 
   // ── 段位排行：只認 PvE 勝負，跟「精通詞卡稱號」是兩套獨立指標 ──
   const RANKS = [
-    { name: '銅牌探索者', ico: '🥉', at: 0 },
-    { name: '銀牌研究員', ico: '🥈', at: 100 },
-    { name: '金牌學者', ico: '🥇', at: 250 },
-    { name: '白金專家', ico: '🎖️', at: 450 },
-    { name: '鑽石大師', ico: '💠', at: 700 },
-    { name: '傳奇科學家', ico: '👑', at: 1000 },
+    { name: '銅牌探索者', ico: '🥉', img: 'assets/rank/rank-bronze.png', at: 0 },
+    { name: '銀牌研究員', ico: '🥈', img: 'assets/rank/rank-silver.png', at: 100 },
+    { name: '金牌學者', ico: '🥇', img: 'assets/rank/rank-gold.png', at: 250 },
+    { name: '白金專家', ico: '🎖️', img: 'assets/rank/rank-platinum.png', at: 450 },
+    { name: '鑽石大師', ico: '💠', img: 'assets/rank/rank-diamond.png', at: 700 },
+    { name: '傳奇科學家', ico: '👑', img: 'assets/rank/rank-legend.png', at: 1000 },
   ];
 
   function weekStr(d = new Date()) {
@@ -160,13 +160,13 @@ const SciBattle = (() => {
 
   // ── 科學夥伴：等級直接讀「精通詞卡數」，不另存數值，跟真實學習量掛鉤 ──
   const COMPANION_TIERS = [
-    { at: 0, emoji: '🥚', name: '神秘蛋', atk: 0, leech: 0, leechChance: 0 },
-    { at: 5, emoji: '🐣', name: '科學雛靈', atk: 2, leech: 0, leechChance: 0 },
-    { at: 20, emoji: '🦉', name: '智慧貓頭鷹', atk: 4, leech: 0, leechChance: 0 },
-    { at: 50, emoji: '🐉', name: '智慧之龍', atk: 6, leech: 5, leechChance: 0.1 },
-    { at: 100, emoji: '✨', name: '星靈', atk: 9, leech: 8, leechChance: 0.2 },
+    { at: 0, emoji: '🥚', img: 'assets/companion/companion-egg.png', name: '神秘蛋', atk: 0, leech: 0, leechChance: 0 },
+    { at: 5, emoji: '🐣', img: 'assets/companion/companion-chick.png', name: '科學雛靈', atk: 2, leech: 0, leechChance: 0 },
+    { at: 20, emoji: '🦉', img: 'assets/companion/companion-owl.png', name: '智慧貓頭鷹', atk: 4, leech: 0, leechChance: 0 },
+    { at: 50, emoji: '🐉', img: 'assets/companion/companion-dragon.png', name: '智慧之龍', atk: 6, leech: 5, leechChance: 0.1 },
+    { at: 100, emoji: '✨', img: 'assets/companion/companion-starspirit.png', name: '星靈', atk: 9, leech: 8, leechChance: 0.2 },
     // 200 張是純視覺收藏態；助戰數值刻意維持 100 張滿階，不製造額外優勢。
-    { at: 200, emoji: '🌟', name: '星靈・典藏', atk: 9, leech: 8, leechChance: 0.2 },
+    { at: 200, emoji: '🌟', img: 'assets/companion/companion-starspirit.png', name: '星靈・典藏', atk: 9, leech: 8, leechChance: 0.2 },
   ];
 
   function companionFor(masteredCount) {
@@ -331,11 +331,11 @@ const SciBattle = (() => {
     function rankStrip() {
       const r = rankInfo(state);
       return `<div class="bat-rank">
-        <span class="bat-rank-ico">${r.ico}</span>
+        <span class="bat-rank-ico">${r.img ? `<img class="bat-rank-img" src="${r.img}" alt="${r.name}">` : r.ico}</span>
         <span class="bat-rank-body">
           <span class="bat-rank-name">${r.name}　<b>${r.pts} 分</b></span>
           <span class="bat-rank-bar"><span style="width:${r.pct}%"></span></span>
-          <span class="bat-rank-next">${r.next ? `再 ${r.next.at - r.pts} 分晉升 ${r.next.ico} ${r.next.name}` : '已達最高段位！'}</span>
+          <span class="bat-rank-next">${r.next ? `再 ${r.next.at - r.pts} 分晉升 ${r.next.name}` : '已達最高段位！'}</span>
         </span>
       </div>`;
     }
@@ -344,7 +344,9 @@ const SciBattle = (() => {
       const c = currentCompanion();
       const face = ctx.subjectKey
         ? subjectCompanionArt(ctx.subjectKey, c, 'bat-companion-face')
-        : `<span class="bat-companion-face">${c.emoji}</span>`;
+        : (c.img
+          ? `<img class="bat-companion-face" src="${c.img}" alt="${c.name}">`
+          : `<span class="bat-companion-face">${c.emoji}</span>`);
       return `<div class="bat-companion">
         ${face}
         <span class="bat-companion-body">
@@ -360,7 +362,7 @@ const SciBattle = (() => {
       if (!c.atk) return '';
       const icon = ctx.subjectKey
         ? subjectCompanionArt(ctx.subjectKey, c, 'bat-assist-img')
-        : c.emoji;
+        : (c.img ? `<img class="bat-assist-img" src="${c.img}" alt="${c.name}">` : c.emoji);
       return `<div class="bat-assist">${icon} ${c.name} 助戰（追擊 ${c.atk}${c.leech ? '・機率回血' : ''}）</div>`;
     }
 

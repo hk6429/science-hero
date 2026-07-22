@@ -905,7 +905,8 @@ main {
   margin-bottom: 10px;
 }
 
-.bat-rank-ico { font-size: 1.6rem; }
+.bat-rank-ico { font-size: 1.6rem; display: inline-flex; align-items: center; }
+.bat-rank-img { width: 44px; height: 44px; object-fit: contain; }
 .bat-rank-body { flex: 1; display: flex; flex-direction: column; gap: 3px; }
 .bat-rank-name { font-size: 0.85rem; font-weight: 700; }
 
@@ -1204,6 +1205,7 @@ body.base-open { overflow: hidden; }
 .sb-rank-badge { opacity: .38; display: grid; gap: 4px; place-items: center; padding: 10px; border-radius: 12px; }
 .sb-rank-badge.is-lit { opacity: 1; border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent); }
 .sb-rank-badge span { font-size: 2rem; }
+.sb-rank-img { width: 48px; height: 48px; object-fit: contain; }
 .bat-foe-img, .fusion-cub-img { width: 64px; height: 64px; object-fit: contain; }
 .bat-foe-img.big, .fusion-result-emoji .fusion-cub-img { width: 96px; height: 96px; }
 .fusion-cub-img.small, .bat-cub-chase { width: 32px; height: 32px; vertical-align: middle; }
@@ -1239,6 +1241,7 @@ body.base-open { overflow: hidden; }
 .rest-reminder button { flex: none; border: 1px solid #527e62; border-radius: 8px; background: #fff; padding: 6px 9px; cursor: pointer; pointer-events: auto; }
 .fusion-notice.is-hatching { min-height: 150px; display: grid; place-items: center; gap: 5px; text-align: center; background: radial-gradient(circle, #fffbd6, #eefaf2); }
 .fusion-egg { font-size: 5rem; filter: drop-shadow(0 0 8px #ffe46b); animation: fusion-hatch 1s ease-in-out both; }
+.fusion-egg-img { width: 104px; height: 104px; object-fit: contain; display: block; }
 @keyframes fusion-hatch { 0%, 100% { transform: rotate(0) scale(.95); filter: drop-shadow(0 0 2px #ffe46b); } 25% { transform: rotate(-7deg) scale(1); } 50% { transform: rotate(7deg) scale(1.04); filter: drop-shadow(0 0 18px #ffe46b); } 75% { transform: rotate(-4deg) scale(1.07); } }
 .fusion-museum-grid, .journey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
 .fusion-museum-grid article, .journey-grid article { display: grid; gap: 6px; place-items: center; border: 1px solid #c9e4d2; border-radius: 14px; background: #fff; padding: 14px; text-align: center; }
@@ -1247,6 +1250,7 @@ body.base-open { overflow: hidden; }
 .journey-panel { width: min(92vw, 760px); padding: 22px; }
 .journey-intro { text-align: center; color: var(--muted); }
 .journey-grid article > span { font-size: 2rem; }
+.journey-rank-img { width: 44px; height: 44px; object-fit: contain; }
 .journey-grid article strong { color: var(--green-dark); }
 .journey-grid article small { color: var(--muted); }
 .book-progress-list { display: grid; gap: 10px; margin: 12px 0; }
