@@ -481,7 +481,7 @@ const SciApp = (() => {
     const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap, SciWeak.isObjectiveSource(source));
     const milestoneUnit = correct && SciWeak.isObjectiveSource(source)
-      ? checkUnitMilestone(target.unit)
+      ? checkUnitMilestone(target.unit, SciBattle.subjectOfId?.(target.id) || activeSubject)
       : null;
     const promotion = correct
       ? SciUiLogic.masteryPromotion(masteredBefore, masteredCardCount(), RANK_TIERS, SciBaseStore.STAGES)
@@ -595,19 +595,20 @@ const SciApp = (() => {
   }
 
   // ================= 里程碑：單元全數精通 =================
-  function checkUnitMilestone(unit) {
+  function checkUnitMilestone(unit, subject = activeSubject) {
     if (!unit) return null;
-    const list = terms.filter((t) => t.unit === unit);
+    const subjectList = subjectTerms.get(subject) || (subject === activeSubject ? terms : []);
+    const list = subjectList.filter((t) => t.unit === unit);
     if (!list.length) return null;
     const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const allMastered = list.every((t) => SciStore.getCard(state, t.id).box >= maxBox);
     if (!allMastered) return null;
 
     state.stats.celebratedUnits = state.stats.celebratedUnits || [];
-    const key = `${activeSubject}:${unit}`;
+    const key = `${subject}:${unit}`;
     if (state.stats.celebratedUnits.includes(key)) return null;
     state.stats.celebratedUnits.push(key);
-    SciScienceRewards.unlockForMasteredUnit(state, scienceLore, activeSubject, unit, terms, maxBox);
+    SciScienceRewards.unlockForMasteredUnit(state, scienceLore, subject, unit, subjectList, maxBox);
     recordDailySignal('unitProgress', false);
     SciStore.save(state);
     return unit;
@@ -644,6 +645,16 @@ const SciApp = (() => {
     flashRevealed = false;
   }
 
+  function emptyLearningQueueHtml() {
+    if (!terms.length) {
+      return `<div class="card"><p>這一科的詞條還在路上，先切去別科練功吧！</p></div>`;
+    }
+    if (unitFilter || gradeFilter) {
+      return `<div class="card"><p>目前篩選條件下沒有可練習的詞條，換個單元或年級看看吧！</p></div>`;
+    }
+    return `<div class="card"><p>這一科目前沒有到期的卡，你已經追平了！卡片會依間隔複習陸續回來，先去別科或看看基地吧。</p></div>`;
+  }
+
   function wireRestCard(body, restartRound) {
     body.querySelector('[data-rest-action="weak"]')?.addEventListener('click', () => {
       mode = 'weak';
@@ -661,7 +672,7 @@ const SciApp = (() => {
     if (flashQueue.length === 0) startFlashRound();
 
     if (flashQueue.length === 0) {
-      body.innerHTML = `<div class="card"><p>這一科的詞條還在路上，先切去別科練功吧！</p></div>`;
+      body.innerHTML = emptyLearningQueueHtml();
       return;
     }
 
@@ -745,7 +756,7 @@ const SciApp = (() => {
     correct ? playCorrectTone() : playWrongTone();
     maybeShowRestReminder();
 
-    const milestoneUnit = correct ? checkUnitMilestone(t.unit) : null;
+    const milestoneUnit = correct ? checkUnitMilestone(t.unit, SciBattle.subjectOfId?.(t.id) || activeSubject) : null;
     flashIdx += 1;
     flashRevealed = false;
 
@@ -793,7 +804,7 @@ const SciApp = (() => {
     if (quizQueue.length === 0) startQuizRound();
 
     if (quizQueue.length === 0) {
-      body.innerHTML = `<div class="card"><p>這一科的詞條還在路上，先切去別科練功吧！</p></div>`;
+      body.innerHTML = emptyLearningQueueHtml();
       return;
     }
 

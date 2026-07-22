@@ -54,7 +54,13 @@ function loadAppHarness() {
     },
   };
   context.SciBaseStore = { STAGES: [] };
-  context.SciBattle = { masteredBySubject: () => ({}) };
+  context.SciBattle = {
+    masteredBySubject: () => ({}),
+    subjectOfId(id) {
+      const prefix = String(id).match(/^([a-z]+)/)?.[1];
+      return ({ e: 'nature', b: 'biology', pc: 'chemphys', d: 'earth' })[prefix] || null;
+    },
+  };
   context.SciFusionStore = { CUBS: [], load: () => ({ collection: [] }) };
 
   const appSource = source('js/app.js').replace(
@@ -64,6 +70,10 @@ function loadAppHarness() {
       setState(value) { state = value; }, getState() { return state; },
       setLearningData(nextTerms, nextLore, subject = 'nature') {
         terms = nextTerms; scienceLore = nextLore; activeSubject = subject;
+        subjectTerms.set(subject, nextTerms);
+      },
+      setSubjectTerms(subject, nextTerms) {
+        subjectTerms.set(subject, nextTerms);
       }
     } };`,
   );
@@ -158,7 +168,39 @@ test('B：對戰攻下單元最後一張時靜默解鎖科學史，且自測仍�
   const settle = appSource.slice(appSource.indexOf('function settleAnswer'), appSource.indexOf('// ================= 弱點清單'));
   const flash = appSource.slice(appSource.indexOf('function answerFlash'), appSource.indexOf('// ================= 自測'));
   assert.match(settle, /const \{ milestoneUnit \} = recordAnswer\([\s\S]*if \(milestoneUnit\)[\s\S]*renderMilestone/);
-  assert.match(flash, /checkUnitMilestone\(t\.unit\)[\s\S]*renderMilestone/, '閃卡既有慶祝路徑不可退化');
+  assert.match(flash, /checkUnitMilestone\(t\.unit,\s*SciBattle\.subjectOfId\?\.\(t\.id\)\s*\|\|\s*activeSubject\)[\s\S]*renderMilestone/, '閃卡既有慶祝路徑不可退化');
+});
+
+test('B2：融合坊跨科答對最後一張時依題目科別解鎖里程碑', () => {
+  const { app, loreUnlocks } = loadAppHarness();
+  const biologyTerms = [
+    { id: 'b-life-mastered', unit: 'cell' },
+    { id: 'b-life-last', unit: 'cell' },
+  ];
+  const earthTerms = [{ id: 'd-active', unit: 'geology' }];
+  const lore = [{ id: 'lore-biology-cell', subject: 'biology', unit: 'cell' }];
+  const today = new Date().toISOString().slice(0, 10);
+  const state = {
+    cards: {
+      'b-life-mastered': { box: 4, due: Date.now() + 86400000, seen: 8, wrong: 0 },
+      'b-life-last': { box: 3, due: 0, seen: 4, wrong: 0 },
+    },
+    stats: {
+      streakDays: 0, lastActiveDate: null, totalReviews: 9, scienceLore: [], celebratedUnits: [],
+      dailyQuests: { date: today, correct: 0, battleWin: 0, unitProgress: 0, subjectCorrect: 0, subject: 'nature', claimed: [] },
+    },
+  };
+  app.setLearningData(earthTerms, lore, 'earth');
+  app.setSubjectTerms('biology', biologyTerms);
+  app.setState(state);
+
+  const result = app.recordAnswer(biologyTerms[1], true, 2200, 20, 'fusion');
+
+  assert.equal(result.milestoneUnit, 'cell');
+  assert.deepEqual(Array.from(state.stats.celebratedUnits), ['biology:cell']);
+  assert.deepEqual(Array.from(state.stats.scienceLore), ['lore-biology-cell']);
+  assert.ok(state.stats.dailyQuests.unitProgress > 0, '跨科完成單元須即時送出 unitProgress');
+  assert.deepEqual(loreUnlocks, ['lore-biology-cell']);
 });
 
 test('C：連線 PvP 戰後解說會渲染詞條 def，不留下空白定義', () => {
