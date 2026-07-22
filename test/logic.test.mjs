@@ -730,6 +730,18 @@ test('accuracyBySubject：只取最近 ACC_WINDOW 筆', () => {
   assert.ok(Math.abs(result.accuracy - 1) < 1e-9);
 });
 
+test('Round4-2：accuracyBySubject 只統計客觀作答，閃卡與克漏字自評不進正確率', () => {
+  const lib = makeSandbox();
+  const state = lib.SciStore.load();
+  state.weakLog = [
+    { termId: 'e0001', correct: true, source: 'flash' },
+    { termId: 'e0001', correct: true, source: 'cloze' },
+    { termId: 'e0001', correct: false, source: 'quiz' },
+    { termId: 'e0001', correct: true, source: 'battle' },
+  ];
+  assert.deepEqual(lib.SciFusionStore.accuracyBySubject(state, 'nature'), { accuracy: 0.5, total: 2 });
+});
+
 test('CUBS：全庫 6 隻、pairKey 兩兩不重複、台詞非空殼', () => {
   const lib = makeSandbox();
   assert.equal(lib.SciFusionStore.CUBS.length, 6);
@@ -1050,7 +1062,7 @@ test('融合坊靜態接線：入口、overlay、六格 class 與模組腳本順
   assert.match(css, /\.fusion-pair-grid/);
 });
 
-test('SciBattle.isUnlocked 依累積答對數解鎖高手/宗師對手', () => {
+test('SciBattle.isUnlocked 依精通詞卡數解鎖高手/宗師對手', () => {
   const lib = makeSandbox();
   const novice = lib.SciBattle.OPPONENTS.find((o) => o.tier === '入門');
   const expert = lib.SciBattle.OPPONENTS.find((o) => o.tier === '高手');
@@ -1060,6 +1072,13 @@ test('SciBattle.isUnlocked 依累積答對數解鎖高手/宗師對手', () => {
   assert.equal(lib.SciBattle.isUnlocked(expert, 30), true);
   assert.equal(lib.SciBattle.isUnlocked(master, 30), false);
   assert.equal(lib.SciBattle.isUnlocked(master, 80), true);
+});
+
+test('Round4-10：PvE 高階對手解鎖只讀精通詞卡數，不讀 totalReviews', () => {
+  const battle = readFileSync(path.join(ROOT, 'js', 'battle.js'), 'utf8');
+  const picker = battle.slice(battle.indexOf('function renderPicker'), battle.indexOf('// ── PvE'));
+  assert.match(picker, /isUnlocked\(o, masteredCardCount\)/);
+  assert.doesNotMatch(picker, /totalReviews/);
 });
 
 test('SciBattle.rankWin/rankLose 依勝負加減分，且每週首敗不扣分', () => {

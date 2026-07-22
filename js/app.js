@@ -448,6 +448,7 @@ const SciApp = (() => {
       cubMods: SciFusionStore.cubBattleMods(SciFusionStore.load()),
       cubArt,
       onBattleWin: () => recordDailySignal('battleWin'),
+      onMilestone: () => playMilestoneTone(),
       onEnergyGain: showEnergyGain,
     });
   }
@@ -470,13 +471,19 @@ const SciApp = (() => {
   }
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
-  function recordAnswer(target, correct, elapsedMs, contentLength = 0, source = 'quiz') {
+  function recordAnswer(target, correct, elapsedMs, contentLength = 0, source = 'quiz', recoveryStrength = 'strong') {
+    const masteredBefore = masteredCardCount();
     const previousCard = SciStore.getCard(state, target.id);
-    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source });
+    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source, recoveryStrength });
     const prevBox = previousCard.box;
     const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap);
-    const energy = SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
+    const promotion = correct
+      ? SciUiLogic.masteryPromotion(masteredBefore, masteredCardCount(), RANK_TIERS, SciBaseStore.STAGES)
+      : null;
+    const energy = source === 'cloze'
+      ? { earned: 0 }
+      : SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能只掛客觀作答；克漏字主觀自評不發放。
     state.stats.totalReviews += 1;
     sessionAnswers += 1;
     const surprise = SciScienceRewards.triggerSurprise({
@@ -492,6 +499,7 @@ const SciApp = (() => {
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
+    if (promotion) showMasteryPromotion(promotion);
     correct ? playCorrectTone() : playWrongTone();
     if (energy.earned > 0) showEnergyGain(energy.earned);
     maybeShowRestReminder();
@@ -505,6 +513,17 @@ const SciApp = (() => {
     pop.textContent = `+${amount} 💎`;
     document.body.appendChild(pop);
     setTimeout(() => pop.remove(), 1400);
+  }
+
+  function showMasteryPromotion(promotion) {
+    const toast = document.createElement('aside');
+    toast.className = 'first-success mastery-promotion-toast celebrate-in';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.innerHTML = `<strong>🌟 晉升〈${promotion.rank}〉！</strong><span>基地已擴建為〈${promotion.stage}〉</span>`;
+    document.body.appendChild(toast);
+    playMilestoneTone();
+    setTimeout(() => toast.remove(), 5000);
   }
 
   function showFirstSuccess() {
@@ -644,7 +663,7 @@ const SciApp = (() => {
     body.innerHTML = `
       <div class="stat-row">
         <span>本回合 ${flashIdx + 1} / ${flashQueue.length}</span>
-        <span>盒序 ${card.box + 1} / ${SciFlashcard.BOX_INTERVAL_DAYS.length}</span>
+        <span>熟悉度 ${card.box + 1} / ${SciFlashcard.BOX_INTERVAL_DAYS.length}</span>
       </div>
       <div class="progress-bar"><div style="width:${((flashIdx) / flashQueue.length) * 100}%"></div></div>
       <div class="card">
@@ -676,7 +695,7 @@ const SciApp = (() => {
   function answerFlash(body, correct) {
     if (flashAnswering) return;
     flashAnswering = true;
-    const scrollY = window.scrollY;
+    const anchorTop = body.getBoundingClientRect().top;
 
     const t = flashQueue[flashIdx];
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
@@ -688,7 +707,10 @@ const SciApp = (() => {
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
-    requestAnimationFrame(() => window.scrollTo(0, scrollY));
+    requestAnimationFrame(() => {
+      const newAnchorTop = body.getBoundingClientRect().top;
+      window.scrollBy(0, newAnchorTop - anchorTop);
+    });
     correct ? playCorrectTone() : playWrongTone();
     maybeShowRestReminder();
 
@@ -807,7 +829,7 @@ const SciApp = (() => {
           else if (b.dataset.id === chosenId) b.classList.add('wrong');
         });
         const chosenTerm = correct ? null : terms.find((t) => t.id === chosenId);
-        settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, SciQuiz.questionContentLength(q));
+        settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, SciQuiz.questionContentLength(q), 'quiz', q.recoveryStrength);
       });
     });
   }
@@ -855,7 +877,7 @@ const SciApp = (() => {
   }
 
   // 答題後的共同收尾（選擇題與克漏字共用）：結果橫幅、解說、下一題、記錄與情境防呆跳題。
-  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, contentLength, source = 'quiz') {
+  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, contentLength, source = 'quiz', recoveryStrength = 'strong') {
     const subjectAtAnswer = activeSubject;
     const modeAtAnswer = mode;
 
@@ -881,7 +903,7 @@ const SciApp = (() => {
     nextBtn.textContent = '下一題 →';
     cardEl.appendChild(nextBtn);
 
-    recordAnswer(target, correct, elapsed, contentLength, source);
+    recordAnswer(target, correct, elapsed, contentLength, source, recoveryStrength);
 
     const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
     // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
@@ -1545,10 +1567,16 @@ const SciApp = (() => {
       body.dataset.answered = '1';
       const correct = button.dataset.id === q.answerId;
       const target = (subjectTerms.get(reveal.subject) || []).find((term) => term.id === q.answerId);
-      recordAnswer(target, correct, Date.now() - startedAt, SciQuiz.questionContentLength(q));
-      body.querySelectorAll('.quiz-option').forEach((option) => { option.disabled = true; });
+      recordAnswer(target, correct, Date.now() - startedAt, SciQuiz.questionContentLength(q), 'fusion', q.recoveryStrength);
+      body.querySelectorAll('.quiz-option').forEach((option) => {
+        option.disabled = true;
+        if (option.dataset.id === q.answerId) option.classList.add('correct');
+        else if (option === button && !correct) option.classList.add('wrong');
+      });
       const feedback = body.querySelector('.fusion-quiz-feedback');
       if (correct) {
+        body.querySelector('.fusion-quiz').classList.add('flash-correct');
+        feedback.innerHTML = '<p class="quiz-result-banner is-correct">✓ 答對了！</p>';
         const next = SciFusionStore.load();
         if (purpose === 'fuse') {
           const result = SciFusionStore.fuse(next, state, a, b, {
@@ -1567,7 +1595,7 @@ const SciApp = (() => {
           SciFusionStore.save(next);
           fusionNotice = { type: 'info', text: '雙科線索合上了，稚靈真身已揭曉！' };
         }
-        setTimeout(renderFusionLab, 450);
+        setTimeout(renderFusionLab, 900);
       } else {
         feedback.innerHTML = '<p>這次差一點，沒有任何資源損失。</p><button class="btn btn-secondary" type="button">再試一題</button>';
         feedback.querySelector('button').addEventListener('click', () => renderRevealQuestion(a, b, purpose));
@@ -1691,11 +1719,6 @@ const SciApp = (() => {
     });
     const classboardBtn = el('#classboard-btn');
     if (classboardBtn) classboardBtn.addEventListener('click', () => {
-      const juniorSubjects = new Set(['biology', 'chemphys', 'earth']);
-      if (!juniorSubjects.has(activeSubject)) {
-        alert('班級協力榜為國中生物／理化／地科而設，請先切到國中科目分頁。');
-        return;
-      }
       window.SciClassBoard?.open({ subject: activeSubject, mastered: masteredCountForSubject(activeSubject) });
     });
     if (fusionClose) fusionClose.addEventListener('click', closeFusionLab);

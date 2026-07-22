@@ -8,7 +8,7 @@ const ORIGINS = new Set([
   'http://localhost:8788',
   'http://localhost:8765',
 ]);
-const SUBJECTS = new Set(['biology', 'chemphys', 'earth']);
+const SUBJECTS = new Set(['nature', 'biology', 'chemphys', 'earth']);
 const CLASS_CODE = /^[A-Z0-9]{4,12}$/;
 const SUBMIT_RATE = 30;
 const BOARD_RATE = 60;

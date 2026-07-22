@@ -1,6 +1,6 @@
-// 國中班級協力學習榜：班級總精通量優先，個人貢獻僅在學生主動填入白名單暱稱後顯示。
+// 班級協力學習榜：班級總精通量優先，個人貢獻僅在學生主動使用白名單科學代號後顯示。
 const SciClassBoard = (() => {
-  const SUBJECTS = new Set(['biology', 'chemphys', 'earth']);
+  const SUBJECTS = new Set(['nature', 'biology', 'chemphys', 'earth']);
   const CLASS_CODE = /^[A-Z0-9]{4,12}$/;
   const STORAGE_KEY = 'sci_classcode';
   const OFFLINE_MESSAGE = '目前無法連線班級榜，你的練習已存在本機';
@@ -24,6 +24,28 @@ const SciClassBoard = (() => {
 
   function rememberCode(code) {
     try { localStorage.setItem(STORAGE_KEY, code); } catch { /* Storage may be unavailable. */ }
+  }
+
+  function nickStorageKey(classCode, subject) {
+    return `sci_classnick:${cleanCode(classCode)}:${String(subject || '')}`;
+  }
+
+  function rememberedNick(classCode, subject) {
+    const code = cleanCode(classCode);
+    if (!CLASS_CODE.test(code) || !subject) return '';
+    try {
+      const nick = String(localStorage.getItem(nickStorageKey(code, subject)) || '');
+      return SciRtBattle.isValidNick(nick) ? nick : '';
+    } catch { return ''; }
+  }
+
+  function rememberNick(classCode, subject, nick) {
+    const code = cleanCode(classCode);
+    if (!CLASS_CODE.test(code) || !subject || !SciRtBattle.isValidNick(nick)) return false;
+    try {
+      localStorage.setItem(nickStorageKey(code, subject), nick);
+      return true;
+    } catch { return false; }
   }
 
   function defaultApiBase() {
@@ -96,6 +118,8 @@ const SciClassBoard = (() => {
     $('classboard-refresh').addEventListener('click', refresh);
     $('classboard-nick-reroll').addEventListener('click', () => {
       generatedNick = SciRtBattle.genNick();
+      const classCode = cleanCode($('classboard-class-code')?.value);
+      if (current) rememberNick(classCode, current.subject, generatedNick);
       $('classboard-nick-preview').textContent = generatedNick;
     });
     $('classboard-form').addEventListener('submit', submitContribution);
@@ -146,11 +170,14 @@ const SciClassBoard = (() => {
     event.preventDefault();
     if (!current) return;
     const classCode = cleanCode($('classboard-class-code').value);
-    const nick = generatedNick;
     if (!CLASS_CODE.test(classCode)) {
       setStatus('請輸入 4–12 碼英文字母或數字的班級碼。', 'error');
       return;
     }
+    const nick = rememberedNick(classCode, current.subject) || generatedNick;
+    generatedNick = nick;
+    rememberNick(classCode, current.subject, nick);
+    $('classboard-nick-preview').textContent = nick;
     if (!SciRtBattle.isValidNick(nick)) {
       setStatus('科學代號無效，請按「換一個」重新產生。', 'error');
       return;
@@ -175,14 +202,16 @@ const SciClassBoard = (() => {
   }
 
   async function open(opts = {}) {
-    if (!SUBJECTS.has(opts.subject)) return { ok: 0, error: 'junior-high-only' };
+    if (!SUBJECTS.has(opts.subject)) return { ok: 0, error: 'invalid-subject' };
     current = {
       subject: opts.subject,
       mastered: cleanMastered(opts.mastered),
       apiBase: opts.apiBase,
     };
     ensureOverlay();
-    generatedNick = SciRtBattle.genNick();
+    const code = rememberedCode();
+    generatedNick = rememberedNick(code, current.subject) || SciRtBattle.genNick();
+    if (code) rememberNick(code, current.subject, generatedNick);
     $('classboard-nick-preview').textContent = generatedNick;
     previousFocus = document.activeElement;
     $('classboard-class-code').value = rememberedCode();
@@ -205,7 +234,7 @@ const SciClassBoard = (() => {
 
   function mount(opts = {}) { return open(opts); }
 
-  return { mount, open, close, refresh };
+  return { mount, open, close, refresh, nickStorageKey, rememberedNick, rememberNick };
 })();
 
 window.SciClassBoard = SciClassBoard;

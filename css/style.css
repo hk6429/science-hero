@@ -944,6 +944,31 @@ body.base-open { overflow: hidden; }
 .sb-bg, .sb-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sb-main, .sb-pav { position: absolute; aspect-ratio: 1 / 1; border: 0; padding: 0; background: none; cursor: pointer; }
 .sb-main { left: 50%; top: 50%; transform: translate(-50%, -50%); width: 26%; z-index: 3; }
+.sb-main[data-stage="5"] img,
+.sb-main[data-stage="6"] img { filter: drop-shadow(0 0 5px rgba(255, 212, 59, .55)); }
+.sb-main[data-stage="7"] img,
+.sb-main[data-stage="8"] img { filter: drop-shadow(0 0 8px rgba(255, 212, 59, .68)) drop-shadow(0 0 14px rgba(255, 146, 43, .25)); }
+.sb-main[data-stage="9"] img,
+.sb-main[data-stage="10"] img { filter: drop-shadow(0 0 11px rgba(255, 212, 59, .8)) drop-shadow(0 0 19px rgba(255, 146, 43, .38)); }
+.sb-main[data-stage="11"] img,
+.sb-main[data-stage="12"] img { filter: drop-shadow(0 0 14px rgba(255, 230, 92, .92)) drop-shadow(0 0 24px rgba(255, 146, 43, .5)); }
+.sb-main[data-stage="12"]::before {
+  content: "👑 典藏之冠";
+  position: absolute;
+  left: 50%;
+  top: -16%;
+  transform: translateX(-50%);
+  z-index: 4;
+  white-space: nowrap;
+  color: #7a4b00;
+  background: linear-gradient(135deg, #fff4b8, #ffd43b);
+  border: 1px solid #d99a00;
+  border-radius: 999px;
+  padding: .18em .55em;
+  font-size: clamp(.68rem, 1.6vw, .82rem);
+  font-weight: 900;
+  box-shadow: 0 0 18px rgba(255, 212, 59, .75);
+}
 .sb-pav { width: 20%; z-index: 2; }
 .sb-pav--nature { left: 6%; top: 10%; }  .sb-pav--biology { right: 6%; top: 10%; }
 .sb-pav--chemphys { left: 6%; bottom: 6%; }  .sb-pav--earth { right: 6%; bottom: 6%; }
@@ -1173,6 +1198,23 @@ body.base-open { overflow: hidden; }
 .energy-gain-pop { position: fixed; left: 50%; top: 36%; z-index: 2600; transform: translateX(-50%); border-radius: 999px; background: #173c2b; color: #fff6c2; padding: 10px 18px; font-size: 1.25rem; font-weight: 900; pointer-events: none; animation: energy-float 1.35s ease-out forwards; }
 @keyframes energy-float { 0% { opacity: 0; transform: translate(-50%, 18px) scale(.8); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -55px) scale(1.08); } }
 .first-success { position: fixed; left: 50%; top: 18%; z-index: 2500; transform: translateX(-50%); display: grid; gap: 4px; max-width: min(420px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 16px; background: #fffbea; padding: 16px 20px; box-shadow: 0 10px 30px #0003; text-align: center; }
+.endless-milestone-toast { animation: endlessMilestoneIn .5s cubic-bezier(.2, .9, .3, 1.25); overflow: visible; }
+.endless-milestone-toast::after {
+  content: "✦ ✧ ✦ ✧ ✦";
+  position: absolute;
+  left: 50%;
+  top: -1.2rem;
+  transform: translateX(-50%);
+  color: #f6b800;
+  letter-spacing: .55rem;
+  text-shadow: 0 8px 0 #69db7c, 12px 5px 0 #74c0fc, -12px 5px 0 #ff8787;
+  pointer-events: none;
+}
+@keyframes endlessMilestoneIn {
+  0% { transform: translateX(-50%) scale(.72); opacity: 0; }
+  65% { transform: translateX(-50%) scale(1.08); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
 /* 非阻擋式吐司：容器 pointer-events:none 讓點擊穿透到底下控制項（不打斷正在進行的操作），只有關閉鈕可點。 */
 .rest-reminder { position: fixed; right: 16px; bottom: 16px; z-index: 2400; display: flex; align-items: center; gap: 10px; max-width: min(430px, calc(100vw - 32px)); border: 1px solid #8bb9a0; border-radius: 14px; background: #f3fbf5; padding: 12px 14px; box-shadow: 0 8px 24px #0002; pointer-events: none; }
 .rest-reminder button { flex: none; border: 1px solid #527e62; border-radius: 8px; background: #fff; padding: 6px 9px; cursor: pointer; pointer-events: auto; }

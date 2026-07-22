@@ -86,3 +86,14 @@ test('F9：新手檢查清單只保存三個布林完成狀態', () => {
   });
   assert.equal(ui.onboardingComplete({ flashcard: true, quiz: true, battle: true }), true);
 });
+
+test('Round4-5：精通數跨過門檻時同時回報新稱號與基地階段', () => {
+  const ranks = [[0, '見習生'], [10, '初階科學家'], [30, '進階科學家']];
+  const stages = [[0, '見習營帳'], [10, '進階實驗樓'], [30, '資深研究院']];
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(ui.masteryPromotion(9, 10, ranks, stages))),
+    { threshold: 10, rank: '初階科學家', stage: '進階實驗樓' },
+  );
+  assert.equal(ui.masteryPromotion(10, 10, ranks, stages), null);
+  assert.equal(ui.masteryPromotion(10, 11, ranks, stages), null);
+});

@@ -27,8 +27,8 @@ const SciBattle = (() => {
     return `<img class="bat-foe-img ${extraClass}" src="assets/battle/foe-${opponent.id}.png" alt="${opponent.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${opponent.emoji}',className:'bat-face ${extraClass}'}))">`;
   }
 
-  function isUnlocked(opponent, totalReviews) {
-    return (totalReviews || 0) >= (TIER_UNLOCK[opponent.tier] || 0);
+  function isUnlocked(opponent, masteredCount) {
+    return (masteredCount || 0) >= (TIER_UNLOCK[opponent.tier] || 0);
   }
 
   // 答對傷害：基礎 12 + 連擊加成，血量 <30 時背水一戰 1.5 倍。
@@ -66,6 +66,14 @@ const SciBattle = (() => {
     summary.totalDamage = (summary.totalDamage || 0) + damage;
     summary.maxDamage = Math.max(summary.maxDamage || 0, damage);
     return summary;
+  }
+
+  function applyFollowUpDamage(state, damage, combo) {
+    const amount = Math.max(0, Number(damage) || 0);
+    state.oHp = Math.max(0, state.oHp - amount);
+    state.foeDamage = (state.foeDamage || 0) + amount;
+    recordPlayerHit(state, amount, combo);
+    return state;
   }
 
   function applyWrongAnswer(state) {
@@ -295,6 +303,7 @@ const SciBattle = (() => {
 
     function showEndlessMilestone(milestone) {
       if (!milestone) return;
+      ctx.onMilestone?.(milestone);
       const toast = document.createElement('aside');
       toast.className = 'first-success endless-milestone-toast celebrate-in';
       toast.setAttribute('role', 'status');
@@ -307,10 +316,6 @@ const SciBattle = (() => {
     const currentCompanion = () => ctx.subjectKey
       ? companionForSubject(ctx.subjectKey, ctx.masteredCountForSubject)
       : companionFor(masteredCardCount);
-
-    function totalReviews() {
-      return state.stats.totalReviews || 0;
-    }
 
     function rankStrip() {
       const r = rankInfo(state);
@@ -371,13 +376,13 @@ const SciBattle = (() => {
         <p class="bat-hint">無盡巡禮會隨連勝增強對手；最佳連勝 <b>${state.battle.endlessBest || 0}</b> 場，不影響段位、不倒扣分數。</p>
         <div class="bat-oppgrid">
           ${OPPONENTS.map((o) => {
-            const unlocked = isUnlocked(o, totalReviews());
+            const unlocked = isUnlocked(o, masteredCardCount);
             const won = beaten.has(o.id);
             return `<button class="bat-oppcard${unlocked ? '' : ' locked'}" data-id="${o.id}" data-open="${unlocked ? 1 : 0}">
               ${unlocked ? foeArt(o) : '<span class="bat-face">🔒</span>'}
               <span class="bat-name">${unlocked ? o.name : '？？？'}${won ? ' 🏆' : ''}</span>
               <span class="bat-tier">${o.tier}</span>
-              ${unlocked ? '' : `<span class="bat-locknote">累積答對 ${TIER_UNLOCK[o.tier]} 題解鎖</span>`}
+              ${unlocked ? '' : `<span class="bat-locknote">精通 ${TIER_UNLOCK[o.tier]} 張詞卡解鎖</span>`}
             </button>`;
           }).join('')}
         </div>
@@ -481,7 +486,7 @@ const SciBattle = (() => {
       const target = pool.find((t) => t.id === q.answerId);
       const elapsedMs = Date.now() - battleState.qStart;
 
-      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
+      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q), 'battle', q.recoveryStrength);
 
       if (correct) {
         const dmg = calcPveDamage(battleState.combo, battleState.pHp, elapsedMs);
@@ -493,8 +498,7 @@ const SciBattle = (() => {
         battleState.log = `命中！對 ${opp.name} 造成 ${dmg} 點傷害${battleState.combo >= 2 ? `（連擊 ×${battleState.combo}）` : ''}`;
         const c = currentCompanion();
         if (c.atk > 0 && battleState.oHp > 0) {
-          battleState.oHp = Math.max(0, battleState.oHp - c.atk);
-          recordPlayerHit(battleState, c.atk, battleState.combo);
+          applyFollowUpDamage(battleState, c.atk, battleState.combo);
           battleState.log += `　${c.emoji} ${c.name} 追擊 -${c.atk}`;
           if (c.leech && Math.random() < c.leechChance) {
             battleState.pHp = Math.min(MAX_HP, battleState.pHp + c.leech);
@@ -505,8 +509,7 @@ const SciBattle = (() => {
         const cubMods = ctx.cubMods || { atk: 0, leech: 0, leechChance: 0 };
         if (cubMods.atk > 0 && battleState.oHp > 0) {
           const cubAtk = Math.min(cubMods.atk, 5);
-          battleState.oHp = Math.max(0, battleState.oHp - cubAtk);
-          recordPlayerHit(battleState, cubAtk, battleState.combo);
+          applyFollowUpDamage(battleState, cubAtk, battleState.combo);
           const activeCub = SciFusionStore.listCubs(SciFusionStore.load()).find((cub) => cub.isActive);
           battleState.log += `　${activeCub ? `${ctx.cubArt?.(activeCub, 'bat-cub-chase') || activeCub.emoji} ${activeCub.displayName}` : '稚靈'} 追擊 -${cubAtk}`;
           if (cubMods.leech && Math.random() < cubMods.leechChance) {
@@ -641,7 +644,7 @@ const SciBattle = (() => {
       const target = pool.find((t) => t.id === q.answerId);
       const elapsedMs = Date.now() - pvpState.qStart;
 
-      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
+      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q), 'pvp', q.recoveryStrength);
 
       if (correct) {
         const dmg = calcDamage(pvpState.combo[me], pvpState.hp[me]);
@@ -677,7 +680,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, clearDamagePops, answerFeedbackClass, endlessOpponent, recordEndlessBest, ENDLESS_MILESTONES, claimEndlessMilestone, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyFollowUpDamage, applyWrongAnswer, clearDamagePops, answerFeedbackClass, endlessOpponent, recordEndlessBest, ENDLESS_MILESTONES, claimEndlessMilestone, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, subjectProgress, companionForSubject, subjectCompanionArt,

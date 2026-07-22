@@ -78,10 +78,23 @@ const SciUiLogic = (() => {
     return !prefersReducedMotion;
   }
 
+  function masteryPromotion(before, after, rankTiers, stages) {
+    const from = Math.max(0, Math.floor(Number(before) || 0));
+    const to = Math.max(0, Math.floor(Number(after) || 0));
+    if (to <= from) return null;
+    const crossed = (Array.isArray(rankTiers) ? rankTiers : [])
+      .filter(([threshold]) => threshold > from && threshold <= to)
+      .at(-1);
+    if (!crossed) return null;
+    const threshold = crossed[0];
+    const stage = (Array.isArray(stages) ? stages : []).find(([at]) => at === threshold);
+    return { threshold, rank: crossed[1], stage: stage ? stage[1] : '' };
+  }
+
   return {
     moreToolsDefaultOpen, restCardHtml, resolveInitialSubject, fusionRevealDelay,
     focusUnitWeight, focusFirst, classMilestone, dueReviewSummary, longTailUnits,
     shouldShowRestReminder,
-    normalizeOnboarding, onboardingComplete, soundEnabled,
+    normalizeOnboarding, onboardingComplete, soundEnabled, masteryPromotion,
   };
 })();

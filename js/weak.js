@@ -19,7 +19,7 @@ const SciWeak = (() => {
   }
 
   // 記錄一次作答結果（quiz 呼叫）：{ termId, unit, correct, elapsedMs }
-  function recordAnswer(state, { termId, unit, correct, elapsedMs, contentLength = 0, source = 'quiz' }) {
+  function recordAnswer(state, { termId, unit, correct, elapsedMs, contentLength = 0, source = 'quiz', recoveryStrength = 'strong' }) {
     state.weakLog = state.weakLog || [];
     const luckyGuess = correct
       && elapsedMs < readingThresholdMs(contentLength)
@@ -31,6 +31,7 @@ const SciWeak = (() => {
       guessed: !correct && elapsedMs < FAST_GUESS_MS,
       luckyGuess,
       source,
+      recoveryStrength,
       t: Date.now(),
     });
     // 只保留最近 300 筆，避免 localStorage 無限成長
@@ -48,7 +49,8 @@ const SciWeak = (() => {
       unitByTerm.set(entry.termId, entry.unit);
       if (entry.correct && !isObjectiveSource(entry.source)) continue;
       if (entry.correct && !entry.luckyGuess) {
-        score.set(entry.termId, 0);
+        const previous = score.get(entry.termId) || 0;
+        score.set(entry.termId, entry.recoveryStrength === 'scaffold' ? previous * 0.5 : 0);
         continue;
       }
       const added = entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0);
@@ -150,5 +152,5 @@ const SciWeak = (() => {
     ].join('\n');
   }
 
-  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, getCalibrationMisses, buildFamilySummary, readingThresholdMs, recentPerformanceUnstable, FAST_GUESS_MS, LUCKY_GUESS_MS };
+  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, getCalibrationMisses, buildFamilySummary, isObjectiveSource, readingThresholdMs, recentPerformanceUnstable, FAST_GUESS_MS, LUCKY_GUESS_MS };
 })();

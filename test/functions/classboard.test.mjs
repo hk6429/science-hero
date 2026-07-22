@@ -54,9 +54,13 @@ test('班級總精通量是全班成員和，個人貢獻依精通數降序', as
   ]);
 });
 
-test('只接受 biology、chemphys、earth 三個國中科目', async () => {
+test('Round4-14：班級榜接受 nature 與三個國中科目，其他科目仍拒絕', async () => {
   const env = makeEnv();
-  for (const subject of ['nature', 'math', '']) {
+  for (const subject of ['nature', 'biology', 'chemphys', 'earth']) {
+    const submitted = await submit(env, { classCode: '701A', subject, nick: '好奇的電子', mastered: 5 });
+    assert.equal(submitted.body.ok, 1, `${subject} 應可加入班級榜`);
+  }
+  for (const subject of ['math', '']) {
     const submitted = await submit(env, { classCode: '701A', subject, nick: '好奇的電子', mastered: 5 });
     assert.deepEqual([submitted.status, submitted.body.ok, submitted.body.error], [400, 0, '參數不合法']);
     const loaded = await board(env, { classCode: '701A', subject });

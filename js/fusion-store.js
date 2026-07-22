@@ -110,7 +110,7 @@ const SciFusionStore = (() => {
     const windowSize = opts.window || ACC_WINDOW;
     const log = (state && state.weakLog) || [];
     const recent = log
-      .filter((entry) => SciBattle.subjectOfId(entry.termId) === subjectKey)
+      .filter((entry) => SciBattle.subjectOfId(entry.termId) === subjectKey && SciWeak.isObjectiveSource(entry.source))
       .slice(-windowSize);
     const total = recent.length;
     const correct = recent.filter((entry) => entry.correct).length;

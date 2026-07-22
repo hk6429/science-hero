@@ -10,6 +10,7 @@ const SciBaseUI = (() => {
     return `onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${safeEmoji}',className:'sb-emoji'}))"`;
   };
 
+  // MAIN_EMOJI 只是圖片載入失敗時的 fallback；高階主樓的逐階差異由 data-stage CSS 呈現。
   const MAIN_EMOJI = ['⛺', '🏠', '🏢', '🏛️', '🏰', '🏯', '🌆', '🏙️', '🛰️', '🚀', '🌠', '🌌', '🔭'];
   const PAV_EMOJI = { nature: '🌱', biology: '🔬', chemphys: '⚗️', earth: '🔭' };
 

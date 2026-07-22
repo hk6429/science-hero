@@ -55,6 +55,9 @@ const SciQuiz = (() => {
 
     const distractors = pickDistractors(target, pool, 3, box);
     const options = shuffle([target, ...distractors]);
+    const recoveryStrength = distractors.every((item) => (
+      item.distractor_pool === target.distractor_pool || item.unit === target.unit
+    )) ? 'strong' : 'scaffold';
 
     if (qMode === 'term2def') {
       return {
@@ -62,6 +65,7 @@ const SciQuiz = (() => {
         prompt: target.term,
         options: options.map((o) => ({ id: o.id, label: o.def })),
         answerId: target.id,
+        recoveryStrength,
       };
     }
     return {
@@ -69,6 +73,7 @@ const SciQuiz = (() => {
       prompt: target.def,
       options: options.map((o) => ({ id: o.id, label: o.term })),
       answerId: target.id,
+      recoveryStrength,
     };
   }
 

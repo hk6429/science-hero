@@ -49,7 +49,8 @@ const SciFlashcard = (() => {
   // 避免同一次作答被算兩次。閃卡與自測共用這個函式，讓「戰功」不再只認閃卡、自測答對也算數。
   function bumpBox(state, id, correct, cap = BOX_INTERVAL_DAYS.length - 1) {
     const card = SciStore.getCard(state, id);
-    const nextBox = correct ? Math.min(card.box + 1, cap) : 0;
+    // 封頂限制「這次最多能推到哪裡」，不得把已有的更高熟悉度往下砍。
+    const nextBox = correct ? Math.max(card.box, Math.min(card.box + 1, cap)) : 0;
     const updated = {
       box: nextBox,
       due: nextDue(nextBox),
