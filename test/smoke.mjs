@@ -293,6 +293,26 @@ try {
     fails.push(`重整後裝飾座標未還原：style=${styleLeft} 存檔=${expectedX}%`);
   }
   console.log('✅ 重整後基地擺設持久化還原');
+
+  // 8. 克漏字回想題（放最後，因為會把整批字設精熟、污染狀態）：精熟字自測應出現克漏字並可自評推進
+  await page.evaluate(async () => {
+    const KEY = 'science-hero:v1';
+    const terms = await (await fetch('/data/elementary.json')).json();
+    const s = JSON.parse(localStorage.getItem(KEY)) || {};
+    s.cards = s.cards || {};
+    for (const t of terms) s.cards[t.id] = { box: 4, due: 0, seen: 5, wrong: 0 };
+    localStorage.setItem(KEY, JSON.stringify(s));
+  });
+  await page.reload();
+  await page.waitForSelector('#tabs button[data-key="nature"]');
+  await page.click('#tabs button[data-key="nature"]');
+  await page.click('.panel[data-key="nature"] .mode-switch button[data-mode="quiz"]');
+  await page.waitForSelector('.quiz-cloze', { timeout: 6000 });
+  await page.click('#cloze-reveal');
+  await page.waitForSelector('#cloze-yes');
+  await page.click('#cloze-yes');
+  await page.waitForTimeout(1200);
+  console.log('✅ 克漏字回想題（精熟字）出現、可揭曉並自評推進');
 } catch (e) {
   fails.push('flow error: ' + e.message);
 }

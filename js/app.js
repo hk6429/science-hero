@@ -666,17 +666,27 @@ const SciApp = (() => {
     }
 
     const target = quizQueue[quizIdx];
-    // 傳入該詞盒序，讓誘答難度隨精熟度調整（新學者放水、熟手加難）。
-    const q = SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, null, SciStore.getCard(state, target.id).box);
+    const box = SciStore.getCard(state, target.id).box;
     quizAnswered = false;
     quizStartTime = Date.now();
 
-    body.innerHTML = `
+    const headHtml = `
       <div class="stat-row">
         <span>第 ${quizIdx + 1} / ${quizQueue.length} 題</span>
         <span>答對 ${quizCorrect}</span>
       </div>
-      <div class="progress-bar"><div style="width:${(quizIdx / quizQueue.length) * 100}%"></div></div>
+      <div class="progress-bar"><div style="width:${(quizIdx / quizQueue.length) * 100}%"></div></div>`;
+
+    // 已達一定精熟度（box>=3）的字改用克漏字回想：把「認得出來」升級成「想得出來」，答完自評對錯。
+    const clozeQ = box >= 3 ? SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, 'cloze', box) : null;
+    if (clozeQ && clozeQ.hasBlank) {
+      renderClozeQuestion(body, headHtml, target, clozeQ);
+      return;
+    }
+
+    // 傳入該詞盒序，讓誘答難度隨精熟度調整（新學者放水、熟手加難）。
+    const q = SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, null, box);
+    body.innerHTML = `${headHtml}
       <div class="card">
         <div class="quiz-prompt">${q.mode === 'term2def' ? `「${q.prompt}」是在說什麼？` : `這個定義說的是哪個詞：<br>「${q.prompt}」`}</div>
         <div class="quiz-options" id="quiz-options">
@@ -692,8 +702,6 @@ const SciApp = (() => {
         const chosenId = btn.dataset.id;
         const correct = chosenId === q.answerId;
         if (correct) quizCorrect += 1;
-        const subjectAtAnswer = activeSubject;
-        const modeAtAnswer = mode;
 
         const cardEl = body.querySelector('.card');
         cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
@@ -702,61 +710,104 @@ const SciApp = (() => {
           if (b.dataset.id === q.answerId) b.classList.add('correct');
           else if (b.dataset.id === chosenId) b.classList.add('wrong');
         });
-
-        const resultBanner = document.createElement('div');
-        resultBanner.className = `quiz-result-banner ${correct ? 'is-correct' : 'is-wrong'}`;
-        resultBanner.setAttribute('role', 'status');
-        resultBanner.setAttribute('aria-live', 'polite');
-        resultBanner.textContent = correct ? '✓ 答對了！' : '✗ 答錯了';
-        cardEl.insertBefore(resultBanner, cardEl.firstChild);
-
-        if (!correct) {
-          const chosenTerm = terms.find((t) => t.id === chosenId);
-          const note = document.createElement('div');
-          note.className = 'quiz-feedback';
-          const compareLine = chosenTerm
-            ? `<div class="quiz-feedback-compare">你選的「${chosenTerm.term}」：${chosenTerm.def}</div>`
-            : '';
-          note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>${compareLine}正確答案：<strong>${target.term}</strong> — ${target.def}`;
-          cardEl.appendChild(note);
-        }
-
-        const nextBtn = document.createElement('button');
-        nextBtn.className = 'btn btn-secondary quiz-next-btn';
-        nextBtn.textContent = '下一題 →';
-        cardEl.appendChild(nextBtn);
-
-        recordAnswer(target, correct, elapsed);
-
-        const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
-        // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
-        // 這裡若不擋下來，會把別科題目誤植進（可能已不存在的）舊分頁，或把使用者尚未看到的
-        // 題目悄悄跳過——這正是多位審查者回報「答完題畫面亂跳到別科」的根因。
-        const stillSameContext = () => activeSubject === subjectAtAnswer && mode === modeAtAnswer;
-
-        const goNext = () => {
-          if (!stillSameContext()) return;
-          if (milestoneUnit) {
-            preserveScroll(() => renderMilestone(body, milestoneUnit, () => {
-              quizIdx += 1;
-              renderQuiz(body);
-            }));
-          } else {
-            preserveScroll(() => {
-              quizIdx += 1;
-              renderQuiz(body);
-            });
-          }
-        };
-
-        // 拉長停留時間讓陪讀家長來得及唸出解說；同時保留手動「下一題」按鈕給想自己掌控節奏的人。
-        const delay = milestoneUnit ? 1400 : (correct ? 1400 : 3200);
-        const timer = setTimeout(goNext, delay);
-        nextBtn.addEventListener('click', () => {
-          clearTimeout(timer);
-          goNext();
-        });
+        const chosenTerm = correct ? null : terms.find((t) => t.id === chosenId);
+        settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm);
       });
+    });
+  }
+
+  // 克漏字回想題（box>=3 的精熟字）：挖空例句、先想再揭曉、誠實自評對錯。
+  function renderClozeQuestion(body, headHtml, target, q) {
+    body.innerHTML = `${headHtml}
+      <div class="card quiz-cloze">
+        <div class="quiz-cloze-tag">回想題 · 把空格補起來</div>
+        <div class="quiz-prompt quiz-cloze-prompt">${q.prompt}</div>
+        <div class="quiz-cloze-hint">提示：${target.def}</div>
+        <button class="btn btn-primary quiz-cloze-reveal" id="cloze-reveal">想好了，看答案</button>
+        <div class="quiz-cloze-answer" id="cloze-answer" hidden>
+          <div class="quiz-cloze-term">答案：<strong>${target.term}</strong></div>
+          <div class="quiz-cloze-ask">你剛剛有想出來嗎？誠實回答，才幫得到自己。</div>
+          <div class="btn-row">
+            <button class="btn btn-ok" id="cloze-yes">我想出來了</button>
+            <button class="btn btn-secondary" id="cloze-no">還沒記得</button>
+          </div>
+        </div>
+      </div>`;
+    const cardEl = body.querySelector('.card');
+    const answerBox = body.querySelector('#cloze-answer');
+    body.querySelector('#cloze-reveal').addEventListener('click', (e) => {
+      e.currentTarget.hidden = true;
+      answerBox.hidden = false;
+    });
+    const settle = (correct) => {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const elapsed = Date.now() - quizStartTime;
+      if (correct) quizCorrect += 1;
+      cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
+      answerBox.querySelectorAll('button').forEach((b) => { b.disabled = true; });
+      settleAnswer(body, cardEl, target, correct, elapsed, null);
+    };
+    body.querySelector('#cloze-yes').addEventListener('click', () => settle(true));
+    body.querySelector('#cloze-no').addEventListener('click', () => settle(false));
+  }
+
+  // 答題後的共同收尾（選擇題與克漏字共用）：結果橫幅、解說、下一題、記錄與情境防呆跳題。
+  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm) {
+    const subjectAtAnswer = activeSubject;
+    const modeAtAnswer = mode;
+
+    const resultBanner = document.createElement('div');
+    resultBanner.className = `quiz-result-banner ${correct ? 'is-correct' : 'is-wrong'}`;
+    resultBanner.setAttribute('role', 'status');
+    resultBanner.setAttribute('aria-live', 'polite');
+    resultBanner.textContent = correct ? '✓ 答對了！' : '✗ 答錯了';
+    cardEl.insertBefore(resultBanner, cardEl.firstChild);
+
+    if (!correct) {
+      const note = document.createElement('div');
+      note.className = 'quiz-feedback';
+      const compareLine = chosenTerm
+        ? `<div class="quiz-feedback-compare">你選的「${chosenTerm.term}」：${chosenTerm.def}</div>`
+        : '';
+      note.innerHTML = `<div class="quiz-feedback-label">戰後解說</div>${compareLine}正確答案：<strong>${target.term}</strong> — ${target.def}`;
+      cardEl.appendChild(note);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn btn-secondary quiz-next-btn';
+    nextBtn.textContent = '下一題 →';
+    cardEl.appendChild(nextBtn);
+
+    recordAnswer(target, correct, elapsed);
+
+    const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
+    // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
+    // 這裡若不擋下來，會把別科題目誤植進（可能已不存在的）舊分頁，或把使用者尚未看到的
+    // 題目悄悄跳過——這正是多位審查者回報「答完題畫面亂跳到別科」的根因。
+    const stillSameContext = () => activeSubject === subjectAtAnswer && mode === modeAtAnswer;
+
+    const goNext = () => {
+      if (!stillSameContext()) return;
+      if (milestoneUnit) {
+        preserveScroll(() => renderMilestone(body, milestoneUnit, () => {
+          quizIdx += 1;
+          renderQuiz(body);
+        }));
+      } else {
+        preserveScroll(() => {
+          quizIdx += 1;
+          renderQuiz(body);
+        });
+      }
+    };
+
+    // 拉長停留時間讓陪讀家長來得及唸出解說；同時保留手動「下一題」按鈕給想自己掌控節奏的人。
+    const delay = milestoneUnit ? 1400 : (correct ? 1400 : 3200);
+    const timer = setTimeout(goNext, delay);
+    nextBtn.addEventListener('click', () => {
+      clearTimeout(timer);
+      goNext();
     });
   }
 
