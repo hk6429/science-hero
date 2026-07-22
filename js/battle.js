@@ -317,6 +317,9 @@ const SciBattle = (() => {
       toast.setAttribute('role', 'status');
       toast.setAttribute('aria-live', 'polite');
       toast.innerHTML = `<strong>${milestone.icon} 巡禮 ${milestone.wins} 連勝</strong><span>${milestone.title}</span>`;
+      const offset = `${document.querySelectorAll('.first-success').length * 76}px`;
+      if (typeof toast.style?.setProperty === 'function') toast.style.setProperty('--stack-offset', offset);
+      else if (toast.style) toast.style['--stack-offset'] = String(offset);
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 4200);
     }
@@ -570,7 +573,7 @@ const SciBattle = (() => {
         const reward = SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
         if (reward.earned > 0) ctx.onEnergyGain?.(reward.earned);
       }
-      if (win && !endlessMode) ctx.onBattleWin?.();
+      if (win) ctx.onBattleWin?.();
       const endlessStatus = endlessMode
         ? `<div class="bat-rankdelta steady">♾️ 本次連勝 ${endlessStreak} 場・最佳 ${state.battle.endlessBest || 0} 場；段位分數不受影響。</div>`
         : `<div class="bat-rankdelta ${win ? 'up' : 'steady'}">${rk.ico} ${rk.name}　${win ? `${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）` : `段位進度保留（歷史最高 ${rk.pts} 分）`}</div>`;

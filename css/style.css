@@ -1205,9 +1205,9 @@ body.base-open { overflow: hidden; }
 .focus-unit-picker select { border: 1px solid #9ec7aa; border-radius: 8px; background: #fff; padding: 6px; }
 .focus-unit-picker small { color: var(--muted); }
 .bat-mission { border-left: 4px solid #d9bd69; background: #fffbea; padding: 9px 12px; font-weight: 700; }
-.energy-gain-pop { position: fixed; left: 50%; top: 36%; z-index: 2600; transform: translateX(-50%); border-radius: 999px; background: #173c2b; color: #fff6c2; padding: 10px 18px; font-size: 1.25rem; font-weight: 900; pointer-events: none; animation: energy-float 1.35s ease-out forwards; }
-@keyframes energy-float { 0% { opacity: 0; transform: translate(-50%, 18px) scale(.8); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -55px) scale(1.08); } }
-.first-success { position: fixed; left: 50%; top: 18%; z-index: 2500; transform: translateX(-50%); display: grid; gap: 4px; max-width: min(420px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 16px; background: #fffbea; padding: 16px 20px; box-shadow: 0 10px 30px #0003; text-align: center; }
+.energy-gain-pop { position: fixed; left: 50%; top: 36%; z-index: 2600; transform: translate(-50%, var(--stack-offset, 0px)); border-radius: 999px; background: #173c2b; color: #fff6c2; padding: 10px 18px; font-size: 1.25rem; font-weight: 900; pointer-events: none; animation: energy-float 1.35s ease-out forwards; }
+@keyframes energy-float { 0% { opacity: 0; transform: translate(-50%, calc(18px + var(--stack-offset, 0px))) scale(.8); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, calc(-55px + var(--stack-offset, 0px))) scale(1.08); } }
+.first-success { position: fixed; left: 50%; top: 18%; z-index: 2500; transform: translate(-50%, var(--stack-offset, 0px)); display: grid; gap: 4px; max-width: min(420px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 16px; background: #fffbea; padding: 16px 20px; box-shadow: 0 10px 30px #0003; text-align: center; }
 .endless-milestone-toast { animation: endlessMilestoneIn .5s cubic-bezier(.2, .9, .3, 1.25); overflow: visible; }
 .endless-milestone-toast::after {
   content: "✦ ✧ ✦ ✧ ✦";

@@ -467,6 +467,7 @@ const SciApp = (() => {
       state, subjectKey: activeSubject, subjectLabel,
       scope: { subject: activeSubject, unit: unitFilter, grade: gradeFilter },
       pool: currentPool(), poolForScope, recordAnswer, masteredCardCount: masteredCardCount(),
+      onBattleWin: () => recordDailySignal('battleWin'),
     });
   }
 
@@ -513,11 +514,18 @@ const SciApp = (() => {
     return { updated, milestoneUnit };
   }
 
+  function setStackOffset(node, selector, stepPx) {
+    const offset = `${document.querySelectorAll(selector).length * stepPx}px`;
+    if (typeof node.style?.setProperty === 'function') node.style.setProperty('--stack-offset', offset);
+    else if (node.style) node.style['--stack-offset'] = String(offset);
+  }
+
   function showEnergyGain(amount) {
     const pop = document.createElement('span');
     pop.className = 'energy-gain-pop';
     pop.setAttribute('role', 'status');
     pop.textContent = `+${amount}💎`;
+    setStackOffset(pop, '.energy-gain-pop', -40);
     document.body.appendChild(pop);
     setTimeout(() => pop.remove(), 1400);
   }
@@ -528,6 +536,7 @@ const SciApp = (() => {
     toast.setAttribute('role', 'status');
     toast.setAttribute('aria-live', 'polite');
     toast.textContent = `🎉 今日任務全清！+${amount}💎`;
+    setStackOffset(toast, '.first-success', 76);
     document.body.appendChild(toast);
     playMilestoneTone();
     setTimeout(() => toast.remove(), 4200);
@@ -539,6 +548,7 @@ const SciApp = (() => {
     toast.setAttribute('role', 'status');
     toast.setAttribute('aria-live', 'polite');
     toast.innerHTML = `<strong>🌟 晉升〈${promotion.rank}〉！</strong><span>基地已擴建為〈${promotion.stage}〉</span>`;
+    setStackOffset(toast, '.first-success', 76);
     document.body.appendChild(toast);
     playMilestoneTone();
     setTimeout(() => toast.remove(), 5000);
@@ -553,6 +563,7 @@ const SciApp = (() => {
     toast.className = 'first-success celebrate-in';
     toast.setAttribute('role', 'status');
     toast.innerHTML = '<strong>🌟 你踏出第一步了！</strong><span>第一個科學線索已經被你點亮。</span>';
+    setStackOffset(toast, '.first-success', 76);
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 4200);
   }
@@ -774,6 +785,11 @@ const SciApp = (() => {
     return `${total} 題裡對了 ${correctCount} 題，這輪本來就是用來找漏洞的，弱點清單已經幫你標好了，練幾輪就會有感覺。`;
   }
 
+  function selfTestUsesCloze(box, questionIndex) {
+    if (box >= 4) return true;
+    return box === 3 && questionIndex % 2 === 1;
+  }
+
   function renderQuiz(body) {
     if (quizQueue.length === 0) startQuizRound();
 
@@ -817,8 +833,10 @@ const SciApp = (() => {
       </div>
       <div class="progress-bar"><div style="width:${(quizIdx / quizQueue.length) * 100}%"></div></div>`;
 
-    // 已達一定精熟度（box>=3）的字改用克漏字回想：把「認得出來」升級成「想得出來」，答完自評對錯。
-    const clozeQ = box >= 3 ? SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, 'cloze', box) : null;
+    // box3 在客觀選擇題與主觀克漏字間交替，讓只做自測也能升到 box4；box4 維持回想練習。
+    const clozeQ = selfTestUsesCloze(box, quizIdx)
+      ? SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, 'cloze', box)
+      : null;
     if (clozeQ && clozeQ.hasBlank) {
       renderClozeQuestion(body, headHtml, target, clozeQ);
       return;
@@ -1803,7 +1821,10 @@ const SciApp = (() => {
       try {
         const text = await file.text();
         state = SciStore.importState(text);
-        if ((state.stats?.totalReviews || 0) > 0) localStorage.setItem(FIRST_SUCCESS_KEY, '1');
+        if ((state.stats?.totalReviews || 0) > 0) {
+          localStorage.setItem(FIRST_SUCCESS_KEY, '1');
+          saveJson(ONBOARDING_KEY, { flashcard: true, quiz: true, battle: true });
+        }
         SciStore.save(state);
         renderHeroStats();
         renderFusionLab();

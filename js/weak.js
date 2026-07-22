@@ -86,16 +86,16 @@ const SciWeak = (() => {
       .map(([termId, s]) => ({ termId, score: s }));
   }
 
-  // 校準落差：孩子在閃卡自評「我記住了」(flash+correct)，之後同一個詞在自測答錯(quiz+wrong)。
+  // 校準落差：孩子以閃卡／克漏字自評「我記住了」，之後同一個詞在客觀模式答錯。
   // 代表「自認會、其實還沒真的會」——純從 weakLog 依時間序推導，不新增追蹤欄位。
   function getCalibrationMisses(state) {
     const log = state.weakLog || [];
     const lastClaimed = {}; // termId -> 最近一次自評記住的時間
     const misses = {};      // termId -> 落差次數（純物件，跨測試 realm 也安全）
     for (const entry of log) {
-      if (entry.source === 'flash' && entry.correct) {
+      if ((entry.source === 'flash' || entry.source === 'cloze') && entry.correct) {
         lastClaimed[entry.termId] = entry.t;
-      } else if (entry.source === 'quiz' && !entry.correct && entry.termId in lastClaimed) {
+      } else if (!entry.correct && isObjectiveSource(entry.source) && entry.termId in lastClaimed) {
         if (entry.t >= lastClaimed[entry.termId]) {
           misses[entry.termId] = (misses[entry.termId] || 0) + 1;
           delete lastClaimed[entry.termId]; // 一次落差只記一次，下次自評才會重新計

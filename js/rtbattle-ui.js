@@ -359,6 +359,7 @@ const SciRtBattleUI = (() => {
       const season = SciRtBattle.recordSeasonResult(ctx.state, SciStore.todayStr(), verdict);
       SciStore.save(ctx.state);
       api({ op: 'seasonAdd', nick: myNick(), verdict });
+      if (verdict === 'win') ctx.onBattleWin?.();
       const titles = { win: '🏆 獲勝！', lose: '💪 惜敗', draw: '🤝 平手' };
       el.innerHTML = `<div class="card celebrate-in"><h3>${titles[verdict]}</h3><p>答對 ${state.correct}/${questions.length}・總輸出 ${state.dmg}</p><p>🗓️ ${season.key} 賽季・${esc(season.title)}（${season.pts} 分，勝率 ${season.winRate}%・連勝 ${season.streak}）</p>${verdict === 'lose' ? '<p>段位分不扣——把知識點記牢，下次贏回來！</p>' : ''}<button class="btn btn-primary" id="rt-home">回連線對戰</button></div>`;
       on('#rt-home', 'click', home);
