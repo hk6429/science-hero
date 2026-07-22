@@ -1,9 +1,9 @@
 // 每日任務只接受真實學習訊號：答對、PvE 勝場、客觀答對後的詞卡熟練度升級。
 const SciDailyQuests = (() => {
   const QUESTS = [
-    { id: 'correct', label: '今日答對 10 題', target: 10 },
+    { id: 'correct', label: '在自測或對戰中答對 10 題', target: 10 },
     { id: 'battleWin', label: '打贏 1 場', target: 1 },
-    { id: 'unitProgress', label: '今天讓 1 張詞卡升級熟練度', target: 1 },
+    { id: 'unitProgress', label: '用自測或對戰讓 1 張詞卡升級', target: 1 },
   ];
   const SUBJECTS = [
     { key: 'nature', label: '國小自然' },

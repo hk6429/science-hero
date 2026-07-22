@@ -73,29 +73,47 @@ function loadAppHarness() {
   return { app: context.__app, storage, appended, elements, makeNode };
 }
 
-test('A：首次成功在 totalReviews 遞增前取快照，兩個實際入口都觸發且只播一次', () => {
+test('A：第一次答錯不會錯過首次成功，兩個入口在首度答對時觸發且只播一次', () => {
   const quiz = loadAppHarness();
   const state = { cards: {}, stats: { streakDays: 0, lastActiveDate: null, totalReviews: 0 } };
   quiz.app.setState(state);
-  quiz.app.recordAnswer({ id: 'quiz-first', unit: 'life' }, true, 2000, 20, 'quiz');
+  quiz.app.recordAnswer({ id: 'quiz-first-wrong', unit: 'life' }, false, 2000, 20, 'quiz');
   assert.equal(state.stats.totalReviews, 1);
-  assert.equal(quiz.storage.sci_first_success_seen, '1', '首次客觀答對應寫入一次性旗標');
+  assert.equal(quiz.storage.sci_first_success_seen, undefined, '第一次答錯不得提前寫入成功旗標');
+  assert.equal(quiz.appended.filter((node) => node.className.includes('first-success')).length, 0);
+
+  quiz.app.recordAnswer({ id: 'quiz-first-correct', unit: 'life' }, true, 2000, 20, 'quiz');
+  assert.equal(state.stats.totalReviews, 2);
+  assert.equal(quiz.storage.sci_first_success_seen, '1', '首度答對應寫入一次性旗標');
   assert.equal(quiz.appended.filter((node) => node.className.includes('first-success')).length, 1);
 
-  quiz.app.recordAnswer({ id: 'quiz-second', unit: 'life' }, true, 2000, 20, 'quiz');
+  quiz.app.recordAnswer({ id: 'quiz-third', unit: 'life' }, true, 2000, 20, 'quiz');
   assert.equal(quiz.appended.filter((node) => node.className.includes('first-success')).length, 1, '第二次答對不得重播');
 
   const flash = loadAppHarness();
   const flashState = { cards: {}, stats: { streakDays: 0, lastActiveDate: null, totalReviews: 0 } };
   flash.app.setState(flashState);
-  flash.app.setFlashTerm({ id: 'flash-first', unit: 'life' });
   const feedbackCard = flash.makeNode();
   const body = flash.makeNode();
   body.querySelector = (selector) => selector === '.card' ? feedbackCard : null;
-  flash.app.answerFlash(body, true);
+
+  flash.app.setFlashTerm({ id: 'flash-first-wrong', unit: 'life' });
+  flash.app.answerFlash(body, false);
   assert.equal(flashState.stats.totalReviews, 1);
-  assert.equal(flash.storage.sci_first_success_seen, '1', '首次閃卡自評也應寫入一次性旗標');
+  assert.equal(flash.storage.sci_first_success_seen, undefined);
+
+  flash.app.setFlashTerm({ id: 'flash-first-correct', unit: 'life' });
+  flash.app.answerFlash(body, true);
+  assert.equal(flashState.stats.totalReviews, 2);
+  assert.equal(flash.storage.sci_first_success_seen, '1', '閃卡首度答對也應寫入一次性旗標');
   assert.equal(flash.appended.filter((node) => node.className.includes('first-success')).length, 1);
+
+  flash.app.setFlashTerm({ id: 'flash-third', unit: 'life' });
+  flash.app.answerFlash(body, true);
+  assert.equal(flash.appended.filter((node) => node.className.includes('first-success')).length, 1, '閃卡後續答對不得重播');
+
+  assert.doesNotMatch(source('js/app.js'), /wasFirstEver/, '不得遺留首次作答快照孤兒變數');
+  assert.doesNotMatch(source('js/ui-logic.js'), /shouldShowFirstSuccess/, '不得保留未接線的首次成功判斷');
 });
 
 test('B：實際作答流程只在客觀答對且盒序上升時完成每日單元進度與全清', () => {

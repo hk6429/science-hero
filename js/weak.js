@@ -21,7 +21,8 @@ const SciWeak = (() => {
   // 記錄一次作答結果（quiz 呼叫）：{ termId, unit, correct, elapsedMs }
   function recordAnswer(state, { termId, unit, correct, elapsedMs, contentLength = 0, source = 'quiz', recoveryStrength = 'strong' }) {
     state.weakLog = state.weakLog || [];
-    const luckyGuess = correct
+    const luckyGuess = isObjectiveSource(source)
+      && correct
       && elapsedMs < readingThresholdMs(contentLength)
       && recentPerformanceUnstable(state.weakLog, termId);
     state.weakLog.push({
@@ -122,7 +123,7 @@ const SciWeak = (() => {
       .filter(Boolean)
       .map((term, index) => `${index + 1}. ${term.term}`);
     // 誠實透明：把系統已算好的「疑似用猜的」訊號攤給家長（資料已在 weakLog，不新增追蹤）。
-    const luckyCount = (state.weakLog || []).filter((entry) => entry.luckyGuess).length;
+    const luckyCount = (state.weakLog || []).filter((entry) => entry.luckyGuess && isObjectiveSource(entry.source)).length;
     const guessLine = luckyCount
       ? `最近有 ${luckyCount} 題疑似靠猜答對（建議請孩子解釋為什麼對，確認是真的理解）。`
       : '最近沒有明顯「疑似靠猜」的作答，答對大多是真的想過的。';

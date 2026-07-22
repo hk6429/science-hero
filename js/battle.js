@@ -91,6 +91,14 @@ const SciBattle = (() => {
     return state;
   }
 
+  function applyEnemyMiss(state, damage = 4) {
+    const amount = Math.max(0, Math.floor(Number(damage)) || 0);
+    clearDamagePops(state);
+    state.oHp = Math.max(0, state.oHp - amount);
+    state.foeDamage = amount;
+    return state;
+  }
+
   function answerFeedbackClass(optionId, answerId, chosenId) {
     if (!answerId) return '';
     if (optionId === answerId) return 'correct';
@@ -537,7 +545,7 @@ const SciBattle = (() => {
           const special = (opp.tier === '高手' || opp.tier === '宗師') && battleState.round % 3 === 0;
           battleState.log = `${opp.name}${special ? ' 施放大招' : ' 出招'}——你受到 ${dmg} 點傷害`;
         } else {
-          battleState.oHp = Math.max(0, battleState.oHp - 4);
+          applyEnemyMiss(battleState, 4);
           battleState.log = `${opp.name} 一時語塞，自損 4`;
         }
         render(true);
@@ -688,7 +696,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyFollowUpDamage, applyWrongAnswer, clearDamagePops, answerFeedbackClass, endlessOpponent, recordEndlessBest, ENDLESS_MILESTONES, claimEndlessMilestone, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyFollowUpDamage, applyWrongAnswer, clearDamagePops, applyEnemyMiss, answerFeedbackClass, endlessOpponent, recordEndlessBest, ENDLESS_MILESTONES, claimEndlessMilestone, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, subjectProgress, companionForSubject, subjectCompanionArt,

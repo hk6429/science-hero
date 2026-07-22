@@ -90,10 +90,6 @@ const SciUiLogic = (() => {
     return !onboardingComplete(checklist);
   }
 
-  function shouldShowFirstSuccess(totalReviews, firstSuccessSeen) {
-    return Number(totalReviews) === 0 && !firstSuccessSeen;
-  }
-
   function soundEnabled(storedValue, prefersReducedMotion) {
     if (storedValue === '1') return false;
     if (storedValue === '0') return true;
@@ -117,6 +113,6 @@ const SciUiLogic = (() => {
     moreToolsDefaultOpen, restCardHtml, resolveInitialSubject, fusionRevealDelay,
     focusUnitWeight, focusFirst, classMilestone, dueReviewSummary, longTailUnits,
     shouldShowRestReminder,
-    normalizeOnboarding, onboardingComplete, shouldShowOnboarding, shouldShowFirstSuccess, soundEnabled, masteryPromotion,
+    normalizeOnboarding, onboardingComplete, shouldShowOnboarding, soundEnabled, masteryPromotion,
   };
 })();

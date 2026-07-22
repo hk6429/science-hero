@@ -472,7 +472,6 @@ const SciApp = (() => {
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
   function recordAnswer(target, correct, elapsedMs, contentLength = 0, source = 'quiz', recoveryStrength = 'strong') {
-    const wasFirstEver = state.stats.totalReviews === 0;
     const masteredBefore = masteredCardCount();
     const previousCard = SciStore.getCard(state, target.id);
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source, recoveryStrength });
@@ -497,7 +496,7 @@ const SciApp = (() => {
       economy: SciEconomy,
       allowCrystalReward: SciWeak.isObjectiveSource(source),
     });
-    if (correct && wasFirstEver) showFirstSuccess();
+    if (correct) showFirstSuccess();
     markOnboarding(mode === 'battle' ? 'battle' : 'quiz');
     if (correct && SciWeak.isObjectiveSource(source) && updated.box > prevBox) recordDailySignal('unitProgress', false);
     if (correct && SciWeak.isObjectiveSource(source)) recordDailySignal('correct', false);
@@ -517,9 +516,20 @@ const SciApp = (() => {
     const pop = document.createElement('span');
     pop.className = 'energy-gain-pop';
     pop.setAttribute('role', 'status');
-    pop.textContent = `+${amount} 💎`;
+    pop.textContent = `+${amount}💎`;
     document.body.appendChild(pop);
     setTimeout(() => pop.remove(), 1400);
+  }
+
+  function showDailyAllClear(amount) {
+    const toast = document.createElement('aside');
+    toast.className = 'first-success daily-all-clear-toast celebrate-in';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = `🎉 今日任務全清！+${amount}💎`;
+    document.body.appendChild(toast);
+    playMilestoneTone();
+    setTimeout(() => toast.remove(), 4200);
   }
 
   function showMasteryPromotion(promotion) {
@@ -707,11 +717,10 @@ const SciApp = (() => {
     feedbackCard?.classList.add(correct ? 'flash-correct' : 'flash-wrong');
 
     const t = flashQueue[flashIdx];
-    const wasFirstEver = state.stats.totalReviews === 0;
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
     SciFlashcard.markResult(state, t.id, correct);
     sessionAnswers += 1;
-    if (correct && wasFirstEver) showFirstSuccess();
+    if (correct) showFirstSuccess();
     markOnboarding('flashcard');
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
@@ -1153,7 +1162,15 @@ const SciApp = (() => {
   function recordDailySignal(signal, rerender = true) {
     SciDailyQuests.record(state, signal, SciStore.todayStr(), activeSubject);
     const rewards = SciDailyQuests.claimNewlyCompleted(state);
-    rewards.forEach((claimId) => SciEconomy.earnCrystals(SciDailyQuests.rewardFor(claimId), claimId === SciDailyQuests.ALL_CLEAR_ID ? 'dailyQuestBonus' : 'dailyQuest'));
+    rewards.forEach((claimId) => {
+      const result = SciEconomy.earnCrystals(
+        SciDailyQuests.rewardFor(claimId),
+        claimId === SciDailyQuests.ALL_CLEAR_ID ? 'dailyQuestBonus' : 'dailyQuest',
+      );
+      const earned = Math.max(0, Number(result?.earned) || 0);
+      if (earned > 0) showEnergyGain(earned);
+      if (claimId === SciDailyQuests.ALL_CLEAR_ID && earned > 0) showDailyAllClear(earned);
+    });
     SciStore.save(state);
     if (rerender) renderHeroStats();
   }
