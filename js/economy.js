@@ -2,6 +2,7 @@
 const SciEconomy = (() => {
   const KEY = 'sci_econ';
   const DAILY_CAP = 100;
+  const MAX_BALANCE = 999999;
   // 退款與市集錢包出金不是新產出的晶能，不佔每日獲取額度。
   const UNCAPPED = new Set(['achievement', 'fusion-refund', 'mkt-withdraw', 'mkt-refund']);
   const EARN_TABLE = { answer: 1, combo: 1, battleWin: 5, master: 3 };
@@ -10,17 +11,31 @@ const SciEconomy = (() => {
     return { v: 1, balance: 0, daily: { date: null, earned: 0 }, combo: 0, bestCombo: 0 };
   }
 
+  const clampInt = (value, max) => Math.max(0, Math.min(max, Math.floor(Number(value) || 0)));
+
+  function sanitize(value) {
+    const def = defaultEcon();
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return def;
+    const daily = value.daily && typeof value.daily === 'object' && !Array.isArray(value.daily) ? value.daily : {};
+    return {
+      v: 1,
+      balance: clampInt(value.balance, MAX_BALANCE),
+      daily: {
+        date: typeof daily.date === 'string' ? daily.date : null,
+        earned: clampInt(daily.earned, DAILY_CAP),
+      },
+      combo: clampInt(value.combo, 9999),
+      bestCombo: clampInt(value.bestCombo, 9999),
+    };
+  }
+
   function todayStr() { return new Date().toISOString().slice(0, 10); }
 
   function load() {
     const def = defaultEcon();
     try {
       const parsed = JSON.parse(localStorage.getItem(KEY));
-      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return def;
-      const daily = parsed.daily && typeof parsed.daily === 'object' && !Array.isArray(parsed.daily)
-        ? { ...def.daily, ...parsed.daily }
-        : def.daily;
-      return { ...def, ...parsed, daily, v: 1 };
+      return sanitize(parsed);
     } catch { return def; }
   }
 
@@ -67,6 +82,14 @@ const SciEconomy = (() => {
   function getBalance() { return state().balance; }
   function getBestCombo() { return state().bestCombo; }
 
+  function exportState() { return { ...state(), daily: { ...state().daily } }; }
+
+  function importState(value) {
+    econ = sanitize(value);
+    save();
+    return exportState();
+  }
+
   // 唯一作答掛鉤：app.js recordAnswer() 每答一題呼叫一次
   function onAnswer(correct, prevBox, newBox) {
     const e = state();
@@ -85,5 +108,5 @@ const SciEconomy = (() => {
     return { earned: total, combo: e.combo };
   }
 
-  return { earnCrystals, spendCrystals, getBalance, getBestCombo, onAnswer, EARN_TABLE, DAILY_CAP };
+  return { earnCrystals, spendCrystals, getBalance, getBestCombo, onAnswer, exportState, importState, EARN_TABLE, DAILY_CAP, MAX_BALANCE };
 })();

@@ -136,6 +136,9 @@ const SciMarketUI = (() => {
     renderTradePanels(info);
     await Promise.all([refreshTopbar(info), loadLists(info), loadSocial(info)]);
   }
+  async function refresh() {
+    if ($('mkt-overlay') && !$('mkt-overlay').hidden) await open();
+  }
   function close() { $('mkt-overlay').hidden = true; }
   function switchTab(name) {
     ['class', 'pub', 'stars', 'ever'].forEach((key) => { $(`mkt-${key}-pane`).hidden = key !== name; });
@@ -265,7 +268,7 @@ const SciMarketUI = (() => {
     loadLists(info);
   }
 
-  return { boot, open, close, callMkt, rulesHtml, stallHtml, listingHtml };
+  return { boot, open, close, refresh, callMkt, rulesHtml, stallHtml, listingHtml };
 })();
 
 document.addEventListener('DOMContentLoaded', SciMarketUI.boot);

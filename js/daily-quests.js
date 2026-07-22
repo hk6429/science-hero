@@ -3,7 +3,7 @@ const SciDailyQuests = (() => {
   const QUESTS = [
     { id: 'correct', label: '在自測或對戰中答對 10 題', target: 10 },
     { id: 'battleWin', label: '打贏 1 場', target: 1 },
-    { id: 'unitProgress', label: '用自測或對戰讓 1 張詞卡升級', target: 1 },
+    { id: 'unitProgress', label: '用自測或對戰讓 1 張詞卡升級或完成到期複習', target: 1 },
   ];
   const SUBJECTS = [
     { key: 'nature', label: '國小自然' },

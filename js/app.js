@@ -476,6 +476,7 @@ const SciApp = (() => {
     const previousCard = SciStore.getCard(state, target.id);
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source, recoveryStrength });
     const prevBox = previousCard.box;
+    const prevDue = previousCard.due;
     const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap, SciWeak.isObjectiveSource(source));
     const milestoneUnit = correct && SciWeak.isObjectiveSource(source)
@@ -498,7 +499,7 @@ const SciApp = (() => {
     });
     if (correct) showFirstSuccess();
     markOnboarding(mode === 'battle' ? 'battle' : 'quiz');
-    if (correct && SciWeak.isObjectiveSource(source) && updated.box > prevBox) recordDailySignal('unitProgress', false);
+    if (correct && SciWeak.isObjectiveSource(source) && updated.due > prevDue) recordDailySignal('unitProgress', false);
     if (correct && SciWeak.isObjectiveSource(source)) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
@@ -570,6 +571,7 @@ const SciApp = (() => {
   }
 
   function showScienceSurprise(surprise) {
+    if (surprise.type === 'crystals' && !(surprise.earned > 0)) return;
     const toast = document.createElement('aside');
     toast.className = 'science-surprise celebrate-in';
     toast.setAttribute('role', 'status');
@@ -1801,8 +1803,12 @@ const SciApp = (() => {
       try {
         const text = await file.text();
         state = SciStore.importState(text);
+        if ((state.stats?.totalReviews || 0) > 0) localStorage.setItem(FIRST_SUCCESS_KEY, '1');
         SciStore.save(state);
         renderHeroStats();
+        renderFusionLab();
+        if (typeof SciBase !== 'undefined') SciBase.refresh?.();
+        if (typeof SciMarketUI !== 'undefined') SciMarketUI.refresh?.();
         renderOnboarding();
         renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
         alert('進度已匯入！');

@@ -149,7 +149,7 @@ const SciRtBattleUI = (() => {
         solo.boost = {}; solo.idx += 1;
         const event = solo.script.get(solo.idx);
         if (event && event.effect !== 'heal') solo.boost[event.effect] = true;
-        el.innerHTML = `<div class="card ${correct ? 'correct' : 'wrong'}"><h3>${correct ? '✅ 答對了！' : '💡 這題記起來'}</h3>${event ? `<div class="rt-adventure">${event.emoji} 科學奇遇【${esc(event.name)}】——${esc(event.desc)}</div>` : ''}</div>`;
+        el.innerHTML = `${feedbackHtml(target, correct)}${event ? `<div class="rt-adventure">${event.emoji} 科學奇遇【${esc(event.name)}】——${esc(event.desc)}</div>` : ''}`;
         setTimeout(() => solo.idx >= solo.questions.length ? onComplete({ correct: solo.correct, dmg: solo.dmg }) : render(), 900);
       }
       render();

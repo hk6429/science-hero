@@ -361,8 +361,46 @@ const SciFusionStore = (() => {
     };
   }
 
+  function sanitizeState(value) {
+    const fallback = defaults();
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return fallback;
+    const validCubIds = new Set(CUBS.map((cub) => cub.id));
+    const validPairs = new Set(CUBS.map((cub) => pairKey(cub.pair[0], cub.pair[1])));
+    const hatched = [...new Set(Array.isArray(value.hatched) ? value.hatched : [])]
+      .filter((id) => validCubIds.has(id))
+      .slice(0, CUBS.length);
+    const nicknames = {};
+    if (value.nicknames && typeof value.nicknames === 'object' && !Array.isArray(value.nicknames)) {
+      for (const id of hatched) {
+        const nickname = String(value.nicknames[id] || '');
+        if (NICK_SET.has(nickname)) nicknames[id] = nickname;
+      }
+    }
+    const revealed = [...new Set(Array.isArray(value.revealed) ? value.revealed : [])].filter((key) => validPairs.has(key));
+    const clampCount = (count) => Math.max(0, Math.min(MAX_FUSE_PER_DAY, Math.floor(Number(count) || 0)));
+    return {
+      v: 1,
+      hatched,
+      nicknames,
+      revealed,
+      failStreak: clampCount(value.failStreak),
+      lastFuseDate: typeof value.lastFuseDate === 'string' ? value.lastFuseDate : '',
+      fuseCount: clampCount(value.fuseCount),
+      activeCub: hatched.includes(value.activeCub) ? value.activeCub : '',
+      grandBorn: value.grandBorn === true && hatched.length === CUBS.length,
+    };
+  }
+
+  function exportState() { return load(); }
+
+  function importState(value) {
+    const sanitized = sanitizeState(value);
+    save(sanitized);
+    return sanitized;
+  }
+
   return {
-    KEY, defaults, load, save, crystalBalance, spendCrystals, refundCrystals,
+    KEY, defaults, load, save, exportState, importState, crystalBalance, spendCrystals, refundCrystals,
     MASTER_GATE, ACC_GATE, ACC_WINDOW, ACC_MIN_SAMPLE, SUBJECT_ORDER,
     pairKey, accuracyBySubject, canFuse,
     CUBS, cubForPair, FUSE_COST, fuse, listCubs,

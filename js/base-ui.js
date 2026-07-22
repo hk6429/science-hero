@@ -283,6 +283,17 @@ const SciBaseUI = (() => {
     document.body.classList.remove('base-open');
   }
 
+  function refresh() {
+    const overlay = $('base-overlay');
+    if (!overlay || overlay.hidden) return;
+    base = SciBaseStore.loadBase();
+    if (showingWall) {
+      $('base-scene').innerHTML = wallHtml(SciBaseStore.getWall(getState(), base), getState()) + loreWallHtml(getLore(), getState());
+    } else {
+      renderScene();
+    }
+  }
+
   function init(opts) {
     getState = opts.getState;
     getTermsBySubject = opts.getTermsBySubject;
@@ -314,5 +325,5 @@ const SciBaseUI = (() => {
     });
   }
 
-  return { sceneHtml, wallHtml, loreWallHtml, rankWallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init };
+  return { sceneHtml, wallHtml, loreWallHtml, rankWallHtml, stylePanelHtml, plaquePanelHtml, celebrationHtml, init, refresh };
 })();

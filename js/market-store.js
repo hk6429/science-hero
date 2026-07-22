@@ -2,6 +2,7 @@
 const SciMarketStore = (() => {
   const KEY = 'sci_market';
   const DAILY_BUY_CAP = 3;
+  const MAX_ITEM_COUNT = 99;
   const ITEM_CATALOG = {
     energy: { name: '能量飲', emoji: '⚡', kind: 'tool', base: 30 },
     magnifier: { name: '放大鏡', emoji: '🔍', kind: 'tool', base: 40 },
@@ -28,19 +29,37 @@ const SciMarketStore = (() => {
   };
 
   const empty = () => ({ inv: {}, claims: [], buys: { date: '', n: 0 }, ever: [], carry: null });
-  function load() {
-    const fallback = empty();
-    try {
-      const parsed = JSON.parse(localStorage.getItem(KEY));
-      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return fallback;
-      return {
-        inv: parsed.inv && typeof parsed.inv === 'object' ? { ...parsed.inv } : {},
-        claims: Array.isArray(parsed.claims) ? parsed.claims.slice() : [],
-        buys: parsed.buys && typeof parsed.buys === 'object' ? { ...fallback.buys, ...parsed.buys } : fallback.buys,
-        ever: Array.isArray(parsed.ever) ? parsed.ever.slice(0, 100) : [],
-        carry: typeof parsed.carry === 'string' ? parsed.carry : null,
+  function sanitizeState(value) {
+    const next = empty();
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return next;
+    if (value.inv && typeof value.inv === 'object' && !Array.isArray(value.inv)) {
+      for (const id of Object.keys(ITEM_CATALOG)) {
+        const count = Math.max(0, Math.min(MAX_ITEM_COUNT, Math.floor(Number(value.inv[id]) || 0)));
+        if (count > 0) next.inv[id] = count;
+      }
+    }
+    next.claims = (Array.isArray(value.claims) ? value.claims : [])
+      .filter((claim) => claim && typeof claim.id === 'string' && ITEM_CATALOG[claim.itemId])
+      .slice(0, 100);
+    if (value.buys && typeof value.buys === 'object' && !Array.isArray(value.buys)) {
+      next.buys = {
+        date: typeof value.buys.date === 'string' ? value.buys.date : '',
+        n: Math.max(0, Math.min(DAILY_BUY_CAP, Math.floor(Number(value.buys.n) || 0))),
       };
-    } catch { return fallback; }
+    }
+    next.ever = (Array.isArray(value.ever) ? value.ever : [])
+      .filter((entry) => entry && ITEM_CATALOG[entry.itemId] && ['sold', 'bought'].includes(entry.dir))
+      .slice(0, 100)
+      .map((entry) => ({ itemId: entry.itemId, dir: entry.dir, peer: String(entry.peer || ''), ts: Number(entry.ts) || Date.now() }));
+    next.carry = typeof value.carry === 'string' && ITEM_CATALOG[value.carry]?.kind === 'tool' && next.inv[value.carry] > 0
+      ? value.carry
+      : null;
+    return next;
+  }
+  function load() {
+    try {
+      return sanitizeState(JSON.parse(localStorage.getItem(KEY)));
+    } catch { return empty(); }
   }
   let state = load();
   function save() {
@@ -163,12 +182,23 @@ const SciMarketStore = (() => {
     return result || { ok: false };
   }
 
+  function exportState() {
+    return { ...state, inv: { ...state.inv }, claims: state.claims.slice(), buys: { ...state.buys }, ever: state.ever.slice() };
+  }
+
+  function importState(value) {
+    state = sanitizeState(value);
+    save();
+    return exportState();
+  }
+
   return {
-    ITEM_CATALOG, TIER_LABEL, THANKS_CARDS, DAILY_BUY_CAP,
+    ITEM_CATALOG, TIER_LABEL, THANKS_CARDS, DAILY_BUY_CAP, MAX_ITEM_COUNT,
     tierOf, bandOf, isMarketOpen, nextOpenText, classInfo,
     getInv, grantItem, removeItem, buyDirect,
     setCarry, getCarry, takeCarry, toolEffect,
     getClaims, addClaim, removeClaim, buysToday, bumpBuys,
     recordEver, getEver, settleToLocal, refundLocal, payLocal, redeemDeco,
+    exportState, importState,
   };
 })();

@@ -42,11 +42,23 @@ const SciStore = (() => {
   }
 
   function exportState(state) {
-    return JSON.stringify(state, null, 2);
+    return JSON.stringify({
+      version: 2,
+      core: state,
+      econ: typeof SciEconomy !== 'undefined' ? SciEconomy.exportState() : null,
+      fusion: typeof SciFusionStore !== 'undefined' ? SciFusionStore.exportState() : null,
+      base: typeof SciBaseStore !== 'undefined' ? SciBaseStore.exportState() : null,
+      market: typeof SciMarketStore !== 'undefined' ? SciMarketStore.exportState() : null,
+    }, null, 2);
   }
 
   function importState(json) {
-    const parsed = JSON.parse(json);
+    const imported = JSON.parse(json);
+    if (imported && Object.prototype.hasOwnProperty.call(imported, 'version') && imported.version !== 2) {
+      throw new TypeError('不支援的進度檔版本');
+    }
+    const parsed = imported && imported.version === 2 ? imported.core : imported;
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new TypeError('進度檔格式不正確');
     parsed.cards = parsed.cards || {};
     parsed.stats = parsed.stats || { streakDays: 0, lastActiveDate: null, totalReviews: 0 };
     // 匯入時把 SRS 欄位夾回合法範圍，擋掉最粗糙的越界偽造
@@ -58,6 +70,12 @@ const SciStore = (() => {
       card.wrong = Math.max(0, Math.round(Number(card.wrong) || 0));
       card.due = Number(card.due) || 0;
       parsed.cards[id] = card;
+    }
+    if (imported && imported.version === 2) {
+      if (typeof SciEconomy !== 'undefined' && imported.econ) SciEconomy.importState(imported.econ);
+      if (typeof SciFusionStore !== 'undefined' && imported.fusion) SciFusionStore.importState(imported.fusion);
+      if (typeof SciBaseStore !== 'undefined' && imported.base) SciBaseStore.importState(imported.base);
+      if (typeof SciMarketStore !== 'undefined' && imported.market) SciMarketStore.importState(imported.market);
     }
     return parsed;
   }

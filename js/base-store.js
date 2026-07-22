@@ -9,15 +9,9 @@ const SciBaseStore = (() => {
   }
 
   function loadBase() {
-    const def = defaultBase();
     try {
-      const parsed = JSON.parse(localStorage.getItem(BASE_KEY));
-      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return def;
-      const merged = { ...def, ...parsed, v: 1 };
-      if (!Array.isArray(merged.celebrated)) merged.celebrated = [];
-      merged.researchDonations = Math.max(0, Math.floor(Number(merged.researchDonations) || 0));
-      return merged;
-    } catch { return def; }
+      return sanitizeState(JSON.parse(localStorage.getItem(BASE_KEY)));
+    } catch { return defaultBase(); }
   }
 
   function saveBase(state) {
@@ -343,8 +337,45 @@ const SciBaseStore = (() => {
     };
   }
 
+  function sanitizeState(value) {
+    const next = defaultBase();
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return next;
+    if (value.placements && typeof value.placements === 'object' && !Array.isArray(value.placements)) {
+      for (const [id, pos] of Object.entries(value.placements)) {
+        if (String(id).startsWith('d-') && pos && Number.isFinite(pos.x) && Number.isFinite(pos.y)) {
+          next.placements[id] = { x: clampPct(pos.x), y: clampPct(pos.y) };
+        }
+      }
+    }
+    if (value.styles && typeof value.styles === 'object' && !Array.isArray(value.styles)) {
+      for (const [subject, shop] of Object.entries(STYLE_SHOP)) {
+        const saved = value.styles[subject];
+        if (!saved || typeof saved !== 'object' || Array.isArray(saved)) continue;
+        const owned = [...new Set([0, ...(Array.isArray(saved.owned) ? saved.owned : [])])]
+          .filter((index) => Number.isInteger(index) && index >= 0 && index < shop.length);
+        next.styles[subject] = { owned, active: owned.includes(saved.active) ? saved.active : 0 };
+      }
+    }
+    if (value.plaques && typeof value.plaques === 'object' && !Array.isArray(value.plaques)) {
+      for (const target of PLAQUE_TARGETS) setPlaque(next, target, value.plaques[target]);
+      const mottoId = Array.isArray(value.plaques.motto) ? value.plaques.motto[0] : null;
+      if (mottoId) setMotto(next, mottoId);
+    }
+    next.celebrated = [...new Set(Array.isArray(value.celebrated) ? value.celebrated.filter((id) => typeof id === 'string') : [])].slice(0, 5000);
+    next.researchDonations = Math.max(0, Math.min(9999, Math.floor(Number(value.researchDonations) || 0)));
+    return next;
+  }
+
+  function exportState() { return loadBase(); }
+
+  function importState(value) {
+    const sanitized = sanitizeState(value);
+    saveBase(sanitized);
+    return sanitized;
+  }
+
   return {
-    BASE_KEY, RESEARCH_DONATION_COST, defaultBase, loadBase, saveBase,
+    BASE_KEY, RESEARCH_DONATION_COST, defaultBase, loadBase, saveBase, exportState, importState,
     STAGES, countMastered, mainStage,
     PAVILIONS, FLOURISH_TIERS, flourishTier, getPavilions,
     DECOR_THEMES, GRADES, gradeOf, DECOR_CAP, getDecorations, decorSummary,
