@@ -62,6 +62,10 @@ const SciClassBoard = (() => {
         <span>本班總精通量</span>
         <strong id="classboard-total">—</strong>
         <small>個知識點</small>
+        <div id="classboard-milestone" class="classboard-milestone" hidden>
+          <div class="classboard-milestone-bar"><span></span></div>
+          <p></p>
+        </div>
       </div>
       <form id="classboard-form" class="classboard-form">
         <label>班級碼
@@ -100,7 +104,12 @@ const SciClassBoard = (() => {
   }
 
   function renderBoard(result) {
-    $('classboard-total').textContent = String(Math.max(0, Math.floor(Number(result.total) || 0)));
+    const milestone = SciUiLogic.classMilestone(result.total);
+    $('classboard-total').textContent = String(milestone.total);
+    const milestoneEl = $('classboard-milestone');
+    milestoneEl.hidden = false;
+    milestoneEl.querySelector('span').style.width = `${milestone.pct}%`;
+    milestoneEl.querySelector('p').textContent = `全班再精通 ${milestone.remaining} 個知識點，就一起抵達 ${milestone.target} 里程碑！`;
     const members = Array.isArray(result.members) ? result.members.slice(0, 50) : [];
     $('classboard-members').innerHTML = members.length
       ? members.map((member) => `<li class="classboard-member"><span>${esc(member.nick)}</span><strong>${cleanMastered(member.mastered)} 個</strong></li>`).join('')

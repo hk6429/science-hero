@@ -62,11 +62,12 @@ const SciBaseUI = (() => {
 
   function loreWallHtml(cards, state) {
     const unlocked = new Set(state?.stats?.scienceLore || []);
-    const items = cards.filter((card) => unlocked.has(card.id)).map((card) =>
-      `<article class="sb-lore-card"><span>${esc(card.icon)}</span><h4>${esc(card.title)}</h4>` +
-      `<b>${esc(card.who)}・${esc(card.year)}</b><p>${esc(card.blurb)}</p></article>`,
+    const items = cards.map((card) => unlocked.has(card.id)
+      ? `<article class="sb-lore-card"><span>${esc(card.icon)}</span><h4>${esc(card.title)}</h4>` +
+        `<b>${esc(card.who)}・${esc(card.year)}</b><p>${esc(card.blurb)}</p></article>`
+      : '<article class="sb-lore-card is-locked" aria-label="尚未解鎖的科學史卡"><span aria-hidden="true">❓</span><h4>尚未解鎖</h4><p>精通對應單元後，故事就會在這裡現身。</p></article>',
     ).join('');
-    return `<h3 class="sb-sub">科學史圖鑑</h3><div class="sb-lore-grid">${items || '<p>精通一個對應單元，就會在這裡點亮科學史卡。</p>'}</div>`;
+    return `<h3 class="sb-sub">科學史圖鑑</h3><div class="sb-lore-grid">${items || '<p>圖鑑準備中。</p>'}</div>`;
   }
 
   // 純函式：樣式面板／門牌面板／慶典卡

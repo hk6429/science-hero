@@ -97,7 +97,8 @@ const SciBattle = (() => {
 
   function rankInfo(state) {
     const r = rankState(state);
-    const p = r.pts;
+    // 對孩子顯示的是歷史最高進度：戰敗不讓段位條倒退，也不呈現懲罰。
+    const p = Math.max(r.pts, r.peak || 0);
     let i = 0;
     while (i + 1 < RANKS.length && p >= RANKS[i + 1].at) i++;
     const cur = RANKS[i];
@@ -107,9 +108,11 @@ const SciBattle = (() => {
 
   function rankWin(state) {
     const r = rankState(state);
-    r.pts += 20;
+    const cap = RANKS[RANKS.length - 1].at;
+    const before = r.pts;
+    r.pts = Math.min(cap, r.pts + 20);
     r.peak = Math.max(r.peak, r.pts);
-    return { delta: 20, ...rankInfo(state) };
+    return { delta: r.pts - before, ...rankInfo(state) };
   }
 
   function rankLose(state) {
@@ -269,6 +272,7 @@ const SciBattle = (() => {
       const carry = marketReady ? SciMarketStore.getCarry() : null;
       const carryItems = marketReady ? Object.entries(SciMarketStore.ITEM_CATALOG).filter(([id, item]) => item.kind === 'tool' && inventory[id] > 0) : [];
       el.innerHTML = `
+        <p class="bat-mission">🔥 任務：守護科學的知識之火</p>
         <p class="bat-hint">在「${subjectLabel}」目前選定的範圍內出題，挑一位對手開打！</p>
         ${rankStrip()}
         ${companionCard()}
@@ -306,7 +310,7 @@ const SciBattle = (() => {
     // ── PvE ──
     function start(o) {
       opp = o;
-      battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, round: 0, bestCombo: 0, totalDamage: 0, maxDamage: 0, log: opp.taunt };
+      battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, round: 0, bestCombo: 0, totalDamage: 0, maxDamage: 0, log: `守護知識之火！${opp.taunt}` };
       if (typeof SciMarketStore !== 'undefined') {
         const carried = SciMarketStore.takeCarry();
         if (carried) {
@@ -450,13 +454,16 @@ const SciBattle = (() => {
         if (!beaten.includes(opp.id)) beaten.push(opp.id);
       }
       SciStore.save(state);
-      if (win) SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
+      if (win) {
+        const reward = SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
+        if (reward.earned > 0) ctx.onEnergyGain?.(reward.earned);
+      }
       if (win) ctx.onBattleWin?.();
       el.innerHTML = `<div class="card celebrate-in">
         <div class="bat-result-emoji">${win ? '🏆' : '💀'}</div>
         <p>${win ? `擊敗 ${opp.name}！` : `不敵 ${opp.name}……`}</p>
         <div class="bat-quote">「${win ? opp.lose : opp.win}」</div>
-        <div class="bat-rankdelta ${win ? 'up' : 'down'}">${rk.ico} ${rk.name}　${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）${rk.shield ? '　🛡️ 本週首敗保護，不扣分！' : ''}</div>
+        <div class="bat-rankdelta ${win ? 'up' : 'steady'}">${rk.ico} ${rk.name}　${win ? `${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）` : `段位進度保留（歷史最高 ${rk.pts} 分）`}</div>
         <div class="bat-record-summary"><span>最高連擊 <b>${battleState.bestCombo}</b></span><span>總輸出 <b>${battleState.totalDamage}</b></span><span>最高傷害 <b>${battleState.maxDamage}</b></span></div>
         <div class="btn-row">
           <button class="btn btn-secondary" id="bat-back">回對手選單</button>

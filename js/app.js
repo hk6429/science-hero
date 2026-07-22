@@ -56,6 +56,9 @@ const SciApp = (() => {
   };
 
   const DAILY_GOAL = 10;
+  const FOCUS_KEY = 'sci_focus_units';
+  const ONBOARDING_KEY = 'sci_onboarding_checklist';
+  const FIRST_SUCCESS_KEY = 'sci_first_success_seen';
 
   let state = null;
   let activeSubject = 'nature';
@@ -69,6 +72,9 @@ const SciApp = (() => {
   let familySummaryDialog = null;
   let parentGuideDialog = null;
   let fusionDialog = null;
+  let journeyDialog = null;
+  let sessionAnswers = 0;
+  let restReminderDismissed = false;
 
   // ---- 閃卡狀態（依科目分開保留，切分頁不會弄丟進度）----
   const flashState = new Map();
@@ -87,6 +93,25 @@ const SciApp = (() => {
   let quizAnswered = false;
 
   function el(sel) { return document.querySelector(sel); }
+
+  function loadJson(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
+  }
+
+  function saveJson(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* 本機儲存不可用時仍可繼續學習。 */ }
+  }
+
+  function focusUnitFor(subject = activeSubject) {
+    return loadJson(FOCUS_KEY, {})[subject] || null;
+  }
+
+  function setFocusUnit(subject, unit) {
+    const saved = loadJson(FOCUS_KEY, {});
+    if (unit) saved[subject] = unit;
+    else delete saved[subject];
+    saveJson(FOCUS_KEY, saved);
+  }
 
   function themeColor(token, fallback) {
     return getComputedStyle(document.documentElement).getPropertyValue(token).trim() || fallback;
@@ -188,7 +213,7 @@ const SciApp = (() => {
   function currentPool() {
     let pool = unitFilter ? terms.filter((t) => t.unit === unitFilter) : terms;
     if (gradeFilter) pool = pool.filter((t) => String(t.grade) === gradeFilter);
-    return pool;
+    return unitFilter ? pool : SciUiLogic.focusFirst(pool, focusUnitFor());
   }
 
   function masteryPct(list) {
@@ -357,7 +382,16 @@ const SciApp = (() => {
         <span class="unit-chip-label">${label}</span>
       </button>`;
     }).join('');
-    wrap.innerHTML = chips;
+    const focusUnit = focusUnitFor();
+    wrap.innerHTML = `<label class="focus-unit-picker">🎯 本週想主攻
+      <select aria-label="選擇本週想主攻的單元"><option value="">自由探索</option>${units.map((u) => `<option value="${u}" ${u === focusUnit ? 'selected' : ''}>${UNIT_LABELS[u] || u}</option>`).join('')}</select>
+      <small>只提高出題優先權，不會排除其他單元。</small></label>${chips}`;
+    wrap.querySelector('.focus-unit-picker select')?.addEventListener('change', (event) => {
+      setFocusUnit(activeSubject, event.target.value || null);
+      flashQueue = [];
+      quizQueue = [];
+      renderLearningBody(panel);
+    });
     wrap.querySelectorAll('.unit-chip').forEach((btn) => {
       btn.addEventListener('click', () => selectUnitFilter(btn.dataset.unit, panel));
     });
@@ -399,6 +433,7 @@ const SciApp = (() => {
       cubMods: SciFusionStore.cubBattleMods(SciFusionStore.load()),
       cubArt,
       onBattleWin: () => recordDailySignal('battleWin'),
+      onEnergyGain: showEnergyGain,
     });
   }
 
@@ -425,22 +460,61 @@ const SciApp = (() => {
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, seen: previousCard.seen });
     const prevBox = previousCard.box;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct);
-    SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
+    const energy = SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
     state.stats.totalReviews += 1;
+    sessionAnswers += 1;
     const surprise = SciScienceRewards.triggerSurprise({
       correct,
       rng: SciScienceRewards.mulberry32(SciScienceRewards.hashSeed(`${SciStore.todayStr()}:${target.id}:${state.stats.totalReviews}`)),
       facts: scienceTrivia,
       economy: SciEconomy,
     });
-    if (state.stats.totalReviews === 1) renderOnboarding();
+    if (correct) showFirstSuccess();
+    markOnboarding(mode === 'battle' ? 'battle' : 'quiz');
     if (correct) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
     correct ? playCorrectTone() : playWrongTone();
+    if (energy.earned > 0) showEnergyGain(energy.earned);
+    maybeShowRestReminder();
     if (surprise.hit) showScienceSurprise(surprise);
+  }
+
+  function showEnergyGain(amount) {
+    const pop = document.createElement('span');
+    pop.className = 'energy-gain-pop';
+    pop.setAttribute('role', 'status');
+    pop.textContent = `+${amount} 💎`;
+    document.body.appendChild(pop);
+    setTimeout(() => pop.remove(), 1400);
+  }
+
+  function showFirstSuccess() {
+    try {
+      if (localStorage.getItem(FIRST_SUCCESS_KEY)) return;
+      localStorage.setItem(FIRST_SUCCESS_KEY, '1');
+    } catch { /* 儀式只顯示一次是加值；儲存失敗不影響作答。 */ }
+    const toast = document.createElement('aside');
+    toast.className = 'first-success celebrate-in';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = '<strong>🌟 你踏出第一步了！</strong><span>第一個科學線索已經被你點亮。</span>';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4200);
+  }
+
+  function maybeShowRestReminder() {
+    if (!SciUiLogic.shouldShowRestReminder(sessionAnswers, restReminderDismissed) || el('.rest-reminder')) return;
+    const reminder = document.createElement('aside');
+    reminder.className = 'rest-reminder';
+    reminder.setAttribute('role', 'status');
+    reminder.innerHTML = '<span>👀 已經練了一段時間，休息一下、看看遠方，保護眼睛。</span><button type="button" aria-label="關閉休息提醒">知道了</button>';
+    document.body.appendChild(reminder);
+    reminder.querySelector('button').addEventListener('click', () => {
+      restReminderDismissed = true;
+      reminder.remove();
+    });
   }
 
   function showScienceSurprise(surprise) {
@@ -590,12 +664,15 @@ const SciApp = (() => {
     const t = flashQueue[flashIdx];
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
     SciFlashcard.markResult(state, t.id, correct);
-    if (state.stats.totalReviews === 1) renderOnboarding();
+    sessionAnswers += 1;
+    if (correct) showFirstSuccess();
+    markOnboarding('flashcard');
     if (correct) recordDailySignal('correct', false);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
     correct ? playCorrectTone() : playWrongTone();
+    maybeShowRestReminder();
 
     const milestoneUnit = correct ? checkUnitMilestone(t.unit) : null;
     flashIdx += 1;
@@ -619,7 +696,8 @@ const SciApp = (() => {
     const now = Date.now();
     quizQueue = SciQuiz.weightedSample(
       pool,
-      (t) => SciQuiz.quizWeight(SciStore.getCard(state, t.id), weakScores.get(t.id) || 0, now),
+      (t) => SciQuiz.quizWeight(SciStore.getCard(state, t.id), weakScores.get(t.id) || 0, now)
+        * SciUiLogic.focusUnitWeight(t, focusUnitFor()),
       Math.min(15, pool.length),
     );
     quizIdx = 0;
@@ -860,15 +938,25 @@ const SciApp = (() => {
       ? `<p class="weak-accuracy">本科近 30 題正確率 <strong>${Math.round(accuracy.accuracy * 100)}%</strong>（${accuracy.total} 題）</p>`
       : '<p class="weak-accuracy">本科還沒有作答紀錄，先去自測練幾題吧。</p>';
     const exportHtml = '<button id="family-summary-btn" class="btn btn-secondary family-summary-btn" type="button">📋 給老師／家長看</button>';
+    const unitProgress = [...new Set(terms.map((term) => term.unit))].map((unit) => ({
+      key: unit,
+      label: UNIT_LABELS[unit] || unit,
+      mastered: unitStatus(terms.filter((term) => term.unit === unit)) === 'mastered',
+    }));
+    const longTail = SciUiLogic.longTailUnits(unitProgress);
+    const longTailHtml = longTail.length
+      ? `<p class="long-tail-guide">🏔️ 就差這幾個單元登頂了：<strong>${longTail.join('、')}</strong>。挑一個慢慢收尾就好。</p>`
+      : '';
 
     if (weakUnits.length === 0 && weakTerms.length === 0) {
-      body.innerHTML = `${accuracyHtml}${exportHtml}<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
+      body.innerHTML = `${accuracyHtml}${longTailHtml}${exportHtml}<div class="card"><p>還沒有作答紀錄——去自測闖個幾輪，這裡就會幫你標出真正該加強的地方。</p></div>`;
       wireWeakActions(body);
       return;
     }
 
     body.innerHTML = `
       ${accuracyHtml}
+      ${longTailHtml}
       ${exportHtml}
       <p class="weak-intro">🧭 進步地圖：這幾個地方再練一次就會更熟</p>
       <div class="card">
@@ -967,6 +1055,15 @@ const SciApp = (() => {
     const questList = el('#daily-quests');
     if (questList) questList.innerHTML = SciDailyQuests.list(state).map((quest) =>
       `<li class="${quest.done ? 'done' : ''}">${quest.done ? '✓' : '○'} ${quest.label}（${quest.value}/${quest.target}）</li>`).join('');
+    const reviewHint = el('#return-review-hint');
+    if (reviewHint) {
+      const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+      const due = SciUiLogic.dueReviewSummary(state, Date.now(), maxBox);
+      reviewHint.hidden = !(state.stats.totalReviews > 0 && due.due > 0);
+      reviewHint.innerHTML = due.due > 0
+        ? `🌿 今天有 <b>${due.due}</b> 張卡可以複習${due.evergreen ? `，其中 ${due.evergreen} 張精熟卡也可以溫和回來看看` : ''}。`
+        : '';
+    }
   }
 
   function recordDailySignal(signal, rerender = true) {
@@ -981,15 +1078,32 @@ const SciApp = (() => {
     const guide = el('#new-player-guide');
     const moreTools = el('#more-tools');
     const isNew = state.stats.totalReviews === 0;
-    if (guide) guide.hidden = !isNew;
+    const checklist = SciUiLogic.normalizeOnboarding(loadJson(ONBOARDING_KEY, {}));
+    if (guide) guide.hidden = SciUiLogic.onboardingComplete(checklist);
     if (moreTools) moreTools.open = SciUiLogic.moreToolsDefaultOpen({ isNew });
+    guide?.querySelectorAll('[data-onboard-check]').forEach((checkbox) => {
+      checkbox.checked = checklist[checkbox.dataset.onboardCheck];
+      checkbox.onchange = () => {
+        checklist[checkbox.dataset.onboardCheck] = checkbox.checked;
+        saveJson(ONBOARDING_KEY, checklist);
+        renderOnboarding();
+      };
+    });
     guide?.querySelectorAll('[data-onboard]').forEach((button) => {
-      button.addEventListener('click', () => {
+      button.onclick = () => {
         mode = button.dataset.onboard;
         renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
         el('#tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      };
     });
+  }
+
+  function markOnboarding(task) {
+    const checklist = SciUiLogic.normalizeOnboarding(loadJson(ONBOARDING_KEY, {}));
+    if (!Object.prototype.hasOwnProperty.call(checklist, task) || checklist[task]) return;
+    checklist[task] = true;
+    saveJson(ONBOARDING_KEY, checklist);
+    renderOnboarding();
   }
 
   // ================= 戰績卡片（免帳號免雲端的「被看見」管道）=================
@@ -1167,6 +1281,9 @@ const SciApp = (() => {
 
   function fusionNoticeHtml() {
     if (!fusionNotice) return '';
+    if (fusionNotice.type === 'hatching') {
+      return '<div class="fusion-notice is-hatching" role="status" aria-live="polite"><div class="fusion-egg" aria-hidden="true">🥚</div><strong>雙科光芒正在匯聚……</strong></div>';
+    }
     if (fusionNotice.type === 'success') {
       const cub = fusionNotice.cub;
       return `<div class="fusion-notice is-success celebrate-in">
@@ -1196,7 +1313,8 @@ const SciApp = (() => {
       return `<section class="fusion-grand is-born"><div class="fusion-grand-face">${cubArt(grand, 'grand')}</div>
         <div class="fusion-grand-body"><span class="fusion-grand-kicker">終局・科學守護者</span>
         <h3>${escapeHtml(grand.name)}</h3><p>${escapeHtml(grand.bornLine)}</p>
-        <button class="btn btn-primary" data-prestige="1">開啟科學守護者巡禮</button></div></section>`;
+        <div class="fusion-actions"><button class="btn btn-primary" data-prestige="1">開啟科學守護者巡禮</button>
+        <button class="btn btn-secondary" data-museum="1">參觀融合博物館</button></div></div></section>`;
     }
     const gate = SciFusionStore.canFuseGrand(fstate);
     if (gate.ok) {
@@ -1279,9 +1397,19 @@ const SciApp = (() => {
       const next = SciFusionStore.load();
       const result = SciFusionStore.fuse(next, state, a, b, { today, meta: { maxBox } });
       if (result.ok) {
-        fusionNotice = result.result === 'success' ? { type: 'success', cub: result.cub }
-          : { type: 'fail', line: result.line, refund: result.refund };
         SciFusionStore.save(next);
+        if (result.result === 'success') {
+          const finalNotice = { type: 'success', cub: result.cub };
+          const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+          const delay = SciUiLogic.fusionRevealDelay(reduced);
+          if (delay > 0) {
+            fusionNotice = { type: 'hatching' };
+            renderFusionLab();
+            setTimeout(() => { fusionNotice = finalNotice; renderFusionLab(); }, delay);
+            return;
+          }
+          fusionNotice = finalNotice;
+        } else fusionNotice = { type: 'fail', line: result.line, refund: result.refund };
       } else {
         const text = result.reason === 'crystals' ? '晶能不足。'
           : result.reason === 'daily-limit' ? '今日融合次數已用完。' : '融合條件還沒有全部達成。';
@@ -1312,6 +1440,23 @@ const SciApp = (() => {
       renderFusionLab();
     }));
     body.querySelectorAll('[data-prestige]').forEach((button) => button.addEventListener('click', renderPrestige));
+    body.querySelectorAll('[data-museum]').forEach((button) => button.addEventListener('click', renderFusionMuseum));
+  }
+
+  function renderFusionMuseum() {
+    const body = el('#fusion-body');
+    if (!body) return;
+    const fstate = SciFusionStore.load();
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const data = SciFusionStore.buildPrestigeData(fstate, state, { maxBox });
+    body.innerHTML = `<button class="fusion-back" type="button">← 回融合坊</button><section class="fusion-museum card">
+      <p class="prestige-kicker">永久榮譽陳列</p><h2>🏛️ 融合博物館</h2>
+      <p>這裡收藏你用真實精通成果迎接的夥伴，不會過期，也不需要重刷。</p>
+      <h3>四科精靈</h3><div class="prestige-spirit-row">${data.spirits.map((spirit) => `<div class="prestige-spirit"><span>${escapeHtml(spirit.spiritEmoji)}</span><b>${escapeHtml(spirit.spiritName)}</b><small>${escapeHtml(spirit.label)}・精通 ${spirit.mastered} 張</small></div>`).join('')}</div>
+      <h3>已收集稚靈</h3><div class="fusion-museum-grid">${data.cubs.filter((cub) => cub.owned).map((cub) => `<article>${cubArt(cub)}<b>${escapeHtml(cub.displayName)}</b><p>${escapeHtml(cub.bornLine)}</p></article>`).join('')}</div>
+      <h3>元靈聖獸</h3><div class="fusion-museum-grand">${cubArt(data.grand, 'grand')}<b>${escapeHtml(data.grand.name)}</b></div>
+    </section>`;
+    body.querySelector('.fusion-back').addEventListener('click', renderFusionLab);
   }
 
   function renderPrestige() {
@@ -1422,6 +1567,29 @@ const SciApp = (() => {
     else if (overlay) overlay.hidden = true;
   }
 
+  function renderJourney() {
+    const body = el('#journey-body');
+    if (!body) return;
+    const mastered = masteredCardCount();
+    const rank = SciBattle.rankInfo(state);
+    const loreCount = SciScienceRewards.unlockedLore(state, scienceLore).length;
+    const fusion = SciFusionStore.load();
+    const cubCount = SciFusionStore.listCubs(fusion).length;
+    body.innerHTML = `<p class="journey-intro">你走過的每一步，都來自真正答過、記住與精通的內容。</p>
+      <div class="journey-grid">
+        <article><span>⭐</span><b>精通稱號</b><strong>${escapeHtml(rankLabel(mastered))}</strong><small>${mastered} 張精通詞卡</small></article>
+        <article><span>${rank.ico}</span><b>PvE 段位</b><strong>${escapeHtml(rank.name)}</strong><small>${rank.next ? `距下一段 ${rank.next.at - rank.pts} 分` : '已達頂點'}</small></article>
+        <article><span>📜</span><b>科學史圖鑑</b><strong>${loreCount} / ${scienceLore.length}</strong><small>已點亮的科學故事</small></article>
+        <article><span>🧬</span><b>融合收藏</b><strong>${cubCount} / ${SciFusionStore.CUBS.length}</strong><small>已迎接的稚靈</small></article>
+        <article><span>🌌</span><b>終局巡禮</b><strong>${fusion.grandBorn ? '已完成' : '探索中'}</strong><small>${fusion.grandBorn ? '元靈聖獸已誕生' : '依自己的步調前進'}</small></article>
+      </div>`;
+  }
+
+  function openJourney() {
+    renderJourney();
+    journeyDialog?.open();
+  }
+
   // ================= 進度匯出／匯入 =================
   function wireIoButtons() {
     const exportBtn = el('#export-btn');
@@ -1436,10 +1604,13 @@ const SciApp = (() => {
     familySummaryDialog = createDialogController(familyOverlay);
     parentGuideDialog = createDialogController(parentGuideOverlay);
     fusionDialog = createDialogController(el('#fusion-overlay'));
+    journeyDialog = createDialogController(el('#journey-overlay'));
     const closeFamilySummary = () => familySummaryDialog?.close();
     const closeParentGuide = () => parentGuideDialog?.close();
     if (shareBtn) shareBtn.addEventListener('click', shareStatsCard);
     if (fusionBtn) fusionBtn.addEventListener('click', openFusionLab);
+    el('#journey-btn')?.addEventListener('click', openJourney);
+    el('#journey-close')?.addEventListener('click', () => journeyDialog?.close());
     if (rtBattleBtn) rtBattleBtn.addEventListener('click', () => {
       mode = 'rtbattle';
       renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
