@@ -40,13 +40,25 @@ const SciUiLogic = (() => {
     return { total, target, remaining: target - total, pct: Math.round((total / target) * 100) };
   }
 
-  function dueReviewSummary(state, now = Date.now(), maxBox = 4) {
-    const cards = Object.values((state && state.cards) || {});
-    const dueCards = cards.filter((card) => (card.seen || 0) > 0 && Number(card.due) <= now);
-    return {
+  function dueReviewSummary(state, now = Date.now(), maxBox = 4, termsBySubject = null) {
+    const cardsById = (state && state.cards) || {};
+    const dueIds = Object.keys(cardsById).filter((id) => {
+      const card = cardsById[id];
+      return (card.seen || 0) > 0 && Number(card.due) <= now;
+    });
+    const dueCards = dueIds.map((id) => cardsById[id]);
+    const summary = {
       due: dueCards.length,
       evergreen: dueCards.filter((card) => Number(card.box) >= maxBox).length,
     };
+    if (!termsBySubject || typeof termsBySubject !== 'object') return summary;
+    const dueSet = new Set(dueIds);
+    summary.bySubject = Object.entries(termsBySubject).map(([key, ids]) => {
+      const subjectCards = (Array.isArray(ids) ? ids : []).filter((id) => dueSet.has(id)).map((id) => cardsById[id]);
+      return { key, due: subjectCards.length, evergreen: subjectCards.filter((card) => Number(card.box) >= maxBox).length };
+    }).filter((item) => item.due > 0).sort((a, b) => b.due - a.due);
+    summary.targetSubject = summary.bySubject[0]?.key || null;
+    return summary;
   }
 
   function longTailUnits(units) {
@@ -72,6 +84,16 @@ const SciUiLogic = (() => {
     return checklist.flashcard && checklist.quiz && checklist.battle;
   }
 
+  function shouldShowOnboarding(totalReviews, masteredCount, checklist) {
+    if (Number(totalReviews) === 0) return true;
+    if (Number(masteredCount) > 0) return false;
+    return !onboardingComplete(checklist);
+  }
+
+  function shouldShowFirstSuccess(totalReviews, firstSuccessSeen) {
+    return Number(totalReviews) === 0 && !firstSuccessSeen;
+  }
+
   function soundEnabled(storedValue, prefersReducedMotion) {
     if (storedValue === '1') return false;
     if (storedValue === '0') return true;
@@ -95,6 +117,6 @@ const SciUiLogic = (() => {
     moreToolsDefaultOpen, restCardHtml, resolveInitialSubject, fusionRevealDelay,
     focusUnitWeight, focusFirst, classMilestone, dueReviewSummary, longTailUnits,
     shouldShowRestReminder,
-    normalizeOnboarding, onboardingComplete, soundEnabled, masteryPromotion,
+    normalizeOnboarding, onboardingComplete, shouldShowOnboarding, shouldShowFirstSuccess, soundEnabled, masteryPromotion,
   };
 })();

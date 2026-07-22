@@ -47,13 +47,15 @@ const SciFlashcard = (() => {
 
   // 只更新盒序本身，不動 totalReviews/streak——給呼叫端（自測/閃卡）自己決定何時記那些全域統計，
   // 避免同一次作答被算兩次。閃卡與自測共用這個函式，讓「戰功」不再只認閃卡、自測答對也算數。
-  function bumpBox(state, id, correct, cap = BOX_INTERVAL_DAYS.length - 1) {
+  function bumpBox(state, id, correct, cap = BOX_INTERVAL_DAYS.length - 1, objective = true) {
     const card = SciStore.getCard(state, id);
     // 封頂限制「這次最多能推到哪裡」，不得把已有的更高熟悉度往下砍。
-    const nextBox = correct ? Math.max(card.box, Math.min(card.box + 1, cap)) : 0;
+    // 主觀自評的「還沒記得」只代表需要再複習，不足以推翻已客觀驗證的熟悉度。
+    const subjectiveMiss = !objective && !correct;
+    const nextBox = subjectiveMiss ? card.box : correct ? Math.max(card.box, Math.min(card.box + 1, cap)) : 0;
     const updated = {
       box: nextBox,
-      due: nextDue(nextBox),
+      due: subjectiveMiss ? nextDue(0) : nextDue(nextBox),
       seen: card.seen + 1,
       wrong: card.wrong + (correct ? 0 : 1),
     };
@@ -62,16 +64,16 @@ const SciFlashcard = (() => {
   }
 
   // 自測與對戰必須尊重 Leitner 到期時間：尚未到期的答對只算作答紀錄，不推進盒序。
-  function bumpBoxIfDue(state, id, correct, now = Date.now(), cap = BOX_INTERVAL_DAYS.length - 1) {
+  function bumpBoxIfDue(state, id, correct, now = Date.now(), cap = BOX_INTERVAL_DAYS.length - 1, objective = true) {
     const card = SciStore.getCard(state, id);
     if (correct && card.seen > 0 && card.due > now) return card;
-    return bumpBox(state, id, correct, cap);
+    return bumpBox(state, id, correct, cap, objective);
   }
 
   function markResult(state, id, correct) {
     // 閃卡是主觀自評，最多到 box3「快熟」；box4 精熟保留給選擇題／對戰等客觀答對。
     const selfAssessmentCap = BOX_INTERVAL_DAYS.length - 2;
-    const updated = bumpBox(state, id, correct, selfAssessmentCap);
+    const updated = bumpBox(state, id, correct, selfAssessmentCap, false);
     state.stats.totalReviews += 1;
     SciStore.touchDailyStreak(state);
     return updated;

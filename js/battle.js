@@ -591,7 +591,7 @@ const SciBattle = (() => {
     let pvpLocked = false;
 
     function startPvp() {
-      pvpState = { hp: [MAX_HP, MAX_HP], turn: 0, combo: [0, 0], log: '玩家 1 先攻！' };
+      pvpState = { hp: [MAX_HP, MAX_HP], turn: 0, combo: [0, 0], log: '玩家 1 先攻！', dmgFoe: 0, dmgMe: 0 };
       pvpLocked = false;
       pvpRound();
     }
@@ -601,21 +601,25 @@ const SciBattle = (() => {
       if (pvpState.hp[1] <= 0) return pvpFinish(1);
       pvpState.q = SciQuiz.buildQuestion(pool[Math.floor(Math.random() * pool.length)], pool);
       pvpState.qStart = Date.now();
+      pvpState.dmgFoe = 0;
+      pvpState.dmgMe = 0;
       pvpLocked = false;
       renderPvp();
     }
 
-    function renderPvp(midTurn) {
+    function renderPvp(midTurn, feedback = {}) {
       const q = pvpState.q;
       const t = pvpState.turn;
       el.innerHTML = `
         <div class="bat-arena pvp">
           <div class="bat-side foe">
+            ${pvpState.dmgFoe ? `<span class="bat-damage-pop">-${pvpState.dmgFoe}</span>` : ''}
             <div class="bat-name">玩家 2 ${pvpState.combo[1] >= 2 ? `🔥×${pvpState.combo[1]}` : ''}</div>
             ${hpBar(pvpState.hp[1], t === 1 ? 'active' : '')}
           </div>
           <div class="bat-log" role="status" aria-live="polite">${pvpState.log}</div>
           <div class="bat-side me">
+            ${pvpState.dmgMe ? `<span class="bat-damage-pop">-${pvpState.dmgMe}</span>` : ''}
             ${hpBar(pvpState.hp[0], t === 0 ? 'active' : '')}
             <div class="bat-name">玩家 1 ${pvpState.combo[0] >= 2 ? `🔥×${pvpState.combo[0]}` : ''}</div>
           </div>
@@ -624,7 +628,7 @@ const SciBattle = (() => {
         <div class="card">
           <div class="quiz-prompt">${q.mode === 'term2def' ? `「${q.prompt}」是在說什麼？` : `這個定義說的是哪個詞：<br>「${q.prompt}」`}</div>
           <div class="quiz-options">
-            ${q.options.map((o) => `<button class="quiz-option" data-id="${o.id}" ${midTurn ? 'disabled' : ''}>${o.label}</button>`).join('')}
+            ${q.options.map((o) => `<button class="quiz-option ${answerFeedbackClass(o.id, feedback.answerId, feedback.chosenId)}" data-id="${o.id}" ${midTurn ? 'disabled' : ''}>${o.label}</button>`).join('')}
           </div>
         </div>`;
       if (!midTurn) {
@@ -649,14 +653,18 @@ const SciBattle = (() => {
       if (correct) {
         const dmg = calcDamage(pvpState.combo[me], pvpState.hp[me]);
         pvpState.hp[foe] = Math.max(0, pvpState.hp[foe] - dmg);
+        if (foe === 1) pvpState.dmgFoe = dmg;
+        else pvpState.dmgMe = dmg;
         pvpState.combo[me]++;
         pvpState.log = `玩家 ${me + 1} 命中！玩家 ${foe + 1} -${dmg}`;
       } else {
         pvpState.combo[me] = 0;
         pvpState.hp[me] = Math.max(0, pvpState.hp[me] - 6);
+        if (me === 1) pvpState.dmgFoe = 6;
+        else pvpState.dmgMe = 6;
         pvpState.log = `玩家 ${me + 1} 答錯，自損 6（正確答案：${target.term}）`;
       }
-      renderPvp(true);
+      renderPvp(true, { chosenId, answerId: q.answerId });
       setTimeout(() => {
         pvpState.turn = foe;
         pvpRound();

@@ -53,7 +53,8 @@ const SciWeak = (() => {
         score.set(entry.termId, entry.recoveryStrength === 'scaffold' ? previous * 0.5 : 0);
         continue;
       }
-      const added = entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0);
+      // flash／cloze 的「還沒記得」是低信心自評訊號；保留待複習價值，但不等同客觀答錯。
+      const added = !isObjectiveSource(entry.source) ? 0.5 : entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0);
       score.set(entry.termId, (score.get(entry.termId) || 0) + added);
     }
     return { score, unitByTerm };

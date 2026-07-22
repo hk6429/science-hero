@@ -48,9 +48,9 @@ const SciScienceRewards = (() => {
     return unlockLore(state, cards, subject, unit);
   }
 
-  function triggerSurprise({ correct, rng, facts, economy }) {
+  function triggerSurprise({ correct, rng, facts, economy, allowCrystalReward = true }) {
     if (!correct || typeof rng !== 'function' || rng() >= SURPRISE_RATE) return { hit: false };
-    if (rng() < 0.5) {
+    if (rng() < 0.5 && allowCrystalReward) {
       const reward = economy.earnCrystals(SURPRISE_CRYSTALS, 'science-surprise');
       return { hit: true, type: 'crystals', ...reward };
     }

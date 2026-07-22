@@ -113,6 +113,8 @@ try {
   for (let guard = 0; guard < 30 && !(await page.locator('#flash-stop').count()); guard++) {
     await page.click('#flash-reveal');
     await page.click('#flash-correct');
+    // F 條：自評後有 ~350ms 綠/紅閃再換卡，等下一張或收尾卡渲染完再判斷是否續圈
+    await page.waitForSelector('#flash-reveal, #flash-stop');
   }
   await page.waitForSelector('#flash-stop');
   await page.click('#flash-stop');

@@ -477,13 +477,13 @@ const SciApp = (() => {
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source, recoveryStrength });
     const prevBox = previousCard.box;
     const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
-    const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap);
+    const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap, SciWeak.isObjectiveSource(source));
     const promotion = correct
       ? SciUiLogic.masteryPromotion(masteredBefore, masteredCardCount(), RANK_TIERS, SciBaseStore.STAGES)
       : null;
-    const energy = source === 'cloze'
+    const energy = !SciWeak.isObjectiveSource(source)
       ? { earned: 0 }
-      : SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能只掛客觀作答；克漏字主觀自評不發放。
+      : SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能只掛客觀作答；主觀自評不發放。
     state.stats.totalReviews += 1;
     sessionAnswers += 1;
     const surprise = SciScienceRewards.triggerSurprise({
@@ -491,10 +491,11 @@ const SciApp = (() => {
       rng: SciScienceRewards.mulberry32(SciScienceRewards.hashSeed(`${SciStore.todayStr()}:${target.id}:${state.stats.totalReviews}`)),
       facts: scienceTrivia,
       economy: SciEconomy,
+      allowCrystalReward: SciWeak.isObjectiveSource(source),
     });
     if (correct) showFirstSuccess();
     markOnboarding(mode === 'battle' ? 'battle' : 'quiz');
-    if (correct) recordDailySignal('correct', false);
+    if (correct && SciWeak.isObjectiveSource(source)) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
@@ -528,7 +529,7 @@ const SciApp = (() => {
 
   function showFirstSuccess() {
     try {
-      if (localStorage.getItem(FIRST_SUCCESS_KEY)) return;
+      if (!SciUiLogic.shouldShowFirstSuccess(state.stats.totalReviews, localStorage.getItem(FIRST_SUCCESS_KEY))) return;
       localStorage.setItem(FIRST_SUCCESS_KEY, '1');
     } catch { /* 儀式只顯示一次是加值；儲存失敗不影響作答。 */ }
     const toast = document.createElement('aside');
@@ -696,6 +697,8 @@ const SciApp = (() => {
     if (flashAnswering) return;
     flashAnswering = true;
     const anchorTop = body.getBoundingClientRect().top;
+    const feedbackCard = body.querySelector('.card');
+    feedbackCard?.classList.add(correct ? 'flash-correct' : 'flash-wrong');
 
     const t = flashQueue[flashIdx];
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
@@ -703,7 +706,6 @@ const SciApp = (() => {
     sessionAnswers += 1;
     if (correct) showFirstSuccess();
     markOnboarding('flashcard');
-    if (correct) recordDailySignal('correct', false);
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
@@ -718,14 +720,16 @@ const SciApp = (() => {
     flashIdx += 1;
     flashRevealed = false;
 
-    preserveScroll(() => {
-      if (milestoneUnit) {
-        renderMilestone(body, milestoneUnit, () => { flashAnswering = false; renderFlashcard(body); });
-      } else {
-        flashAnswering = false;
-        renderFlashcard(body);
-      }
-    });
+    setTimeout(() => {
+      preserveScroll(() => {
+        if (milestoneUnit) {
+          renderMilestone(body, milestoneUnit, () => { flashAnswering = false; renderFlashcard(body); });
+        } else {
+          flashAnswering = false;
+          renderFlashcard(body);
+        }
+      });
+    }, 350);
   }
 
   // ================= 自測 =================
@@ -1120,11 +1124,24 @@ const SciApp = (() => {
     const reviewHint = el('#return-review-hint');
     if (reviewHint) {
       const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
-      const due = SciUiLogic.dueReviewSummary(state, Date.now(), maxBox);
+      const idsBySubject = Object.fromEntries([...subjectTerms].map(([key, list]) => [key, list.map((term) => term.id)]));
+      const due = SciUiLogic.dueReviewSummary(state, Date.now(), maxBox, idsBySubject);
       reviewHint.hidden = !(state.stats.totalReviews > 0 && due.due > 0);
       reviewHint.innerHTML = due.due > 0
-        ? `🌿 今天有 <b>${due.due}</b> 張卡可以複習${due.evergreen ? `，其中 ${due.evergreen} 張精熟卡也可以溫和回來看看` : ''}。`
+        ? `🌿 今天有 <b>${due.due}</b> 張卡可以複習${due.evergreen ? `，其中 ${due.evergreen} 張精熟卡也可以溫和回來看看` : ''}。
+          <span class="return-review-actions">${due.bySubject.map((item) => {
+            const label = SUBJECTS.find((subject) => subject.key === item.key)?.label || item.key;
+            return `<button type="button" class="text-link-btn" data-review-subject="${item.key}">${label} ${item.due} 張</button>`;
+          }).join('')}</span>`
         : '';
+      reviewHint.querySelectorAll('[data-review-subject]').forEach((button) => {
+        button.addEventListener('click', () => {
+          mode = 'flashcard';
+          switchSubject(button.dataset.reviewSubject);
+          startFlashRound();
+          renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
+        });
+      });
     }
   }
 
@@ -1141,7 +1158,7 @@ const SciApp = (() => {
     const moreTools = el('#more-tools');
     const isNew = state.stats.totalReviews === 0;
     const checklist = SciUiLogic.normalizeOnboarding(loadJson(ONBOARDING_KEY, {}));
-    if (guide) guide.hidden = isNew ? false : SciUiLogic.onboardingComplete(checklist);
+    if (guide) guide.hidden = !SciUiLogic.shouldShowOnboarding(state.stats.totalReviews, masteredCardCount(), checklist);
     if (moreTools) moreTools.open = SciUiLogic.moreToolsDefaultOpen({ isNew });
     guide?.querySelectorAll('[data-onboard-check]').forEach((checkbox) => {
       checkbox.checked = checklist[checkbox.dataset.onboardCheck];

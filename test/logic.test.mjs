@@ -177,7 +177,7 @@ test('SciStore.load 空狀態有預期結構', () => {
   assert.equal(state.stats.totalReviews, 0);
 });
 
-test('SciFlashcard.markResult 答對推進盒序、答錯歸零', () => {
+test('SciFlashcard.markResult 答對推進盒序、主觀答錯保留盒序並提前複習', () => {
   const lib = makeSandbox();
   const state = lib.SciStore.load();
   const id = terms[0].id;
@@ -187,7 +187,7 @@ test('SciFlashcard.markResult 答對推進盒序、答錯歸零', () => {
   card = lib.SciFlashcard.markResult(state, id, true);
   assert.equal(card.box, 2);
   card = lib.SciFlashcard.markResult(state, id, false);
-  assert.equal(card.box, 0, '答錯應該歸零盒序');
+  assert.equal(card.box, 2, '主觀答錯只重排複習，不得降低盒序');
   assert.equal(state.stats.totalReviews, 3);
 });
 
