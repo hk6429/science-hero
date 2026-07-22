@@ -29,9 +29,12 @@ function makeSandbox(seed = {}) {
   return { lib: { SciEconomy: wrap(context.__exports.SciEconomy), SciMarketStore: wrap(context.__exports.SciMarketStore) }, raw };
 }
 
-test('前後端常數同步：目錄、品階、價格帶、時窗與小卡不漂移', () => {
+test('前後端常數同步：市集只保留三種可用實驗道具', () => {
   const { SciMarketStore: market } = makeSandbox().lib;
   assert.deepEqual(market.ITEM_CATALOG, core.ITEM_CATALOG);
+  assert.deepEqual(Object.keys(market.ITEM_CATALOG), ['energy', 'magnifier', 'goggles']);
+  assert.ok(Object.values(market.ITEM_CATALOG).every((item) => item.kind === 'tool'));
+  assert.equal('redeemDeco' in market, false, '不再暴露未接線的樣式券兌換 API');
   for (const id of [...Object.keys(core.ITEM_CATALOG), 'senlingdeer', '']) {
     assert.equal(market.tierOf(id), core.tierOf(id));
     assert.deepEqual(market.bandOf(id), core.bandOf(id));
@@ -84,7 +87,7 @@ test('claims、每日限購快取、曾經持有留痕可持久化', () => {
   assert.equal(market.getEver()[0].dir, 'sold');
 });
 
-test('classInfo 壞檔降級；基地未就緒不吞券', () => {
+test('classInfo 壞檔降級', () => {
   const { lib, raw } = makeSandbox();
   const market = lib.SciMarketStore;
   assert.equal(market.classInfo(), null);
@@ -92,9 +95,13 @@ test('classInfo 壞檔降級；基地未就緒不吞券', () => {
   assert.deepEqual(market.classInfo(), { classCode: '七年3班', nick: '小明' });
   raw.sci_class = '{{{壞檔';
   assert.equal(market.classInfo(), null);
-  market.grantItem('deco_gold');
-  assert.deepEqual(market.redeemDeco('deco_gold'), { ok: 0, pending: 1 });
-  assert.equal(market.getInv().deco_gold, 1);
+});
+
+test('樣式券公開承諾與死接線已從市集前端整層移除', () => {
+  const storeSource = readFileSync(path.join(ROOT, 'js/market-store.js'), 'utf8');
+  const uiSource = readFileSync(path.join(ROOT, 'js/market-ui.js'), 'utf8');
+  assert.doesNotMatch(storeSource, /deco_(?:bronze|silver|gold)|redeemDeco|SciBase/);
+  assert.doesNotMatch(uiSource, /樣式券|金級券|至科學基地換購|kind\s*===\s*['"]deco['"]/);
 });
 
 test('市集出金與退款豁免每日晶能收入上限', () => {

@@ -1,7 +1,7 @@
 // 科學市集單一路由：所有持久化 key 僅使用 mkt: 命名空間。
 import { kvFor } from '../lib/_kv.js';
 import {
-  tierOf, bandOf, validPrice, isMarketOpen, weekKey, dayStr,
+  tierOf, bandOf, validPrice, isMarketOpen, dayStr,
   okNick, okClass, sigOf, TIER_LABEL,
 } from '../lib/market-core.js';
 
@@ -175,11 +175,6 @@ export async function mktOp(redis, body = {}, ctx = {}, nowMs = Date.now()) {
     }
     const posts = await redis.incr(`mkt:posts:${classCode}:${cleanSeller}:${dayStr(nowMs)}`, 86400);
     if (posts > DAILY_POST_CAP) return { ok: 0, error: `每天最多上架 ${DAILY_POST_CAP} 筆，明天再來` };
-    if (tierOf(itemId) === 'gold') {
-      const rare = await redis.incr(`mkt:rare:${classCode}:${weekKey(nowMs)}`, 8 * 86400);
-      if (rare > 5) return { ok: 0, error: '本班金級樣式券本週限量 5 件已滿，下週五再來' };
-    }
-
     const id = randHex(6);
     const claimKey = randHex(12);
     const record = { id, itemId, seller: cleanSeller, price, ts: nowMs, classCode, pub: body.pub ? 1 : 0 };

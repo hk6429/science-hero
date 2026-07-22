@@ -17,8 +17,8 @@ const SciMarketUI = (() => {
       return `<tr><td>${item.emoji} ${esc(item.name)}</td><td>${esc(SciMarketStore.TIER_LABEL[SciMarketStore.tierOf(id)])}</td><td>${item.base}</td><td>${low}–${high}</td></tr>`;
     }).join('');
     return `<p><strong>晶能不可兌換現實金錢或禮物。</strong>本站沒有真錢加值。</p>
-      <p>精靈與稚靈是夥伴，不是商品；市集只交易實驗道具與基地樣式券。</p>
-      <ul><li>每週五全天開市；平日可瀏覽、領款與下架。</li><li>每天限購 3 件、上架 3 筆；金級券每班每週限量 5 件。</li><li>成交價就是掛單價，沒有殺價或隱藏折扣；賣出收取 10% 晶能稅。</li><li>錢包晶能存在伺服器，換裝置也在。</li></ul>
+      <p>精靈與稚靈是夥伴，不是商品；市集只交易實驗道具。</p>
+      <ul><li>每週五全天開市；平日可瀏覽、領款與下架。</li><li>每天限購 3 件、上架 3 筆。</li><li>成交價就是掛單價，沒有殺價或隱藏折扣；賣出收取 10% 晶能稅。</li><li>錢包晶能存在伺服器，換裝置也在。</li></ul>
       <table><thead><tr><th>物品</th><th>品階</th><th>原價</th><th>掛單價格帶</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
 
@@ -26,8 +26,8 @@ const SciMarketUI = (() => {
     const effects = { energy: '開局 +10 HP', magnifier: '本場一次排除錯誤選項', goggles: '本場一次答錯保留連擊' };
     return Object.entries(SciMarketStore.ITEM_CATALOG).map(([id, item]) => `<article class="mkt-stall-card mkt-card mkt-${SciMarketStore.tierOf(id)}">
       <span class="mkt-item-face">${item.emoji}</span><strong>${esc(item.name)}</strong>
-      <small>${esc(effects[id] || '基地裝飾樣式券')}・原價 ${item.base} 晶能</small>
-      ${item.kind === 'tool' ? `<button type="button" data-mkt-direct="${id}">直購</button>` : '<span class="mkt-pending">至科學基地換購</span>'}
+      <small>${esc(effects[id])}・原價 ${item.base} 晶能</small>
+      <button type="button" data-mkt-direct="${id}">直購</button>
     </article>`).join('');
   }
 

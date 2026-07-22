@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   ITEM_CATALOG,
   tierOf,
@@ -40,19 +41,19 @@ test('R11 市集 API 只回固定 500 文案，內部錯誤僅寫 server log', a
   }
 });
 
-test('ITEM_CATALOG：恰好 6 件、tool/deco 各 3；tierOf 白名單 fail-closed', () => {
+test('ITEM_CATALOG：恰好 3 件實驗道具；tierOf 白名單 fail-closed', () => {
   const ids = Object.keys(ITEM_CATALOG);
-  assert.equal(ids.length, 6);
-  assert.equal(ids.filter((id) => ITEM_CATALOG[id].kind === 'tool').length, 3);
+  assert.deepEqual(ids, ['energy', 'magnifier', 'goggles']);
+  assert.ok(ids.every((id) => ITEM_CATALOG[id].kind === 'tool'));
   assert.equal(tierOf('energy'), 'bronze');
   assert.equal(tierOf('goggles'), 'bronze');
-  assert.equal(tierOf('deco_gold'), 'gold');
+  assert.equal(tierOf('deco_gold'), null);
   assert.equal(tierOf('senlingdeer'), null);
 });
 
 test('bandOf/validPrice：帶＝原價×0.5～×1.5，整數且含邊界', () => {
   assert.deepEqual(bandOf('energy'), [15, 45]);
-  assert.deepEqual(bandOf('deco_gold'), [150, 450]);
+  assert.equal(bandOf('deco_gold'), null);
   assert.equal(bandOf('nope'), null);
   assert.equal(validPrice('energy', 15), true);
   assert.equal(validPrice('energy', 45), true);
@@ -242,14 +243,15 @@ test('roster fail-closed：名單外 post/buy/deposit 拒絕；list 仍可瀏覽
   assert.equal((await mktOp(redis, { op: 'list', scope: 'pub' }, ROSTER_ENV, OPEN_TS)).ok, 1);
 });
 
-test('珍品每週限量：金級樣式券第 6 件拒收，銅品不受限；下週換桶', async () => {
+test('市集 API 拒絕舊樣式券，且不再建立金級券週限量分支', async () => {
   const redis = fakeKv();
-  for (let index = 0; index < 5; index += 1) {
-    assert.equal((await mktOp(redis, { op: 'post', itemId: 'deco_gold', price: 300, seller: `賣家${index}`, classCode: 'demo' }, ENV, OPEN_TS)).ok, 1);
-  }
-  assert.match((await mktOp(redis, { op: 'post', itemId: 'deco_gold', price: 300, seller: '新賣家', classCode: 'demo' }, ENV, OPEN_TS)).error, /限量/);
+  assert.match(
+    (await mktOp(redis, { op: 'post', itemId: 'deco_gold', price: 300, seller: '新賣家', classCode: 'demo' }, ENV, OPEN_TS)).error,
+    /不在市集可交易清單/,
+  );
   assert.equal((await mktOp(redis, { op: 'post', itemId: 'energy', price: 30, seller: '新賣家', classCode: 'demo' }, ENV, OPEN_TS)).ok, 1);
-  assert.equal((await mktOp(redis, { op: 'post', itemId: 'deco_gold', price: 300, seller: '新賣家', classCode: 'demo' }, ENV, Date.UTC(2026, 6, 31, 4, 0))).ok, 1);
+  const apiSource = readFileSync(new URL('../functions/api/mkt.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(apiSource, /mkt:rare|金級樣式券|tierOf\(itemId\)\s*===\s*['"]gold['"]/);
 });
 
 test('stars：成交後買賣雙方各 +1；只回前五且不列金額', async () => {

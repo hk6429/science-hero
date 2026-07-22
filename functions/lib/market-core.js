@@ -5,9 +5,6 @@ export const ITEM_CATALOG = {
   energy: { name: '能量飲', emoji: '⚡', kind: 'tool', base: 30 },
   magnifier: { name: '放大鏡', emoji: '🔍', kind: 'tool', base: 40 },
   goggles: { name: '護目鏡', emoji: '🥽', kind: 'tool', base: 60 },
-  deco_bronze: { name: '銅級樣式券', emoji: '🎫', kind: 'deco', base: 80 },
-  deco_silver: { name: '銀級樣式券', emoji: '🎟️', kind: 'deco', base: 150 },
-  deco_gold: { name: '金級樣式券', emoji: '🏵️', kind: 'deco', base: 300 },
 };
 
 export const TIER_LABEL = { bronze: '銅品', silver: '銀品', gold: '金品' };

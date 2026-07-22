@@ -318,6 +318,8 @@ main {
 }
 
 .card.celebrate-in { animation: celebrateIn 0.35s ease-out; }
+.first-success.celebrate-in,
+.science-surprise.celebrate-in { animation: celebrateIn 0.35s ease-out; }
 
 @keyframes celebrateIn {
   0% { transform: scale(0.97); opacity: 0; }

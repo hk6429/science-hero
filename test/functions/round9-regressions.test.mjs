@@ -289,7 +289,7 @@ test('B4：匯入成功後刷新晶能列、融合坊、基地與已開啟的市
   const importFlow = app.slice(app.indexOf("importFile.addEventListener('change'"), app.indexOf("alert('匯入失敗"));
   assert.match(importFlow, /renderHeroStats\(\)/);
   assert.match(importFlow, /renderFusionLab\(\)/);
-  assert.match(importFlow, /SciBase\.refresh\?\.\(\)/);
+  assert.match(importFlow, /SciBaseUI\.refresh\?\.\(\)/);
   assert.match(importFlow, /SciMarketUI\.refresh\?\.\(\)/);
   assert.match(source('js/base-ui.js'), /return \{[^}]*refresh/s);
   assert.match(source('js/market-ui.js'), /return \{[^}]*refresh/s);

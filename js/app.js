@@ -786,8 +786,7 @@ const SciApp = (() => {
   }
 
   function selfTestUsesCloze(box, questionIndex) {
-    if (box >= 4) return true;
-    return box === 3 && questionIndex % 2 === 1;
+    return box >= 3 && questionIndex % 2 === 1;
   }
 
   function renderQuiz(body) {
@@ -833,7 +832,7 @@ const SciApp = (() => {
       </div>
       <div class="progress-bar"><div style="width:${(quizIdx / quizQueue.length) * 100}%"></div></div>`;
 
-    // box3 在客觀選擇題與主觀克漏字間交替，讓只做自測也能升到 box4；box4 維持回想練習。
+    // box3 以上交替客觀選擇題與主觀克漏字，讓各盒序都有可計入每日任務的客觀答對路徑。
     const clozeQ = selfTestUsesCloze(box, quizIdx)
       ? SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, 'cloze', box)
       : null;
@@ -878,7 +877,7 @@ const SciApp = (() => {
   function renderClozeQuestion(body, headHtml, target, q) {
     body.innerHTML = `${headHtml}
       <div class="card quiz-cloze">
-        <div class="quiz-cloze-tag">回想題 · 把空格補起來</div>
+        <div class="quiz-cloze-tag">回想練習·不列入答對計數</div>
         <div class="quiz-prompt quiz-cloze-prompt">${q.prompt}</div>
         <button class="btn btn-secondary quiz-cloze-hint-toggle" id="cloze-hint-toggle" type="button">需要提示</button>
         <div class="quiz-cloze-hint" id="cloze-hint" hidden>${escapeHtml(SciQuiz.clozeHint(target))}</div>
@@ -907,7 +906,6 @@ const SciApp = (() => {
       if (quizAnswered) return;
       quizAnswered = true;
       const elapsed = Date.now() - quizStartTime;
-      if (correct) quizCorrect += 1;
       cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
       answerBox.querySelectorAll('button').forEach((b) => { b.disabled = true; });
       settleAnswer(body, cardEl, target, correct, elapsed, null, SciQuiz.questionContentLength(q), 'cloze');
@@ -1828,7 +1826,7 @@ const SciApp = (() => {
         SciStore.save(state);
         renderHeroStats();
         renderFusionLab();
-        if (typeof SciBase !== 'undefined') SciBase.refresh?.();
+        if (typeof SciBaseUI !== 'undefined') SciBaseUI.refresh?.();
         if (typeof SciMarketUI !== 'undefined') SciMarketUI.refresh?.();
         renderOnboarding();
         renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));

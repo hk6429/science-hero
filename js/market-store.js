@@ -7,9 +7,6 @@ const SciMarketStore = (() => {
     energy: { name: '能量飲', emoji: '⚡', kind: 'tool', base: 30 },
     magnifier: { name: '放大鏡', emoji: '🔍', kind: 'tool', base: 40 },
     goggles: { name: '護目鏡', emoji: '🥽', kind: 'tool', base: 60 },
-    deco_bronze: { name: '銅級樣式券', emoji: '🎫', kind: 'deco', base: 80 },
-    deco_silver: { name: '銀級樣式券', emoji: '🎟️', kind: 'deco', base: 150 },
-    deco_gold: { name: '金級樣式券', emoji: '🏵️', kind: 'deco', base: 300 },
   };
   const TIER_LABEL = { bronze: '銅品', silver: '銀品', gold: '金品' };
   const THANKS_CARDS = [
@@ -113,7 +110,7 @@ const SciMarketStore = (() => {
   }
   function buyDirect(itemId) {
     const item = ITEM_CATALOG[itemId];
-    if (!item || item.kind !== 'tool') return { ok: false, msg: '此物品請至科學基地換購' };
+    if (!item || item.kind !== 'tool') return { ok: false, msg: '此物品無法直購' };
     const paid = SciEconomy.spendCrystals(item.base, 'mkt-direct');
     if (!paid.ok) return paid;
     grantItem(itemId);
@@ -173,15 +170,6 @@ const SciMarketStore = (() => {
   const settleToLocal = (amount) => SciEconomy.earnCrystals(amount, 'mkt-withdraw');
   const refundLocal = (amount) => SciEconomy.earnCrystals(amount, 'mkt-refund');
   const payLocal = (amount) => SciEconomy.spendCrystals(amount, 'mkt-deposit');
-  function redeemDeco(itemId) {
-    const item = ITEM_CATALOG[itemId];
-    if (!item || item.kind !== 'deco' || !(state.inv[itemId] > 0)) return { ok: false };
-    if (!window.SciBase || typeof window.SciBase.redeemMarketDeco !== 'function') return { ok: 0, pending: 1 };
-    const result = window.SciBase.redeemMarketDeco(itemId);
-    if (result && result.ok) removeItem(itemId);
-    return result || { ok: false };
-  }
-
   function exportState() {
     return { ...state, inv: { ...state.inv }, claims: state.claims.slice(), buys: { ...state.buys }, ever: state.ever.slice() };
   }
@@ -198,7 +186,7 @@ const SciMarketStore = (() => {
     getInv, grantItem, removeItem, buyDirect,
     setCarry, getCarry, takeCarry, toolEffect,
     getClaims, addClaim, removeClaim, buysToday, bumpBuys,
-    recordEver, getEver, settleToLocal, refundLocal, payLocal, redeemDeco,
+    recordEver, getEver, settleToLocal, refundLocal, payLocal,
     exportState, importState,
   };
 })();

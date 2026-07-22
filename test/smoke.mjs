@@ -309,6 +309,13 @@ try {
   await page.waitForSelector('#tabs button[data-key="nature"]');
   await page.click('#tabs button[data-key="nature"]');
   await page.click('.panel[data-key="nature"] .mode-switch button[data-mode="quiz"]');
+  // box4 自測交替出題：偶數題為客觀 MC、奇數題為克漏字（Round11 起 box4 也交替，非全 cloze）。
+  // 先答掉第一題（客觀 MC）讓它自動前進，下一題即為克漏字。
+  await page.waitForSelector('.quiz-cloze, .quiz-option', { timeout: 6000 });
+  if (await page.locator('.quiz-cloze').count() === 0) {
+    await page.click('.quiz-option >> nth=0');
+    await page.waitForTimeout(3400); // 等自測自動進到下一題
+  }
   await page.waitForSelector('.quiz-cloze', { timeout: 6000 });
   await page.click('#cloze-reveal');
   await page.waitForSelector('#cloze-yes');

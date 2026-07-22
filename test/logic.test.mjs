@@ -1552,7 +1552,7 @@ test('SciRtBattleUI.mount 渲染連線對戰入口，不需啟動瀏覽器', () 
   assert.match(node.innerHTML, /id="rt-season-board"/);
 });
 
-test('科學市集瀏覽 UI 靜態接線：overlay、透明規則、六卡與 SHAPI 單一出口', () => {
+test('科學市集瀏覽 UI 靜態接線：overlay、透明規則、實驗道具與 SHAPI 單一出口', () => {
   const html = readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   const ui = readFileSync(path.join(ROOT, 'js/market-ui.js'), 'utf8');
   assert.match(html, /id="btn-market"/);
