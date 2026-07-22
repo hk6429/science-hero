@@ -501,6 +501,19 @@ test('getCalibrationMisses：落差後客觀答對會清除；落差前答對不
   assert.equal(misses['still-missed'], 1, '客觀答對若發生在落差之前，不得預先抵銷後續落差');
 });
 
+test('getCalibrationMisses：客觀答對會消費舊自評，後續普通答錯不算落差', () => {
+  const lib = makeSandbox();
+  const state = { weakLog: [
+    { termId: 'x', unit: 'u', correct: true, source: 'flash', t: 1000 },
+    { termId: 'x', unit: 'u', correct: true, source: 'quiz', t: 2000 },
+    { termId: 'x', unit: 'u', correct: false, source: 'quiz', t: 3000 },
+  ] };
+
+  const misses = lib.SciWeak.getCalibrationMisses(state);
+
+  assert.equal('x' in misses, false, '客觀答對已重新證明掌握，不得讓舊自評污染後續普通答錯');
+});
+
 test('buildFamilySummary 攤露校準落差詞給家長', () => {
   const lib = makeSandbox();
   const subjects = [{ key: 'nature', label: '自然' }];

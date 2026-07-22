@@ -1089,6 +1089,7 @@ body.base-open { overflow: hidden; }
 .fusion-owned-tag { margin-top: auto; border-radius: 999px; background: #e9f7ee; color: var(--green-dark); padding: .25em .65em; font-size: .78rem; font-weight: 700; }
 .fusion-reasons { width: 100%; margin: 0; padding-left: 1.2em; color: #a04c28; text-align: left; font-size: .75rem; }
 .fusion-notice { margin-bottom: 14px; border: 1px solid #b8dcc5; border-radius: 12px; background: #fff; padding: 12px; text-align: center; }
+.fusion-notice.celebrate-in { animation: celebrateIn 0.35s ease-out; }
 .fusion-notice.is-success { border-color: #e0b64e; background: #fffbed; }
 .fusion-notice.is-gentle { border-color: #8ab7d8; background: #f0f8ff; }
 .fusion-notice.is-grand { border-color: #7b5cd6; background: linear-gradient(160deg, #f3efff, #eaf4ff); }
@@ -1215,7 +1216,8 @@ body.base-open { overflow: hidden; }
 .energy-gain-pop { position: fixed; left: 50%; top: 36%; z-index: 2600; transform: translate(-50%, var(--stack-offset, 0px)); border-radius: 999px; background: #173c2b; color: #fff6c2; padding: 10px 18px; font-size: 1.25rem; font-weight: 900; pointer-events: none; animation: energy-float 1.35s ease-out forwards; }
 @keyframes energy-float { 0% { opacity: 0; transform: translate(-50%, calc(18px + var(--stack-offset, 0px))) scale(.8); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, calc(-55px + var(--stack-offset, 0px))) scale(1.08); } }
 .first-success { position: fixed; left: 50%; top: 18%; z-index: 2500; transform: translate(-50%, var(--stack-offset, 0px)); display: grid; gap: 4px; max-width: min(420px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 16px; background: #fffbea; padding: 16px 20px; box-shadow: 0 10px 30px #0003; text-align: center; }
-.endless-milestone-toast { animation: endlessMilestoneIn .5s cubic-bezier(.2, .9, .3, 1.25); overflow: visible; }
+.first-success.endless-milestone-toast.celebrate-in { animation: endlessMilestoneIn .5s cubic-bezier(.2, .9, .3, 1.25); }
+.endless-milestone-toast { overflow: visible; }
 .endless-milestone-toast::after {
   content: "✦ ✧ ✦ ✧ ✦";
   position: absolute;
@@ -1228,9 +1230,9 @@ body.base-open { overflow: hidden; }
   pointer-events: none;
 }
 @keyframes endlessMilestoneIn {
-  0% { transform: translateX(-50%) scale(.72); opacity: 0; }
-  65% { transform: translateX(-50%) scale(1.08); opacity: 1; }
-  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  0% { transform: translate(-50%, var(--stack-offset, 0px)) scale(.72); opacity: 0; }
+  65% { transform: translate(-50%, var(--stack-offset, 0px)) scale(1.08); opacity: 1; }
+  100% { transform: translate(-50%, var(--stack-offset, 0px)) scale(1); opacity: 1; }
 }
 /* 非阻擋式吐司：容器 pointer-events:none 讓點擊穿透到底下控制項（不打斷正在進行的操作），只有關閉鈕可點。 */
 .rest-reminder { position: fixed; right: 16px; bottom: 16px; z-index: 2400; display: flex; align-items: center; gap: 10px; max-width: min(430px, calc(100vw - 32px)); border: 1px solid #8bb9a0; border-radius: 14px; background: #f3fbf5; padding: 12px 14px; box-shadow: 0 8px 24px #0002; pointer-events: none; }

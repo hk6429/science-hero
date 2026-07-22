@@ -100,8 +100,9 @@ const SciWeak = (() => {
           misses[entry.termId] = (misses[entry.termId] || 0) + 1;
           delete lastClaimed[entry.termId]; // 一次落差只記一次，下次自評才會重新計
         }
-      } else if (entry.correct && isObjectiveSource(entry.source) && misses[entry.termId] > 0) {
-        delete misses[entry.termId]; // 落差後重新客觀答對，代表已再次證明掌握。
+      } else if (entry.correct && isObjectiveSource(entry.source)) {
+        if (misses[entry.termId] > 0) delete misses[entry.termId]; // 落差後重新客觀答對，代表已再次證明掌握。
+        delete lastClaimed[entry.termId]; // 客觀答對也會兌現並消費先前的自評宣告。
       }
     }
     return misses;
