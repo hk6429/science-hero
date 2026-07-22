@@ -1213,16 +1213,17 @@ function stateWithMastered(lib, ids, wrong = 0) {
   return state;
 }
 
-test('SciBaseStore.STAGES 門檻延伸至 400，mainStage 正確分階', () => {
+test('Round3-1：精通稱號與主樓進度階梯延伸至真終點 1000', () => {
   const B = makeSandbox().SciBaseStore;
-  assert.deepEqual(B.STAGES.map((s) => s[0]), [0, 1, 10, 30, 80, 120, 200, 300, 400], '門檻必須對齊 app.js RANK_TIERS');
-  assert.deepEqual(B.STAGES.map((s) => s[1]), ['見習營帳', '初階研究站', '進階實驗樓', '資深研究院', '領域總部', '學者研究院', '科學殿堂', '宗師天文臺', '科學典藏館']);
+  assert.deepEqual(B.STAGES.map((s) => s[0]), [0, 1, 10, 30, 80, 120, 200, 300, 400, 550, 700, 850, 1000], '門檻必須對齊 app.js RANK_TIERS');
+  assert.deepEqual(B.STAGES.map((s) => s[1]), ['見習營帳', '初階研究站', '進階實驗樓', '資深研究院', '領域總部', '學者研究院', '科學殿堂', '宗師天文臺', '科學典藏館', '星海研究總部', '萬象觀測城', '宇宙探索基地', '科學大典藏館']);
   assert.equal(B.mainStage(0).name, '見習營帳');
   assert.equal(B.mainStage(0).next.at, 1);
   assert.equal(B.mainStage(9).name, '初階研究站');
   assert.equal(B.mainStage(10).stage, 2);
   assert.equal(B.mainStage(80).name, '領域總部');
-  assert.equal(B.mainStage(999).next, null, '最高階沒有下一階');
+  assert.deepEqual(B.mainStage(999).next, { at: 1000, name: '科學大典藏館' });
+  assert.equal(B.mainStage(1000).next, null, '真的精通 1000 張才到最高階');
 });
 
 test('SciBaseStore.countMastered 與 box>=4 判準一致', () => {
@@ -1403,12 +1404,12 @@ test('SciBaseStore.pendingCelebrations 列升階/升級/金級；mark 去重；s
   assert.deepEqual(B.pendingCelebrations(state, termsBySubject, fresh).map((p) => p.id).sort(), ['gold-n2', 'pav-nature-t2']);
 });
 
-test('SciBaseStore.getWall 三面榮譽，無紀錄不催促', () => {
+test('SciBaseStore.getWall 四面榮譽，無紀錄不催促', () => {
   const lib = makeSandbox();
   const B = lib.SciBaseStore;
   const state = lib.SciStore.load();
   let wall = B.getWall(state);
-  assert.equal(wall.length, 3);
+  assert.equal(wall.length, 4);
   assert.equal(wall[0].value, '尚未出戰');
 
   state.rank = { pts: 80, peak: 260, shieldWk: null };
@@ -1418,6 +1419,7 @@ test('SciBaseStore.getWall 三面榮譽，無紀錄不催促', () => {
   assert.ok(wall[0].value.includes('金牌學者') && wall[0].value.includes('260'), 'peak 260 依 SciBattle.RANKS 應為金牌學者');
   assert.equal(wall[1].value, '1 題');
   assert.equal(wall[2].value, '7 天');
+  assert.equal(wall[3].value, '0 連勝');
 });
 
 test('SciBaseStore.getBaseView 一次拿齊整包視圖', () => {
@@ -1428,7 +1430,7 @@ test('SciBaseStore.getBaseView 一次拿齊整包視圖', () => {
   assert.equal(v.pavilions.length, 4);
   assert.ok(Array.isArray(v.decorations));
   assert.equal(v.plaques.main, '科學研究基地');
-  assert.deepEqual([v.motto, v.balance, v.wall.length], [null, 0, 3]);
+  assert.deepEqual([v.motto, v.balance, v.wall.length], [null, 0, 4]);
 });
 
 test('SciBaseUI.sceneHtml 含主樓（階段圖＋門牌）＋四展館（繁茂度圖）＋onerror 佔位', () => {

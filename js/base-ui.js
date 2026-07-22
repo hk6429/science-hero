@@ -5,18 +5,23 @@ const SciBaseUI = (() => {
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
-  const fallback = (emoji) =>
-    `onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${emoji}',className:'sb-emoji'}))"`;
+  const fallback = (emoji) => {
+    const safeEmoji = emoji || '✨';
+    return `onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${safeEmoji}',className:'sb-emoji'}))"`;
+  };
 
-  const MAIN_EMOJI = ['⛺', '🏠', '🏢', '🏛️', '🏰'];
+  const MAIN_EMOJI = ['⛺', '🏠', '🏢', '🏛️', '🏰', '🏯', '🌆', '🏙️', '🛰️', '🚀', '🌠', '🌌', '🔭'];
   const PAV_EMOJI = { nature: '🌱', biology: '🔬', chemphys: '⚗️', earth: '🔭' };
 
   function sceneHtml(view) {
     const m = view.main;
+    const mainStage = Math.max(0, Math.floor(Number(m.stage) || 0));
+    const mainArtStage = Math.min(mainStage + 1, 5);
+    const mainEmoji = MAIN_EMOJI[Math.min(mainStage, MAIN_EMOJI.length - 1)] || MAIN_EMOJI.at(-1);
     const main =
-      `<button class="sb-main" type="button" data-target="main" data-stage="${m.stage}"` +
+      `<button class="sb-main" type="button" data-target="main" data-stage="${mainStage}"` +
       ` aria-label="基地主樓・${esc(m.name)}（點擊掛門牌）">` +
-      `<img src="${IMG_DIR}/main-s${m.stage + 1}.png" alt="" loading="lazy" ${fallback(MAIN_EMOJI[m.stage])}>` +
+      `<img src="${IMG_DIR}/main-s${mainArtStage}.png" alt="" loading="lazy" ${fallback(mainEmoji)}>` +
       `<span class="sb-plaque">${esc(view.plaques.main)}</span>` +
       `<span class="sb-main-rank">${esc(m.name)}・精通 ${m.masteredCount} 張${m.next ? `（再 ${m.next.at - m.masteredCount} 張升「${esc(m.next.name)}」）` : '（已達最高階）'}</span>` +
       `</button>`;

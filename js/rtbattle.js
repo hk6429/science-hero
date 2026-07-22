@@ -83,6 +83,11 @@ const SciRtBattle = (() => {
     return `${adj}${noun}${String(Math.floor(rng() * 100)).padStart(2, '0')}`;
   }
 
+  function isValidNick(nick) {
+    if (typeof nick !== 'string') return false;
+    return NICK_ADJ.some((adj) => NICK_NOUN.some((noun) => new RegExp(`^${adj}${noun}\\d{0,2}$`, 'u').test(nick)));
+  }
+
   function buildAdventureScript(seed, role, rounds = ROUNDS, every = ADVENTURE_EVERY) {
     const rng = mulberry32((seed ^ (ROLE_SALT[role] || 0)) >>> 0);
     const script = new Map();
@@ -148,5 +153,5 @@ const SciRtBattle = (() => {
     return { key: season.key, pts: season.pts, wins: season.wins, battles: season.battles, streak: season.streak, winRate: Math.round(season.wins / season.battles * 100), title: titleFor(season.pts) };
   }
 
-  return { ROUNDS, ROUND_SEC, POLL_MS, DEAD_MS, MAX_HP, mulberry32, withSeededRandom, buildQuestions, answerResult, hpOf, judge, NICK_ADJ, NICK_NOUN, genNick, ADVENTURE_EVERY, ADVENTURE_RATE, ADVENTURES, buildAdventureScript, safeBoard, loadClass, saveClass, SEASON_TITLES, WIN_PTS, LOSE_PTS, seasonKey, titleFor, recordSeasonResult };
+  return { ROUNDS, ROUND_SEC, POLL_MS, DEAD_MS, MAX_HP, mulberry32, withSeededRandom, buildQuestions, answerResult, hpOf, judge, NICK_ADJ, NICK_NOUN, genNick, isValidNick, ADVENTURE_EVERY, ADVENTURE_RATE, ADVENTURES, buildAdventureScript, safeBoard, loadClass, saveClass, SEASON_TITLES, WIN_PTS, LOSE_PTS, seasonKey, titleFor, recordSeasonResult };
 })();

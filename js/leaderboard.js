@@ -6,6 +6,7 @@ const SciClassBoard = (() => {
   const OFFLINE_MESSAGE = '目前無法連線班級榜，你的練習已存在本機';
   let current = null;
   let previousFocus = null;
+  let generatedNick = SciRtBattle.genNick();
 
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -71,10 +72,13 @@ const SciClassBoard = (() => {
         <label>班級碼
           <input id="classboard-class-code" name="classCode" type="text" inputmode="text" maxlength="12" pattern="[A-Za-z0-9]{4,12}" autocomplete="off" required placeholder="例如 701A">
         </label>
-        <label>科學暱稱（自願公開）
-          <input id="classboard-nick" name="nick" type="text" maxlength="12" autocomplete="off" required placeholder="例如 好奇的電子01">
-        </label>
-        <p class="classboard-privacy-note">不填暱稱就不會出現在個人貢獻列表，也不收集真名。</p>
+        <div class="classboard-nick-field">
+          <span>科學代號（自願公開）</span>
+          <div class="classboard-nick-picker"><strong id="classboard-nick-preview">${esc(generatedNick)}</strong>
+            <button id="classboard-nick-reroll" type="button">換一個</button>
+          </div>
+        </div>
+        <p class="classboard-privacy-note">系統只會送出上方自動產生的科學代號，不提供真名輸入欄位。</p>
         <div class="classboard-actions">
           <button id="classboard-refresh" class="classboard-refresh" type="button">只查看班級成果</button>
           <button id="classboard-submit" class="classboard-submit" type="submit">加入並更新我的貢獻</button>
@@ -90,6 +94,10 @@ const SciClassBoard = (() => {
     $('classboard-close').addEventListener('click', close);
     overlay.addEventListener('click', (event) => { if (event.target === overlay) close(); });
     $('classboard-refresh').addEventListener('click', refresh);
+    $('classboard-nick-reroll').addEventListener('click', () => {
+      generatedNick = SciRtBattle.genNick();
+      $('classboard-nick-preview').textContent = generatedNick;
+    });
     $('classboard-form').addEventListener('submit', submitContribution);
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && !overlay.hidden) close();
@@ -138,13 +146,13 @@ const SciClassBoard = (() => {
     event.preventDefault();
     if (!current) return;
     const classCode = cleanCode($('classboard-class-code').value);
-    const nick = $('classboard-nick').value.trim();
+    const nick = generatedNick;
     if (!CLASS_CODE.test(classCode)) {
       setStatus('請輸入 4–12 碼英文字母或數字的班級碼。', 'error');
       return;
     }
-    if (!nick) {
-      setStatus('若要自願公開貢獻，請填入科學暱稱。', 'error');
+    if (!SciRtBattle.isValidNick(nick)) {
+      setStatus('科學代號無效，請按「換一個」重新產生。', 'error');
       return;
     }
     $('classboard-submit').disabled = true;
@@ -174,6 +182,8 @@ const SciClassBoard = (() => {
       apiBase: opts.apiBase,
     };
     ensureOverlay();
+    generatedNick = SciRtBattle.genNick();
+    $('classboard-nick-preview').textContent = generatedNick;
     previousFocus = document.activeElement;
     $('classboard-class-code').value = rememberedCode();
     $('classboard-overlay').hidden = false;

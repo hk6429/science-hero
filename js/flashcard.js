@@ -61,14 +61,14 @@ const SciFlashcard = (() => {
   }
 
   // 自測與對戰必須尊重 Leitner 到期時間：尚未到期的答對只算作答紀錄，不推進盒序。
-  function bumpBoxIfDue(state, id, correct, now = Date.now()) {
+  function bumpBoxIfDue(state, id, correct, now = Date.now(), cap = BOX_INTERVAL_DAYS.length - 1) {
     const card = SciStore.getCard(state, id);
     if (correct && card.seen > 0 && card.due > now) return card;
-    return bumpBox(state, id, correct);
+    return bumpBox(state, id, correct, cap);
   }
 
   function markResult(state, id, correct) {
-    // 閃卡是主觀自評，最多到 box3「快熟」；box4 精熟保留給 quiz/cloze/對戰客觀答對。
+    // 閃卡是主觀自評，最多到 box3「快熟」；box4 精熟保留給選擇題／對戰等客觀答對。
     const selfAssessmentCap = BOX_INTERVAL_DAYS.length - 2;
     const updated = bumpBox(state, id, correct, selfAssessmentCap);
     state.stats.totalReviews += 1;

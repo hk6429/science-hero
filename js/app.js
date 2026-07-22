@@ -470,11 +470,12 @@ const SciApp = (() => {
   }
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
-  function recordAnswer(target, correct, elapsedMs, contentLength = 0) {
+  function recordAnswer(target, correct, elapsedMs, contentLength = 0, source = 'quiz') {
     const previousCard = SciStore.getCard(state, target.id);
-    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength });
+    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source });
     const prevBox = previousCard.box;
-    const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct);
+    const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap);
     const energy = SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
     state.stats.totalReviews += 1;
     sessionAnswers += 1;
@@ -675,6 +676,7 @@ const SciApp = (() => {
   function answerFlash(body, correct) {
     if (flashAnswering) return;
     flashAnswering = true;
+    const scrollY = window.scrollY;
 
     const t = flashQueue[flashIdx];
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
@@ -686,6 +688,7 @@ const SciApp = (() => {
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
     renderHeroStats();
+    requestAnimationFrame(() => window.scrollTo(0, scrollY));
     correct ? playCorrectTone() : playWrongTone();
     maybeShowRestReminder();
 
@@ -845,14 +848,14 @@ const SciApp = (() => {
       if (correct) quizCorrect += 1;
       cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
       answerBox.querySelectorAll('button').forEach((b) => { b.disabled = true; });
-      settleAnswer(body, cardEl, target, correct, elapsed, null, SciQuiz.questionContentLength(q));
+      settleAnswer(body, cardEl, target, correct, elapsed, null, SciQuiz.questionContentLength(q), 'cloze');
     };
     body.querySelector('#cloze-yes').addEventListener('click', () => settle(true));
     body.querySelector('#cloze-no').addEventListener('click', () => settle(false));
   }
 
   // 答題後的共同收尾（選擇題與克漏字共用）：結果橫幅、解說、下一題、記錄與情境防呆跳題。
-  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, contentLength) {
+  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, contentLength, source = 'quiz') {
     const subjectAtAnswer = activeSubject;
     const modeAtAnswer = mode;
 
@@ -878,7 +881,7 @@ const SciApp = (() => {
     nextBtn.textContent = '下一題 →';
     cardEl.appendChild(nextBtn);
 
-    recordAnswer(target, correct, elapsed, contentLength);
+    recordAnswer(target, correct, elapsed, contentLength, source);
 
     const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
     // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
@@ -1023,6 +1026,10 @@ const SciApp = (() => {
     [200, '科學大師'],
     [300, '科學宗師'],
     [400, '科學泰斗'],
+    [550, '科學巨擘'],
+    [700, '萬象宗師'],
+    [850, '星海先驅'],
+    [1000, '科學典藏家'],
   ];
 
   function rankLabel(masteredCount) {
@@ -1192,6 +1199,7 @@ const SciApp = (() => {
       ['⭐ 戰功', `${mastered} 個`],
       ['🏅 精通單元', `${masteredUnits} 個`],
       ['🔭 研究捐獻', `${researchDonations} 次`],
+      ['♾️ 無盡巡禮最佳', `${(state.battle && state.battle.endlessBest) || 0} 連勝`],
     ];
     let y = 300;
     rows.forEach(([label, value]) => {

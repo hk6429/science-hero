@@ -3,13 +3,17 @@ const SciWeak = (() => {
   const FAST_GUESS_MS = 1500;
   const LUCKY_GUESS_MS = 800;
 
+  function isObjectiveSource(source) {
+    return source !== 'flash' && source !== 'cloze';
+  }
+
   function readingThresholdMs(contentLength) {
     const chars = Math.max(0, Number(contentLength) || 0);
     return Math.min(4000, Math.max(LUCKY_GUESS_MS, 500 + chars * 25));
   }
 
   function recentPerformanceUnstable(log, termId) {
-    const recent = log.filter((entry) => entry.termId === termId && entry.source !== 'flash').slice(-5);
+    const recent = log.filter((entry) => entry.termId === termId && isObjectiveSource(entry.source)).slice(-5);
     if (recent.length < 3) return true;
     return recent.filter((entry) => entry.correct).length / recent.length < 0.8;
   }
@@ -42,6 +46,7 @@ const SciWeak = (() => {
     const unitByTerm = new Map();
     for (const entry of log) {
       unitByTerm.set(entry.termId, entry.unit);
+      if (entry.correct && !isObjectiveSource(entry.source)) continue;
       if (entry.correct && !entry.luckyGuess) {
         score.set(entry.termId, 0);
         continue;

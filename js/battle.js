@@ -72,6 +72,14 @@ const SciBattle = (() => {
     if (state.shieldLeft > 0) state.shieldLeft -= 1;
     else state.combo = 0;
     state.pHp = Math.max(0, state.pHp - 8);
+    state.meDamage = 8;
+    state.foeDamage = 0;
+    return state;
+  }
+
+  function clearDamagePops(state) {
+    state.foeDamage = 0;
+    state.meDamage = 0;
     return state;
   }
 
@@ -257,6 +265,25 @@ const SciBattle = (() => {
     return state.battle.endlessBest;
   }
 
+  const ENDLESS_MILESTONES = [
+    { wins: 5, icon: '🔥', title: '知識之火守護者' },
+    { wins: 10, icon: '🏅', title: '巡禮知識行者' },
+    { wins: 15, icon: '🌟', title: '星海探索先鋒' },
+    { wins: 20, icon: '♾️', title: '萬象巡禮典藏家' },
+  ];
+
+  function claimEndlessMilestone(state, streak) {
+    beatenList(state);
+    const wins = Math.max(0, Math.floor(streak) || 0);
+    const milestone = ENDLESS_MILESTONES.find((item) => item.wins === wins);
+    if (!milestone) return null;
+    state.battle.endlessCelebrated = Array.isArray(state.battle.endlessCelebrated)
+      ? state.battle.endlessCelebrated : [];
+    if (state.battle.endlessCelebrated.includes(wins)) return null;
+    state.battle.endlessCelebrated.push(wins);
+    return { ...milestone };
+  }
+
   // ── mount：掛在指定容器上，ctx = { pool, state, subjectLabel, recordAnswer, masteredCardCount } ──
   function mount(el, ctx) {
     const { pool, state, subjectLabel, recordAnswer, masteredCardCount } = ctx;
@@ -265,6 +292,17 @@ const SciBattle = (() => {
     let locked = false;
     let endlessMode = false;
     let endlessStreak = 0;
+
+    function showEndlessMilestone(milestone) {
+      if (!milestone) return;
+      const toast = document.createElement('aside');
+      toast.className = 'first-success endless-milestone-toast celebrate-in';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.innerHTML = `<strong>${milestone.icon} 巡禮 ${milestone.wins} 連勝</strong><span>${milestone.title}</span>`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 4200);
+    }
 
     const currentCompanion = () => ctx.subjectKey
       ? companionForSubject(ctx.subjectKey, ctx.masteredCountForSubject)
@@ -383,6 +421,7 @@ const SciBattle = (() => {
     function nextRound() {
       if (battleState.oHp <= 0) return finish(true);
       if (battleState.pHp <= 0) return finish(false);
+      clearDamagePops(battleState);
       battleState.round += 1;
       battleState.q = SciQuiz.buildQuestion(pool[Math.floor(Math.random() * pool.length)], pool);
       battleState.qStart = Date.now();
@@ -505,14 +544,17 @@ const SciBattle = (() => {
 
     function finish(win) {
       const rk = endlessMode ? { delta: 0, ...rankInfo(state) } : (win ? rankWin(state) : rankLose(state));
+      let endlessMilestone = null;
       if (endlessMode && win) {
         endlessStreak += 1;
         recordEndlessBest(state, endlessStreak);
+        endlessMilestone = claimEndlessMilestone(state, endlessStreak);
       } else if (win) {
         const beaten = beatenList(state);
         if (!beaten.includes(opp.id)) beaten.push(opp.id);
       }
       SciStore.save(state);
+      showEndlessMilestone(endlessMilestone);
       if (win && !endlessMode) {
         const reward = SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
         if (reward.earned > 0) ctx.onEnergyGain?.(reward.earned);
@@ -635,7 +677,7 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, answerFeedbackClass, endlessOpponent, recordEndlessBest, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, clearDamagePops, answerFeedbackClass, endlessOpponent, recordEndlessBest, ENDLESS_MILESTONES, claimEndlessMilestone, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
     SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, subjectProgress, companionForSubject, subjectCompanionArt,

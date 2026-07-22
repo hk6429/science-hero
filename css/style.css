@@ -66,6 +66,8 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 .hero-stat--primary strong { font-size: 1.15rem; }
 
 .site-header.is-new-player .hero-stat { display: none; }
+.site-header.is-new-player .hero-mission,
+.site-header.is-new-player .rank-next-goal { display: none; }
 .site-header.is-new-player .hero-stats::after {
   content: "開始練習，累積你的第一個戰功";
   display: block;
@@ -73,7 +75,7 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
   font-size: .86rem;
   font-weight: 800;
 }
-.site-header.is-new-player .new-player-guide { order: -1; width: min(100%, 760px); color: var(--text); text-align: left; }
+.site-header.is-new-player .new-player-guide { width: min(100%, 760px); color: var(--text); text-align: left; }
 
 .hero-rank { background: rgba(255, 212, 59, 0.25); color: #ffd43b; }
 .rank-next-goal { margin: 7px 0 0; color: #d8f5e2; font-size: .76rem; font-weight: 700; }
@@ -175,6 +177,10 @@ header.site-header h1 .brand-ico { width: 1.4em; height: 1.4em; object-fit: cont
 .classboard-milestone p { margin: 7px 0 0; color: #3a4a34; font-size: .84rem; font-weight: 700; }
 .classboard-form { display: grid; gap: 12px; }
 .classboard-form label { display: grid; gap: 5px; font-size: .88rem; font-weight: 600; color: #3a4a34; }
+.classboard-nick-field { display: grid; gap: 5px; font-size: .88rem; font-weight: 600; color: #3a4a34; }
+.classboard-nick-picker { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid rgba(82,126,14,.32); border-radius: 10px; background: #fff; }
+.classboard-nick-picker strong { flex: 1; color: #21331f; }
+.classboard-nick-picker button { min-height: 36px; border: 1px solid var(--sci-nature, #527e0e); border-radius: 8px; background: #fff; color: var(--sci-nature, #527e0e); font-weight: 700; cursor: pointer; }
 .classboard-form input { padding: 10px 12px; border: 1px solid rgba(82,126,14,.32); border-radius: 10px; font-size: 1rem; background: #fff; color: #21331f; }
 .classboard-form input:focus { outline: 2px solid var(--sci-nature, #527e0e); outline-offset: 1px; }
 .classboard-privacy-note { margin: 2px 0 0; font-size: .78rem; color: var(--muted, #566b5e); line-height: 1.5; }

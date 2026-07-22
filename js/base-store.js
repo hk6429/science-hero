@@ -28,6 +28,7 @@ const SciBaseStore = (() => {
   const STAGES = [
     [0, '見習營帳'], [1, '初階研究站'], [10, '進階實驗樓'], [30, '資深研究院'], [80, '領域總部'],
     [120, '學者研究院'], [200, '科學殿堂'], [300, '宗師天文臺'], [400, '科學典藏館'],
+    [550, '星海研究總部'], [700, '萬象觀測城'], [850, '宇宙探索基地'], [1000, '科學大典藏館'],
   ];
 
   function maxBox() { return SciFlashcard.BOX_INTERVAL_DAYS.length - 1; }
@@ -322,6 +323,7 @@ const SciBaseStore = (() => {
       { icon: '🏆', label: '段位巔峰', value: rankValue },
       { icon: '🔥', label: '最高連對', value: `${SciEconomy.getBestCombo()} 題` },
       { icon: '📅', label: '累計天數', value: `${(state && state.stats && state.stats.streakDays) || 0} 天` },
+      { icon: '♾️', label: '無盡巡禮最佳', value: `${(state && state.battle && state.battle.endlessBest) || 0} 連勝` },
     ];
   }
 
