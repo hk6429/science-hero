@@ -109,7 +109,8 @@ test('D：匯入既有進度但沒有本機旗標時，不重播 onboarding 與 
 
   const app = source('js/app.js');
   assert.match(app, /SciUiLogic\.shouldShowOnboarding\(state\.stats\.totalReviews,\s*masteredCardCount\(\),\s*checklist\)/);
-  assert.match(app, /SciUiLogic\.shouldShowFirstSuccess\(state\.stats\.totalReviews,\s*localStorage\.getItem\(FIRST_SUCCESS_KEY\)\)/);
+  assert.equal((app.match(/const wasFirstEver = state\.stats\.totalReviews === 0;/g) || []).length, 2, '兩個作答入口都須在遞增前擷取首次快照');
+  assert.match(app, /if \(localStorage\.getItem\(FIRST_SUCCESS_KEY\)\) return;/, '儀式內仍以本機旗標防止重播');
 });
 
 test('E：本機 PvP 答題後標出正解與選錯，並顯示本回合傷害跳字', () => {

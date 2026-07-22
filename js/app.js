@@ -472,6 +472,7 @@ const SciApp = (() => {
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
   function recordAnswer(target, correct, elapsedMs, contentLength = 0, source = 'quiz', recoveryStrength = 'strong') {
+    const wasFirstEver = state.stats.totalReviews === 0;
     const masteredBefore = masteredCardCount();
     const previousCard = SciStore.getCard(state, target.id);
     SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength, source, recoveryStrength });
@@ -493,8 +494,9 @@ const SciApp = (() => {
       economy: SciEconomy,
       allowCrystalReward: SciWeak.isObjectiveSource(source),
     });
-    if (correct) showFirstSuccess();
+    if (correct && wasFirstEver) showFirstSuccess();
     markOnboarding(mode === 'battle' ? 'battle' : 'quiz');
+    if (correct && SciWeak.isObjectiveSource(source) && updated.box > prevBox) recordDailySignal('unitProgress', false);
     if (correct && SciWeak.isObjectiveSource(source)) recordDailySignal('correct', false);
     SciStore.touchDailyStreak(state);
     SciStore.bumpDailyCount(state);
@@ -529,7 +531,7 @@ const SciApp = (() => {
 
   function showFirstSuccess() {
     try {
-      if (!SciUiLogic.shouldShowFirstSuccess(state.stats.totalReviews, localStorage.getItem(FIRST_SUCCESS_KEY))) return;
+      if (localStorage.getItem(FIRST_SUCCESS_KEY)) return;
       localStorage.setItem(FIRST_SUCCESS_KEY, '1');
     } catch { /* 儀式只顯示一次是加值；儲存失敗不影響作答。 */ }
     const toast = document.createElement('aside');
@@ -701,10 +703,11 @@ const SciApp = (() => {
     feedbackCard?.classList.add(correct ? 'flash-correct' : 'flash-wrong');
 
     const t = flashQueue[flashIdx];
+    const wasFirstEver = state.stats.totalReviews === 0;
     SciWeak.recordFlash(state, { termId: t.id, unit: t.unit, correct });
     SciFlashcard.markResult(state, t.id, correct);
     sessionAnswers += 1;
-    if (correct) showFirstSuccess();
+    if (correct && wasFirstEver) showFirstSuccess();
     markOnboarding('flashcard');
     SciStore.bumpDailyCount(state);
     SciStore.save(state);
@@ -1781,6 +1784,7 @@ const SciApp = (() => {
         state = SciStore.importState(text);
         SciStore.save(state);
         renderHeroStats();
+        renderOnboarding();
         renderLearningBody(document.querySelector(`.panel[data-key="${activeSubject}"]`));
         alert('進度已匯入！');
       } catch (err) {

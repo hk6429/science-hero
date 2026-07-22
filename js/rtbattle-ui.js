@@ -142,7 +142,7 @@ const SciRtBattleUI = (() => {
         const q = solo.questions[solo.idx];
         const correct = id === q.answerId;
         const target = solo.pool.find((term) => term.id === q.answerId);
-        ctx.recordAnswer?.(target, correct, elapsedMs);
+        ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
         const result = SciRtBattle.answerResult({ correct, combo: solo.combo, myHp: SciRtBattle.MAX_HP, boost: solo.boost });
         solo.dmg += result.dmg; solo.combo = result.nextCombo; if (correct) solo.correct += 1;
         solo.boost = {}; solo.idx += 1;
@@ -201,7 +201,7 @@ const SciRtBattleUI = (() => {
           const correct = button.dataset.id === q.answerId;
           const pool = ctx.poolForScope(live.scope);
           const target = pool.find((term) => term.id === q.answerId);
-          ctx.recordAnswer?.(target, correct, Date.now() - started);
+          ctx.recordAnswer?.(target, correct, Date.now() - started, SciQuiz.questionContentLength(q));
           await liveApi({ op: 'answer', code, nick, qNo: live.qNo, correct });
           el.innerHTML = `<div class="card rt-wait"><h3>${correct ? '✅ 答對了' : '💡 這題記起來'}</h3><p>等老師出下一題…</p></div>`;
         }));
@@ -322,7 +322,7 @@ const SciRtBattleUI = (() => {
       const q = questions[state.idx];
       const correct = chosenId === q.answerId;
       const target = state.pool.find((term) => term.id === q.answerId);
-      ctx.recordAnswer?.(target, correct, elapsedMs);
+      ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
       const result = SciRtBattle.answerResult({ correct, combo: state.combo, myHp: myHp(), boost: state.boost });
       state.dmg += result.dmg;
       state.combo = result.nextCombo;
