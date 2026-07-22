@@ -65,9 +65,12 @@ function loadAppHarness() {
   const appSource = source('js/app.js').replace(
     'return { boot };',
     `return { boot, __round10: {
-      recordAnswer, selfTestUsesCloze, showEnergyGain, showDailyAllClear, showMasteryPromotion,
+      recordAnswer, quizSummaryText, selfTestUsesCloze, countQuizMcQuestion,
+      showEnergyGain, showDailyAllClear, showMasteryPromotion,
       wireIoButtons, renderOnboarding,
-      setState(value) { state = value; }, getState() { return state; }
+      setState(value) { state = value; }, getState() { return state; },
+      setQuizCounting(total, countedIdx) { quizMcTotal = total; quizMcCountedIdx = countedIdx; },
+      getQuizMcTotal() { return quizMcTotal; }
     } };`,
   );
   vm.runInContext(
@@ -122,6 +125,51 @@ test('A：box3 自測交替客觀選擇題與克漏字，客觀答對可升 box4
   assert.equal(subjectiveState.cards.target.box, 3, 'cloze 主觀自評仍封頂 box3');
   assert.equal(subjectiveState.stats.dailyQuests.correct, 0, 'cloze 不得產生客觀 correct 訊號');
   assert.equal(harness.answerEnergyCalls.length, 1, 'cloze 不得呼叫晶能作答獎勵');
+});
+
+test('A2：全 box4 的 15 題回合只以 8 題 MC 結算，全克漏字回合使用中性文案', () => {
+  const harness = loadAppHarness();
+  harness.app.setQuizCounting(0, -1);
+  for (let index = 0; index < 15; index += 1) {
+    if (!harness.app.selfTestUsesCloze(4, index)) {
+      harness.app.countQuizMcQuestion(index);
+      harness.app.countQuizMcQuestion(index);
+    }
+  }
+  const mcTotal = harness.app.getQuizMcTotal();
+
+  assert.equal(mcTotal, 8, '15 題全 box4 回合應有 8 題可計數 MC');
+  const perfectSummary = harness.app.quizSummaryText(8, mcTotal);
+  assert.match(perfectSummary, /8 題全對/);
+  assert.doesNotMatch(perfectSummary, /找漏洞/);
+
+  const recallOnlySummary = harness.app.quizSummaryText(0, 0);
+  assert.match(recallOnlySummary, /回想練習/);
+  assert.doesNotMatch(recallOnlySummary, /找漏洞/);
+});
+
+test('A3：MC 分母會隨科目狀態存取並重置，結算不再使用整個 quizQueue', () => {
+  const appSource = source('js/app.js');
+  assert.match(appSource, /let quizMcTotal = 0;/);
+  assert.match(appSource, /quizState\.set\(activeSubject, \{[^}]*mcTotal: quizMcTotal[^}]*mcCountedIdx: quizMcCountedIdx/s);
+  assert.match(appSource, /quizMcTotal = savedQuiz\.mcTotal;/);
+  assert.match(appSource, /quizMcCountedIdx = savedQuiz\.mcCountedIdx;/);
+
+  const startRound = appSource.slice(
+    appSource.indexOf('function startQuizRound'),
+    appSource.indexOf('function quizSummaryText'),
+  );
+  assert.match(startRound, /quizMcTotal = 0;/);
+  assert.match(startRound, /quizMcCountedIdx = -1;/);
+  assert.match(appSource, /quizSummaryText\(quizCorrect, quizMcTotal\)/);
+  assert.doesNotMatch(appSource, /quizSummaryText\(quizCorrect, quizQueue\.length\)/);
+
+  const mcFlow = appSource.slice(
+    appSource.indexOf('// 傳入該詞盒序'),
+    appSource.indexOf('function renderClozeQuestion'),
+  );
+  assert.match(mcFlow, /countQuizMcQuestion\(quizIdx\)/);
+  assert.match(appSource, /<span>答對 \$\{quizCorrect\}<\/span>/, '表頭仍顯示原始客觀答對數');
 });
 
 test('B：校準落差接受各客觀模式證偽，排除主觀 cloze 答錯並接受 cloze 自評宣告', () => {

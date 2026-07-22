@@ -90,6 +90,8 @@ const SciApp = (() => {
   let quizQueue = [];
   let quizIdx = 0;
   let quizCorrect = 0;
+  let quizMcTotal = 0;
+  let quizMcCountedIdx = -1;
   let quizStartTime = 0;
   let quizAnswered = false;
 
@@ -258,7 +260,14 @@ const SciApp = (() => {
 
     // 離開前先把這科正在進行的回合存起來，回來時可以接著練，不會平白歸零。
     flashState.set(activeSubject, { queue: flashQueue, idx: flashIdx, revealed: flashRevealed });
-    quizState.set(activeSubject, { pool: quizPool, queue: quizQueue, idx: quizIdx, correct: quizCorrect });
+    quizState.set(activeSubject, {
+      pool: quizPool,
+      queue: quizQueue,
+      idx: quizIdx,
+      correct: quizCorrect,
+      mcTotal: quizMcTotal,
+      mcCountedIdx: quizMcCountedIdx,
+    });
 
     activeSubject = key;
     terms = subjectTerms.get(key);
@@ -282,11 +291,15 @@ const SciApp = (() => {
       quizQueue = savedQuiz.queue;
       quizIdx = savedQuiz.idx;
       quizCorrect = savedQuiz.correct;
+      quizMcTotal = savedQuiz.mcTotal;
+      quizMcCountedIdx = savedQuiz.mcCountedIdx;
     } else {
       quizPool = [];
       quizQueue = [];
       quizIdx = 0;
       quizCorrect = 0;
+      quizMcTotal = 0;
+      quizMcCountedIdx = -1;
     }
 
     document.querySelectorAll('#tabs button').forEach((b) => {
@@ -786,9 +799,12 @@ const SciApp = (() => {
     );
     quizIdx = 0;
     quizCorrect = 0;
+    quizMcTotal = 0;
+    quizMcCountedIdx = -1;
   }
 
   function quizSummaryText(correctCount, total) {
+    if (total === 0) return '這輪都是回想練習，弱點清單已幫你記下，繼續保持！';
     const pct = total ? Math.round((correctCount / total) * 100) : 0;
     if (pct === 100) return `${total} 題全對，穩了！這科的底子已經很扎實。`;
     if (pct >= 80) return `${total} 題裡對了 ${correctCount} 題，手感很不錯，剩下的弱點清單已經幫你記下來了。`;
@@ -798,6 +814,12 @@ const SciApp = (() => {
 
   function selfTestUsesCloze(box, questionIndex) {
     return box >= 3 && questionIndex % 2 === 1;
+  }
+
+  function countQuizMcQuestion(questionIndex) {
+    if (quizMcCountedIdx === questionIndex) return;
+    quizMcTotal += 1;
+    quizMcCountedIdx = questionIndex;
   }
 
   function renderQuiz(body) {
@@ -811,7 +833,7 @@ const SciApp = (() => {
     if (quizIdx >= quizQueue.length) {
       body.innerHTML = `
         <div class="card celebrate-in">
-          <p>${quizSummaryText(quizCorrect, quizQueue.length)}</p>
+          <p>${quizSummaryText(quizCorrect, quizMcTotal)}</p>
           <div class="btn-row">
             <button class="btn btn-secondary" id="quiz-stop">今天先這樣</button>
             <button class="btn btn-primary" id="quiz-again">再來測一次</button>
@@ -853,6 +875,7 @@ const SciApp = (() => {
     }
 
     // 傳入該詞盒序，讓誘答難度隨精熟度調整（新學者放水、熟手加難）。
+    countQuizMcQuestion(quizIdx);
     const q = SciQuiz.buildQuestion(target, quizPool.length ? quizPool : terms, null, box);
     body.innerHTML = `${headHtml}
       <div class="card">
