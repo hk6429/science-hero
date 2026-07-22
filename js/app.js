@@ -479,6 +479,9 @@ const SciApp = (() => {
     const prevBox = previousCard.box;
     const cap = source === 'cloze' ? SciFlashcard.BOX_INTERVAL_DAYS.length - 2 : SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct, Date.now(), cap, SciWeak.isObjectiveSource(source));
+    const milestoneUnit = correct && SciWeak.isObjectiveSource(source)
+      ? checkUnitMilestone(target.unit)
+      : null;
     const promotion = correct
       ? SciUiLogic.masteryPromotion(masteredBefore, masteredCardCount(), RANK_TIERS, SciBaseStore.STAGES)
       : null;
@@ -507,6 +510,7 @@ const SciApp = (() => {
     if (energy.earned > 0) showEnergyGain(energy.earned);
     maybeShowRestReminder();
     if (surprise.hit) showScienceSurprise(surprise);
+    return { updated, milestoneUnit };
   }
 
   function showEnergyGain(amount) {
@@ -910,9 +914,7 @@ const SciApp = (() => {
     nextBtn.textContent = '下一題 →';
     cardEl.appendChild(nextBtn);
 
-    recordAnswer(target, correct, elapsed, contentLength, source, recoveryStrength);
-
-    const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
+    const { milestoneUnit } = recordAnswer(target, correct, elapsed, contentLength, source, recoveryStrength);
     // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
     // 這裡若不擋下來，會把別科題目誤植進（可能已不存在的）舊分頁，或把使用者尚未看到的
     // 題目悄悄跳過——這正是多位審查者回報「答完題畫面亂跳到別科」的根因。

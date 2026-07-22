@@ -4,7 +4,7 @@ const SciWeak = (() => {
   const LUCKY_GUESS_MS = 800;
 
   function isObjectiveSource(source) {
-    return source !== 'flash' && source !== 'cloze';
+    return source !== 'flash' && source !== 'cloze' && source !== 'timeout';
   }
 
   function readingThresholdMs(contentLength) {

@@ -26,7 +26,7 @@ function runRestrictedStaticSmoke() {
   ok('精通到期把關與每日任務模組已接線', /bumpBoxIfDue/.test(app) && /js\/daily-quests\.js/.test(html));
   ok('PvE 血條、跳字與戰功結算條存在', /bat-hp-fill/.test(css) && /bat-damage-pop/.test(css) && /bat-record-summary/.test(battle));
   ok('守護者與稚靈圖片槽含 fallback', /assets\/battle\/foe-/.test(battle) && /assets\/fusion\/cub-/.test(app) && /onerror="this\.replaceWith/.test(`${battle}\n${app}`));
-  ok('四科精靈圖片槽依科別階級載入且含 fallback', /sprite-\$\{subjectKey\}-s\$\{companion\.level\}/.test(battle) && /subjectCompanionArt/.test(battle));
+  ok('四科精靈圖片槽依科別階級載入且含 fallback', /sprite-\$\{subjectKey\}-s\$\{artLevel\}/.test(battle) && /subjectCompanionArt/.test(battle));
   ok('老師家長摘要入口與可複製文字框已接線', /id="family-summary-btn"/.test(app) && /id="family-summary-text"/.test(html) && /buildFamilySummary/.test(app));
   ok('家長說明入口與教師口吻內容已接線', /id="parent-guide-btn"/.test(html) && /id="parent-guide-overlay"/.test(html) && /精通不是點得多/.test(html));
   ok('訪客徽章與 GoatCounter 已接線', /visitor-badge\.laobi\.icu\/badge\?page_id=hk6429\.science-hero/.test(html) && /hk6429\.goatcounter\.com\/count/.test(html) && /gc\.zgo\.at\/count\.js/.test(html));

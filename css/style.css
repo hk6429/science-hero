@@ -510,6 +510,16 @@ main {
 
 .card.flash-correct { animation: cardFlashGreen 0.5s ease; }
 .card.flash-wrong { animation: cardFlashRed 0.5s ease; }
+.card.correct {
+  background: #e7f6ec;
+  border-color: var(--green);
+  animation: cardFlashGreen 0.5s ease;
+}
+.card.wrong {
+  background: var(--warn-bg);
+  border-color: var(--warn);
+  animation: cardFlashRed 0.5s ease;
+}
 
 @keyframes cardFlashGreen {
   0% { background: #e7f6ec; }

@@ -3,6 +3,7 @@ const SciRtBattleUI = (() => {
   const api = (body) => SHAPI.call('/api/rt-room', body);
   const liveApi = (body) => SHAPI.call('/api/rt-live', body);
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const feedbackHtml = (target, correct) => `<div class="card ${correct ? 'correct' : 'wrong'}"><h3>${correct ? '✅ 答對了！' : '💡 這題記起來'}</h3><p>${esc(target?.term || '')}：${esc(target?.def || '')}</p></div>`;
 
   function mount(el, ctx) {
     let room = null;
@@ -142,7 +143,7 @@ const SciRtBattleUI = (() => {
         const q = solo.questions[solo.idx];
         const correct = id === q.answerId;
         const target = solo.pool.find((term) => term.id === q.answerId);
-        ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
+        ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q), id === null ? 'timeout' : 'quiz');
         const result = SciRtBattle.answerResult({ correct, combo: solo.combo, myHp: SciRtBattle.MAX_HP, boost: solo.boost });
         solo.dmg += result.dmg; solo.combo = result.nextCombo; if (correct) solo.correct += 1;
         solo.boost = {}; solo.idx += 1;
@@ -322,7 +323,7 @@ const SciRtBattleUI = (() => {
       const q = questions[state.idx];
       const correct = chosenId === q.answerId;
       const target = state.pool.find((term) => term.id === q.answerId);
-      ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
+      ctx.recordAnswer?.(target, correct, elapsedMs, SciQuiz.questionContentLength(q), chosenId === null ? 'timeout' : 'quiz');
       const result = SciRtBattle.answerResult({ correct, combo: state.combo, myHp: myHp(), boost: state.boost });
       state.dmg += result.dmg;
       state.combo = result.nextCombo;
@@ -332,7 +333,7 @@ const SciRtBattleUI = (() => {
       maybeAdventure();
       if (state.idx >= questions.length) state.done = true;
       const adventure = state.lastAdventure ? `<div class="card rt-adventure">${state.lastAdventure.emoji} 科學奇遇【${esc(state.lastAdventure.name)}】——${esc(state.lastAdventure.desc)}</div>` : '';
-      el.innerHTML = `<div id="rt-hud"></div><div class="card ${correct ? 'correct' : 'wrong'}"><h3>${correct ? '✅ 答對了！' : '💡 這題記起來'}</h3><p>${esc(target?.term || '')}：${esc(target?.definition || '')}</p></div>${adventure}`;
+      el.innerHTML = `<div id="rt-hud"></div>${feedbackHtml(target, correct)}${adventure}`;
       state.lastAdventure = null;
       paintHud();
       setTimeout(() => state.done ? waitOpponent() : nextRound(), 900);
@@ -373,5 +374,5 @@ const SciRtBattleUI = (() => {
     home();
   }
 
-  return { mount };
+  return { mount, feedbackHtml };
 })();

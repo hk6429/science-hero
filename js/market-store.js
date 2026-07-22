@@ -70,8 +70,10 @@ const SciMarketStore = (() => {
   function classInfo() {
     try {
       const parsed = JSON.parse(localStorage.getItem('sci_class'));
-      if (!parsed || typeof parsed.classCode !== 'string' || typeof parsed.nick !== 'string') return null;
-      return { classCode: parsed.classCode, nick: parsed.nick };
+      if (!parsed || typeof parsed.nick !== 'string') return null;
+      const classCode = typeof parsed.classCode === 'string' ? parsed.classCode : parsed.code;
+      if (typeof classCode !== 'string') return null;
+      return { classCode, nick: parsed.nick };
     } catch { return null; }
   }
   function getInv() { return { ...state.inv }; }

@@ -161,7 +161,7 @@ test('C：匯入老手進度的實際 change 流程會立即隱藏新手引導',
 
 test('D：即時對戰三條作答路徑都傳題長，長題 1000ms 與 PvE 一樣會標記僥倖答對', () => {
   const ui = source('js/rtbattle-ui.js');
-  const wiredCalls = ui.match(/ctx\.recordAnswer\?\.\(target, correct, [^;\n]+, SciQuiz\.questionContentLength\(q\)\)/g) || [];
+  const wiredCalls = ui.match(/ctx\.recordAnswer\?\.\(target, correct, [^;\n]+, SciQuiz\.questionContentLength\(q\)(?:, [^;\n]+)?\)/g) || [];
   assert.equal(wiredCalls.length, 3, '房間對戰、挑戰書、隨堂戰況三條路徑都必須傳 contentLength');
 
   const context = vm.createContext({ console, Date, Math, JSON });
