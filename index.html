@@ -19,8 +19,10 @@
     <span class="hero-stat hero-stat--primary">⭐ 戰功 <strong id="mastered-count">0</strong> 個</span>
     <span class="hero-stat hero-rank" id="hero-rank">見習生</span>
   </div>
+  <p class="rank-next-goal" id="rank-next-goal">再精通 1 張晉升〈初階英雄〉</p>
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false">🔊 音效開啟</button>
   <div class="daily-goal" id="daily-goal">
-    <div class="daily-goal-label" id="daily-goal-label">今日目標：複習 0 / 10 題</div>
+    <div class="daily-goal-label" id="daily-goal-label">今日已練 0 題</div>
     <div class="daily-goal-bar"><div id="daily-goal-fill" style="width:0%"></div></div>
     <ul id="daily-quests" class="daily-quests"></ul>
   </div>
@@ -31,7 +33,7 @@
 <section id="new-player-guide" class="new-player-guide" hidden aria-label="新手任務">
   <h2>▶ 今天從這裡開始</h2>
   <p>照自己的步調完成，做過就可以打勾。</p>
-  <ol><li><label><input type="checkbox" data-onboard-check="flashcard"> <button type="button" data-onboard="flashcard">先練 5 張閃卡</button></label></li>
+  <ol><li><label><input type="checkbox" data-onboard-check="flashcard"> <button type="button" data-onboard="flashcard">先翻幾張閃卡熟悉一下</button></label></li>
     <li><label><input type="checkbox" data-onboard-check="quiz"> <button type="button" data-onboard="quiz">完成一輪自測</button></label></li>
     <li><label><input type="checkbox" data-onboard-check="battle"> <button type="button" data-onboard="battle">挑戰見習研究員</button></label></li></ol>
 </section>
@@ -192,8 +194,7 @@
 <footer class="site-footer">
   <p>科學英雄由大乃老師製作維護，如發現內容錯誤歡迎來信 <a href="mailto:hk6429@gmail.com">hk6429@gmail.com</a> 指正。</p>
   <img class="visitor-badge" src="https://visitor-badge.laobi.icu/badge?page_id=hk6429.science-hero" alt="訪客數">
-  <script src="js/vendor/gc-config.js"></script>
-  <script data-goatcounter="https://hk6429.goatcounter.com/count" async src="js/vendor/count.js"></script>
+  <script data-goatcounter="https://hk6429.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </footer>
 
 <script src="js/store.js"></script>

@@ -65,7 +65,20 @@ header.site-header p { margin: 0; font-size: 0.82rem; font-weight: 500; opacity:
 
 .hero-stat--primary strong { font-size: 1.15rem; }
 
+.site-header.is-new-player .hero-stat { display: none; }
+.site-header.is-new-player .hero-stats::after {
+  content: "開始練習，累積你的第一個戰功";
+  display: block;
+  color: #d8f5e2;
+  font-size: .86rem;
+  font-weight: 800;
+}
+.site-header.is-new-player .new-player-guide { order: -1; width: min(100%, 760px); color: var(--text); text-align: left; }
+
 .hero-rank { background: rgba(255, 212, 59, 0.25); color: #ffd43b; }
+.rank-next-goal { margin: 7px 0 0; color: #d8f5e2; font-size: .76rem; font-weight: 700; }
+.sound-toggle { margin-top: 7px; border: 1px solid #ffffff66; border-radius: 999px; background: #ffffff18; color: #fff; padding: 5px 10px; cursor: pointer; }
+.bat-companion-plus { filter: drop-shadow(0 0 7px #ffd43b); }
 
 .daily-goal { max-width: 340px; margin: 12px auto 0; }
 
@@ -449,6 +462,7 @@ main {
 }
 
 .quiz-option:hover:not(:disabled) { border-color: var(--green); transform: translateX(2px); }
+.quiz-option:active:not(:disabled) { transform: scale(.98); border-color: var(--green); background: #f3fbf5; }
 .quiz-option:disabled { cursor: default; }
 
 .quiz-option.correct {
@@ -1168,6 +1182,11 @@ body.base-open { overflow: hidden; }
 .journey-grid article > span { font-size: 2rem; }
 .journey-grid article strong { color: var(--green-dark); }
 .journey-grid article small { color: var(--muted); }
+.book-progress-list { display: grid; gap: 10px; margin: 12px 0; }
+.book-progress-row { display: grid; gap: 4px; }
+.book-progress-row small { color: var(--muted); }
+.book-progress-bar { height: 9px; overflow: hidden; border-radius: 999px; background: #e0ebe4; }
+.book-progress-bar i { display: block; height: 100%; border-radius: inherit; background: var(--green); }
 .sb-lore-card.is-locked { border-style: dashed; background: #f2f3f1; color: #6c736d; filter: grayscale(1); }
 .milestone-lore { display: grid; gap: 5px; margin: 16px 0; border: 1px solid #d9bd69; border-radius: 14px; background: #fffbea; padding: 14px; text-align: left; }
 .milestone-lore span { color: var(--muted); }
@@ -1176,7 +1195,8 @@ body.base-open { overflow: hidden; }
 .sb-lore-card { border: 1px solid #d9bd69; border-radius: 14px; background: #fffbea; padding: 12px; }
 .sb-lore-card > span { font-size: 2rem; }
 .sb-lore-card h4, .sb-lore-card p { margin: 6px 0; }
-.science-surprise { position: fixed; right: 16px; bottom: 16px; z-index: 2000; max-width: min(360px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 14px; background: #fffbea; padding: 14px 16px; box-shadow: 0 8px 24px #0002; font-weight: 700; }
+.science-surprise { position: fixed; right: 16px; bottom: 16px; z-index: 2500; max-width: min(360px, calc(100vw - 32px)); border: 2px solid #d9bd69; border-radius: 14px; background: #fffbea; padding: 14px 16px; box-shadow: 0 8px 24px #0002; font-weight: 700; }
+body:has(.rest-reminder) .science-surprise { bottom: 96px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

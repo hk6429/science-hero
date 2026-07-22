@@ -118,18 +118,7 @@ const SciFusionStore = (() => {
   }
 
   const FUSE_COST = 30;
-  const FAIL_RATE = 0.2;
   const MAX_FUSE_PER_DAY = 3;
-  const FAIL_LINES = [
-    '兩股靈力沒能合上——別急，這不扣你的精靈、也不扣你的學習，退你一半晶能，明天再來一次。',
-    '光曈閃了一下又散開了。稚靈感覺得到你的努力，只是還差一點火候，這半數晶能拿回去。',
-    '這次沒接住，但精靈毫髮無傷、進度一格沒少。休息一下，多練幾題晶能又滿了。',
-  ];
-
-  function failLine(fstate) {
-    const index = Math.min(Math.max((fstate.failStreak || 1) - 1, 0), FAIL_LINES.length - 1);
-    return FAIL_LINES[index];
-  }
 
   const CUBS = [
     { id: 'cub_forestdeer', name: '森靈鹿', emoji: '🦌', pair: ['nature', 'biology'],
@@ -231,7 +220,7 @@ const SciFusionStore = (() => {
   }
 
   function fuse(fstate, state, subjA, subjB, opts = {}) {
-    const { rng = Math.random, today = '', meta = { maxBox: 4 } } = opts;
+    const { knowledgeCheckPassed = false, today = '', meta = { maxBox: 4 } } = opts;
     const gate = canFuse(meta, state, subjA, subjB);
     if (!gate.ok) return { ok: false, reason: 'ineligible', reasons: gate.reasons };
     if (fstate.lastFuseDate !== today) {
@@ -241,15 +230,10 @@ const SciFusionStore = (() => {
     if (fstate.fuseCount >= MAX_FUSE_PER_DAY) return { ok: false, reason: 'daily-limit' };
     const cub = cubForPair(subjA, subjB);
     if (!cub) return { ok: false, reason: 'ineligible' };
+    if (!knowledgeCheckPassed) return { ok: false, reason: 'knowledge-check' };
     const paid = spendCrystals(FUSE_COST);
     if (!paid.ok) return { ok: false, reason: 'crystals' };
     fstate.fuseCount += 1;
-    if (rng() < FAIL_RATE) {
-      const refund = Math.floor(FUSE_COST / 2);
-      refundCrystals(refund);
-      fstate.failStreak = (fstate.failStreak || 0) + 1;
-      return { ok: true, result: 'fail', line: failLine(fstate), refund, fstate };
-    }
     fstate.hatched.push(cub.id);
     fstate.failStreak = 0;
     fstate.lastFuseDate = today;
@@ -381,9 +365,9 @@ const SciFusionStore = (() => {
     KEY, defaults, load, save, crystalBalance, spendCrystals, refundCrystals,
     MASTER_GATE, ACC_GATE, ACC_WINDOW, ACC_MIN_SAMPLE, SUBJECT_ORDER,
     pairKey, accuracyBySubject, canFuse,
-    CUBS, cubForPair, FUSE_COST, FAIL_RATE, fuse, listCubs,
+    CUBS, cubForPair, FUSE_COST, fuse, listCubs,
     GRAND, GRAND_COST, canFuseGrand, fuseGrand, buildPrestigeData,
-    MAX_FUSE_PER_DAY, FAIL_LINES, failLine,
+    MAX_FUSE_PER_DAY,
     isRevealed, revealPair, buildRevealQuestion, getFusionPreview,
     setActiveCub, clearActiveCub, cubBattleMods,
     SUBJECT_LABELS, NICK_PREFIXES, NICK_SUFFIXES, composeNickname, setNickname, buildCubCardData,

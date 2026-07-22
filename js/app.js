@@ -59,6 +59,7 @@ const SciApp = (() => {
   const FOCUS_KEY = 'sci_focus_units';
   const ONBOARDING_KEY = 'sci_onboarding_checklist';
   const FIRST_SUCCESS_KEY = 'sci_first_success_seen';
+  const SOUND_KEY = 'sci_sound_off';
 
   let state = null;
   let activeSubject = 'nature';
@@ -176,7 +177,21 @@ const SciApp = (() => {
   }
 
   let audioCtx = null;
+  function soundEnabled() {
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+    return SciUiLogic.soundEnabled(localStorage.getItem(SOUND_KEY), reduced);
+  }
+
+  function updateSoundButton() {
+    const button = el('#sound-toggle');
+    if (!button) return;
+    const enabled = soundEnabled();
+    button.textContent = enabled ? '🔊 音效開啟' : '🔇 音效關閉';
+    button.setAttribute('aria-pressed', String(!enabled));
+  }
+
   function playTone(freq, duration, type = 'sine') {
+    if (!soundEnabled()) return;
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       const osc = audioCtx.createOscillator();
@@ -455,9 +470,9 @@ const SciApp = (() => {
   }
 
   // 自測與對戰共用的作答記錄：弱點聚合、盒序推進、每日統計、存檔，一次做完。
-  function recordAnswer(target, correct, elapsedMs) {
+  function recordAnswer(target, correct, elapsedMs, contentLength = 0) {
     const previousCard = SciStore.getCard(state, target.id);
-    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, seen: previousCard.seen });
+    SciWeak.recordAnswer(state, { termId: target.id, unit: target.unit, correct, elapsedMs, contentLength });
     const prevBox = previousCard.box;
     const updated = SciFlashcard.bumpBoxIfDue(state, target.id, correct);
     const energy = SciEconomy.onAnswer(correct, prevBox, updated.box); // 晶能唯一作答掛鉤（答對/連擊/精通掉落）
@@ -789,7 +804,7 @@ const SciApp = (() => {
           else if (b.dataset.id === chosenId) b.classList.add('wrong');
         });
         const chosenTerm = correct ? null : terms.find((t) => t.id === chosenId);
-        settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm);
+        settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, SciQuiz.questionContentLength(q));
       });
     });
   }
@@ -800,10 +815,12 @@ const SciApp = (() => {
       <div class="card quiz-cloze">
         <div class="quiz-cloze-tag">回想題 · 把空格補起來</div>
         <div class="quiz-prompt quiz-cloze-prompt">${q.prompt}</div>
-        <div class="quiz-cloze-hint">提示：${target.def}</div>
+        <button class="btn btn-secondary quiz-cloze-hint-toggle" id="cloze-hint-toggle" type="button">需要提示</button>
+        <div class="quiz-cloze-hint" id="cloze-hint" hidden>${escapeHtml(SciQuiz.clozeHint(target))}</div>
         <button class="btn btn-primary quiz-cloze-reveal" id="cloze-reveal">想好了，看答案</button>
         <div class="quiz-cloze-answer" id="cloze-answer" hidden>
           <div class="quiz-cloze-term">答案：<strong>${target.term}</strong></div>
+          <div class="quiz-cloze-def">複習說明：${target.def}</div>
           <div class="quiz-cloze-ask">你剛剛有想出來嗎？誠實回答，才幫得到自己。</div>
           <div class="btn-row">
             <button class="btn btn-ok" id="cloze-yes">我想出來了</button>
@@ -813,6 +830,10 @@ const SciApp = (() => {
       </div>`;
     const cardEl = body.querySelector('.card');
     const answerBox = body.querySelector('#cloze-answer');
+    body.querySelector('#cloze-hint-toggle').addEventListener('click', (e) => {
+      e.currentTarget.hidden = true;
+      body.querySelector('#cloze-hint').hidden = false;
+    });
     body.querySelector('#cloze-reveal').addEventListener('click', (e) => {
       e.currentTarget.hidden = true;
       answerBox.hidden = false;
@@ -824,14 +845,14 @@ const SciApp = (() => {
       if (correct) quizCorrect += 1;
       cardEl.classList.add(correct ? 'flash-correct' : 'flash-wrong');
       answerBox.querySelectorAll('button').forEach((b) => { b.disabled = true; });
-      settleAnswer(body, cardEl, target, correct, elapsed, null);
+      settleAnswer(body, cardEl, target, correct, elapsed, null, SciQuiz.questionContentLength(q));
     };
     body.querySelector('#cloze-yes').addEventListener('click', () => settle(true));
     body.querySelector('#cloze-no').addEventListener('click', () => settle(false));
   }
 
   // 答題後的共同收尾（選擇題與克漏字共用）：結果橫幅、解說、下一題、記錄與情境防呆跳題。
-  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm) {
+  function settleAnswer(body, cardEl, target, correct, elapsed, chosenTerm, contentLength) {
     const subjectAtAnswer = activeSubject;
     const modeAtAnswer = mode;
 
@@ -857,7 +878,7 @@ const SciApp = (() => {
     nextBtn.textContent = '下一題 →';
     cardEl.appendChild(nextBtn);
 
-    recordAnswer(target, correct, elapsed);
+    recordAnswer(target, correct, elapsed, contentLength);
 
     const milestoneUnit = correct ? checkUnitMilestone(target.unit) : null;
     // 使用者可能在延遲期間切了科目/模式，這時全域 quizIdx/quizQueue 已經是別科的狀態，
@@ -998,6 +1019,10 @@ const SciApp = (() => {
     [10, '進階英雄'],
     [30, '資深英雄'],
     [80, '領域專家'],
+    [120, '科學學者'],
+    [200, '科學大師'],
+    [300, '科學宗師'],
+    [400, '科學泰斗'],
   ];
 
   function rankLabel(masteredCount) {
@@ -1034,9 +1059,17 @@ const SciApp = (() => {
     const masteredEl = el('#mastered-count');
     const rankEl = el('#hero-rank');
     const mastered = masteredCardCount();
+    renderNewPlayerLayout();
     if (streakEl) streakEl.textContent = (state.stats && state.stats.streakDays) || 0;
     if (masteredEl) masteredEl.textContent = mastered;
     if (rankEl) rankEl.textContent = rankLabel(mastered);
+    const rankGoalEl = el('#rank-next-goal');
+    if (rankGoalEl) {
+      const nextRank = RANK_TIERS.find(([threshold]) => threshold > mastered);
+      rankGoalEl.textContent = nextRank
+        ? `再精通 ${nextRank[0] - mastered} 張晉升〈${nextRank[1]}〉`
+        : '已達頂點，繼續收藏每一張精通';
+    }
     const loreProgress = el('#science-lore-progress');
     if (loreProgress) loreProgress.textContent = `已點亮 ${SciScienceRewards.unlockedLore(state, scienceLore).length} / ${scienceLore.length} 個科學領域`;
 
@@ -1050,7 +1083,7 @@ const SciApp = (() => {
       const pct = Math.round((capped / DAILY_GOAL) * 100);
       fillEl.style.width = `${pct}%`;
       wrapEl.classList.toggle('done', daily >= DAILY_GOAL);
-      labelEl.textContent = daily >= DAILY_GOAL ? '今日目標已達成 🎉' : `今日目標：複習 ${capped} / ${DAILY_GOAL} 題`;
+      labelEl.textContent = `今日已練 ${daily} 題${daily >= DAILY_GOAL ? ' 🎉' : ''}`;
     }
     const questList = el('#daily-quests');
     if (questList) questList.innerHTML = SciDailyQuests.list(state).map((quest) =>
@@ -1079,7 +1112,7 @@ const SciApp = (() => {
     const moreTools = el('#more-tools');
     const isNew = state.stats.totalReviews === 0;
     const checklist = SciUiLogic.normalizeOnboarding(loadJson(ONBOARDING_KEY, {}));
-    if (guide) guide.hidden = SciUiLogic.onboardingComplete(checklist);
+    if (guide) guide.hidden = isNew ? false : SciUiLogic.onboardingComplete(checklist);
     if (moreTools) moreTools.open = SciUiLogic.moreToolsDefaultOpen({ isNew });
     guide?.querySelectorAll('[data-onboard-check]').forEach((checkbox) => {
       checkbox.checked = checklist[checkbox.dataset.onboardCheck];
@@ -1096,6 +1129,20 @@ const SciApp = (() => {
         el('#tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       };
     });
+  }
+
+  function renderNewPlayerLayout() {
+    const header = el('.site-header');
+    const guide = el('#new-player-guide');
+    const heroStats = el('.hero-stats');
+    const dailyGoal = el('#daily-goal');
+    const isNew = state.stats.totalReviews === 0;
+    header?.classList.toggle('is-new-player', isNew);
+    if (dailyGoal) dailyGoal.hidden = isNew;
+    if (header && guide && heroStats) {
+      if (isNew && guide.parentElement !== header) header.insertBefore(guide, heroStats);
+      else if (!isNew && guide.parentElement === header) header.after(guide);
+    }
   }
 
   function markOnboarding(task) {
@@ -1321,7 +1368,7 @@ const SciApp = (() => {
       const enough = balance >= cost;
       return `<section class="fusion-grand is-ready"><div class="fusion-grand-face is-dormant">${cubArt(grand, 'grand')}</div>
         <div class="fusion-grand-body"><span class="fusion-grand-kicker">終局融合已解鎖</span>
-        <h3>六道稚靈之光即將匯流……</h3><p>你已在四門科學各自登頂，這是收藏的最後一步——一次性、保證成功、不再需要碰運氣。</p>
+        <h3>六道稚靈之光即將匯流……</h3><p>你已在四門科學完成元靈里程碑。迎接元靈不是全書終點；融合一次性且保證成功。</p>
         ${enough ? '' : `<p class="fusion-grand-hint">還差 ${cost - balance} 晶能（需 ${cost}）。持續作答就能補齊。</p>`}
         <button class="btn btn-primary" data-grand="1" ${enough ? '' : 'disabled'}>迎接元靈（${cost} 晶能）</button></div></section>`;
     }
@@ -1339,6 +1386,7 @@ const SciApp = (() => {
     const todayCount = fstate.lastFuseDate === today ? fstate.fuseCount : 0;
     const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const mastered = SciBattle.masteredBySubject(state, maxBox);
+    const bookProgress = SciBattle.subjectProgress(state, maxBox, Object.fromEntries(subjectTerms));
     const collection = SciFusionStore.listCubs(fstate);
     const owned = new Map(collection.map((cub) => [cub.id, cub]));
     const balanceEl = el('#fusion-crystal-balance');
@@ -1348,7 +1396,7 @@ const SciApp = (() => {
       const count = mastered[subject.key] || 0;
       const spirit = SciBattle.companionForSubject(subject.key, count);
       return `<div class="fusion-spirit"><span>${escapeHtml(spirit.emoji)}</span><b>${escapeHtml(subject.label)}</b>
-        <small>${escapeHtml(spirit.name)} Lv.${spirit.level}<br>${count >= SciFusionStore.MASTER_GATE ? '已滿階 ✓' : `精通 ${count} / 100`}</small></div>`;
+        <small>${escapeHtml(spirit.name)} Lv.${spirit.level}<br>${count >= SciFusionStore.MASTER_GATE ? '已迎接元靈里程碑' : `元靈里程碑 ${count} / 100`}<br>全書 ${count} / ${bookProgress[subject.key].total}</small></div>`;
     }).join('');
 
     const pairCards = SciFusionStore.CUBS.map((cub) => {
@@ -1393,29 +1441,7 @@ const SciApp = (() => {
     }));
     body.querySelectorAll('[data-fuse]').forEach((button) => button.addEventListener('click', () => {
       const [a, b] = button.dataset.fuse.split('|');
-      if (!confirm(`確定花費 ${SciFusionStore.FUSE_COST} 晶能進行融合？`)) return;
-      const next = SciFusionStore.load();
-      const result = SciFusionStore.fuse(next, state, a, b, { today, meta: { maxBox } });
-      if (result.ok) {
-        SciFusionStore.save(next);
-        if (result.result === 'success') {
-          const finalNotice = { type: 'success', cub: result.cub };
-          const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-          const delay = SciUiLogic.fusionRevealDelay(reduced);
-          if (delay > 0) {
-            fusionNotice = { type: 'hatching' };
-            renderFusionLab();
-            setTimeout(() => { fusionNotice = finalNotice; renderFusionLab(); }, delay);
-            return;
-          }
-          fusionNotice = finalNotice;
-        } else fusionNotice = { type: 'fail', line: result.line, refund: result.refund };
-      } else {
-        const text = result.reason === 'crystals' ? '晶能不足。'
-          : result.reason === 'daily-limit' ? '今日融合次數已用完。' : '融合條件還沒有全部達成。';
-        fusionNotice = { type: 'info', text };
-      }
-      renderFusionLab();
+      renderRevealQuestion(a, b, 'fuse');
     }));
     body.querySelectorAll('[data-active]').forEach((button) => button.addEventListener('click', () => {
       const next = SciFusionStore.load();
@@ -1465,8 +1491,15 @@ const SciApp = (() => {
     const fstate = SciFusionStore.load();
     const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
     const data = SciFusionStore.buildPrestigeData(fstate, state, { maxBox });
+    const progress = SciBattle.subjectProgress(state, maxBox, Object.fromEntries(subjectTerms));
     const spiritCards = data.spirits.map((s) => `<div class="prestige-spirit"><span>${escapeHtml(s.spiritEmoji)}</span>
-      <b>${escapeHtml(s.label)}</b><small>${escapeHtml(s.spiritName)} Lv.${s.level}<br>精通 ${s.mastered} 張</small></div>`).join('');
+      <b>${escapeHtml(s.label)}</b><small>${escapeHtml(s.spiritName)} Lv.${s.level}<br>精通 ${s.mastered} / ${progress[s.key].total}</small></div>`).join('');
+    const bookRows = SUBJECTS.map((subject) => {
+      const item = progress[subject.key];
+      return `<div class="book-progress-row"><span><b>${escapeHtml(subject.label)}</b> ${item.mastered} / ${item.total}</span>
+        <div class="book-progress-bar" aria-label="${escapeHtml(subject.label)}全書精通 ${item.mastered} / ${item.total}"><i style="width:${item.pct}%"></i></div>
+        <small>還有 ${item.remaining} 個知識點等你收藏</small></div>`;
+    }).join('');
     const cubRows = data.cubs.map((cub) => `<li class="prestige-cub"><span class="prestige-cub-face">${cubArt(cub, 'small')}</span>
       <span class="prestige-cub-text"><b>${escapeHtml(cub.displayName)}</b><em>${escapeHtml(cub.bornLine)}</em></span></li>`).join('');
     body.innerHTML = `<button class="fusion-back" type="button">← 回融合坊</button>
@@ -1474,25 +1507,27 @@ const SciApp = (() => {
         <div class="prestige-crown">${cubArt(data.grand, 'grand')}</div>
         <p class="prestige-kicker">科學守護者巡禮</p>
         <h2>${escapeHtml(data.grand.name)}</h2>
-        <p class="prestige-lead">你點亮了整座科學宇宙。四門科學、六隻稚靈，最後在元靈身上合而為一。這一頁，記下你走過的路。</p>
+        <p class="prestige-lead">你已迎接元靈，這是里程碑，不是終點。四門科學與六隻稚靈在元靈身上相遇，這一頁記下你走過的路。</p>
         <div class="prestige-stats"><div><b>${data.totalMastered}</b><small>累計精通詞卡</small></div>
           <div><b>${data.cubCount} / 6</b><small>稚靈圖鑑</small></div>
-          <div><b>4 / 4</b><small>科學領域登頂</small></div></div>
-        <h3>四科滿階精靈</h3><div class="prestige-spirit-row">${spiritCards}</div>
+          <div><b>4 / 4</b><small>元靈里程碑</small></div></div>
+        <h3>全書精通進度</h3><div class="book-progress-list">${bookRows}</div>
+        <h3>四科里程碑精靈</h3><div class="prestige-spirit-row">${spiritCards}</div>
         <h3>六稚靈誕生語</h3><ul class="prestige-cub-list">${cubRows}</ul>
         <p class="prestige-foot">這是永久的榮譽，不會過期、不會清零。你隨時可以回來看看牠們，也可以繼續陪弱項一起變強。</p>
       </div>`;
     body.querySelector('.fusion-back').addEventListener('click', renderFusionLab);
   }
 
-  function renderRevealQuestion(a, b) {
+  function renderRevealQuestion(a, b, purpose = 'reveal') {
     const body = el('#fusion-body');
     const reveal = SciFusionStore.buildRevealQuestion(a, b, Object.fromEntries(subjectTerms));
     const q = reveal.question;
     const startedAt = Date.now();
     body.dataset.answered = '0';
     body.innerHTML = `<button class="fusion-back" type="button">← 回配對牆</button><div class="fusion-quiz card">
-      <p class="fusion-kicker">配方揭曉·${escapeHtml(SciFusionStore.SUBJECT_LABELS[reveal.subject])}</p>
+      <p class="fusion-kicker">${purpose === 'fuse' ? '融合前科學挑戰' : '配方揭曉'}·${escapeHtml(SciFusionStore.SUBJECT_LABELS[reveal.subject])}</p>
+      ${purpose === 'fuse' ? `<p>答對才會扣 ${SciFusionStore.FUSE_COST} 晶能並保證融合成功；答錯不扣晶能，可以再試。</p>` : ''}
       <div class="quiz-prompt">${q.mode === 'term2def' ? `「${escapeHtml(q.prompt)}」是在說什麼？` : `這個定義說的是哪個詞：<br>「${escapeHtml(q.prompt)}」`}</div>
       <div class="quiz-options">${q.options.map((option) => `<button class="quiz-option" data-id="${escapeHtml(option.id)}">${escapeHtml(option.label)}</button>`).join('')}</div>
       <div class="fusion-quiz-feedback" aria-live="polite"></div></div>`;
@@ -1502,18 +1537,32 @@ const SciApp = (() => {
       body.dataset.answered = '1';
       const correct = button.dataset.id === q.answerId;
       const target = (subjectTerms.get(reveal.subject) || []).find((term) => term.id === q.answerId);
-      recordAnswer(target, correct, Date.now() - startedAt);
+      recordAnswer(target, correct, Date.now() - startedAt, SciQuiz.questionContentLength(q));
       body.querySelectorAll('.quiz-option').forEach((option) => { option.disabled = true; });
       const feedback = body.querySelector('.fusion-quiz-feedback');
       if (correct) {
         const next = SciFusionStore.load();
-        SciFusionStore.revealPair(next, a, b);
-        SciFusionStore.save(next);
-        fusionNotice = { type: 'info', text: '雙科線索合上了，稚靈真身已揭曉！' };
+        if (purpose === 'fuse') {
+          const result = SciFusionStore.fuse(next, state, a, b, {
+            knowledgeCheckPassed: true,
+            today: SciStore.todayStr(),
+            meta: { maxBox: SciFlashcard.BOX_INTERVAL_DAYS.length - 1 },
+          });
+          if (result.ok) {
+            SciFusionStore.save(next);
+            fusionNotice = { type: 'success', cub: result.cub };
+          } else {
+            fusionNotice = { type: 'info', text: result.reason === 'crystals' ? '晶能不足。' : '融合條件還沒有全部達成。' };
+          }
+        } else {
+          SciFusionStore.revealPair(next, a, b);
+          SciFusionStore.save(next);
+          fusionNotice = { type: 'info', text: '雙科線索合上了，稚靈真身已揭曉！' };
+        }
         setTimeout(renderFusionLab, 450);
       } else {
         feedback.innerHTML = '<p>這次差一點，沒有任何資源損失。</p><button class="btn btn-secondary" type="button">再試一題</button>';
-        feedback.querySelector('button').addEventListener('click', () => renderRevealQuestion(a, b));
+        feedback.querySelector('button').addEventListener('click', () => renderRevealQuestion(a, b, purpose));
       }
     }));
   }
@@ -1575,14 +1624,22 @@ const SciApp = (() => {
     const loreCount = SciScienceRewards.unlockedLore(state, scienceLore).length;
     const fusion = SciFusionStore.load();
     const cubCount = SciFusionStore.listCubs(fusion).length;
+    const maxBox = SciFlashcard.BOX_INTERVAL_DAYS.length - 1;
+    const progress = SciBattle.subjectProgress(state, maxBox, Object.fromEntries(subjectTerms));
+    const bookRows = SUBJECTS.map((subject) => {
+      const item = progress[subject.key];
+      return `<div class="book-progress-row"><span><b>${escapeHtml(subject.label)}</b> ${item.mastered} / ${item.total}</span>
+        <div class="book-progress-bar" aria-label="${escapeHtml(subject.label)}全書精通 ${item.mastered} / ${item.total}"><i style="width:${item.pct}%"></i></div>
+        <small>還有 ${item.remaining} 個知識點等你收藏</small></div>`;
+    }).join('');
     body.innerHTML = `<p class="journey-intro">你走過的每一步，都來自真正答過、記住與精通的內容。</p>
       <div class="journey-grid">
         <article><span>⭐</span><b>精通稱號</b><strong>${escapeHtml(rankLabel(mastered))}</strong><small>${mastered} 張精通詞卡</small></article>
         <article><span>${rank.ico}</span><b>PvE 段位</b><strong>${escapeHtml(rank.name)}</strong><small>${rank.next ? `距下一段 ${rank.next.at - rank.pts} 分` : '已達頂點'}</small></article>
         <article><span>📜</span><b>科學史圖鑑</b><strong>${loreCount} / ${scienceLore.length}</strong><small>已點亮的科學故事</small></article>
         <article><span>🧬</span><b>融合收藏</b><strong>${cubCount} / ${SciFusionStore.CUBS.length}</strong><small>已迎接的稚靈</small></article>
-        <article><span>🌌</span><b>終局巡禮</b><strong>${fusion.grandBorn ? '已完成' : '探索中'}</strong><small>${fusion.grandBorn ? '元靈聖獸已誕生' : '依自己的步調前進'}</small></article>
-      </div>`;
+        <article><span>🌌</span><b>元靈巡禮</b><strong>${fusion.grandBorn ? '里程碑達成' : '探索中'}</strong><small>${fusion.grandBorn ? '已迎接元靈，繼續收藏知識' : '依自己的步調前進'}</small></article>
+      </div><h3>全書精通進度</h3><div class="book-progress-list">${bookRows}</div>`;
   }
 
   function openJourney() {
@@ -1597,6 +1654,14 @@ const SciApp = (() => {
     const importFile = el('#import-file');
     const shareBtn = el('#share-card-btn');
     const fusionBtn = el('#fusion-lab-btn');
+    const soundToggle = el('#sound-toggle');
+    if (soundToggle) {
+      updateSoundButton();
+      soundToggle.addEventListener('click', () => {
+        localStorage.setItem(SOUND_KEY, soundEnabled() ? '1' : '0');
+        updateSoundButton();
+      });
+    }
     const rtBattleBtn = el('#rtbattle-tool-btn');
     const fusionClose = el('#fusion-close');
     const familyOverlay = el('#family-summary-overlay');

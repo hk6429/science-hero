@@ -72,10 +72,16 @@ const SciUiLogic = (() => {
     return checklist.flashcard && checklist.quiz && checklist.battle;
   }
 
+  function soundEnabled(storedValue, prefersReducedMotion) {
+    if (storedValue === '1') return false;
+    if (storedValue === '0') return true;
+    return !prefersReducedMotion;
+  }
+
   return {
     moreToolsDefaultOpen, restCardHtml, resolveInitialSubject, fusionRevealDelay,
     focusUnitWeight, focusFirst, classMilestone, dueReviewSummary, longTailUnits,
     shouldShowRestReminder,
-    normalizeOnboarding, onboardingComplete,
+    normalizeOnboarding, onboardingComplete, soundEnabled,
   };
 })();

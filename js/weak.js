@@ -2,17 +2,30 @@
 const SciWeak = (() => {
   const FAST_GUESS_MS = 1500;
   const LUCKY_GUESS_MS = 800;
-  const LOW_FAMILIARITY_SEEN = 2;
+
+  function readingThresholdMs(contentLength) {
+    const chars = Math.max(0, Number(contentLength) || 0);
+    return Math.min(4000, Math.max(LUCKY_GUESS_MS, 500 + chars * 25));
+  }
+
+  function recentPerformanceUnstable(log, termId) {
+    const recent = log.filter((entry) => entry.termId === termId && entry.source !== 'flash').slice(-5);
+    if (recent.length < 3) return true;
+    return recent.filter((entry) => entry.correct).length / recent.length < 0.8;
+  }
 
   // 記錄一次作答結果（quiz 呼叫）：{ termId, unit, correct, elapsedMs }
-  function recordAnswer(state, { termId, unit, correct, elapsedMs, seen = 0, source = 'quiz' }) {
+  function recordAnswer(state, { termId, unit, correct, elapsedMs, contentLength = 0, source = 'quiz' }) {
     state.weakLog = state.weakLog || [];
+    const luckyGuess = correct
+      && elapsedMs < readingThresholdMs(contentLength)
+      && recentPerformanceUnstable(state.weakLog, termId);
     state.weakLog.push({
       termId,
       unit,
       correct,
       guessed: !correct && elapsedMs < FAST_GUESS_MS,
-      luckyGuess: correct && elapsedMs < LUCKY_GUESS_MS && seen < LOW_FAMILIARITY_SEEN,
+      luckyGuess,
       source,
       t: Date.now(),
     });
@@ -24,15 +37,31 @@ const SciWeak = (() => {
     recordAnswer(state, { termId, unit, correct, elapsedMs: Infinity, seen: Infinity, source: 'flash' });
   }
 
-  // 回傳依 unit 彙整的弱點分數（答錯 +1，猜測額外 +0.5），由高到低排序。
+  function recoveredWeakScores(log) {
+    const score = new Map();
+    const unitByTerm = new Map();
+    for (const entry of log) {
+      unitByTerm.set(entry.termId, entry.unit);
+      if (entry.correct && !entry.luckyGuess) {
+        score.set(entry.termId, 0);
+        continue;
+      }
+      const added = entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0);
+      score.set(entry.termId, (score.get(entry.termId) || 0) + added);
+    }
+    return { score, unitByTerm };
+  }
+
+  // 回傳依 unit 彙整的弱點分數；一次客觀答對會清掉該詞較早的錯誤，只保留之後的新訊號。
   function getWeakUnits(state, unitLabels) {
     const log = state.weakLog || [];
+    const recovered = recoveredWeakScores(log);
     const score = new Map();
-    for (const entry of log) {
-      if (entry.correct && !entry.luckyGuess) continue;
-      const s = (score.get(entry.unit) || 0) + (entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0));
-      score.set(entry.unit, s);
-    }
+    recovered.score.forEach((value, termId) => {
+      if (value <= 0) return;
+      const unit = recovered.unitByTerm.get(termId);
+      score.set(unit, (score.get(unit) || 0) + value);
+    });
     return [...score.entries()]
       .map(([unit, s]) => ({ unit, label: unitLabels[unit] || unit, score: s }))
       .sort((a, b) => b.score - a.score);
@@ -40,13 +69,9 @@ const SciWeak = (() => {
 
   function getWeakTerms(state, limit = 10) {
     const log = state.weakLog || [];
-    const score = new Map();
-    for (const entry of log) {
-      if (entry.correct && !entry.luckyGuess) continue;
-      const s = (score.get(entry.termId) || 0) + (entry.luckyGuess ? 0.75 : 1 + (entry.guessed ? 0.5 : 0));
-      score.set(entry.termId, s);
-    }
+    const { score } = recoveredWeakScores(log);
     return [...score.entries()]
+      .filter(([, value]) => value > 0)
       .sort((a, b) => b[1] - a[1])
       .slice(0, limit)
       .map(([termId, s]) => ({ termId, score: s }));
@@ -120,5 +145,5 @@ const SciWeak = (() => {
     ].join('\n');
   }
 
-  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, getCalibrationMisses, buildFamilySummary, FAST_GUESS_MS, LUCKY_GUESS_MS };
+  return { recordAnswer, recordFlash, getWeakUnits, getWeakTerms, getCalibrationMisses, buildFamilySummary, readingThresholdMs, recentPerformanceUnstable, FAST_GUESS_MS, LUCKY_GUESS_MS };
 })();

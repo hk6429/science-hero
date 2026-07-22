@@ -83,6 +83,17 @@ const SciQuiz = (() => {
     return w;
   }
 
+  function clozeHint(target) {
+    const chars = Array.from(String((target && target.term) || ''));
+    return chars.length ? `答案是 ${chars.length} 個字，第一個字是「${chars[0]}」` : '先想想這個單元最關鍵的詞';
+  }
+
+  function questionContentLength(question) {
+    const prompt = String((question && question.prompt) || '');
+    const optionText = ((question && question.options) || []).map((option) => String(option.label || '')).join('');
+    return Array.from(prompt + optionText).length;
+  }
+
   // 依權重不放回抽 n 題（rng 可注入以利測試）。
   function weightedSample(items, weightOf, n, rng = Math.random) {
     const pool = items.map((item) => ({ item, w: Math.max(weightOf(item), 0.0001) }));
@@ -99,5 +110,5 @@ const SciQuiz = (() => {
     return out;
   }
 
-  return { buildQuestion, pickDistractors, quizWeight, weightedSample };
+  return { buildQuestion, pickDistractors, quizWeight, weightedSample, clozeHint, questionContentLength };
 })();

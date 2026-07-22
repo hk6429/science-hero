@@ -24,9 +24,10 @@ const SciBaseStore = (() => {
     try { localStorage.setItem(BASE_KEY, JSON.stringify(state)); return true; } catch { return false; }
   }
 
-  // 主樓五階：門檻鏡射 app.js RANK_TIERS（SciApp 私有無法引用）；測試已釘死，改 RANK_TIERS 必同步
+  // 主樓階梯：門檻鏡射 app.js RANK_TIERS（SciApp 私有無法引用）；測試已釘死，改 RANK_TIERS 必同步
   const STAGES = [
     [0, '見習營帳'], [1, '初階研究站'], [10, '進階實驗樓'], [30, '資深研究院'], [80, '領域總部'],
+    [120, '學者研究院'], [200, '科學殿堂'], [300, '宗師天文臺'], [400, '科學典藏館'],
   ];
 
   function maxBox() { return SciFlashcard.BOX_INTERVAL_DAYS.length - 1; }
@@ -320,7 +321,7 @@ const SciBaseStore = (() => {
     return [
       { icon: '🏆', label: '段位巔峰', value: rankValue },
       { icon: '🔥', label: '最高連對', value: `${SciEconomy.getBestCombo()} 題` },
-      { icon: '📅', label: '守繼天數', value: `${(state && state.stats && state.stats.streakDays) || 0} 天` },
+      { icon: '📅', label: '累計天數', value: `${(state && state.stats && state.stats.streakDays) || 0} 天` },
     ];
   }
 

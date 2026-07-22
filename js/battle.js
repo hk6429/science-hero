@@ -55,7 +55,8 @@ const SciBattle = (() => {
     const tierGrowth = { 入門: 1, 進階: 2, 高手: 3, 宗師: 4 };
     const turn = Math.max(1, Math.floor(round) || 1);
     const base = 8 + Math.round(opponent.acc * 8);
-    const scaled = base + Math.floor((turn - 1) / 3) * (tierGrowth[opponent.tier] || 1);
+    const endlessGrowth = Math.floor(Math.max(0, (opponent.endlessLevel || 1) - 1) / 3);
+    const scaled = base + Math.floor((turn - 1) / 3) * (tierGrowth[opponent.tier] || 1) + endlessGrowth;
     const special = (opponent.tier === '高手' || opponent.tier === '宗師') && turn % 3 === 0;
     return special ? scaled * 2 : scaled;
   }
@@ -72,6 +73,13 @@ const SciBattle = (() => {
     else state.combo = 0;
     state.pHp = Math.max(0, state.pHp - 8);
     return state;
+  }
+
+  function answerFeedbackClass(optionId, answerId, chosenId) {
+    if (!answerId) return '';
+    if (optionId === answerId) return 'correct';
+    if (optionId === chosenId) return 'wrong';
+    return '';
   }
 
   // ── 段位排行：只認 PvE 勝負，跟「精通詞卡稱號」是兩套獨立指標 ──
@@ -133,6 +141,8 @@ const SciBattle = (() => {
     { at: 20, emoji: '🦉', name: '智慧貓頭鷹', atk: 4, leech: 0, leechChance: 0 },
     { at: 50, emoji: '🐉', name: '智慧之龍', atk: 6, leech: 5, leechChance: 0.1 },
     { at: 100, emoji: '✨', name: '星靈', atk: 9, leech: 8, leechChance: 0.2 },
+    // 200 張是純視覺收藏態；助戰數值刻意維持 100 張滿階，不製造額外優勢。
+    { at: 200, emoji: '🌟', name: '星靈・典藏', atk: 9, leech: 8, leechChance: 0.2 },
   ];
 
   function companionFor(masteredCount) {
@@ -147,16 +157,16 @@ const SciBattle = (() => {
   // 四科精靈：進化門檻與助戰數值沿用既有科學夥伴，只更換各科形象。
   const SUBJECT_LINES = {
     nature: [
-      ['🌰', '萌芽種子'], ['🌱', '新芽綠靈'], ['🌿', '藤蔓精靈'], ['🌳', '巨木守衛'], ['🍀', '萬物之靈'],
+      ['🌰', '萌芽種子'], ['🌱', '新芽綠靈'], ['🌿', '藤蔓精靈'], ['🌳', '巨木守衛'], ['🍀', '萬物之靈'], ['🌟', '萬物之靈・典藏'],
     ],
     biology: [
-      ['🥚', '細胞原卵'], ['🐛', '幼蟲之靈'], ['🦋', '蝶翼精靈'], ['🦉', '智慧之鴞'], ['🧬', '生命之靈'],
+      ['🥚', '細胞原卵'], ['🐛', '幼蟲之靈'], ['🦋', '蝶翼精靈'], ['🦉', '智慧之鴞'], ['🧬', '生命之靈'], ['🌟', '生命之靈・典藏'],
     ],
     chemphys: [
-      ['⚗️', '燒瓶精靈'], ['🧪', '試管之靈'], ['🔥', '焰晶精靈'], ['⚡', '電光之靈'], ['⚛️', '元素宗靈'],
+      ['⚗️', '燒瓶精靈'], ['🧪', '試管之靈'], ['🔥', '焰晶精靈'], ['⚡', '電光之靈'], ['⚛️', '元素宗靈'], ['🌟', '元素宗靈・典藏'],
     ],
     earth: [
-      ['🪨', '礦石精靈'], ['🌋', '火山之靈'], ['🌊', '海潮精靈'], ['🌍', '地脈守護'], ['🪐', '星辰之靈'],
+      ['🪨', '礦石精靈'], ['🌋', '火山之靈'], ['🌊', '海潮精靈'], ['🌍', '地脈守護'], ['🪐', '星辰之靈'], ['🌟', '星辰之靈・典藏'],
     ],
   };
   Object.keys(SUBJECT_LINES).forEach((key) => {
@@ -182,6 +192,23 @@ const SciBattle = (() => {
     return result;
   }
 
+  function subjectProgress(state, maxBox, termsBySubject) {
+    const cards = (state && state.cards) || {};
+    const result = {};
+    Object.keys(termsBySubject || {}).forEach((subject) => {
+      const pool = termsBySubject[subject] || [];
+      const mastered = pool.filter((term) => (cards[term.id] || {}).box >= maxBox).length;
+      const total = pool.length;
+      result[subject] = {
+        mastered,
+        total,
+        remaining: Math.max(0, total - mastered),
+        pct: total ? Math.round((mastered / total) * 100) : 0,
+      };
+    });
+    return result;
+  }
+
   function companionForSubject(subjectKey, masteredCount) {
     const line = SUBJECT_LINES[subjectKey] || COMPANION_TIERS;
     const n = masteredCount || 0;
@@ -192,7 +219,9 @@ const SciBattle = (() => {
   }
 
   function subjectCompanionArt(subjectKey, companion, extraClass = '') {
-    return `<img class="${extraClass}" src="assets/battle/sprite-${subjectKey}-s${companion.level}.png" alt="${companion.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${companion.emoji}',className:'${extraClass}'}))">`;
+    const artLevel = Math.min(companion.level, 5);
+    const plusClass = companion.level > 5 ? ' bat-companion-plus' : '';
+    return `<img class="${extraClass}${plusClass}" src="assets/battle/sprite-${subjectKey}-s${artLevel}.png" alt="${companion.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${companion.emoji}',className:'${extraClass}${plusClass}'}))">`;
   }
 
   function shuffle(arr) {
@@ -210,12 +239,32 @@ const SciBattle = (() => {
     return state.battle.beaten;
   }
 
+  function endlessOpponent(streak) {
+    const wins = Math.max(0, Math.floor(streak) || 0);
+    const cycle = Math.floor(wins / OPPONENTS.length);
+    const base = OPPONENTS[wins % OPPONENTS.length];
+    return {
+      ...base,
+      name: `${base.name}・巡禮 ${wins + 1}`,
+      acc: Math.min(0.96, base.acc + cycle * 0.03),
+      endlessLevel: wins + 1,
+    };
+  }
+
+  function recordEndlessBest(state, streak) {
+    beatenList(state);
+    state.battle.endlessBest = Math.max(state.battle.endlessBest || 0, Math.max(0, Math.floor(streak) || 0));
+    return state.battle.endlessBest;
+  }
+
   // ── mount：掛在指定容器上，ctx = { pool, state, subjectLabel, recordAnswer, masteredCardCount } ──
   function mount(el, ctx) {
     const { pool, state, subjectLabel, recordAnswer, masteredCardCount } = ctx;
     let opp = null;
     let battleState = null;
     let locked = false;
+    let endlessMode = false;
+    let endlessStreak = 0;
 
     const currentCompanion = () => ctx.subjectKey
       ? companionForSubject(ctx.subjectKey, ctx.masteredCountForSubject)
@@ -279,7 +328,9 @@ const SciBattle = (() => {
         ${carryItems.length ? `<div class="bat-carry"><strong>🎒 戰前攜帶（PvE）</strong>
           ${carryItems.map(([id, item]) => `<button type="button" data-carry="${id}" class="${carry === id ? 'active' : ''}">${item.emoji} ${item.name} ×${inventory[id]}</button>`).join('')}
           <button type="button" data-carry="">不帶</button></div>` : ''}
-        <button class="btn btn-secondary bat-pvp-btn" id="bat-pvp">👥 雙人對戰（同裝置輪流答題）</button>
+        <div class="btn-row"><button class="btn btn-primary" id="bat-endless">♾️ 無盡巡禮</button>
+        <button class="btn btn-secondary bat-pvp-btn" id="bat-pvp">👥 雙人對戰（同裝置輪流答題）</button></div>
+        <p class="bat-hint">無盡巡禮會隨連勝增強對手；最佳連勝 <b>${state.battle.endlessBest || 0}</b> 場，不影響段位、不倒扣分數。</p>
         <div class="bat-oppgrid">
           ${OPPONENTS.map((o) => {
             const unlocked = isUnlocked(o, totalReviews());
@@ -305,11 +356,16 @@ const SciBattle = (() => {
         renderPicker();
       }));
       el.querySelector('#bat-pvp').addEventListener('click', startPvp);
+      el.querySelector('#bat-endless').addEventListener('click', () => {
+        endlessStreak = 0;
+        start(endlessOpponent(endlessStreak), { endless: true });
+      });
     }
 
     // ── PvE ──
-    function start(o) {
+    function start(o, options = {}) {
       opp = o;
+      endlessMode = options.endless === true;
       battleState = { pHp: MAX_HP, oHp: MAX_HP, combo: 0, round: 0, bestCombo: 0, totalDamage: 0, maxDamage: 0, log: `守護知識之火！${opp.taunt}` };
       if (typeof SciMarketStore !== 'undefined') {
         const carried = SciMarketStore.takeCarry();
@@ -339,7 +395,7 @@ const SciBattle = (() => {
         <div class="bat-hp-fill" style="width:${Math.min(100, hp)}%"></div><span>${hp}</span></div>`;
     }
 
-    function render(midTurn) {
+    function render(midTurn, feedback = {}) {
       const q = battleState.q;
       el.innerHTML = `
         <div class="bat-arena">
@@ -360,7 +416,7 @@ const SciBattle = (() => {
         <div class="card">
           <div class="quiz-prompt">${q.mode === 'term2def' ? `「${q.prompt}」是在說什麼？` : `這個定義說的是哪個詞：<br>「${q.prompt}」`}</div>
           <div class="quiz-options">
-            ${q.options.map((o) => `<button class="quiz-option" data-id="${o.id}" ${midTurn ? 'disabled' : ''}>${o.label}</button>`).join('')}
+            ${q.options.map((o) => `<button class="quiz-option ${answerFeedbackClass(o.id, feedback.answerId, feedback.chosenId)}" data-id="${o.id}" ${midTurn ? 'disabled' : ''}>${o.label}</button>`).join('')}
           </div>
           ${!midTurn && battleState.excludeLeft > 0 ? '<button type="button" class="btn btn-secondary bat-magnify">🔍 排除一個錯誤選項</button>' : ''}
         </div>`;
@@ -386,7 +442,7 @@ const SciBattle = (() => {
       const target = pool.find((t) => t.id === q.answerId);
       const elapsedMs = Date.now() - battleState.qStart;
 
-      recordAnswer(target, correct, elapsedMs);
+      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
 
       if (correct) {
         const dmg = calcPveDamage(battleState.combo, battleState.pHp, elapsedMs);
@@ -425,7 +481,7 @@ const SciBattle = (() => {
         battleState.log = `答錯！${opp.name} 趁隙反擊，你 -8（正確答案：${target.term}）`;
         if (protectedCombo) battleState.log += '　🥽 護目鏡保住了連擊！';
       }
-      render(true);
+      render(true, { chosenId, answerId: q.answerId });
 
       setTimeout(() => {
         if (battleState.oHp <= 0) return finish(true);
@@ -448,29 +504,40 @@ const SciBattle = (() => {
     }
 
     function finish(win) {
-      const rk = win ? rankWin(state) : rankLose(state);
-      if (win) {
+      const rk = endlessMode ? { delta: 0, ...rankInfo(state) } : (win ? rankWin(state) : rankLose(state));
+      if (endlessMode && win) {
+        endlessStreak += 1;
+        recordEndlessBest(state, endlessStreak);
+      } else if (win) {
         const beaten = beatenList(state);
         if (!beaten.includes(opp.id)) beaten.push(opp.id);
       }
       SciStore.save(state);
-      if (win) {
+      if (win && !endlessMode) {
         const reward = SciEconomy.earnCrystals(SciEconomy.EARN_TABLE.battleWin, 'battleWin'); // 對戰勝 +5（僅 PvE；PvP 不發，防同機自刷）
         if (reward.earned > 0) ctx.onEnergyGain?.(reward.earned);
       }
-      if (win) ctx.onBattleWin?.();
+      if (win && !endlessMode) ctx.onBattleWin?.();
+      const endlessStatus = endlessMode
+        ? `<div class="bat-rankdelta steady">♾️ 本次連勝 ${endlessStreak} 場・最佳 ${state.battle.endlessBest || 0} 場；段位分數不受影響。</div>`
+        : `<div class="bat-rankdelta ${win ? 'up' : 'steady'}">${rk.ico} ${rk.name}　${win ? `${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）` : `段位進度保留（歷史最高 ${rk.pts} 分）`}</div>`;
       el.innerHTML = `<div class="card celebrate-in">
-        <div class="bat-result-emoji">${win ? '🏆' : '💀'}</div>
+        <div class="bat-result-emoji">${win ? '🏆' : endlessMode ? '🌿' : '💀'}</div>
         <p>${win ? `擊敗 ${opp.name}！` : `不敵 ${opp.name}……`}</p>
         <div class="bat-quote">「${win ? opp.lose : opp.win}」</div>
-        <div class="bat-rankdelta ${win ? 'up' : 'steady'}">${rk.ico} ${rk.name}　${win ? `${rk.delta > 0 ? '+' : ''}${rk.delta} 分（${rk.pts}）` : `段位進度保留（歷史最高 ${rk.pts} 分）`}</div>
+        ${endlessStatus}
         <div class="bat-record-summary"><span>最高連擊 <b>${battleState.bestCombo}</b></span><span>總輸出 <b>${battleState.totalDamage}</b></span><span>最高傷害 <b>${battleState.maxDamage}</b></span></div>
         <div class="btn-row">
           <button class="btn btn-secondary" id="bat-back">回對手選單</button>
-          <button class="btn btn-primary" id="bat-again">再戰一場</button>
+          <button class="btn btn-primary" id="bat-again">${endlessMode && win ? '繼續巡禮' : endlessMode ? '再走一輪' : '再戰一場'}</button>
         </div>
       </div>`;
-      el.querySelector('#bat-again').addEventListener('click', () => start(opp));
+      el.querySelector('#bat-again').addEventListener('click', () => {
+        if (endlessMode) {
+          if (!win) endlessStreak = 0;
+          start(endlessOpponent(endlessStreak), { endless: true });
+        } else start(opp);
+      });
       el.querySelector('#bat-back').addEventListener('click', () => renderPicker());
     }
 
@@ -532,7 +599,7 @@ const SciBattle = (() => {
       const target = pool.find((t) => t.id === q.answerId);
       const elapsedMs = Date.now() - pvpState.qStart;
 
-      recordAnswer(target, correct, elapsedMs);
+      recordAnswer(target, correct, elapsedMs, SciQuiz.questionContentLength(q));
 
       if (correct) {
         const dmg = calcDamage(pvpState.combo[me], pvpState.hp[me]);
@@ -568,9 +635,9 @@ const SciBattle = (() => {
   }
 
   return {
-    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, mount,
+    OPPONENTS, TIER_UNLOCK, foeArt, isUnlocked, calcDamage, speedMultiplier, calcPveDamage, enemyDamage, recordPlayerHit, applyWrongAnswer, answerFeedbackClass, endlessOpponent, recordEndlessBest, mount,
     RANKS, rankInfo, rankWin, rankLose, weekStr,
     COMPANION_TIERS, companionFor,
-    SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, companionForSubject, subjectCompanionArt,
+    SUBJECT_LINES, PREFIX_SUBJECT, subjectOfId, masteredBySubject, subjectProgress, companionForSubject, subjectCompanionArt,
   };
 })();
